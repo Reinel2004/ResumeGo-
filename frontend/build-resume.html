@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.resume-preview {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.resume-preview h2 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+}
+
+.skills-list {
+    list-style-type: none;
+    padding: 0;
+}
+/* Add these styles */
+#image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px 0;
+    border: 3px solid #007bff;
+}
+
+#image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+              <img src="../assets/img/logo.png" alt="" style="width: 80px; height: auto;">
+              <div class="nav-links">
+                  <a href="build-resume.html">Resume Builder</a>
+                  <a href="templates.html">Resume Templates</a>
+                  <a href="login.html">My Account</a>
+              </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Input Form -->
+        <div class="form-section">
+            <h1>Resume Builder</h1>
+          <!-- Add API key input (get one from https://www.remove.bg/) -->
+        <div class="input-group">
+            <h3>Profile Picture</h3>
+            <input type="text" id="api-key" placeholder="Remove.bg API Key">
+            <input type="file" id="profile-pic" accept="image/*">
+            <div id="image-preview"></div>
+        </div>
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Full Name">
+                <input type="email" id="email" placeholder="Email">
+                <input type="tel" id="phone" placeholder="Phone">
+            </div>
+
+            <div class="input-group">
+                <h3>Education</h3>
+                <div id="education-section">
+                    <div class="education-entry">
+                        <input type="text" placeholder="Degree">
+                        <input type="text" placeholder="University">
+                        <input type="text" placeholder="Graduation Year">
+                    </div>
+                </div>
+                <button onclick="addEducation()">Add Education</button>
+            </div>
+
+            <div class="input-group">
+                <h3>Work Experience</h3>
+                <div id="work-section">
+                    <div class="work-entry">
+                        <input type="text" placeholder="Job Title">
+                        <input type="text" placeholder="Company">
+                        <input type="text" placeholder="Duration (e.g., 2020-2023)">
+                    </div>
+                </div>
+                <button onclick="addWork()">Add Work Experience</button>
+            </div>
+
+            <div class="input-group">
+                <h3>Skills</h3>
+                <textarea id="skills" placeholder="Separate skills with commas (e.g., Python, JavaScript)"></textarea>
+            </div>
+
+            <button onclick="generateResume()">Generate Resume</button>
+        </div>
+
+        <!-- Resume Preview -->
+        <div class="resume-preview" id="resume-preview"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.0.0"></script>
+    <script src="script.js"></script>
+</body>
+</html>

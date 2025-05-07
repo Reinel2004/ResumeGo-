@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #F2F7F5;
+    text-align: center;
+}
+
+.overlay-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #7B6DFAA1; /* Apply the semi-transparent purple overlay */
+    z-index: 2;
+}
+
+
+.content {
+    position: relative;
+    z-index: 3;
+    color: white;
+    max-width: 800px;
+    padding: 20px;
+}
+
+h2 {
+    text-decoration: underline;
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.step {
+    width: 22%;
+    text-align: center;
+}
+
+.step img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 14px;
+}
+
+
+/* General Styles */
+
+
+/* Badge */
+.badge {
+    font-size: 14px;
+}
+
+/* Resume Carousel */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.templates {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.resume-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Carousel Arrows */
+.carousel-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+/* Button */
+.build-btn {
+    background: #7B6DFA;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.build-btn:hover {
+    background: #6257E6;
+}
+
+
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.steps-create {
+    background-color: #6257E6;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0; 
+}
+
+.step-item p {
+    margin: 0; 
+}
