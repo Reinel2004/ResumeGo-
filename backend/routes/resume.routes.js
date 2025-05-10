@@ -1,27 +1,12 @@
-const { authJwt } = require("../middleware");
-const controller = require("../controllers/resume.controller");
+const express = require("express");
+const router = express.Router();
+const resumeController = require("../controllers/resume.controller");
+const authJwt = require("../middleware/authJwt");
 
-module.exports = function(app) {
-    app.use(function(req, res, next) {
-        res.header(
-            "Access-Control-Allow-Headers",
-            "x-access-token, Origin, Content-Type, Accept"
-        );
-        next();
-    });
+// Resume routes
+router.post("/", [authJwt.verifyToken], resumeController.create);
+router.get("/", [authJwt.verifyToken], resumeController.findAll);
+router.get("/:id", [authJwt.verifyToken], resumeController.findOne);
+router.put("/:id", [authJwt.verifyToken], resumeController.update);
 
-    // Create a new resume
-    app.post("/api/resumes", [authJwt.verifyToken], controller.create);
-
-    // Get all resumes for a user
-    app.get("/api/resumes", [authJwt.verifyToken], controller.findAll);
-
-    // Get a single resume
-    app.get("/api/resumes/:id", [authJwt.verifyToken], controller.findOne);
-
-    // Update a resume
-    app.put("/api/resumes/:id", [authJwt.verifyToken], controller.update);
-
-    // Delete a resume
-    app.delete("/api/resumes/:id", [authJwt.verifyToken], controller.delete);
-}; 
+module.exports = router; 
