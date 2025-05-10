@@ -663,18 +663,6 @@
                         <i>⚙️</i>
                         <span>Account Settings</span>
                     </li>
-                    <li class="menu-item">
-                        <i>🔒</i>
-                        <span>Security</span>
-                    </li>
-                    <li class="menu-item">
-                        <i>🛒</i>
-                        <span>Subscriptions</span>
-                    </li>
-                    <li class="menu-item">
-                        <i>❓</i>
-                        <span>Help & Support</span>
-                    </li>
                 </ul>
             </div>
             
@@ -817,7 +805,7 @@
                 <a href="#">Help Center</a>
                 <a href="#">Contact Us</a>
             </div>
-            <p>© 2023 ResumeGo! All rights reserved.</p>
+            <p>© 2025 ResumeGo! All rights reserved.</p>
         </div>
     </div>
 
@@ -1080,14 +1068,26 @@
                 document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
                 
+                const menuText = this.querySelector('span').textContent;
+                
                 // Show loading state
                 const content = document.querySelector('.account-content');
                 content.innerHTML = '<div class="loading active">Loading...</div>';
                 
-                // Simulate content loading (replace with actual content loading)
-                setTimeout(() => {
-                    content.innerHTML = '<h2>Content for ' + this.querySelector('span').textContent + ' will be loaded here</h2>';
-                }, 500);
+                // Load appropriate content based on menu item
+                switch(menuText) {
+                    case 'Profile':
+                        window.location.href = 'profile.html';
+                        break;
+                    case 'My Resumes':
+                        window.location.href = 'my-resumes.html';
+                        break;
+                    case 'Account Settings':
+                        window.location.href = 'account-settings.html';
+                        break;
+                    default:
+                        content.innerHTML = '<h2>Content for ' + menuText + ' will be loaded here</h2>';
+                }
             });
         });
 
