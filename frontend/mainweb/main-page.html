@@ -107,10 +107,34 @@
 
     .template-card {
       background-color: #f3f3f3;
-      height: 200px;
+      height: 300px;
       border-radius: 8px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
+
+    .button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.button-group button {
+  background-color: #e0e0e0;
+  color: #111;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;   
+  transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+  background-color: #ccc;
+}
+
   </style>
 
 </head>
@@ -133,11 +157,12 @@
     </header>
     
     <section class="hero">
-
+        <br>
         <h1>Free Online Resume Builder</h1>
         <p>easily create a resume for any job using our resume builder platform.</p>
         <button>Build Your Resume</button>
-
+        <br>
+        <br>
     </section>
 
 
@@ -148,21 +173,42 @@
             Crafting a standout resume is key to landing your next dream job offer.
             With our resume templates and expert content, you can easily create a polished resume and download it in your preferred format.
         </p>
+        <br>
+        <br>
 
+        <div class="template-grid">
 
-    <div class="template-grid">
+            <div class="template-card"></div>
+            <div class="template-card"></div>
+            <div class="template-card"></div>
+            <div class="template-card"></div>
+            <div class="template-card"></div>
+            <div class="template-card"></div>
+            <div class="template-card"></div>
+            <div class="template-card"></div>
 
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-        <div class="template-card"></div>
-
-    </div>
+        </div>
 
   </section>
+
+
+  <section class = "hero">
+
+    <h1>Resume templates for these fields</h1>
+       
+        <div class="button-group">
+            <button>Information Technology</button>
+            <button>Accountant</button>
+            <button>Business Administration</button>
+            <button>Elementary Education</button>
+            <button>Civil Engineer</button>
+            <button>Generic Resume</button>
+        </div>
+
+    
+    <p>A basic resume offers a simple design and a straightforward presentation of your skills and experience.</p>
+  
+  
+    </section>
 </body>
 </html>
