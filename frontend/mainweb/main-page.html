@@ -135,6 +135,121 @@
   background-color: #ccc;
 }
 
+.features {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.features p {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: #444;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.feature-card h3 {
+  color: #1a3acc;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: #444;
+}
+.site-footer {
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  gap: 2rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer-logo img {
+  height: 40px;
+}
+
+.footer-brand {
+  font-weight: bold;
+  color: #a51f1f;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 4rem;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section a {
+  text-decoration: none;
+  color: #333;
+  margin: 0.3rem 0;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #a51f1f;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.footer-bottom a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 0.4rem;
+}
+
+.footer-bottom a:hover {
+  color: #a51f1f;
+}
   </style>
 
 </head>
@@ -210,5 +325,80 @@
   
   
     </section>
+
+    <section class="features">
+            <h2>Why ResumeGO?</h2>
+            <p>
+                ResumeGo isn’t just another resume builder—it’s an all-in-one solution designed to simplify the resume creation
+                process while maximizing your job search success.
+            </p>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <h3>Professionally Designed Templates</h3>
+                <p>Choose from a variety of layouts tailored to different industries and career levels.</p>
+            </div>
+        
+            <div class="feature-card">
+                <h3>AI-Enhanced Assistant</h3>
+                <p>Let AI help refine your content, ensuring clarity, impact, and relevance.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Industry-Specific Formatting</h3>
+                <p>Our templates follow best practices, making your resume ATS-friendly and easy to read.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Effortless Photo Enhancement</h3>
+                <p>Need a professional-looking headshot? Our AI-powered tool can remove backgrounds and apply formal attire instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>User-Friendly Experience</h3>
+                <p>Our intuitive platform makes it easy to build, edit, and download your resume in just a few clicks.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+    <div class="footer-top">
+             <div class="footer-logo">
+                <img src="your-logo.png" alt="ResumeGO Logo" />
+                <span class="footer-brand">RESUME GO!</span>
+            </div>
+
+    <div class="footer-links">
+      <div class="footer-section">
+        <strong>Build your Resume</strong>
+        <a href="#">Resume Builder</a>
+        <a href="#">Resume Templates</a>
+      </div>
+
+      <div class="footer-section">
+        <strong>About ResumeGo!</strong>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+      
+    
+    </div>
+    </div>
+
+  <div class="footer-bottom">
+    <p>
+      <a href="#">Account Agreement</a> |
+      <a href="#">Privacy</a> |
+      <a href="#">Terms of Agreement</a> |
+      <a href="#">Give rating</a>
+    </p>
+    <p>© 2025 ResumeGO All rights reserved.</p>
+  </div>
+    </footer>
+
+
 </body>
 </html>
