@@ -4,8 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
+
+    <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .brand-name {
+      font-weight: bold;
+      color: #a51f1f;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a {
+      margin-left: 2rem;
+      text-decoration: none;
+      color: #111;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #a51f1f;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background-color: #f4f7fa;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 2rem;
+    }
+
+    .hero button {
+      background-color: #1a73e8;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background-color: #155cc2;
+    }
+
+    .templates-section {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+
+    .templates-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .templates-section p {
+      color: #444;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 0 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .template-card {
+      background-color: #f3f3f3;
+      height: 200px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+
 </head>
 <body>
+    <header class="navbar">
+
+         <div class="logo-section">
+            <img src="your-logo.png" alt="Logo" class="logo" />
+            <span class="brand-name">RESUMEGO!</span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="#">Resume Builder</a>
+            <a href="#">Resume Templates</a>
+            <a href="#">My Account</a>
+            <a href="#">Feedback</a>
+        </nav>
+        
+    </header>
     
+    <section class="hero">
+
+        <h1>Free Online Resume Builder</h1>
+        <p>easily create a resume for any job using our resume builder platform.</p>
+        <button>Build Your Resume</button>
+
+    </section>
+
+
+    <section class="templates-section">
+        
+        <h2>Our Professional Resume Templates</h2>
+        <p>
+            Crafting a standout resume is key to landing your next dream job offer.
+            With our resume templates and expert content, you can easily create a polished resume and download it in your preferred format.
+        </p>
+
+
+    <div class="template-grid">
+
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+        <div class="template-card"></div>
+
+    </div>
+
+  </section>
 </body>
 </html>
