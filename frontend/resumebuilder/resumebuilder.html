@@ -86,34 +86,35 @@
     color: #333;
     }
     
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
+    .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-}
+    .input-group {
+    display: flex;
+    flex-direction: column;
+    }
 
-.input-group label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
-}
+    .input-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+    }
 
-.input-group input {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
+    .input-group input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    }
 
-.full-width {
-  grid-column: span 2;
-}
+    .full-width {
+    grid-column: span 2;
+    }
+
 
 </style>
 
@@ -176,7 +177,7 @@
                         <input type="text" id="last-name" placeholder="Enter your last name">
                     </div>
 
-                    <div class="input-group full-width">
+                    <div class="input-group">
 
                         <label for="phone">Phone Number</label>
                         <input type="text" id="phone" placeholder="Enter your phone number">
@@ -185,11 +186,41 @@
             
             </form>
 
-
             
+            <br>
+            <h1 class="section-header">Address</h1>
+        
+
+            <form action="">
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label for="country">Country</label>
+                        <input type="text" id="country" placeholder="Enter country">
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Enter city">
+                    </div>
+                    
+                     <div class="input-group">
+                        
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="Enter state">
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="postalcode">Postal Code</label>
+                        <input type="text" id="postalcode" placeholder="Enter postal code">
+                    </div>
+                </div>
+
+            </form>
         </div>
-
-
 
 
 
