@@ -111,6 +111,15 @@
     font-size: 1rem;
     }
 
+    .input-group textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    font-family: inherit;
+    }
+
     .full-width {
     grid-column: span 2;
     }
@@ -222,8 +231,25 @@
             </form>
         </div>
 
+        <!-- space here -->
+
         <div class="section-block">
 
+            <h1 class="section-header">Professional Summary</h1>
+            <p>Craft a compelling 2-4 sentence summary that highlights your strengths, experience, and key achievements. Start with your role and expertise, then showcase your biggest accomplishments and core skills. Keep it energetic and engaging to make a strong first impression.</p>
+        
+        
+            <form action="">
+
+                <div class="form-grid">
+
+                    <div class="input-group full-width">
+
+                        <label for="summary">Professional Summary</label>
+                        <textarea id="summary" name="summary" rows="6" placeholder="Write a brief summary about yourself..."></textarea>
+                    </div>
+                </div>
+            </form>
         </div>
 
     </div>
