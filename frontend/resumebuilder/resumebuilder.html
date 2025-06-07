@@ -5,77 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Builder</title>
 
-    <style>
+<style>
 
-        body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        .navbar {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: #fff;
-        border-bottom: 1px solid #eee;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        }
+    .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    }
 
-        .logo-section {
-        position: absolute;
-        left: 2rem;
-        display: flex;
-        align-items: center;
-        }
+    .logo-section {
+    position: absolute;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    }
 
-        .logo {
-        height: 40px;
-        margin-right: 10px;
-        }
+    .logo {
+    height: 40px;
+    margin-right: 10px;
+    }
 
-        .brand-name {
-        font-weight: bold;
-        color: #a51f1f;
-        font-size: 1.2rem;
-        }
+    .brand-name {
+    font-weight: bold;
+    color: #a51f1f;
+    font-size: 1.2rem;
+    }
 
-        .nav-links a {
-        margin-left: 2rem;
-        text-decoration: none;
-        color: #111;
-        }
+    .nav-links a {
+    margin-left: 2rem;
+    text-decoration: none;
+    color: #111;
+    }
 
-        .nav-links a:hover {
-        color: #a51f1f;
-        }
+    .nav-links a:hover {
+    color: #a51f1f;
+    }
 
-        /* Two-Panel Layout */
-        .main-container {
-        display: flex;
-        height: calc(100vh - 70px); /* Adjust for header height */
-        }
+    /* Two-Panel Layout */
+    .main-container {
+    display: flex;
+    height: calc(100vh - 70px); /* Adjust for header height */
+    }
 
-        .left-panel {
-        width: 50%;
-        overflow-y: auto;
-        padding: 2rem;
-        background-color: #f4f4f4;
-        }
+    .left-panel {
+    width: 50%;
+    overflow-y: auto;
+    padding: 2rem;
+    background-color: #f4f4f4;
+    }
 
-        .right-panel {
-        width: 50%;
-        background-color: #4a5881;
-        color: white;
-        padding: 2rem;
-        position: sticky;
-        top: 70px; /* same as header height */
-        height: calc(100vh - 70px);
-        }
+    .right-panel {
+    width: 50%;
+    background-color: #4a5881;
+    color: white;
+    padding: 2rem;
+    position: sticky;
+    top: 70px; /* same as header height */
+    height: calc(100vh - 70px);
+    }
 
-    </style>
+    /* Section Styling */
+    .section-block {
+    margin-bottom: 3rem; /* white space between sections */
+    }
+
+    .section-header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    }
+
+</style>
 
 </head>
 
@@ -96,19 +107,36 @@
   <main class="main-container">
     <div class="left-panel">
 
-        <section>
-            
+
+        <div class = "section-block">
+            <h1 class="section-header">Resume Builder</h1>
+            <p>Create your professional resume in just a few minutes!</p>
+            <h2 style="text-align: center;">Resume Title</h2>
+            <hr>
+        </div>
+
+        <!-- space here -->
+
+        <div class = "section-block">
+            <h1 class="section-header">Personal Details</h1>
+           
+        </div>
+
+
+
+        <!-- <section>
+
             <h1>Resume Builder</h1>
             <p>Create your professional resume in just a few minutes!</p>
 
             <h2 style="text-align: center;">Resume Title</h2>
             <hr>
 
-        </section>
+        </section> -->
       
 
 
-      <input type="text" placeholder="Job Title" />
+      <!-- <input type="text" placeholder="Job Title" />
       <input type="text" placeholder="Name" />
       <input type="email" placeholder="Email" />
       <input type="text" placeholder="Phone" />
@@ -117,7 +145,7 @@
       <input type="text" placeholder="Country" />
       <input type="text" placeholder="City" />
       <input type="text" placeholder="State" />
-      <input type="text" placeholder="Postal Code" />
+      <input type="text" placeholder="Postal Code" /> -->
 
       <!-- Add more form sections below -->
 
