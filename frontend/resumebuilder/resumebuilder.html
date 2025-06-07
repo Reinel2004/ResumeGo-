@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+
+    <style>
+
+        body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        }
+
+        .logo-section {
+        position: absolute;
+        left: 2rem;
+        display: flex;
+        align-items: center;
+        }
+
+        .logo {
+        height: 40px;
+        margin-right: 10px;
+        }
+
+        .brand-name {
+        font-weight: bold;
+        color: #a51f1f;
+        font-size: 1.2rem;
+        }
+
+        .nav-links a {
+        margin-left: 2rem;
+        text-decoration: none;
+        color: #111;
+        }
+
+        .nav-links a:hover {
+        color: #a51f1f;
+        }
+
+        /* Two-Panel Layout */
+        .main-container {
+        display: flex;
+        height: calc(100vh - 70px); /* Adjust for header height */
+        }
+
+        .left-panel {
+        width: 50%;
+        overflow-y: auto;
+        padding: 2rem;
+        background-color: #f4f4f4;
+        }
+
+        .right-panel {
+        width: 50%;
+        background-color: #4a5881;
+        color: white;
+        padding: 2rem;
+        position: sticky;
+        top: 70px; /* same as header height */
+        height: calc(100vh - 70px);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="your-logo.png" class="logo" name="logo"/>
+      <span class="brand-name">RESUMEGO!</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Resume Builder</a>
+      <a href="#">Resume Templates</a>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <div class="left-panel">
+
+        <section>
+            
+            <h1>Resume Builder</h1>
+            <p>Create your professional resume in just a few minutes!</p>
+
+            <h2 style="text-align: center;">Resume Title</h2>
+            <hr>
+
+        </section>
+      
+
+
+      <input type="text" placeholder="Job Title" />
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <input type="text" placeholder="Phone" />
+
+      <h3>Address</h3>
+      <input type="text" placeholder="Country" />
+      <input type="text" placeholder="City" />
+      <input type="text" placeholder="State" />
+      <input type="text" placeholder="Postal Code" />
+
+      <!-- Add more form sections below -->
+
+
+    </div>
+
+    <div class="right-panel">
+      <h3>[Resume Preview]</h3>
+      <!-- Placeholder -->
+    </div>
+  </main>
+
+</body>
+
+</html>
