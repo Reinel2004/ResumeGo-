@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountant Template 5 - Modern | ResumeGo</title>
+    <style>
+        :root {
+            --primary-color: #2d3748;
+            --secondary-color: #4a5568;
+            --accent-color: #4299e1;
+            --text-color: #1a202c;
+            --bg-color: #ffffff;
+            --light-gray: #f7fafc;
+            --border-color: #e2e8f0;
+            --success-color: #48bb78;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            max-width: 210mm;
+            margin: 2rem auto;
+            background: var(--bg-color);
+            box-shadow: var(--card-shadow);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-picture {
+            width: 175px;
+            height: 175px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .profile-picture::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.2));
+            border-radius: 50%;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .header h2 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--accent-color);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .timeline-date {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .timeline-company {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-description {
+            font-size: 0.9rem;
+        }
+
+        .timeline-description ul {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .timeline-description li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-2px);
+        }
+
+        .skill-category h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list li::before {
+            content: "▹";
+            color: var(--accent-color);
+        }
+
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-item {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .cert-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .cert-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-org {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .achievements {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .achievement-item {
+            background: var(--light-gray);
+            padding: 1.25rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .achievement-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .achievement-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-content p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .resume-container {
+                margin: 0;
+                box-shadow: none;
+            }
+            .skill-category:hover,
+            .cert-item:hover,
+            .achievement-item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="profile-picture">
+                <img src="assets/images/profile-placeholder.jpg" alt="Profile Picture">
+            </div>
+            <h1>John Doe</h1>
+            <h2>Senior Accountant</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>john.doe@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>(123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>New York, NY</span>
+                </div>
+                <div class="contact-item">
+                    <span>🔗</span>
+                    <span>linkedin.com/in/johndoe</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Professional Summary Section -->
+            <section class="section">
+                <h3 class="section-title">Professional Summary</h3>
+                <p>Certified Public Accountant with over 8 years of experience in financial analysis, tax planning, and audit management. Proven track record of improving financial processes and reducing costs. Expert in GAAP, IFRS, and tax regulations.</p>
+            </section>
+
+            <!-- Key Skills Section -->
+            <section class="section">
+                <h3 class="section-title">Key Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Technical Skills</h4>
+                        <ul class="skill-list">
+                            <li>Financial Analysis</li>
+                            <li>Tax Planning</li>
+                            <li>Audit Management</li>
+                            <li>GAAP & IFRS</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Software Proficiency</h4>
+                        <ul class="skill-list">
+                            <li>QuickBooks</li>
+                            <li>SAP</li>
+                            <li>Excel Advanced</li>
+                            <li>Oracle Financials</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Specializations</h4>
+                        <ul class="skill-list">
+                            <li>Tax Compliance</li>
+                            <li>Financial Reporting</li>
+                            <li>Cost Analysis</li>
+                            <li>Budget Planning</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Professional Experience Section -->
+            <section class="section">
+                <h3 class="section-title">Professional Experience</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Senior Accountant</div>
+                            <div class="timeline-date">Jan 2020 - Present</div>
+                        </div>
+                        <div class="timeline-company">Global Financial Services Inc.</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Led financial reporting and analysis for a $50M portfolio</li>
+                                <li>Implemented new accounting software, reducing processing time by 40%</li>
+                                <li>Managed team of 5 junior accountants and provided mentorship</li>
+                                <li>Developed and maintained internal controls ensuring compliance with SOX</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Staff Accountant</div>
+                            <div class="timeline-date">Jun 2017 - Dec 2019</div>
+                        </div>
+                        <div class="timeline-company">Regional Accounting Firm</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Prepared and reviewed financial statements for 20+ clients</li>
+                                <li>Conducted tax planning and preparation for corporate clients</li>
+                                <li>Assisted in external audits and implemented recommendations</li>
+                                <li>Reduced month-end closing time by 25% through process improvements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Achievements Section -->
+            <section class="section">
+                <h3 class="section-title">Key Achievements</h3>
+                <div class="achievements">
+                    <div class="achievement-item">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-content">
+                            <h4>Cost Reduction Initiative</h4>
+                            <p>Led a project that reduced operational costs by 15% through process optimization</p>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">📈</div>
+                        <div class="achievement-content">
+                            <h4>Revenue Growth</h4>
+                            <p>Implemented new financial strategies resulting in 20% revenue increase</p>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">🎯</div>
+                        <div class="achievement-content">
+                            <h4>Process Improvement</h4>
+                            <p>Developed automated reporting system reducing manual work by 60%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section class="section">
+                <h3 class="section-title">Certifications</h3>
+                <div class="certifications">
+                    <div class="cert-item">
+                        <div class="cert-title">Certified Public Accountant (CPA)</div>
+                        <div class="cert-org">American Institute of CPAs</div>
+                        <div>Issued: June 2018</div>
+                        <div>License #: 123456</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-title">Certified Management Accountant (CMA)</div>
+                        <div class="cert-org">Institute of Management Accountants</div>
+                        <div>Issued: March 2019</div>
+                        <div>License #: 789012</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="section">
+                <h3 class="section-title">Education</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Master of Accountancy</div>
+                            <div class="timeline-date">2015 - 2017</div>
+                        </div>
+                        <div class="timeline-company">New York University</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Specialization in Financial Accounting</li>
+                                <li>GPA: 3.8/4.0</li>
+                                <li>Dean's List</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Bachelor of Science in Accounting</div>
+                            <div class="timeline-date">2011 - 2015</div>
+                        </div>
+                        <div class="timeline-company">University of Pennsylvania</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Dean's List, Accounting Department</li>
+                                <li>GPA: 3.9/4.0</li>
+                                <li>Accounting Club President</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html> 
