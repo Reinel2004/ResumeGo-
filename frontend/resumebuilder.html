@@ -197,6 +197,66 @@
         height: calc(100vh - 70px);
     }
 
+    /* Preview Toggle Button */
+    .preview-toggle {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary-color);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 1000;
+        font-weight: 600;
+    }
+
+    .preview-toggle:hover {
+        background: var(--secondary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .main-container {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .left-panel {
+            width: 100%;
+            height: auto;
+        }
+
+        .right-panel {
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .right-panel.active {
+            transform: translateX(0);
+        }
+
+        .preview-toggle {
+            display: block;
+        }
+
+        .preview-toggle.active {
+            background: var(--secondary-color);
+        }
+    }
+
     /* Section Styling */
     .section-block {
         margin-bottom: 3rem;
@@ -226,24 +286,115 @@
         color: var(--text-color);
     }
 
-    .input-group input {
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--border-color);
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-
+    .input-group input,
     .input-group textarea {
         padding: 0.75rem 1rem;
         border: 1px solid var(--border-color);
         border-radius: 5px;
         font-size: 1rem;
+        width: 100%;
+        background-color: var(--white);
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    }
+
+    .input-group textarea {
         resize: vertical;
         font-family: inherit;
+        min-height: 100px;
     }
 
     .full-width {
         grid-column: span 2;
+    }
+
+    /* Responsive Form Styles */
+    @media (max-width: 768px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .full-width {
+            grid-column: span 1;
+        }
+
+        .input-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            font-size: 16px; /* Prevents zoom on iOS */
+            padding: 0.875rem 1rem;
+        }
+
+        .section-block {
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .section-header {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .left-panel {
+            padding: 1rem 0;
+        }
+
+      
+        button, 
+        .btn {
+            min-height: 44px;
+            padding: 0.75rem 1.5rem;
+        }
+
+       
+        .tech-skills-grid {
+            grid-template-columns: 1fr;
+        }
+
+     
+        .cert-grid {
+            grid-template-columns: 1fr;
+        }
+
+        /* Make project items more mobile-friendly */
+        .project-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech-stack {
+            gap: 0.5rem;
+        }
+
+        .tech-badge {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+        .section-block {
+            padding: 0 0.75rem;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            padding: 0.75rem;
+        }
+
+        .section-header {
+            font-size: 1.125rem;
+        }
     }
 
     /* Template-specific styles */
@@ -658,12 +809,118 @@
         <!-- Resume preview will be generated here -->
     </div>
   </main>
+
+  <button class="preview-toggle" id="previewToggle">Preview Resume</button>
+
   <script src="js/auth.js"></script>
   <script>
-      // Check authentication and redirect if not authenticated
-      if (!Auth.requireAuth()) {
-          // This will redirect to index.html if not authenticated
-          // No need for additional code here
+      if (!Auth.requireAuth()){
+      
+      }
+      // Preview functionality
+      const previewToggle = document.getElementById('previewToggle');
+      const rightPanel = document.querySelector('.right-panel');
+      let isPreviewActive = false;
+
+      function togglePreview() {
+          isPreviewActive = !isPreviewActive;
+          rightPanel.classList.toggle('active');
+          previewToggle.classList.toggle('active');
+          previewToggle.textContent = isPreviewActive ? 'Hide Preview' : 'Preview Resume';
+          
+          // Update preview content when showing
+          if (isPreviewActive) {
+              updatePreview();
+          }
+      }
+
+      function updatePreview() {
+          // Get all form inputs
+          const formInputs = document.querySelectorAll('.input-group input, .input-group textarea');
+          
+          // Update preview content based on form inputs
+          formInputs.forEach(input => {
+              const previewElement = document.querySelector(`[data-preview="${input.id}"]`);
+              if (previewElement) {
+                  previewElement.textContent = input.value || input.placeholder;
+              }
+          });
+
+          // Update skills preview
+          const skillsInputs = document.querySelectorAll('.skill-input');
+          const skillsContainer = document.querySelector('.skills-preview');
+          if (skillsContainer) {
+              skillsContainer.innerHTML = '';
+              skillsInputs.forEach(skill => {
+                  if (skill.value) {
+                      const skillElement = document.createElement('span');
+                      skillElement.className = 'skill-badge';
+                      skillElement.textContent = skill.value;
+                      skillsContainer.appendChild(skillElement);
+                  }
+              });
+          }
+
+          // Update projects preview
+          const projectInputs = document.querySelectorAll('.project-item');
+          const projectsContainer = document.querySelector('.projects-preview');
+          if (projectsContainer) {
+              projectsContainer.innerHTML = '';
+              projectInputs.forEach(project => {
+                  const title = project.querySelector('.project-title')?.value;
+                  const description = project.querySelector('.project-description')?.value;
+                  if (title || description) {
+                      const projectElement = document.createElement('div');
+                      projectElement.className = 'preview-project';
+                      projectElement.innerHTML = `
+                          <h4>${title || 'Project Title'}</h4>
+                          <p>${description || 'Project Description'}</p>
+                      `;
+                      projectsContainer.appendChild(projectElement);
+                  }
+              });
+          }
+      }
+
+      // Add event listeners
+      previewToggle.addEventListener('click', togglePreview);
+
+      // Close preview when clicking outside on mobile
+      document.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768 && 
+              isPreviewActive && 
+              !rightPanel.contains(e.target) && 
+              !previewToggle.contains(e.target)) {
+              togglePreview();
+          }
+      });
+
+      // Update preview when form inputs change
+      document.querySelectorAll('.input-group input, .input-group textarea').forEach(input => {
+          input.addEventListener('input', () => {
+              if (isPreviewActive) {
+                  updatePreview();
+              }
+          });
+      });
+
+      // Handle window resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+              if (window.innerWidth > 768 && isPreviewActive) {
+                  rightPanel.classList.remove('active');
+                  previewToggle.classList.remove('active');
+                  previewToggle.textContent = 'Preview Resume';
+                  isPreviewActive = false;
+              }
+          }, 250);
+      });
+
+      // Initialize preview state
+      if (window.innerWidth <= 768) {
+          previewToggle.style.display = 'block';
       }
 
       // Initialize user menu
@@ -751,9 +1008,6 @@
               userDropdown.classList.remove('active');
           }
       });
-
-      // Check authentication
-      checkAuth();
   </script>
 </body>
 
