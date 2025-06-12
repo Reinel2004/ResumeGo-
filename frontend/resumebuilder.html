@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
 
 <style>
     :root {
@@ -190,6 +203,7 @@
     .right-panel {
         width: 50%;
         background-color: var(--white);
+        overflow: auto;
         color: var(--text-color);
         padding: 2rem;
         position: sticky;
@@ -868,36 +882,83 @@
         33% { content: '..'; }
         66% { content: '...'; }
     }
+
+    /* Add these styles for the skill badges */
+    .skill-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #e5e7eb;
+        color: #374151;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .skill-badge:hover {
+        background-color: #d1d5db;
+    }
+
+    .remove-skill-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 9999px;
+        background-color: #9ca3af;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .remove-skill-btn:hover {
+        background-color: #6b7280;
+    }
+
+    /* Animation for adding/removing skills */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .skill-badge {
+        animation: fadeIn 0.2s ease-out;
+    }
 </style>
 
 </head>
 
 <body>
-    <header>
-        <div class="nav-container">
-            <nav>
-                <div class="nav-left">
-                    <a href="dashboard.html" class="logo">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo">
-                        <span class="logo-text">ResumeGo!</span>
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <a href="dashboard.html" class="flex items-center space-x-2">
+                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
+                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
                     </a>
-                    <div class="nav-links">
-                        <a href="dashboard.html">Dashboard</a>
-                        <a href="templates.html">Templates</a>
-                        <a href="resumebuilder.html">Create Resume</a>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
+                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
+                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
                     </div>
                 </div>
-                <div class="nav-right">
-                    <div class="user-menu">
-                        <button class="user-button" id="userMenuButton">
-                            <div class="user-avatar" id="userAvatar">U</div>
-                            <span id="userName">User Name</span>
+                <div class="flex items-center">
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
+                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
+                            <span id="userName" class="hidden md:inline">User Name</span>
                         </button>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="profile.html">Profile Settings</a>
-                            <a href="my-resumes.html">My Resumes</a>
-                            <div class="divider"></div>
-                            <a href="#" id="logoutButton">Logout</a>
+                        <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
+                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -1027,32 +1088,49 @@
             </div>
 
             <!-- Technical Skills -->
-            <div class="section-block">
-                <h2 class="section-header">Technical Skills</h2>
-                <div class="tech-skills-section">
-                        <div class="skill-category">
-                            <h4>Programming Languages</h4>
-                        <div class="skills-input-container">
-                            <input type="text" class="skill-input" placeholder="e.g., JavaScript, Python, Java">
-                            <button class="add-skill-btn">Add</button>
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Technical Skills</h2>
+                <div class="space-y-8">
+                    <!-- Programming Languages -->
+                    <div class="skill-category">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Programming Languages</h4>
+                        <div class="flex gap-2 mb-3">
+                            <input type="text" 
+                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors" 
+                                   placeholder="e.g., JavaScript, Python, Java">
+                            <button class="add-skill-btn px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                Add
+                            </button>
                         </div>
-                        <div class="skills-list"></div>
+                        <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
+                    </div>
+
+                    <!-- Frameworks & Libraries -->
+                    <div class="skill-category">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Frameworks & Libraries</h4>
+                        <div class="flex gap-2 mb-3">
+                            <input type="text" 
+                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors" 
+                                   placeholder="e.g., React, Node.js, Django">
+                            <button class="add-skill-btn px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                Add
+                            </button>
                         </div>
-                        <div class="skill-category">
-                            <h4>Frameworks & Libraries</h4>
-                        <div class="skills-input-container">
-                            <input type="text" class="skill-input" placeholder="e.g., React, Node.js, Django">
-                            <button class="add-skill-btn">Add</button>
+                        <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
+                    </div>
+
+                    <!-- Tools & Technologies -->
+                    <div class="skill-category">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Tools & Technologies</h4>
+                        <div class="flex gap-2 mb-3">
+                            <input type="text" 
+                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors" 
+                                   placeholder="e.g., Git, Docker, AWS">
+                            <button class="add-skill-btn px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                Add
+                            </button>
                         </div>
-                        <div class="skills-list"></div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Tools & Technologies</h4>
-                        <div class="skills-input-container">
-                            <input type="text" class="skill-input" placeholder="e.g., Git, Docker, AWS">
-                            <button class="add-skill-btn">Add</button>
-                        </div>
-                        <div class="skills-list"></div>
+                        <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
                     </div>
                 </div>
             </div>
@@ -1403,10 +1481,13 @@
                     removeBtn.className = 'remove-skill-btn';
                     removeBtn.textContent = '×';
                     removeBtn.addEventListener('click', () => {
-                        skillBadge.remove();
-                        if (isPreviewActive) {
-                            updatePreview();
-                        }
+                        skillBadge.style.animation = 'fadeOut 0.2s ease-out';
+                        setTimeout(() => {
+                            skillBadge.remove();
+                            if (isPreviewActive) {
+                                updatePreview();
+                            }
+                        }, 200);
                     });
                     
                     skillBadge.appendChild(removeBtn);
@@ -1416,6 +1497,17 @@
                     if (isPreviewActive) {
                         updatePreview();
                     }
+                }
+            });
+        });
+
+        // Add enter key support for adding skills
+        document.querySelectorAll('.skill-input').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const addBtn = input.nextElementSibling;
+                    addBtn.click();
                 }
             });
         });

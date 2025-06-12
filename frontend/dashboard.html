@@ -4,222 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - ResumeGo!</title>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --text-color: #334155;
-            --light-gray: #f1f5f9;
-            --white: #ffffff;
-            --border-color: #e2e8f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* Header Styles */
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo img {
-            width: 40px;
-            height: auto;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .user-menu {
-            position: relative;
-        }
-
-        .user-button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: var(--white);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .user-button:hover {
-            border-color: var(--primary-color);
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-        }
 
         .user-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 8px;
-            background: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
             display: none;
         }
-
         .user-dropdown.active {
             display: block;
         }
-
-        .user-dropdown a {
-            display: block;
-            padding: 12px 16px;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .user-dropdown a:hover {
-            background-color: var(--light-gray);
-        }
-
-        .user-dropdown .divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 8px 0;
-        }
-
-        /* Main Content */
-        .main-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .dashboard-header {
-            margin-bottom: 30px;
-        }
-
-        .dashboard-title {
-            font-size: 2rem;
-            color: var(--text-color);
-            margin-bottom: 10px;
-        }
-
-        .dashboard-subtitle {
-            color: #64748b;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .user-button span {
-                display: none;
-            }
-        }
     </style>
 </head>
-<body>
-    <header>
-        <div class="nav-container">
-            <nav>
-                <div class="nav-left">
-                    <a href="dashboard.html" class="logo">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo">
-                        <span class="logo-text">ResumeGo!</span>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <a href="dashboard.html" class="flex items-center space-x-2">
+                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
+                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
                     </a>
-                    <div class="nav-links">
-                        <a href="dashboard.html">Dashboard</a>
-                        <a href="templates.html">Templates</a>
-                        <a href="resumebuilder.html">Create Resume</a>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
+                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
+                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
                     </div>
                 </div>
-                <div class="nav-right">
-                    <div class="user-menu">
-                        <button class="user-button" id="userMenuButton">
-                            <div class="user-avatar" id="userAvatar">U</div>
-                            <span id="userName">User Name</span>
+                <div class="flex items-center">
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
+                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
+                            <span id="userName" class="hidden md:inline">User Name</span>
                         </button>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="profile.html">Profile Settings</a>
-                            <a href="my-resumes.html">My Resumes</a>
-                            <div class="divider"></div>
-                            <a href="#" id="logoutButton">Logout</a>
+                        <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
+                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -227,12 +61,81 @@
         </div>
     </header>
 
-    <main class="main-container">
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">Welcome back!</h1>
-            <p class="dashboard-subtitle">Manage your resumes and create new ones</p>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Welcome back!</h1>
+            <p class="mt-2 text-gray-600">Manage your resumes and create new ones</p>
         </div>
-        <!-- Add your dashboard content here -->
+        <div class="text-center py-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Build Your Professional Resume</h2>
+            <p class="text-gray-600">Create a winning resume in minutes with our AI-powered resume builder.</p>
+        </div>
+
+        <!-- Recent Work Section -->
+        <section class="mt-12 bg-white p-10 ">
+            <h2 class="text-2xl font-bold text-blue-500 mb-2">Your Recent Work</h2>
+            <p class="text-gray-600 mb-8">Continue editing or download your previously created resumes</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Resume Card 1 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <img src="https://via.placeholder.com/300x180?text=Tech+Resume" alt="Tech Resume Preview" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-1">Senior Developer Resume</h3>
+                        <p class="text-sm text-gray-600 mb-4">Last edited: 2 days ago</p>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors">Edit</button>
+                            <button class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">Download</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resume Card 2 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <img src="https://via.placeholder.com/300x180?text=Business+Resume" alt="Business Resume Preview" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-1">Marketing Manager</h3>
+                        <p class="text-sm text-gray-600 mb-4">Last edited: 1 week ago</p>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors">Edit</button>
+                            <button class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">Download</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resume Card 3 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <img src="https://via.placeholder.com/300x180?text=Teacher+Resume" alt="Education Resume Preview" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-1">Elementary Teacher</h3>
+                        <p class="text-sm text-gray-600 mb-4">Last edited: 3 weeks ago</p>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors">Edit</button>
+                            <button class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">Download</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Empty State (for new users) -->
+                <div class="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 overflow-hidden hover:border-primary transition-colors">
+                    <div class="aspect-w-16 aspect-h-9 flex items-center justify-center">
+                        <div class="text-center p-6">
+                            <div class="text-4xl text-gray-400 mb-2">+</div>
+                            <p class="text-gray-600">Create Your First Resume</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <button class="w-full px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors">Start Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="js/auth.js"></script>
@@ -240,12 +143,38 @@
         // Check authentication and redirect if not authenticated
         if (!Auth.requireAuth()) {
             // This will redirect to index.html if not authenticated
-            // No need for additional code here
         }
 
-        // Initialize user menu
-        Auth.updateUserMenu();
-        Auth.initUserMenu();
+        // User dropdown functionality
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userDropdown = document.getElementById('userDropdown');
+        const logoutButton = document.getElementById('logoutButton');
+
+        // Toggle dropdown
+        userMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        // Handle logout
+        logoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            Auth.logout();
+        });
+
+        // Update user info
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('userName').textContent = user.fullName || 'User';
+            document.getElementById('userAvatar').textContent = (user.fullName || 'U')[0].toUpperCase();
+        }
     </script>
 </body>
 </html>

@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Resume Templates | ResumeGo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+   
     <style>
         :root {
             --primary-color: #2563eb;
@@ -29,11 +43,17 @@
 
         /* Header Styles */
         header {
-            background: var(--light);
+            background: var(--white);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         nav {
@@ -63,7 +83,7 @@
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--primary-color);
         }
 
         .nav-links {
@@ -72,14 +92,14 @@
         }
 
         .nav-links a {
-            color: var(--dark);
+            color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--primary-color);
         }
 
         .nav-right {
@@ -88,25 +108,8 @@
             gap: 20px;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
         .user-menu {
             position: relative;
-            display: none;
         }
 
         .user-button {
@@ -114,23 +117,23 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            background: white;
+            background: var(--white);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .user-button:hover {
-            border-color: var(--primary);
+            border-color: var(--primary-color);
         }
 
         .user-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: var(--primary);
-            color: white;
+            background: var(--primary-color);
+            color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -142,8 +145,8 @@
             top: 100%;
             right: 0;
             margin-top: 8px;
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--white);
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             min-width: 200px;
@@ -157,21 +160,20 @@
         .user-dropdown a {
             display: block;
             padding: 12px 16px;
-            color: var(--dark);
+            color: var(--text-color);
             text-decoration: none;
             transition: background-color 0.3s;
         }
 
         .user-dropdown a:hover {
-            background-color: var(--light);
+            background-color: var(--light-gray);
         }
 
         .user-dropdown .divider {
             height: 1px;
-            background: #e2e8f0;
+            background: var(--border-color);
             margin: 8px 0;
         }
-
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -390,45 +392,41 @@
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="nav-left">
-                    <a href="index.html" class="logo">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo">
-                        <span class="logo-text">ResumeGo!</span>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <a href="dashboard.html" class="flex items-center space-x-2">
+                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
+                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
                     </a>
-                    <div class="nav-links">
-                        <a href="templates-2.html">Resume Templates</a>
-                        
-                        
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
+                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
+                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
                     </div>
                 </div>
-                <div class="nav-right">
-                    <div class="auth-buttons" id="authButtons">
-                        <a href="login.html" class="btn btn-outline">Login</a>
-                        <a href="register.html" class="btn">Sign Up</a>
-                    </div>
-                    <div class="user-menu" id="userMenu">
-                        <button class="user-button" id="userMenuButton">
-                            <div class="user-avatar" id="userAvatar">U</div>
-                            <span id="userName">User Name</span>
+                <div class="flex items-center">
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
+                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
+                            <span id="userName" class="hidden md:inline">User Name</span>
                         </button>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="dashboard.html">Dashboard</a>
-                            <a href="profile.html">Profile Settings</a>
-                            <a href="my-resumes.html">My Resumes</a>
-                            <div class="divider"></div>
-                            <a href="#" id="logoutButton">Logout</a>
+                        <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
+                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
+
     
-   <div class="container">
+    <div class="container">
         <section class="hero">
             <h1>Professional Resume Templates</h1>
             <p>Crafting a standout resume is key to landing your next dream job offer. With our resume templates and expert content, you can easily create a polished resume and download it in your preferred format.</p>
@@ -641,6 +639,11 @@
     
     <script src="js/auth.js"></script>
     <script>
+        // Check authentication and redirect if not authenticated
+        if (!Auth.requireAuth()) {
+            // This will redirect to index.html if not authenticated
+            
+        }
 
         // Initialize user menu
         Auth.updateUserMenu();

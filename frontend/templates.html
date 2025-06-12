@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Resume Templates | ResumeGo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+   
     <style>
         :root {
             --primary-color: #2563eb;
@@ -378,38 +392,39 @@
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="nav-container">
-            <nav>
-                <div class="nav-left">
-                    <a href="dashboard.html" class="logo">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo">
-                        <span class="logo-text">ResumeGo!</span>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <a href="dashboard.html" class="flex items-center space-x-2">
+                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
+                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
                     </a>
-                    <div class="nav-links">
-                        <a href="dashboard.html">Dashboard</a>
-                        <a href="templates.html">Templates</a>
-                        <a href="resumebuilder.html">Create Resume</a>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
+                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
+                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
                     </div>
                 </div>
-                <div class="nav-right">
-                    <div class="user-menu">
-                        <button class="user-button" id="userMenuButton">
-                            <div class="user-avatar" id="userAvatar">U</div>
-                            <span id="userName">User Name</span>
+                <div class="flex items-center">
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
+                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
+                            <span id="userName" class="hidden md:inline">User Name</span>
                         </button>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="profile.html">Profile Settings</a>
-                            <a href="my-resumes.html">My Resumes</a>
-                            <div class="divider"></div>
-                            <a href="#" id="logoutButton">Logout</a>
+                        <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
+                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
+
     
     <div class="container">
         <section class="hero">
