@@ -1784,7 +1784,7 @@
                     const apiResponse = await fetch('https://api.remove.bg/v1.0/removebg', {
                         method: 'POST',
                         headers: {
-                            'X-Api-Key': 'UEkJrBrsoY45JYiNqvvCaAw3',
+                            'X-Api-Key': process.env.REMOVE_BG_API_KEY || '',
                         },
                         body: formData,
                     });
@@ -1816,7 +1816,7 @@
         // AI Enhancement functionality
         let currentTextarea = null;
         let currentPopup = null;
-        const API_KEY = '';
+        const API_KEY = process.env.OPENAI_API_KEY || '';
 
         function addAIEnhanceButtons() {
             const textareas = document.querySelectorAll('textarea');
