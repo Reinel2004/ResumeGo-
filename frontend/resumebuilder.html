@@ -483,6 +483,391 @@
     .template-content.active {
         display: block;
     }
+
+    /* Template-specific styles */
+    .it-template-1-preview {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #334155;
+        line-height: 1.6;
+        padding: 2rem;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .it-template-1-preview .preview-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #2563eb;
+    }
+
+    .it-template-1-preview h1 {
+        font-size: 2.5rem;
+        color: #2563eb;
+        margin-bottom: 0.5rem;
+    }
+
+    .it-template-1-preview h2 {
+        font-size: 1.5rem;
+        color: #64748b;
+        margin-bottom: 1rem;
+    }
+
+    .it-template-1-preview .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        color: #64748b;
+    }
+
+    .it-template-1-preview .preview-summary {
+        margin-bottom: 2rem;
+    }
+
+    .it-template-1-preview h3 {
+        font-size: 1.25rem;
+        color: #2563eb;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .it-template-1-preview .preview-skills {
+        margin-bottom: 2rem;
+    }
+
+    .it-template-1-preview .skill-category-preview {
+        margin-bottom: 1rem;
+    }
+
+    .it-template-1-preview .skill-category-preview h4 {
+        font-size: 1.1rem;
+        color: #64748b;
+        margin-bottom: 0.5rem;
+    }
+
+    .it-template-1-preview .skill-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .it-template-1-preview .skill-badge {
+        background: #e2e8f0;
+        color: #334155;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.875rem;
+    }
+
+    .it-template-1-preview .preview-experience {
+        margin-bottom: 2rem;
+    }
+
+    .it-template-1-preview .experience-item-preview {
+        margin-bottom: 1.5rem;
+    }
+
+    .it-template-1-preview .experience-item-preview h4 {
+        font-size: 1.1rem;
+        color: #2563eb;
+        margin-bottom: 0.25rem;
+    }
+
+    .it-template-1-preview .experience-item-preview h5 {
+        font-size: 1rem;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+    }
+
+    .it-template-1-preview .experience-item-preview .date {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .it-template-1-preview .preview-projects {
+        margin-bottom: 2rem;
+    }
+
+    .it-template-1-preview .project-item-preview {
+        margin-bottom: 1.5rem;
+    }
+
+    .it-template-1-preview .project-item-preview h4 {
+        font-size: 1.1rem;
+        color: #2563eb;
+        margin-bottom: 0.25rem;
+    }
+
+    .it-template-1-preview .project-item-preview .tech-stack {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Default template preview styles */
+    .default-template-preview {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #334155;
+        line-height: 1.6;
+        padding: 2rem;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .default-template-preview .preview-header {
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+
+    .default-template-preview h1 {
+        font-size: 2rem;
+        color: #334155;
+        margin-bottom: 0.5rem;
+    }
+
+    .default-template-preview h2 {
+        font-size: 1.25rem;
+        color: #64748b;
+        margin-bottom: 1rem;
+    }
+
+    .default-template-preview .contact-info {
+        display: flex;
+        gap: 2rem;
+        color: #64748b;
+    }
+
+    .default-template-preview .preview-summary {
+        margin-bottom: 2rem;
+    }
+
+    .default-template-preview h3 {
+        font-size: 1.25rem;
+        color: #334155;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* Responsive preview styles */
+    @media (max-width: 768px) {
+        .it-template-1-preview,
+        .default-template-preview {
+            padding: 1rem;
+        }
+
+        .it-template-1-preview h1 {
+            font-size: 2rem;
+        }
+
+        .it-template-1-preview h2 {
+            font-size: 1.25rem;
+        }
+
+        .it-template-1-preview .contact-info {
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .default-template-preview .contact-info {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+
+    /* Add profile picture styles */
+    .profile-upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .profile-preview {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .profile-preview .placeholder {
+        color: #64748b;
+        font-size: 3rem;
+    }
+
+    .profile-upload input[type="file"] {
+        display: none;
+    }
+
+    .profile-upload label {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .profile-upload label:hover {
+        background: var(--secondary-color);
+    }
+
+    .profile-upload .remove-photo {
+        color: #ef4444;
+        cursor: pointer;
+        font-size: 0.875rem;
+        display: none;
+    }
+
+    .profile-upload .remove-photo.active {
+        display: block;
+    }
+
+    /* Update preview styles for profile picture */
+    .it-template-1-preview .profile-picture {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        overflow: hidden;
+        border: 3px solid #2563eb;
+    }
+
+    .it-template-1-preview .profile-picture img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .default-template-preview .profile-picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+    }
+
+    .default-template-preview .profile-picture img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+  
+    .ai-enhance-btn {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .ai-enhance-btn:hover {
+        background: #45a049;
+    }
+
+    .ai-enhance-btn.loading {
+        background: #666;
+        cursor: not-allowed;
+    }
+
+    .ai-enhance-popup {
+        display: none;
+        position: absolute;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        z-index: 1000;
+        right: 0;
+        top: 100%;
+        margin-top: 5px;
+    }
+
+    .regenerate-btn {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .regenerate-btn:hover {
+        background: #45a049;
+    }
+
+    .regenerate-btn.loading {
+        background: #666;
+        cursor: not-allowed;
+    }
+
+    .ai-suggestion {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .ai-suggestion:hover {
+        background: #f5f5f5;
+        border-color: #4CAF50;
+    }
+
+    .ai-suggestion:last-child {
+        margin-bottom: 0;
+    }
+
+    .ai-loading {
+        text-align: center;
+        color: #666;
+        padding: 10px;
+    }
+
+    .ai-loading::after {
+        content: '...';
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        0% { content: '.'; }
+        33% { content: '..'; }
+        66% { content: '...'; }
+    }
 </style>
 
 </head>
@@ -522,14 +907,96 @@
 
     <main class="main-container">
     <div class="left-panel">
+            <!-- Profile Picture Upload -->
+            <div class="section-block">
+                <h2 class="section-header">Profile Picture</h2>
+                <div class="profile-upload">
+                    <div class="profile-preview" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                        <img src="" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <button type="button" onclick="openModal()" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Upload Photo</button>
+                    <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+                    <span class="remove-photo">Remove Photo</span>
+                </div>
+            </div>
 
-        <!-- Default Template Content -->
-        <div id="default-template" class="template-content active">
-            <div class = "section-block">
-                <h1 class="section-header">Resume Builder</h1>
-                <p>Create your professional resume in just a few minutes!</p>
-                <h2 style="text-align: center;">Resume Title</h2>
-                <hr>
+            <!-- Profile Editor Modal -->
+            <div id="profileEditorModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
+                <div style="background: white; width: 95%; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 8px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <h2 style="font-size: clamp(20px, 4vw, 24px); font-weight: 600; color: #333;">Profile Photo Editor</h2>
+                            <p style="color: #666; font-size: clamp(14px, 2vw, 16px);">Crop and apply professional suit overlay for your resume</p>
+                        </div>
+                        <button onclick="closeModal()" style="background: none; border: none; cursor: pointer; font-size: 24px; padding: 5px;">×</button>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <!-- Image Preview Section -->
+                        <div>
+                            <div style="aspect-ratio: 1; background: #f3f4f6; border-radius: 8px; overflow: hidden; position: relative; min-height: 300px; max-width: 300px; margin: 0 auto;">
+                                <img id="previewImage" src="https://via.placeholder.com/400x400?text=Upload+Photo" alt="Profile Preview" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <div id="dragText" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #666; pointer-events: none;">
+                                    Drag to reposition image
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; max-width: 300px; margin: 10px auto;">
+                                <button onclick="zoomOut()" style="padding: 8px; background: #f3f4f6; border-radius: 50%; border: none; cursor: pointer; min-width: 36px; min-height: 36px;">-</button>
+                                <input type="range" id="zoomSlider" min="50" max="200" value="100" style="flex: 1;">
+                                <button onclick="zoomIn()" style="padding: 8px; background: #f3f4f6; border-radius: 50%; border: none; cursor: pointer; min-width: 36px; min-height: 36px;">+</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Controls Section -->
+                        <div>
+                            <!-- Suit Options -->
+                            <div style="margin-bottom: 20px;">
+                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;">👔 Select Suit Overlay</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
+                                    <div onclick="selectSuit(this)" class="suit-option" style="cursor: pointer; padding: 10px; border: 2px solid #3b82f6; border-radius: 8px;">
+                                        <img src="../assets/img/suit-overlay/suit-overlay-1.png" alt="Business Suit" style="width: 100%; border-radius: 4px;">
+                                        <span style="display: block; text-align: center; margin-top: 5px; font-size: 14px;">Business</span>
+                                    </div>
+                                    <div onclick="selectSuit(this)" class="suit-option" style="cursor: pointer; padding: 10px; border: 2px solid transparent; border-radius: 8px;">
+                                        <img src="../assets/img/suit-overlay/suit-overlay-2.png" alt="Executive Suit" style="width: 100%; border-radius: 4px;">
+                                        <span style="display: block; text-align: center; margin-top: 5px; font-size: 14px;">Executive</span>
+                                    </div>
+                                    <div onclick="selectSuit(this)" class="suit-option" style="cursor: pointer; padding: 10px; border: 2px solid transparent; border-radius: 8px;">
+                                        <img src="../assets/img/suit-overlay/suit-overlay-3.png" alt="Formal Suit" style="width: 100%; border-radius: 4px;">
+                                        <span style="display: block; text-align: center; margin-top: 5px; font-size: 14px;">Formal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Upload Options -->
+                            <div style="margin-bottom: 20px;">
+                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;">🖼️ Upload New Image</h3>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <button onclick="document.getElementById('profile-upload').click()" style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px);">Select Photo from Device</button>
+                                    <button style="width: 100%; padding: 12px; background: #f3f4f6; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px);">Take a Selfie</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Advanced Settings -->
+                            <div>
+                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;">⚙️ Advanced Settings</h3>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 10px; font-size: clamp(14px, 2vw, 16px);">
+                                        <input type="checkbox" id="bgRemovalCheckbox" onchange="handleBackgroundRemoval(this)">
+                                        <span>Automatic background removal</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Footer Actions -->
+                    <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="closeModal()" style="padding: 12px 24px; background: #f3f4f6; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px); min-width: 100px;">Cancel</button>
+                        <button onclick="applyChanges()" style="padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px); min-width: 100px;">Apply to Resume</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Personal Information -->
@@ -550,106 +1017,11 @@
                     </div>
                     <div class="input-group">
                         <label for="phone">Phone</label>
-                        <input type="tel" id="phone" placeholder="(123) 456-7890">
-                    </div>
-                    <div class="input-group">
-                        <label for="location">Location</label>
-                        <input type="text" id="location" placeholder="City, State">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Experience -->
-            <div class="section-block">
-                <h2 class="section-header">Work Experience</h2>
-                <div id="experience-container">
-                    <div class="experience-item">
-                        <div class="form-grid">
-                            <div class="input-group">
-                                <label>Job Title</label>
-                                <input type="text" placeholder="e.g., Software Engineer">
-                            </div>
-                            <div class="input-group">
-                                <label>Company</label>
-                                <input type="text" placeholder="e.g., Tech Corp">
-                            </div>
-                            <div class="input-group">
-                                <label>Duration</label>
-                                <input type="text" placeholder="e.g., Jan 2020 - Present">
+                        <input type="tel" id="phone" placeholder="+1 234 567 890">
                             </div>
                             <div class="input-group full-width">
-                                <label>Description</label>
-                                <textarea rows="4" placeholder="Describe your responsibilities and achievements"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="addExperience()" class="btn">Add Experience</button>
-            </div>
-
-            <!-- Education -->
-            <div class="section-block">
-                <h2 class="section-header">Education</h2>
-                <div id="education-container">
-                    <div class="education-item">
-                        <div class="form-grid">
-                            <div class="input-group">
-                                <label>Degree</label>
-                                <input type="text" placeholder="e.g., Bachelor of Science">
-                            </div>
-                            <div class="input-group">
-                                <label>Institution</label>
-                                <input type="text" placeholder="e.g., University Name">
-                            </div>
-                            <div class="input-group">
-                                <label>Graduation Date</label>
-                                <input type="text" placeholder="e.g., May 2020">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="addEducation()" class="btn">Add Education</button>
-            </div>
-        </div>
-
-        <!-- IT Template Content -->
-        <div id="it-template" class="template-content">
-            <div class = "section-block">
-                <h1 class="section-header">IT Professional Resume</h1>
-                <p>Create your professional IT resume with emphasis on technical skills and projects</p>
-            </div>
-
-            <!-- Personal Information -->
-            <div class="section-block">
-                <h2 class="section-header">Personal Information</h2>
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label for="it-name">Full Name</label>
-                        <input type="text" id="it-name" placeholder="John Doe">
-                    </div>
-                    <div class="input-group">
-                        <label for="it-title">Professional Title</label>
-                        <input type="text" id="it-title" placeholder="e.g., Senior Software Engineer">
-                    </div>
-                    <div class="input-group">
-                        <label for="it-email">Email</label>
-                        <input type="email" id="it-email" placeholder="john.doe@example.com">
-                    </div>
-                    <div class="input-group">
-                        <label for="it-phone">Phone</label>
-                        <input type="tel" id="it-phone" placeholder="(123) 456-7890">
-                    </div>
-                    <div class="input-group">
-                        <label for="it-location">Location</label>
-                        <input type="text" id="it-location" placeholder="City, State">
-                    </div>
-                    <div class="input-group">
-                        <label for="it-linkedin">LinkedIn</label>
-                        <input type="url" id="it-linkedin" placeholder="linkedin.com/in/johndoe">
-                    </div>
-                    <div class="input-group">
-                        <label for="it-github">GitHub</label>
-                        <input type="url" id="it-github" placeholder="github.com/johndoe">
+                        <label for="summary">Professional Summary</label>
+                        <textarea id="summary" placeholder="Write a brief summary of your professional background..."></textarea>
                     </div>
                 </div>
             </div>
@@ -658,357 +1030,940 @@
             <div class="section-block">
                 <h2 class="section-header">Technical Skills</h2>
                 <div class="tech-skills-section">
-                    <div class="tech-skills-grid">
                         <div class="skill-category">
                             <h4>Programming Languages</h4>
-                            <input type="text" placeholder="e.g., Python, Java, JavaScript">
+                        <div class="skills-input-container">
+                            <input type="text" class="skill-input" placeholder="e.g., JavaScript, Python, Java">
+                            <button class="add-skill-btn">Add</button>
+                        </div>
+                        <div class="skills-list"></div>
                         </div>
                         <div class="skill-category">
                             <h4>Frameworks & Libraries</h4>
-                            <input type="text" placeholder="e.g., React, Django, Spring">
+                        <div class="skills-input-container">
+                            <input type="text" class="skill-input" placeholder="e.g., React, Node.js, Django">
+                            <button class="add-skill-btn">Add</button>
                         </div>
-                        <div class="skill-category">
-                            <h4>Databases</h4>
-                            <input type="text" placeholder="e.g., MySQL, MongoDB, PostgreSQL">
+                        <div class="skills-list"></div>
                         </div>
                         <div class="skill-category">
                             <h4>Tools & Technologies</h4>
-                            <input type="text" placeholder="e.g., Git, Docker, AWS">
+                        <div class="skills-input-container">
+                            <input type="text" class="skill-input" placeholder="e.g., Git, Docker, AWS">
+                            <button class="add-skill-btn">Add</button>
                         </div>
+                        <div class="skills-list"></div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Certifications -->
-            <div class="section-block">
-                <h2 class="section-header">Certifications</h2>
-                <div class="certifications-section">
-                    <div id="certifications-container">
-                        <div class="cert-item">
-                            <div class="form-grid">
-                                <div class="input-group">
-                                    <label>Certification Name</label>
-                                    <input type="text" placeholder="e.g., AWS Certified Solutions Architect">
-                                </div>
-                                <div class="input-group">
-                                    <label>Issuing Organization</label>
-                                    <input type="text" placeholder="e.g., Amazon Web Services">
-                                </div>
-                                <div class="input-group">
-                                    <label>Date Earned</label>
-                                    <input type="date">
-                                </div>
-                                <div class="input-group">
-                                    <label>Credential ID</label>
-                                    <input type="text" placeholder="e.g., ABC123XYZ">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="addCertification()" class="btn">Add Certification</button>
-                </div>
-            </div>
-
-            <!-- Technical Projects -->
-            <div class="section-block">
-                <h2 class="section-header">Technical Projects</h2>
-                <div class="projects-section">
-                    <div id="projects-container">
-                        <div class="project-item">
-                            <div class="form-grid">
-                                <div class="input-group full-width">
-                                    <label>Project Name</label>
-                                    <input type="text" placeholder="e.g., E-commerce Platform">
-                                </div>
-                                <div class="input-group full-width">
-                                    <label>Description</label>
-                                    <textarea rows="3" placeholder="Describe the project, your role, and key achievements"></textarea>
-                                </div>
-                                <div class="input-group full-width">
-                                    <label>Technologies Used</label>
-                                    <input type="text" placeholder="e.g., React, Node.js, MongoDB">
-                                </div>
-                                <div class="input-group">
-                                    <label>Project URL</label>
-                                    <input type="url" placeholder="https://github.com/username/project">
-                                </div>
-                                <div class="input-group">
-                                    <label>Duration</label>
-                                    <input type="text" placeholder="e.g., Jan 2023 - Present">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="addProject()" class="btn">Add Project</button>
                 </div>
             </div>
 
             <!-- Work Experience -->
             <div class="section-block">
                 <h2 class="section-header">Work Experience</h2>
-                <div id="it-experience-container">
+                <div id="work-experience-container">
                     <div class="experience-item">
-                        <div class="form-grid">
-                            <div class="input-group">
-                                <label>Job Title</label>
-                                <input type="text" placeholder="e.g., Senior Software Engineer">
-                            </div>
-                            <div class="input-group">
-                                <label>Company</label>
-                                <input type="text" placeholder="e.g., Tech Corp">
-                            </div>
-                            <div class="input-group">
-                                <label>Location</label>
-                                <input type="text" placeholder="e.g., San Francisco, CA">
-                            </div>
-                            <div class="input-group">
-                                <label>Duration</label>
-                                <input type="text" placeholder="e.g., Jan 2020 - Present">
-                            </div>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" placeholder="Company Name">
+                                </div>
+                                <div class="input-group">
+                                <label for="position">Position</label>
+                                <input type="text" id="position" placeholder="Job Title">
+                                </div>
+                                <div class="input-group">
+                                <label for="start-date">Start Date</label>
+                                <input type="month" id="start-date">
+                                </div>
+                                <div class="input-group">
+                                <label for="end-date">End Date</label>
+                                <input type="month" id="end-date">
+                                </div>
                             <div class="input-group full-width">
-                                <label>Key Responsibilities & Achievements</label>
-                                <textarea rows="4" placeholder="List your key responsibilities and achievements"></textarea>
+                                <label for="description">Description</label>
+                                <textarea id="description" placeholder="Describe your responsibilities and achievements..."></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button onclick="addITExperience()" class="btn">Add Experience</button>
+                <button class="add-experience-btn">Add Another Experience</button>
             </div>
 
-            <!-- Education -->
+            <!-- Projects -->
             <div class="section-block">
-                <h2 class="section-header">Education</h2>
-                <div id="it-education-container">
-                    <div class="education-item">
-                        <div class="form-grid">
+                <h2 class="section-header">Projects</h2>
+                    <div id="projects-container">
+                        <div class="project-item">
+                            <div class="form-grid">
                             <div class="input-group">
-                                <label>Degree</label>
-                                <input type="text" placeholder="e.g., Bachelor of Science in Computer Science">
-                            </div>
+                                <label for="project-title">Project Title</label>
+                                <input type="text" id="project-title" placeholder="Project Name">
+                                </div>
                             <div class="input-group">
-                                <label>Institution</label>
-                                <input type="text" placeholder="e.g., University of Technology">
+                                <label for="project-tech">Technologies Used</label>
+                                <input type="text" id="project-tech" placeholder="e.g., React, Node.js, MongoDB">
+                                </div>
+                                <div class="input-group full-width">
+                                <label for="project-desc">Project Description</label>
+                                <textarea id="project-desc" placeholder="Describe the project and your role..."></textarea>
+                                </div>
+                                </div>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <label>Location</label>
-                                <input type="text" placeholder="e.g., Boston, MA">
-                            </div>
-                            <div class="input-group">
-                                <label>Graduation Date</label>
-                                <input type="text" placeholder="e.g., May 2020">
-                            </div>
+                <button class="add-project-btn">Add Another Project</button>
                         </div>
                     </div>
+
+        <div class="right-panel" id="resume-preview">
+            <!-- Resume preview will be generated here -->
                 </div>
-                <button onclick="addITEducation()" class="btn">Add Education</button>
+    </main>
+
+    <button class="preview-toggle" id="previewToggle">Preview Resume</button>
+
+    <script src="js/auth.js"></script>
+    <script>
+           if (!Auth.requireAuth()) {
+            // This will redirect to index.html if not authenticated
+            // No need for additional code here
+        }
+
+        // Get user data from localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+        
+        // Auto-fill name and email if user is logged in
+        if (user) {
+            if (user.fullName) {
+                document.getElementById('name').value = user.fullName;
+            }
+            if (user.email) {
+                document.getElementById('email').value = user.email;
+            }
+        }
+
+        // Get template ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const templateId = urlParams.get('template') || 'default';
+
+        // Preview functionality
+        const previewToggle = document.getElementById('previewToggle');
+        const rightPanel = document.querySelector('.right-panel');
+        let isPreviewActive = true; // Start with preview active
+
+        function togglePreview() {
+            isPreviewActive = !isPreviewActive;
+            rightPanel.classList.toggle('active');
+            previewToggle.classList.toggle('active');
+            previewToggle.textContent = isPreviewActive ? 'Hide Preview' : 'Preview Resume';
+            
+            if (isPreviewActive) {
+                updatePreview();
+            }
+        }
+
+        function updatePreview() {
+            const previewContainer = document.getElementById('resume-preview');
+            
+            // Clear previous preview
+            previewContainer.innerHTML = '';
+            
+            // Create preview based on template
+            if (templateId === 'it-1') {
+                // IT Template 1 Preview
+                const preview = document.createElement('div');
+                preview.className = 'it-template-1-preview';
+                preview.innerHTML = `
+                    <div class="preview-header">
+                        ${profileImage ? `
+                            <div class="profile-picture">
+                                <img src="${profileImage}" alt="Profile Picture">
+                            </div>
+                        ` : ''}
+                        <h1>${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <h2>${document.getElementById('title')?.value || 'Professional Title'}</h2>
+                        <div class="contact-info">
+                            <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p>${document.getElementById('phone')?.value || '+1 234 567 890'}</p>
+                            </div>
+                            </div>
+                    <div class="preview-summary">
+                        <h3>Professional Summary</h3>
+                        <p>${document.getElementById('summary')?.value || 'Your professional summary...'}</p>
+                            </div>
+                    <div class="preview-skills">
+                        <h3>Technical Skills</h3>
+                        <div class="skills-preview"></div>
+                            </div>
+                    <div class="preview-experience">
+                        <h3>Work Experience</h3>
+                        <div class="experience-preview"></div>
+                        </div>
+                    <div class="preview-projects">
+                        <h3>Projects</h3>
+                        <div class="projects-preview"></div>
+                    </div>
+                `;
+                previewContainer.appendChild(preview);
+            } else {
+                // Default template preview
+                const preview = document.createElement('div');
+                preview.className = 'default-template-preview';
+                preview.innerHTML = `
+                    <div class="preview-header"> 
+                        ${profileImage ? `
+                            <div class="profile-picture">
+                                <img src="${profileImage}" alt="Profile Picture">
+                </div>
+                        ` : ''}
+                        <h1>${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <h2>${document.getElementById('title')?.value || 'Professional Title'}</h2>
+                        <div class="contact-info">
+                            <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p>${document.getElementById('phone')?.value || '+1 234 567 890'}</p>
             </div>
+                    </div>
+                    <div class="preview-summary">
+                        <h3>Professional Summary</h3>
+                        <p>${document.getElementById('summary')?.value || 'Your professional summary...'}</p>
+                    </div>
+                `;
+                previewContainer.appendChild(preview);
+            }
+
+            // Update skills preview
+            const skillsLists = document.querySelectorAll('.skills-list');
+            const skillsPreview = previewContainer.querySelector('.skills-preview');
+            if (skillsPreview) {
+                skillsLists.forEach(list => {
+                    const skills = Array.from(list.querySelectorAll('.skill-badge'))
+                        .map(badge => badge.textContent.replace('×', '').trim());
+                    if (skills.length > 0) {
+                        const categoryDiv = document.createElement('div');
+                        categoryDiv.className = 'skill-category-preview';
+                        categoryDiv.innerHTML = `
+                            <h4>${list.previousElementSibling.previousElementSibling.textContent}</h4>
+                            <div class="skill-badges">
+                                ${skills.map(skill => `<span class="skill-badge">${skill}</span>`).join('')}
+                            </div>
+                        `;
+                        skillsPreview.appendChild(categoryDiv);
+                    }
+                });
+            }
+
+            // Update experience preview
+            const experienceItems = document.querySelectorAll('.experience-item');
+            const experiencePreview = previewContainer.querySelector('.experience-preview');
+            if (experiencePreview) {
+                experienceItems.forEach(item => {
+                    const company = item.querySelector('input[placeholder="Company Name"]')?.value;
+                    const position = item.querySelector('input[placeholder="Job Title"]')?.value;
+                    const startDate = item.querySelector('input[type="month"]:first-of-type')?.value;
+                    const endDate = item.querySelector('input[type="month"]:last-of-type')?.value;
+                    const description = item.querySelector('textarea')?.value;
+
+                    if (company || position) {
+                        const experienceDiv = document.createElement('div');
+                        experienceDiv.className = 'experience-item-preview';
+                        experienceDiv.innerHTML = `
+                            <h4>${position || 'Position'}</h4>
+                            <h5>${company || 'Company'}</h5>
+                            <p class="date">${startDate || 'Start Date'} - ${endDate || 'End Date'}</p>
+                            <p>${description || 'Description'}</p>
+                        `;
+                        experiencePreview.appendChild(experienceDiv);
+                    }
+                });
+            }
+
+            // Update projects preview
+            const projectItems = document.querySelectorAll('.project-item');
+            const projectsPreview = previewContainer.querySelector('.projects-preview');
+            if (projectsPreview) {
+                projectItems.forEach(item => {
+                    const title = item.querySelector('input[placeholder="Project Name"]')?.value;
+                    const tech = item.querySelector('input[placeholder="e.g., React, Node.js, MongoDB"]')?.value;
+                    const description = item.querySelector('textarea')?.value;
+
+                    if (title || description) {
+                        const projectDiv = document.createElement('div');
+                        projectDiv.className = 'project-item-preview';
+                        projectDiv.innerHTML = `
+                            <h4>${title || 'Project Title'}</h4>
+                            ${tech ? `<p class="tech-stack">${tech}</p>` : ''}
+                            <p>${description || 'Project Description'}</p>
+                        `;
+                        projectsPreview.appendChild(projectDiv);
+                    }
+                });
+            }
+        }
+
+        // Add Experience Functionality
+        const addExperienceBtn = document.querySelector('.add-experience-btn');
+        const experienceContainer = document.getElementById('work-experience-container');
+
+        function addExperience() {
+            const experienceItem = document.createElement('div');
+            experienceItem.className = 'experience-item';
+            experienceItem.innerHTML = `
+                        <div class="form-grid">
+                            <div class="input-group">
+                        <label for="company">Company</label>
+                        <input type="text" placeholder="Company Name">
+                            </div>
+                            <div class="input-group">
+                        <label for="position">Position</label>
+                        <input type="text" placeholder="Job Title">
+                            </div>
+                            <div class="input-group">
+                        <label for="start-date">Start Date</label>
+                        <input type="month">
+                            </div>
+                            <div class="input-group">
+                        <label for="end-date">End Date</label>
+                        <input type="month">
+                            </div>
+                    <div class="input-group full-width">
+                        <label for="description">Description</label>
+                        <textarea placeholder="Describe your responsibilities and achievements..."></textarea>
+                        </div>
+                    </div>
+                <button class="remove-experience-btn">Remove</button>
+            `;
+
+            experienceContainer.appendChild(experienceItem);
+
+            // Add remove functionality
+            const removeBtn = experienceItem.querySelector('.remove-experience-btn');
+            removeBtn.addEventListener('click', () => {
+                experienceItem.remove();
+                if (isPreviewActive) {
+                    updatePreview();
+                }
+            });
+        }
+
+        addExperienceBtn?.addEventListener('click', addExperience);
+
+        // Add Project Functionality
+        const addProjectBtn = document.querySelector('.add-project-btn');
+        const projectsContainer = document.getElementById('projects-container');
+
+        function addProject() {
+            const projectItem = document.createElement('div');
+            projectItem.className = 'project-item';
+            projectItem.innerHTML = `
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="project-title">Project Title</label>
+                        <input type="text" placeholder="Project Name">
+                </div>
+                    <div class="input-group">
+                        <label for="project-tech">Technologies Used</label>
+                        <input type="text" placeholder="e.g., React, Node.js, MongoDB">
+            </div>
+                    <div class="input-group full-width">
+                        <label for="project-desc">Project Description</label>
+                        <textarea placeholder="Describe the project and your role..."></textarea>
         </div>
     </div>
+                <button class="remove-project-btn">Remove</button>
+            `;
 
-    <div class="right-panel" id="resume-preview">
-        <!-- Resume preview will be generated here -->
-    </div>
-  </main>
+            projectsContainer.appendChild(projectItem);
 
-  <button class="preview-toggle" id="previewToggle">Preview Resume</button>
+            // Add remove functionality
+            const removeBtn = projectItem.querySelector('.remove-project-btn');
+            removeBtn.addEventListener('click', () => {
+                projectItem.remove();
+                if (isPreviewActive) {
+                    updatePreview();
+                }
+            });
+        }
 
-  <script src="js/auth.js"></script>
-  <script>
-      if (!Auth.requireAuth()){
-      
-      }
-      // Preview functionality
-      const previewToggle = document.getElementById('previewToggle');
-      const rightPanel = document.querySelector('.right-panel');
-      let isPreviewActive = false;
+        addProjectBtn?.addEventListener('click', addProject);
 
-      function togglePreview() {
-          isPreviewActive = !isPreviewActive;
-          rightPanel.classList.toggle('active');
-          previewToggle.classList.toggle('active');
-          previewToggle.textContent = isPreviewActive ? 'Hide Preview' : 'Preview Resume';
-          
-          // Update preview content when showing
-          if (isPreviewActive) {
-              updatePreview();
-          }
-      }
+        // Add Skill Functionality
+        const addSkillBtns = document.querySelectorAll('.add-skill-btn');
 
-      function updatePreview() {
-          // Get all form inputs
-          const formInputs = document.querySelectorAll('.input-group input, .input-group textarea');
-          
-          // Update preview content based on form inputs
-          formInputs.forEach(input => {
-              const previewElement = document.querySelector(`[data-preview="${input.id}"]`);
-              if (previewElement) {
-                  previewElement.textContent = input.value || input.placeholder;
-              }
-          });
+        addSkillBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const container = e.target.closest('.skill-category');
+                const input = container.querySelector('.skill-input');
+                const skillsList = container.querySelector('.skills-list');
+                
+                if (input.value.trim()) {
+                    const skillBadge = document.createElement('span');
+                    skillBadge.className = 'skill-badge';
+                    skillBadge.textContent = input.value;
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'remove-skill-btn';
+                    removeBtn.textContent = '×';
+                    removeBtn.addEventListener('click', () => {
+                        skillBadge.remove();
+                        if (isPreviewActive) {
+                            updatePreview();
+                        }
+                    });
+                    
+                    skillBadge.appendChild(removeBtn);
+                    skillsList.appendChild(skillBadge);
+                    input.value = '';
+                    
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                }
+            });
+        });
 
-          // Update skills preview
-          const skillsInputs = document.querySelectorAll('.skill-input');
-          const skillsContainer = document.querySelector('.skills-preview');
-          if (skillsContainer) {
-              skillsContainer.innerHTML = '';
-              skillsInputs.forEach(skill => {
-                  if (skill.value) {
-                      const skillElement = document.createElement('span');
-                      skillElement.className = 'skill-badge';
-                      skillElement.textContent = skill.value;
-                      skillsContainer.appendChild(skillElement);
-                  }
-              });
-          }
+        // Add event listeners
+        previewToggle.addEventListener('click', togglePreview);
 
-          // Update projects preview
-          const projectInputs = document.querySelectorAll('.project-item');
-          const projectsContainer = document.querySelector('.projects-preview');
-          if (projectsContainer) {
-              projectsContainer.innerHTML = '';
-              projectInputs.forEach(project => {
-                  const title = project.querySelector('.project-title')?.value;
-                  const description = project.querySelector('.project-description')?.value;
-                  if (title || description) {
-                      const projectElement = document.createElement('div');
-                      projectElement.className = 'preview-project';
-                      projectElement.innerHTML = `
-                          <h4>${title || 'Project Title'}</h4>
-                          <p>${description || 'Project Description'}</p>
-                      `;
-                      projectsContainer.appendChild(projectElement);
-                  }
-              });
-          }
-      }
+        // Close preview when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                isPreviewActive && 
+                !rightPanel.contains(e.target) && 
+                !previewToggle.contains(e.target)) {
+                togglePreview();
+            }
+        });
 
-      // Add event listeners
-      previewToggle.addEventListener('click', togglePreview);
+        // Update preview when form inputs change
+        document.querySelectorAll('.input-group input, .input-group textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                if (isPreviewActive) {
+                    updatePreview();
+                }
+            });
+        });
 
-      // Close preview when clicking outside on mobile
-      document.addEventListener('click', (e) => {
-          if (window.innerWidth <= 768 && 
-              isPreviewActive && 
-              !rightPanel.contains(e.target) && 
-              !previewToggle.contains(e.target)) {
-              togglePreview();
-          }
-      });
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (window.innerWidth > 768 && isPreviewActive) {
+                    rightPanel.classList.remove('active');
+                    previewToggle.classList.remove('active');
+                    previewToggle.textContent = 'Preview Resume';
+                    isPreviewActive = false;
+                }
+            }, 250);
+        });
 
-      // Update preview when form inputs change
-      document.querySelectorAll('.input-group input, .input-group textarea').forEach(input => {
-          input.addEventListener('input', () => {
-              if (isPreviewActive) {
-                  updatePreview();
-              }
-          });
-      });
+        // Initialize preview state
+        if (window.innerWidth <= 768) {
+            previewToggle.style.display = 'block';
+        }
 
-      // Handle window resize
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => {
-              if (window.innerWidth > 768 && isPreviewActive) {
-                  rightPanel.classList.remove('active');
-                  previewToggle.classList.remove('active');
-                  previewToggle.textContent = 'Preview Resume';
-                  isPreviewActive = false;
-              }
-          }, 250);
-      });
-
-      // Initialize preview state
-      if (window.innerWidth <= 768) {
-          previewToggle.style.display = 'block';
-      }
+        // Show preview immediately when page loads
+    
 
       // Initialize user menu
-      Auth.updateUserMenu();
-      Auth.initUserMenu();
+        Auth.updateUserMenu();
+        Auth.initUserMenu();
 
-      // Template-specific functions
-      function addCertification() {
-          const container = document.getElementById('certifications-container');
-          const newCert = container.children[0].cloneNode(true);
-          newCert.querySelectorAll('input').forEach(input => input.value = '');
-          container.appendChild(newCert);
-      }
+        // Profile Picture Upload Functionality
+        const profileUpload = document.getElementById('profile-upload');
+        const profilePreview = document.querySelector('.profile-preview');
+        const removePhoto = document.querySelector('.remove-photo');
+        let profileImage = null;
 
-      function addProject() {
-          const container = document.getElementById('projects-container');
-          const newProject = container.children[0].cloneNode(true);
-          newProject.querySelectorAll('input, textarea').forEach(input => input.value = '');
-          container.appendChild(newProject);
-      }
+        // Update applyChanges function to handle the edited photo
+        function applyChanges() {
+            const previewImage = document.getElementById('previewImage');
+            const profilePreview = document.querySelector('.profile-preview');
+            const removePhoto = document.querySelector('.remove-photo');
+            
+            if (!previewImage.src || previewImage.src.includes('placeholder.com')) {
+                alert('Please upload an image first');
+                return;
+            }
 
-      function addITExperience() {
-          const container = document.getElementById('it-experience-container');
-          const newExp = container.children[0].cloneNode(true);
-          newExp.querySelectorAll('input, textarea').forEach(input => input.value = '');
-          container.appendChild(newExp);
-      }
+            // Create a canvas to capture exactly what's visible in the editor
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to match the editor container (300x300)
+            canvas.width = 300;
+            canvas.height = 300;
+            
+            // Get the current transform values
+            const transform = new WebKitCSSMatrix(getComputedStyle(previewImage).transform);
+            const scale = transform.m11; // Get the scale value
+            const translateX = transform.m41; // Get the X translation
+            const translateY = transform.m42; // Get the Y translation
+            
+            // Calculate the image dimensions after scaling
+            const scaledWidth = previewImage.naturalWidth * scale;
+            const scaledHeight = previewImage.naturalHeight * scale;
+            
+            // Calculate the position to center the image
+            const x = translateX + (canvas.width - scaledWidth) / 2;
+            const y = translateY + (canvas.height - scaledHeight) / 2;
+            
+            // Fill the background with white
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw the image exactly as it appears in the editor
+            ctx.drawImage(
+                previewImage,
+                x,
+                y,
+                scaledWidth,
+                scaledHeight
+            );
+            
+            // Convert to PNG and update profile preview
+            const finalImage = canvas.toDataURL('image/png');
+            profileImage = finalImage;
+            
+            // Update the profile preview with the new image
+            profilePreview.innerHTML = `<img src="${finalImage}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">`;
+            
+            // Show remove photo button
+            if (removePhoto) {
+                removePhoto.classList.add('active');
+            }
+            
+            // Update the preview if it's active
+            if (isPreviewActive) {
+                updatePreview();
+            }
+            
+            // Close the modal
+            document.getElementById('profileEditorModal').style.display = 'none';
+        }
 
-      function addITEducation() {
-          const container = document.getElementById('it-education-container');
-          const newEdu = container.children[0].cloneNode(true);
-          newEdu.querySelectorAll('input').forEach(input => input.value = '');
-          container.appendChild(newEdu);
-      }
+        // Update file upload handler to not show in preview immediately
+        document.getElementById('profile-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    
+                    // Reset position and scale when new image is loaded
+                    translateX = 0;
+                    translateY = 0;
+                    previewImage.style.transform = 'translate(-50%, -50%) scale(1)';
+                    
+                    // Reset zoom slider
+                    document.getElementById('zoomSlider').value = 100;
+                    
+                    // Store the original image for background removal
+                    originalImage = e.target.result;
+                    
+                    // Reset background removal checkbox
+                    document.getElementById('bgRemovalCheckbox').checked = false;
+                    
+                    // Ensure profile preview remains empty until Save to Resume is clicked
+                    const profilePreview = document.querySelector('.profile-preview');
+                    if (profilePreview) {
+                        profilePreview.innerHTML = '<div class="placeholder">👤</div>';
+                    }
+                    
+                    // Initialize drag and drop for the new image
+                    initDragAndDrop();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
-      function addExperience() {
-          const container = document.getElementById('experience-container');
-          const newExp = container.children[0].cloneNode(true);
-          newExp.querySelectorAll('input, textarea').forEach(input => input.value = '');
-          container.appendChild(newExp);
-      }
+        // Initialize profile preview to be empty
+        document.addEventListener('DOMContentLoaded', function() {
+            const profilePreview = document.querySelector('.profile-preview');
+            if (profilePreview) {
+                profilePreview.innerHTML = '<div class="placeholder">👤</div>';
+            }
+        });
 
-      function addEducation() {
-          const container = document.getElementById('education-container');
-          const newEdu = container.children[0].cloneNode(true);
-          newEdu.querySelectorAll('input').forEach(input => input.value = '');
-          container.appendChild(newEdu);
-      }
+        // Modal functions
+        function openModal() {
+            document.getElementById('profileEditorModal').style.display = 'block';
+            // Initialize drag and drop when modal opens
+            initDragAndDrop();
+        }
 
-      // Template switching logic
-      function switchTemplate(templateId) {
-          // Hide all template contents
-          document.querySelectorAll('.template-content').forEach(content => {
-              content.classList.remove('active');
-          });
+        function closeModal() {
+            document.getElementById('profileEditorModal').style.display = 'none';
+        }
 
-          // Show selected template content
-          document.getElementById(templateId).classList.add('active');
+        function selectSuit(element) {
+            document.querySelectorAll('.suit-option').forEach(opt => {
+                opt.style.borderColor = 'transparent';
+            });
+            element.style.borderColor = '#3b82f6';
+        }
 
-          // Update body class for template-specific styles
-          document.body.className = templateId;
-      }
+        function zoomIn() {
+            const slider = document.getElementById('zoomSlider');
+            slider.value = parseInt(slider.value) + 10;
+            updateZoom();
+        }
 
-      // Check URL parameters and switch template accordingly
-      const urlParams = new URLSearchParams(window.location.search);
-      const template = urlParams.get('template');
-      
-      if (template === 'it') {
-          switchTemplate('it-template');
-      } else {
-          switchTemplate('default-template');
-      }
+        function zoomOut() {
+            const slider = document.getElementById('zoomSlider');
+            slider.value = parseInt(slider.value) - 10;
+            updateZoom();
+        }
 
-      // Initialize user menu
-      const userButton = document.querySelector('.user-button');
-      const userDropdown = document.querySelector('.user-dropdown');
+        function updateZoom() {
+            const slider = document.getElementById('zoomSlider');
+            const image = document.getElementById('previewImage');
+            const container = image.parentElement;
+            
+            // Calculate the scale based on slider value
+            const scale = slider.value / 100;
+            
+            // Calculate bounds
+            const rect = container.getBoundingClientRect();
+            const imageWidth = image.naturalWidth * scale;
+            const imageHeight = image.naturalHeight * scale;
+            const maxX = (imageWidth - rect.width) / 2;
+            const maxY = (imageHeight - rect.height) / 2;
+            
+            // Constrain the translation within bounds
+            translateX = Math.max(-maxX, Math.min(maxX, translateX));
+            translateY = Math.max(-maxY, Math.min(maxY, translateY));
+            
+            // Update the transform to include both translation and scale
+            image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        }
 
-      userButton.addEventListener('click', () => {
-          userDropdown.classList.toggle('active');
-      });
+        // Add drag functionality
+        let isDragging = false;
+        let startX, startY, translateX = 0, translateY = 0;
 
-      // Close dropdown when clicking outside
-      document.addEventListener('click', (e) => {
-          if (!userButton.contains(e.target)) {
-              userDropdown.classList.remove('active');
-          }
-      });
-  </script>
+        function initDragAndDrop() {
+            const image = document.getElementById('previewImage');
+            const container = image.parentElement;
+            
+            // Make container relative for absolute positioning of image
+            container.style.position = 'relative';
+            container.style.overflow = 'hidden'; // Keep overflow hidden to contain the image
+            
+            // Make image absolute for dragging
+            image.style.position = 'absolute';
+            image.style.cursor = 'move';
+            image.style.userSelect = 'none';
+            image.style.maxWidth = 'none';
+            image.style.maxHeight = 'none';
+            
+            // Center the image initially
+            image.style.top = '50%';
+            image.style.left = '50%';
+            image.style.transform = 'translate(-50%, -50%)';
+            
+            // Mouse events for dragging
+            image.addEventListener('mousedown', startDrag);
+            image.addEventListener('mousemove', drag);
+            image.addEventListener('mouseup', endDrag);
+            image.addEventListener('mouseleave', endDrag);
+            
+            // Touch events for mobile
+            image.addEventListener('touchstart', startDrag);
+            image.addEventListener('touchmove', drag);
+            image.addEventListener('touchend', endDrag);
+        }
+
+        function startDrag(e) {
+            isDragging = true;
+            const image = document.getElementById('previewImage');
+            
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+            } else {
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+            }
+            
+            // Hide drag text when dragging starts
+            const dragText = document.getElementById('dragText');
+            if (dragText) {
+                dragText.style.display = 'none';
+            }
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            const image = document.getElementById('previewImage');
+            const container = image.parentElement;
+            const rect = container.getBoundingClientRect();
+            
+            let currentX, currentY;
+            if (e.type === 'touchmove') {
+                currentX = e.touches[0].clientX;
+                currentY = e.touches[0].clientY;
+            } else {
+                currentX = e.clientX;
+                currentY = e.clientY;
+            }
+            
+            // Calculate new position
+            let newTranslateX = currentX - startX;
+            let newTranslateY = currentY - startY;
+            
+            // Get the current scale
+            const scale = document.getElementById('zoomSlider').value / 100;
+            
+            // Calculate image dimensions
+            const imageWidth = image.naturalWidth * scale;
+            const imageHeight = image.naturalHeight * scale;
+            
+            // Calculate bounds
+            const maxX = (imageWidth - rect.width) / 2;
+            const maxY = (imageHeight - rect.height) / 2;
+            
+            // Constrain the translation within bounds
+            translateX = Math.max(-maxX, Math.min(maxX, newTranslateX));
+            translateY = Math.max(-maxY, Math.min(maxY, newTranslateY));
+            
+            // Apply the translation
+            image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        }
+
+        function endDrag() {
+            isDragging = false;
+            
+            // Show drag text when dragging ends
+            const dragText = document.getElementById('dragText');
+            if (dragText) {
+                dragText.style.display = 'flex';
+            }
+        }
+
+        // Background removal functionality
+        let originalImage = null; // Store the original image
+
+        async function handleBackgroundRemoval(checkbox) {
+            const previewImage = document.getElementById('previewImage');
+            
+            if (!previewImage.src || previewImage.src.includes('placeholder.com')) {
+                alert('Please upload an image first');
+                checkbox.checked = false;
+                return;
+            }
+
+            try {
+                if (checkbox.checked) {
+                    // Store original image if not already stored
+                    if (!originalImage) {
+                        originalImage = previewImage.src;
+                    }
+
+                    // Show loading state
+                    const loadingText = document.createElement('div');
+                    loadingText.style.position = 'absolute';
+                    loadingText.style.top = '50%';
+                    loadingText.style.left = '50%';
+                    loadingText.style.transform = 'translate(-50%, -50%)';
+                    loadingText.style.color = '#666';
+                    loadingText.textContent = 'Removing background...';
+                    previewImage.parentElement.appendChild(loadingText);
+
+                    // Convert image to blob
+                    const response = await fetch(previewImage.src);
+                    const blob = await response.blob();
+
+                    // Create form data
+                    const formData = new FormData();
+                    formData.append('image_file', blob);
+
+                    // Call background removal API
+                    const apiResponse = await fetch('https://api.remove.bg/v1.0/removebg', {
+                        method: 'POST',
+                        headers: {
+                            'X-Api-Key': 'UEkJrBrsoY45JYiNqvvCaAw3',
+                        },
+                        body: formData,
+                    });
+
+                    if (!apiResponse.ok) {
+                        throw new Error('Failed to remove background');
+                    }
+
+                    // Convert response to blob and create URL
+                    const processedBlob = await apiResponse.blob();
+                    const processedUrl = URL.createObjectURL(processedBlob);
+
+                    // Update image
+                    previewImage.src = processedUrl;
+                    loadingText.remove();
+                } else {
+                    // Revert to original image if available
+                    if (originalImage) {
+                        previewImage.src = originalImage;
+                    }
+                }
+            } catch (error) {
+                console.error('Error removing background:', error);
+                alert('Failed to remove background. Please try again.');
+                checkbox.checked = false;
+            }
+        }
+
+        // AI Enhancement functionality
+        let currentTextarea = null;
+        let currentPopup = null;
+        const API_KEY = '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';
+
+        function addAIEnhanceButtons() {
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const container = textarea.parentElement;
+                if (!container.querySelector('.ai-enhance-btn')) {
+                    // Create button
+                    const aiButton = document.createElement('button');
+                    aiButton.className = 'ai-enhance-btn';
+                    aiButton.innerHTML = 'Get help with AI assistant';
+                    aiButton.onclick = (e) => {
+                        e.stopPropagation();
+                        openAIEnhancePopup(textarea, aiButton);
+                    };
+                    container.style.position = 'relative';
+                    container.appendChild(aiButton);
+
+                    // Create popup
+                    const popup = document.createElement('div');
+                    popup.className = 'ai-enhance-popup';
+                    popup.innerHTML = '<div class="ai-loading">Generating suggestions</div>';
+                    container.appendChild(popup);
+                }
+            });
+        }
+
+        // Initialize AI enhancement buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            addAIEnhanceButtons();
+        });
+
+        // Add AI enhancement buttons when new sections are added
+        const originalAddSection = addSection;
+        addSection = function() {
+            originalAddSection();
+            addAIEnhanceButtons();
+        };
+
+        async function getAISuggestions(text) {
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo",
+                        messages: [
+                            {
+                                role: "system",
+                                content: "You are a professional resume writer. Provide 3 different versions of the given text: 1) A professional version with impact, 2) A concise version that's clear and direct, 3) A detailed version with more context. Keep the core meaning but enhance the language and structure."
+                            },
+                            {
+                                role: "user",
+                                content: text
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 500
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+
+                const data = await response.json();
+                const suggestions = data.choices[0].message.content.split('\n\n').filter(s => s.trim());
+                return suggestions;
+            } catch (error) {
+                console.error('Error getting AI suggestions:', error);
+                return [
+                    "Professional version: " + text + " (enhanced for impact)",
+                    "Concise version: " + text + " (clear and direct)",
+                    "Detailed version: " + text + " (with more context)"
+                ];
+            }
+        }
+
+        function openAIEnhancePopup(textarea, button) {
+            // Close any open popups
+            if (currentPopup) {
+                currentPopup.style.display = 'none';
+            }
+
+            currentTextarea = textarea;
+            currentPopup = button.nextElementSibling;
+            
+            // Show popup and start generating
+            currentPopup.style.display = 'block';
+            currentPopup.innerHTML = '<div class="ai-loading">Generating suggestions</div>';
+            
+            // Get the current text
+            const currentText = textarea.value;
+            
+            // Get AI suggestions
+            getAISuggestions(currentText).then(suggestions => {
+                currentPopup.innerHTML = `
+                    ${suggestions.map(text => `
+                        <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
+                            ${text}
+                        </div>
+                    `).join('')}
+                    <button class="regenerate-btn" onclick="regenerateSuggestions('${currentText.replace(/'/g, "\\'")}')">
+                        🔄 Regenerate
+                    </button>
+                `;
+            });
+        }
+
+        function regenerateSuggestions(text) {
+            const regenerateBtn = currentPopup.querySelector('.regenerate-btn');
+            regenerateBtn.classList.add('loading');
+            regenerateBtn.innerHTML = '🔄 Regenerating...';
+            
+            getAISuggestions(text).then(suggestions => {
+                currentPopup.innerHTML = `
+                    ${suggestions.map(text => `
+                        <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
+                            ${text}
+                        </div>
+                    `).join('')}
+                    <button class="regenerate-btn" onclick="regenerateSuggestions('${text.replace(/'/g, "\\'")}')">
+                        🔄 Regenerate
+                    </button>
+                `;
+            });
+        }
+
+        function applyEnhancement(text) {
+            if (currentTextarea) {
+                currentTextarea.value = text;
+                if (currentPopup) {
+                    currentPopup.style.display = 'none';
+                }
+            }
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (currentPopup && !currentPopup.contains(e.target) && !e.target.classList.contains('ai-enhance-btn')) {
+                currentPopup.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>
+
