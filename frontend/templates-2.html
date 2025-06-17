@@ -639,33 +639,33 @@
     
     <script src="js/auth.js"></script>
     <script>
-        // Check authentication and redirect if not authenticated
-        if (!Auth.requireAuth()) {
-            // This will redirect to index.html if not authenticated
+        // // Check authentication and redirect if not authenticated
+        // if (!Auth.requireAuth()) {
+        //     // This will redirect to index.html if not authenticated
             
-        }
+        // }
 
-        // Initialize user menu
-        Auth.updateUserMenu();
-        Auth.initUserMenu();
+        // // Initialize user menu
+        // Auth.updateUserMenu();
+        // Auth.initUserMenu();
 
-        // Simple filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // In a real app, you would filter templates here
-            });
-        });
+        // // Simple filter functionality
+        // document.querySelectorAll('.filter-btn').forEach(btn => {
+        //     btn.addEventListener('click', () => {
+        //         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        //         btn.classList.add('active');
+        //         // In a real app, you would filter templates here
+        //     });
+        // });
         
-        // Template selection
-        document.querySelectorAll('.use-template').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const templateName = e.target.closest('.template-card').querySelector('h3').textContent;
-                alert(`Selected template: ${templateName}\n\nIn a real app, this would load the template in the builder.`);
-            });
-        });
+        // // Template selection
+        // document.querySelectorAll('.use-template').forEach(btn => {
+        //     btn.addEventListener('click', (e) => {
+        //         e.preventDefault();
+        //         const templateName = e.target.closest('.template-card').querySelector('h3').textContent;
+        //         alert(`Selected template: ${templateName}\n\nIn a real app, this would load the template in the builder.`);
+        //     });
+        // });
     </script>
 </body>
 </html>
