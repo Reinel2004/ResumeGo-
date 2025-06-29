@@ -321,6 +321,11 @@
         resize: vertical;
         font-family: inherit;
         min-height: 100px;
+        max-height: 300px;
+        overflow-y: auto;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        line-height: 1.5;
     }
 
     .full-width {
@@ -600,6 +605,17 @@
         margin-bottom: 0.5rem;
     }
 
+    .it-template-1-preview .experience-item-preview p {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
     .it-template-1-preview .preview-projects {
         margin-bottom: 2rem;
     }
@@ -618,6 +634,27 @@
         color: #64748b;
         font-size: 0.875rem;
         margin-bottom: 0.5rem;
+    }
+
+    .it-template-1-preview .project-item-preview p {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
+    .it-template-1-preview .preview-summary p {
+        color: #64748b;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        max-width: 100%;
+        overflow-wrap: break-word;
     }
 
     /* Default template preview styles */
@@ -665,6 +702,16 @@
         border-bottom: 1px solid #e2e8f0;
     }
 
+    .default-template-preview .preview-summary p {
+        color: #64748b;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
     /* Responsive preview styles */
     @media (max-width: 768px) {
         .it-template-1-preview,
@@ -689,6 +736,23 @@
         .default-template-preview .contact-info {
             flex-direction: column;
             gap: 0.5rem;
+        }
+
+        /* Improve text handling on mobile */
+        .it-template-1-preview .experience-item-preview p,
+        .it-template-1-preview .project-item-preview p,
+        .it-template-1-preview .preview-summary p,
+        .default-template-preview .preview-summary p {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        /* Ensure textareas don't overflow on mobile */
+        .input-group textarea {
+            font-size: 16px; /* Prevents zoom on iOS */
+            min-height: 80px;
+            max-height: 200px;
         }
     }
 
@@ -1412,6 +1476,17 @@
 
             experienceContainer.appendChild(experienceItem);
 
+            // Add auto-resize to new textarea
+            const newTextarea = experienceItem.querySelector('textarea');
+            if (newTextarea) {
+                newTextarea.addEventListener('input', () => {
+                    autoResizeTextarea(newTextarea);
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            }
+
             // Add remove functionality
             const removeBtn = experienceItem.querySelector('.remove-experience-btn');
             removeBtn.addEventListener('click', () => {
@@ -1450,6 +1525,17 @@
             `;
 
             projectsContainer.appendChild(projectItem);
+
+            // Add auto-resize to new textarea
+            const newTextarea = projectItem.querySelector('textarea');
+            if (newTextarea) {
+                newTextarea.addEventListener('input', () => {
+                    autoResizeTextarea(newTextarea);
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            }
 
             // Add remove functionality
             const removeBtn = projectItem.querySelector('.remove-project-btn');
@@ -1514,6 +1600,22 @@
 
         // Add event listeners
         previewToggle.addEventListener('click', togglePreview);
+
+        // Auto-resize textareas
+        function autoResizeTextarea(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 300) + 'px';
+        }
+
+        // Add auto-resize to all textareas
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                autoResizeTextarea(textarea);
+                if (isPreviewActive) {
+                    updatePreview();
+                }
+            });
+        });
 
         // Close preview when clicking outside on mobile
         document.addEventListener('click', (e) => {

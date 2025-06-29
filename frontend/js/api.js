@@ -48,11 +48,82 @@ export const authAPI = {
     },
 };
 
+// User API calls
+export const userAPI = {
+    getProfile: async (token) => {
+        try {
+            const response = await fetch(`${API_URL}/user/profile`, {
+                method: 'GET',
+                headers: {
+                    'x-access-token': token,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Get profile API error:', error);
+            throw error;
+        }
+    },
+
+    updateProfile: async (profileData, token) => {
+        try {
+            const response = await fetch(`${API_URL}/user/profile`, {
+                method: 'PUT',
+                headers: {
+                    'x-access-token': token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(profileData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Update profile API error:', error);
+            throw error;
+        }
+    },
+
+    changePassword: async (passwordData, token) => {
+        try {
+            const response = await fetch(`${API_URL}/user/change-password`, {
+                method: 'POST',
+                headers: {
+                    'x-access-token': token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(passwordData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Change password API error:', error);
+            throw error;
+        }
+    },
+};
+
 // Resume API calls
 export const resumeAPI = {
     create: async (resumeData, token) => {
         try {
-            const response = await fetch(`${API_URL}/resumes`, {
+            const response = await fetch(`${API_URL}/resume`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +146,7 @@ export const resumeAPI = {
 
     getAll: async (token) => {
         try {
-            const response = await fetch(`${API_URL}/resumes`, {
+            const response = await fetch(`${API_URL}/resume`, {
                 headers: {
                     'x-access-token': token,
                 },
@@ -95,7 +166,7 @@ export const resumeAPI = {
 
     getOne: async (id, token) => {
         try {
-            const response = await fetch(`${API_URL}/resumes/${id}`, {
+            const response = await fetch(`${API_URL}/resume/${id}`, {
                 headers: {
                     'x-access-token': token,
                 },
@@ -115,7 +186,7 @@ export const resumeAPI = {
 
     update: async (id, resumeData, token) => {
         try {
-            const response = await fetch(`${API_URL}/resumes/${id}`, {
+            const response = await fetch(`${API_URL}/resume/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -138,7 +209,7 @@ export const resumeAPI = {
 
     delete: async (id, token) => {
         try {
-            const response = await fetch(`${API_URL}/resumes/${id}`, {
+            const response = await fetch(`${API_URL}/resume/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'x-access-token': token,
