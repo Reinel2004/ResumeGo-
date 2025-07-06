@@ -43,17 +43,11 @@
 
         /* Header Styles */
         header {
-            background: var(--white);
+            background: var(--light);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
 
         nav {
@@ -83,7 +77,7 @@
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--primary);
         }
 
         .nav-links {
@@ -92,14 +86,14 @@
         }
 
         .nav-links a {
-            color: var(--text-color);
+            color: var(--dark);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: var(--primary);
         }
 
         .nav-right {
@@ -108,8 +102,25 @@
             gap: 20px;
         }
 
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
         .user-menu {
             position: relative;
+            display: none;
         }
 
         .user-button {
@@ -117,23 +128,23 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #e2e8f0;
             border-radius: 4px;
-            background: var(--white);
+            background: white;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .user-button:hover {
-            border-color: var(--primary-color);
+            border-color: var(--primary);
         }
 
         .user-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: var(--primary-color);
-            color: var(--white);
+            background: var(--primary);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -145,8 +156,8 @@
             top: 100%;
             right: 0;
             margin-top: 8px;
-            background: var(--white);
-            border: 1px solid var(--border-color);
+            background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 4px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             min-width: 200px;
@@ -160,21 +171,20 @@
         .user-dropdown a {
             display: block;
             padding: 12px 16px;
-            color: var(--text-color);
+            color: var(--dark);
             text-decoration: none;
             transition: background-color 0.3s;
         }
 
         .user-dropdown a:hover {
-            background-color: var(--light-gray);
+            background-color: var(--light);
         }
 
         .user-dropdown .divider {
             height: 1px;
-            background: var(--border-color);
+            background: #e2e8f0;
             margin: 8px 0;
         }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -348,11 +358,32 @@
             border-radius: 20px;
             font-weight: 500;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
         
-        .industry-tags a:hover {
-            transform: translateY(-10px);
-            transition: transform 0.3s ease;
+        .industry-tags a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .industry-tags a:hover .industry-tag {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .industry-tags a.active .industry-tag {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .template-card {
+            transition: all 0.3s ease;
+        }
+        
+        .template-card.hidden {
+            display: none;
         }
         
         footer {
@@ -393,32 +424,22 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-8">
-                    <a href="dashboard.html" class="flex items-center space-x-2">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
-                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-left">
+                    <a href="index.html" class="logo">
+                        <img src="../assets/img/logo.png" alt="ResumeGo Logo">
+                        <span class="logo-text">ResumeGo!</span>
                     </a>
-                    <div class="hidden md:flex space-x-8">
-                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
-                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
-                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
+                    <div class="nav-links">
+                        <a href="templates-2.html">Resume Templates</a>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    <div class="relative">
-                        <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
-                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
-                            <span id="userName" class="hidden md:inline">User Name</span>
-                        </button>
-                        <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
-                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
-                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
-                            <div class="border-t border-gray-200 my-1"></div>
-                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
-                        </div>
+                <div class="nav-right">
+                    <div class="auth-buttons" id="authButtons">
+                        <a href="login.html" class="btn btn-outline">Login</a>
+                        <a href="register.html" class="btn">Sign Up</a>
                     </div>
                 </div>
             </nav>
@@ -445,9 +466,9 @@
             <p>Find the perfect template for your industry and career level</p>
         </section>
         
-        <div class="templates-grid">
+        <div class="templates-grid" id="templatesGrid">
             <!-- IT Template 1 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-1.png" alt="IT Template 1">
                 </div>
@@ -462,7 +483,7 @@
             </div>
 
             <!-- IT Template 2 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-2.png" alt="IT Template 2">
                 </div>
@@ -477,7 +498,7 @@
             </div>
 
             <!-- IT Template 3 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-3.png" alt="IT Template 3">
                 </div>
@@ -492,7 +513,7 @@
             </div>
 
             <!-- IT Template 4 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-4.png" alt="IT Template 4">
                 </div>
@@ -507,7 +528,7 @@
             </div>
 
             <!-- IT Template 5 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-5.png" alt="IT Template 5">
                 </div>
@@ -522,7 +543,7 @@
             </div>
 
             <!-- IT Template 6 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-6.png" alt="IT Template 6">
                 </div>
@@ -537,7 +558,7 @@
             </div>
 
             <!-- IT Template 7 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-7.png" alt="IT Template 7">
                 </div>
@@ -552,7 +573,7 @@
             </div>
 
             <!-- IT Template 8 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-8.png" alt="IT Template 8">
                 </div>
@@ -567,7 +588,7 @@
             </div>
 
             <!-- IT Template 9 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-9.png" alt="IT Template 9">
                 </div>
@@ -582,7 +603,7 @@
             </div>
 
             <!-- IT Template 10 -->
-            <div class="template-card">
+            <div class="template-card" data-category="it">
                 <div class="template-preview">
                     <img src="../assets/img/templates/it-template-10.png" alt="IT Template 10">
                 </div>
@@ -639,33 +660,103 @@
     
     <script src="js/auth.js"></script>
     <script>
-        // Check authentication and redirect if not authenticated
-        if (!Auth.requireAuth()) {
-            // This will redirect to index.html if not authenticated
-            
-        }
-
         // Initialize user menu
         Auth.updateUserMenu();
         Auth.initUserMenu();
-
-        // Simple filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // In a real app, you would filter templates here
-            });
-        });
         
-        // Template selection
-        document.querySelectorAll('.use-template').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const templateName = e.target.closest('.template-card').querySelector('h3').textContent;
-                alert(`Selected template: ${templateName}\n\nIn a real app, this would load the template in the builder.`);
+        // Template filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const industryTags = document.querySelectorAll('.industry-tags a');
+            const templatesGrid = document.getElementById('templatesGrid');
+            const templateCards = document.querySelectorAll('.template-card');
+            
+            // Show all templates by default
+            let currentFilter = 'all';
+            
+            // Add click event listeners to industry tags
+            industryTags.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tags
+                    industryTags.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+                    
+                    // Get the category to filter by from the text content
+                    const category = this.querySelector('.industry-tag').textContent.trim();
+                    
+                    // Filter templates
+                    filterTemplates(category);
+                });
             });
+            
+            function filterTemplates(category) {
+                templateCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    // Map category names to data-category values
+                    let shouldShow = false;
+                    
+                    if (category === 'all') {
+                        shouldShow = true;
+                    } else if (category === 'Information Technology' && cardCategory === 'it') {
+                        shouldShow = true;
+                    } else if (category === 'Accountant' && cardCategory === 'accountant') {
+                        shouldShow = true;
+                    } else if (category === 'Business Administration' && cardCategory === 'business') {
+                        shouldShow = true;
+                    } else if (category === 'Civil Engineer' && cardCategory === 'civil') {
+                        shouldShow = true;
+                    } else if (category === 'Generic Resume' && cardCategory === 'generic') {
+                        shouldShow = true;
+                    }
+                    
+                    if (shouldShow) {
+                        card.classList.remove('hidden');
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                    }
+                });
+                
+                // Add smooth animation for visible cards
+                setTimeout(() => {
+                    templateCards.forEach(card => {
+                        if (!card.classList.contains('hidden')) {
+                            card.style.transition = 'all 0.3s ease';
+                        }
+                    });
+                }, 100);
+            }
+            
+            // Add "Show All" functionality
+            const showAllButton = document.createElement('a');
+            showAllButton.href = '#';
+            showAllButton.innerHTML = '<span class="industry-tag">Show All</span>';
+            showAllButton.classList.add('active');
+            showAllButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tags
+                industryTags.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to "Show All" button
+                this.classList.add('active');
+                
+                // Show all templates
+                filterTemplates('all');
+            });
+            
+            // Insert "Show All" button at the beginning
+            const industryTagsContainer = document.querySelector('.industry-tags');
+            industryTagsContainer.insertBefore(showAllButton, industryTagsContainer.firstChild);
         });
     </script>
 </body>
+</html>
 </html>

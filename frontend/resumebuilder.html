@@ -1,3 +1,4 @@
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1247,10 +1248,10 @@
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                         <!-- Image Preview Section -->
                         <div>
-                            <div style="aspect-ratio: 1; background: #f3f4f6; border-radius: 8px; overflow: hidden; position: relative; min-height: 300px; max-width: 300px; margin: 0 auto;">
+                            <div style="aspect-ratio: 1; background: #f3f4f6; border-radius: 8px; overflow: auto; position: relative; min-height: 300px; max-width: 300px; margin: 0 auto;">
                                 <img id="previewImage" src="https://via.placeholder.com/400x400?text=Upload+Photo" alt="Profile Preview" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                 <div id="dragText" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #666; pointer-events: none;">
-                                    Drag to reposition image
+                                    Drag to  reposition image
                                 </div>
                             </div>
                             
@@ -1284,7 +1285,7 @@
                             
                             <!-- Upload Options -->
                             <div style="margin-bottom: 20px;">
-                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;">🖼️ Upload New Image</h3>
+                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;"> Upload New Image</h3>
                                 <div style="display: flex; flex-direction: column; gap: 10px;">
                                     <button onclick="document.getElementById('profile-upload').click()" style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px);">Select Photo from Device</button>
                                     <button style="width: 100%; padding: 12px; background: #f3f4f6; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px);">Take a Selfie</button>
@@ -2228,7 +2229,7 @@
         let currentTextarea = null;
         let currentPopup = null;
         // TODO: Set up your OpenAI API key in your environment variables
-        // const API_KEY = process.env.OPENAI_API_KEY || '';
+         const API_KEY = '5ace75c438754c588b6fd2ad4c4c570f' || process.env.OPENAI_API_KEY;
 
         function addAIEnhanceButtons() {
             const textareas = document.querySelectorAll('textarea');
@@ -2378,4 +2379,3 @@
 </body>
 
 </html>
-
