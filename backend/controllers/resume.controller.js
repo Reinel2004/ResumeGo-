@@ -92,4 +92,19 @@ exports.delete = async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: err.message });
     }
-}; 
+};
+
+exports.saveOrUpdate = async (req, res) => {
+    try {
+        const { title, template, content } = req.body;
+        let resume = await Resume.findOne({ where: { userId: req.userId, title } });
+        if (resume) {
+            await resume.update({ template, content, updatedAt: new Date() });
+        } else {
+            resume = await Resume.create({ userId: req.userId, title, template, content });
+        }
+        res.status(200).send(resume);
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
+};
