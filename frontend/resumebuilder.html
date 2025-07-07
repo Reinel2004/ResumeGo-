@@ -1571,6 +1571,10 @@
                 alert('Failed to load resume for editing.');
             }
         }
+        
+        if (typeof updatePreview === 'function') {
+            updatePreview();
+        }
     });
     </script>
     <script>
