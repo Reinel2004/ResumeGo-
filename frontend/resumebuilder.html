@@ -942,16 +942,19 @@
         height: 150px;
         border-radius: 50%;
         overflow: hidden;
-        background-color: #f0f0f0;
+        background: #fff;
+        border: 3px solid #2563eb;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .profile-preview img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
     }
 
     .profile-preview .placeholder {
@@ -1225,8 +1228,8 @@
             <div class="section-block">
                 <h2 class="section-header">Profile Picture</h2>
                 <div class="profile-upload">
-                    <div class="profile-preview" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-                        <img src="" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="profile-preview" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; background: #fff; border: 3px solid #2563eb; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <img src="" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
                     <button type="button" onclick="openModal()" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Upload Photo</button>
                     <input type="file" id="profile-upload" accept="image/*" style="display: none;">
