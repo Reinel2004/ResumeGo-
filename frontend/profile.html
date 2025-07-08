@@ -621,7 +621,7 @@
                     <div class="nav-links">
                         <a href="dashboard.html">Dashboard</a>
                         <a href="templates.html">Templates</a>
-                        <a href="build-resume.html">Create Resume</a>
+                        <a href="resumebuilder.html">Create Resume</a>
                     </div>
                 </div>
                 <div class="nav-right">
@@ -810,12 +810,14 @@
     </div>
 
     <script type="module">
-        import { authAPI } from './js/api.js';
+        import { authAPI, userAPI } from './js/api.js';
 
         // Check if user is logged in
         function checkAuth() {
             const token = localStorage.getItem('token');
             const user = JSON.parse(localStorage.getItem('user'));
+            
+            console.log('Auth check - Token:', !!token, 'User:', !!user);
             
             if (!token || !user) {
                 console.log('User not logged in, redirecting to login page...');
@@ -823,6 +825,32 @@
                 return false;
             }
             return true;
+        }
+
+        // Debug function to check authentication status
+        function debugAuth() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            console.log('=== AUTH DEBUG ===');
+            console.log('Token exists:', !!token);
+            console.log('User exists:', !!user);
+            
+            if (token) {
+                console.log('Token length:', token.length);
+                console.log('Token preview:', token.substring(0, 20) + '...');
+            }
+            
+            if (user) {
+                try {
+                    const userObj = JSON.parse(user);
+                    console.log('User data:', userObj);
+                } catch (e) {
+                    console.log('Invalid user data in localStorage');
+                }
+            }
+            
+            console.log('==================');
         }
 
         // Fetch user profile data when page loads
@@ -835,25 +863,10 @@
                 const user = JSON.parse(localStorage.getItem('user'));
                 
                 console.log('Current user data:', user);
+                console.log('Token present:', !!token);
 
-                // Fetch user data from the backend
-                const response = await fetch('http://localhost:3000/api/user/profile', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                });
-
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
-                }
-
-                const userData = await response.json();
+                // Use the userAPI to fetch profile data
+                const userData = await userAPI.getProfile(token);
                 console.log('User data loaded:', userData);
                 
                 // Update profile display
@@ -865,13 +878,13 @@
                 const memberSinceText = document.querySelector('.profile-info p');
                 
                 // Split fullName into firstName and lastName
-                const nameParts = userData.fullName.split(' ');
+                const nameParts = userData.fullName ? userData.fullName.split(' ') : ['User', 'Name'];
                 const firstName = nameParts[0];
                 const lastName = nameParts.slice(1).join(' ');
                 
                 // Check if elements exist before updating
                 if (profileName) {
-                    profileName.textContent = userData.fullName;
+                    profileName.textContent = userData.fullName || 'User Name';
                 }
                 
                 if (firstNameInput) {
@@ -883,7 +896,7 @@
                 }
                 
                 if (emailInput) {
-                    emailInput.value = userData.email;
+                    emailInput.value = userData.email || '';
                 }
                 
                 if (profilePhoto) {
@@ -911,8 +924,8 @@
                     // Account Settings
                     const accountSettings = detailCards[1].querySelectorAll('.detail-value');
                     if (accountSettings.length >= 2) {
-                        accountSettings[0].textContent = userData.id;
-                        accountSettings[1].textContent = userData.email;
+                        accountSettings[0].textContent = userData.id || 'N/A';
+                        accountSettings[1].textContent = userData.email || 'N/A';
                     }
                     
                     // Login Activity
@@ -937,6 +950,16 @@
                 
             } catch (error) {
                 console.error('Error loading profile:', error);
+                
+                // Check if it's an authentication error
+                if (error.message.includes('401') || error.message.includes('403') || error.message.includes('Unauthorized')) {
+                    console.log('Authentication error detected, redirecting to login...');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
                 // Show error in the profile section
                 const profileSection = document.querySelector('.profile-section');
                 if (profileSection) {
@@ -946,7 +969,12 @@
                     errorDiv.style.marginTop = '10px';
                     errorDiv.style.backgroundColor = '#f8d7da';
                     errorDiv.style.borderRadius = '5px';
-                    errorDiv.textContent = `Error: ${error.message}`;
+                    errorDiv.innerHTML = `
+                        <strong>Error loading profile:</strong> ${error.message}
+                        <br><br>
+                        <button onclick="window.location.reload()" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Retry</button>
+                        <button onclick="window.location.href='login.html'" style="background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-left: 10px;">Login</button>
+                    `;
                     profileSection.appendChild(errorDiv);
                 }
             }
@@ -986,22 +1014,11 @@
                         throw new Error('Not authenticated');
                     }
 
-                    // Update profile in the backend
-                    const response = await fetch('http://localhost:3000/api/user/profile', {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            fullName: `${firstName} ${lastName}`,
-                            email: email
-                        })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Failed to update profile');
-                    }
+                    // Use userAPI to update profile
+                    await userAPI.updateProfile({
+                        fullName: `${firstName} ${lastName}`,
+                        email: email
+                    }, token);
 
                     // Update display name
                     document.querySelector('.profile-name').textContent = `${firstName} ${lastName}`;
@@ -1051,8 +1068,12 @@
 
         // Initialize profile data when page loads
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fetchUserProfile);
+            document.addEventListener('DOMContentLoaded', () => {
+                debugAuth();
+                fetchUserProfile();
+            });
         } else {
+            debugAuth();
             fetchUserProfile();
         }
 
@@ -1126,8 +1147,6 @@
                 window.location.href = 'login.html';
             }
         });
-        Auth.updateUserMenu();
-        Auth.initUserMenu();
 
         // Initialize modal functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -1257,22 +1276,11 @@
                         throw new Error('Not authenticated');
                     }
 
-                    const response = await fetch('http://localhost:3000/api/user/change-password', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            currentPassword,
-                            newPassword
-                        })
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.message || 'Failed to change password');
-                    }
+                    // Use userAPI to change password
+                    await userAPI.changePassword({
+                        currentPassword,
+                        newPassword
+                    }, token);
 
                     // Clear form and close modal
                     document.getElementById('currentPassword').value = '';

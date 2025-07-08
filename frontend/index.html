@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ResumeGo! - Professional Resume Templates</title>
+    <link rel="stylesheet" href="../src/output.css">
     <style>
         :root {
             --primary: #4361ee;
@@ -315,9 +316,62 @@
           
            
         }
-        .industry-tags a:hover{
-          transform: translateY(-10px);
-          transition: transform 0.3s ease;
+        .industry-tags a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .industry-tags a:hover .industry-tag {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .industry-tags a.active .industry-tag {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .template-card {
+            transition: all 0.3s ease;
+        }
+        
+        .template-card.hidden {
+            display: none;
+        }
+        
+        /* Template preview styles */
+        .template-preview {
+            position: relative;
+            padding-top: 141.4%; /* A4 aspect ratio */
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .template-preview img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e1;
         }
         
         /* Why Choose Us Section */
@@ -388,31 +442,13 @@
                 <div class="nav-left">
                     <a href="index.html" class="logo">
                         <img src="../assets/img/logo.png" alt="ResumeGo Logo">
-                        <span class="logo-text">ResumeGo!</span>
+                        <span class="logo-text text-2xl font-bold text-blue-600">ResumeGo!</span>
                     </a>
-                    <div class="nav-links">
-                        <a href="templates-2.html">Resume Templates</a>
-                        
-                        
-                    </div>
                 </div>
                 <div class="nav-right">
                     <div class="auth-buttons" id="authButtons">
-                        <a href="login.html" class="btn btn-outline">Login</a>
-                        <a href="register.html" class="btn">Sign Up</a>
-                    </div>
-                    <div class="user-menu" id="userMenu">
-                        <button class="user-button" id="userMenuButton">
-                            <div class="user-avatar" id="userAvatar">U</div>
-                            <span id="userName">User Name</span>
-                        </button>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="dashboard.html">Dashboard</a>
-                            <a href="profile.html">Profile Settings</a>
-                            <a href="my-resumes.html">My Resumes</a>
-                            <div class="divider"></div>
-                            <a href="#" id="logoutButton">Logout</a>
-                        </div>
+                        <a href="login.html" class="btn btn-outline text-blue-600 font-medium">Login</a>
+                        <a href="register.html" class="btn font-medium">Sign Up</a>
                     </div>
                 </div>
             </nav>
@@ -420,75 +456,385 @@
     </header>
 
     <section class="hero">
-        <h1>Create Your Professional Resume</h1>
-        <p>Build a winning resume in minutes with our easy-to-use tools and professional templates</p>
+        <h1 class="text-5xl font-bold text-black mb-6 leading-tight">Free Resume Builder</h1>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">Build a winning resume in minutes with our easy-to-use tools and professional templates</p>
         <div class="hero-buttons">
             <a href="register.html" class="btn btn-primary">Get Started Free</a>
-            <a href="templates-2.html" class="btn btn-outline">View Templates</a>
+            <a href="#categories" class="btn btn-outline">View Templates</a>
         </div>
     </section>
 
     <main class="container">
+        
         <section>
-            <h2 class="section-title">Our Professional Resume Templates</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
+            <h1 class="text-3xl font-bold text-black mb-6 leading-tight text-center">Our Premium Feautures</h1>
+            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12 leading-relaxed">
                 Crafting a standout resume is key to landing your next dream job offer. With our resume templates and expert content, you can easily create a polished resume and download it in your preferred format.
             </p>
+            <br><br>
             
-            <div class="templates-grid">
-                <div class="template-card">
-                    <div class="template-img">Template Preview</div>
+            <div class="templates-grid" id="originalTemplatesGrid">
+                <div class="template-card" data-category="generic">
+                    <div class="template-img"><img src="../assets/img/templates/it-template-3.png" alt=""></div>
                     <div class="template-info">
-                        <h3>Modern Professional</h3>
-                        <p>Clean design perfect for corporate jobs</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Modern Professional</h3>
+                        <p class="text-gray-600 leading-relaxed">Clean design perfect for corporate jobs</p>
                     </div>
                 </div>
                 
 
-                <div class="template-card">
+                <div class="template-card" data-category="generic">
                     <div class="template-img">Template Preview</div>
                     <div class="template-info">
-                        <h3>Creative</h3>
-                        <p>For designers and artistic professionals</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Creative</h3>
+                        <p class="text-gray-600 leading-relaxed">For designers and artistic professionals</p>
                     </div>
                 </div>
                 
 
-                <div class="template-card">
+                <div class="template-card" data-category="generic">
                     <div class="template-img">Template Preview</div>
                     <div class="template-info">
-                        <h3>Minimalist</h3>
-                        <p>Simple and elegant for all industries</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Minimalist</h3>
+                        <p class="text-gray-600 leading-relaxed">Simple and elegant for all industries</p>
                     </div>
                 </div>
                 
                 <!-- Template 4 -->
-                <div class="template-card">
+                <div class="template-card" data-category="generic">
                     <div class="template-img">Template Preview</div>
                     <div class="template-info">
-                        <h3>Executive</h3>
-                        <p>For senior-level professionals</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Executive</h3>
+                        <p class="text-gray-600 leading-relaxed">For senior-level professionals</p>
                     </div>
                 </div>
             </div>
         </section>
 
-      
+      <a name="categories"></a>
         <section class="industries">
             <div class="container">
-                <h2 class="section-title">Resume Templates for These Fields</h2>
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-8">Resume Templates for These Fields</h2>
                 
                 <div class="industry-tags">
-                  <a href=""><span class="industry-tag">Information Technology</span></a>
-                  <a href=""><span class="industry-tag">Accountant</span></a>
-                  <a href=""><span class="industry-tag">Business Administration</span></a>
-                  <a href=""><span class="industry-tag">Civil Engineer</span></a>
-                  <a href=""><span class="industry-tag">Generic Resume</span></a>
+                  <a href="#" data-category="it"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Information Technology</span></a>
+                  <a href="#" data-category="accountant"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Accountant</span></a>
+                  <a href="#" data-category="business"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Business Administration</span></a>
+                  <a href="#" data-category="civil"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Civil Engineer</span></a>
+                  <a href="#" data-category="generic"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Generic Resume</span></a>
                 </div>
                 
-                <p style="text-align: center; max-width: 800px; margin: 30px auto 0;">
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mt-8 mb-12 leading-relaxed">
                     A basic resume offers a simple design and a straightforward presentation of your skills and experience.
                 </p>
+
+                <div class="templates-grid" id="templatesGrid">
+                    <!-- IT Template 1 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-1.png" alt="IT Template 1">
+                        </div>
+                        <div class="template-info">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">IT Professional - Modern</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for IT professionals. Features a professional layout with emphasis on technical skills.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-1" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 2 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-2.png" alt="IT Template 2">
+                        </div>
+                        <div class="template-info">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">IT Professional - Minimalist</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">A minimalist design focusing on readability and content. Ideal for showcasing technical expertise.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-2" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 3 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-3.png" alt="IT Template 3">
+                        </div>
+                        <div class="template-info">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">IT Professional - Sidebar</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">Modern design with a sidebar layout. Perfect for highlighting technical skills and certifications.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-3" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 4 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-4.png" alt="IT Template 4">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Card Based</h3>
+                            <p>Card-based design with hover effects. Great for presenting technical projects and achievements.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-4" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 5 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-5.png" alt="IT Template 5">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Timeline</h3>
+                            <p>Timeline-based design for chronological presentation. Excellent for showcasing career progression.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-5" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 6 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-6.png" alt="IT Template 6">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Split Layout</h3>
+                            <p>Split layout with prominent sidebar. Ideal for emphasizing technical skills and certifications.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-6" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 7 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-7.png" alt="IT Template 7">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Gradient</h3>
+                            <p>Gradient-based design with modern aesthetics. Perfect for a contemporary tech professional.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-7" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 8 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-8.png" alt="IT Template 8">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Dark Theme</h3>
+                            <p>Dark theme design for a bold look. Great for making a strong impression.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-8" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 9 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-9.png" alt="IT Template 9">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Minimalist Split</h3>
+                            <p>Split layout with minimalist design. Perfect for a clean, professional presentation.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-9" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- IT Template 10 -->
+                    <div class="template-card" data-category="it">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-10.png" alt="IT Template 10">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Card Gradient</h3>
+                            <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=it-10" class="btn btn-primary">Use Template</a>
+                                <a href="templates/it-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Accountant Templates-->
+
+                <div class="templates-grid" id="templatesGrid">
+                    <!-- Accountant Template 1 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-1.png" alt="Accountant Template 1">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Modern</h3>
+                            <p>A clean, modern design perfect for IT professionals. Features a professional layout with emphasis on technical skills.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-1" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 2 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-2.png" alt="Accountant Template 2">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Minimalist</h3>
+                            <p>A minimalist design focusing on readability and content. Ideal for showcasing technical expertise.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-2" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 3 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-3.png" alt="Accountant Template 3">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Sidebar</h3>
+                            <p>Modern design with a sidebar layout. Perfect for highlighting technical skills and certifications.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-3" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 4 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-4.png" alt="Accountant Template 4">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Card Based</h3>
+                            <p>Card-based design with hover effects. Great for presenting technical projects and achievements.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-4" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 5 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-5.png" alt="Accountant Template 5">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Timeline</h3>
+                            <p>Timeline-based design for chronological presentation. Excellent for showcasing career progression.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-5" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 6 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-6.png" alt="Accountant Template 6">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Split Layout</h3>
+                            <p>Split layout with prominent sidebar. Ideal for emphasizing technical skills and certifications.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-6" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 7 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-7.png" alt="Accountant Template 7">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Gradient</h3>
+                            <p>Gradient-based design with modern aesthetics. Perfect for a contemporary tech professional.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-7" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 8 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-8.png" alt="Accountant Template 8">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Dark Theme</h3>
+                            <p>Dark theme design for a bold look. Great for making a strong impression.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-8" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 9 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-9.png" alt="Accountant Template 9">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Minimalist Split</h3>
+                            <p>Split layout with minimalist design. Perfect for a clean, professional presentation.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-9" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Accountant Template 10 -->
+                    <div class="template-card" data-category="accountant">
+                        <div class="template-preview">
+                            <img src="../assets/img/templates/it-template-10.png" alt="Accountant Template 10">
+                        </div>
+                        <div class="template-info">
+                            <h3>IT Professional - Card Gradient</h3>
+                            <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                            <div class="template-actions">
+                                <a href="resumebuilder.html?template=accountant-10" class="btn btn-primary">Use Template</a>
+                                <a href="templates/accountant-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -502,27 +848,27 @@
                 
                 <div class="features-list">
                     <div class="feature-item">
-                        <h3>Professionally Designed Templates</h3>
+                        <h3><b>Professionally Designed Templates</b></h3>
                         <p>Choose from a variety of layouts tailored to different industries and career levels.</p>
                     </div>
                     
                     <div class="feature-item">
-                        <h3>AI-Enhanced Customization</h3>
+                        <h3><b>AI-Enhanced Customization</b></h3>
                         <p>Let AI help refine your content, ensuring clarity, impact, and relevance.</p>
                     </div>
                     
                     <div class="feature-item">
-                        <h3>Industry-Specific Formatting</h3>
+                        <h3><b>Industry-Specific Formatting</b></h3>
                         <p>Our templates follow best practices, making your resume ATS-friendly and easy to read.</p>
                     </div>
                     
                     <div class="feature-item">
-                        <h3>Effortless Photo Enhancement</h3>
+                        <h3><b>Effortless Photo Enhancement</b></h3>
                         <p>Need a professional-looking headshot? Our AI-powered tool can remove backgrounds and apply formal attire instantly.</p>
                     </div>
                     
                     <div class="feature-item">
-                        <h3>User-Friendly Experience</h3>
+                        <h3><b>User-Friendly Experience</b></h3>
                         <p>Our intuitive platform makes it easy to build, edit, and download your resume in just a few clicks.</p>
                     </div>
                 </div>
@@ -571,9 +917,87 @@
 
     <script src="js/auth.js"></script>
     <script>
-        // // Initialize user menu
-        // Auth.updateUserMenu();
-        // Auth.initUserMenu();
+
+        // Initialize user menu
+        Auth.updateUserMenu();
+        Auth.initUserMenu();
+        
+        // Template filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const industryTags = document.querySelectorAll('.industry-tags a');
+            const originalTemplatesGrid = document.getElementById('originalTemplatesGrid');
+            const itTemplatesGrid = document.getElementById('templatesGrid');
+            const allTemplateCards = document.querySelectorAll('.template-card');
+            
+            // Hide IT templates grid by default
+            if (itTemplatesGrid) {
+                itTemplatesGrid.style.display = 'none';
+            }
+            
+            // Add click event listeners to industry tags
+            industryTags.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tags
+                    industryTags.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+                    
+                    // Get the category to filter by
+                    const category = this.getAttribute('data-category');
+                    
+                    // Filter templates
+                    filterTemplates(category);
+                });
+            });
+            
+            function filterTemplates(category) {
+                // Show/hide template grids based on category
+                if (category === 'it') {
+                    if (originalTemplatesGrid) originalTemplatesGrid.style.display = 'none';
+                    if (itTemplatesGrid) itTemplatesGrid.style.display = 'grid';
+                } else if (category === 'generic') {
+                    if (originalTemplatesGrid) originalTemplatesGrid.style.display = 'grid';
+                    if (itTemplatesGrid) itTemplatesGrid.style.display = 'none';
+                } else {
+                    // For other categories, show original templates for now
+                    if (originalTemplatesGrid) originalTemplatesGrid.style.display = 'grid';
+                    if (itTemplatesGrid) itTemplatesGrid.style.display = 'none';
+                }
+                
+                // Filter individual template cards
+                allTemplateCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (category === 'all' || cardCategory === category) {
+                        card.classList.remove('hidden');
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                    }
+                });
+                
+                // Add smooth animation for visible cards
+                setTimeout(() => {
+                    allTemplateCards.forEach(card => {
+                        if (!card.classList.contains('hidden')) {
+                            card.style.transition = 'all 0.3s ease';
+                        }
+                    });
+                }, 100);
+            }
+            
+
+            
+            // Show original templates by default
+            filterTemplates('it');
+        });
+
     </script>
 </body>
 </html>
