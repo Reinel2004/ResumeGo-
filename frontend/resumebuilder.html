@@ -1566,14 +1566,81 @@
                             profilePreview.innerHTML = `<img src="${resume.content.profileImage}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">`;
                         }
                     }
+                    if (resume.template) {
+                        templateId = resume.template;
+                    }
                 }
             } catch (err) {
+                console.error('Failed to load resume for editing:', err);
                 alert('Failed to load resume for editing.');
             }
         }
         
         if (typeof updatePreview === 'function') {
             updatePreview();
+        }
+    });
+
+    document.getElementById('saveResumeBtn').addEventListener('click', async function() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('You must be logged in to save your resume.');
+            return;
+        }
+        const title = document.getElementById('title').value || 'Untitled Resume';
+        const template = templateId;
+        // Gather all content (inputs, skills, experience, projects, etc.)
+        function getSkills() {
+            const skills = [];
+            document.querySelectorAll('.skills-list').forEach((list, i) => {
+                const category = list.previousElementSibling.previousElementSibling.textContent;
+                const items = Array.from(list.querySelectorAll('.skill-badge')).map(badge => badge.textContent.replace('×', '').trim());
+                if (items.length) skills.push({ category, items });
+            });
+            return skills;
+        }
+        function getExperience() {
+            return Array.from(document.querySelectorAll('.experience-item')).map(item => ({
+                company: item.querySelector('input[placeholder="Company Name"]')?.value,
+                position: item.querySelector('input[placeholder="Job Title"]')?.value,
+                startDate: item.querySelector('input[type="month"]:first-of-type')?.value,
+                endDate: item.querySelector('input[type="month"]:last-of-type')?.value,
+                description: item.querySelector('textarea')?.value
+            }));
+        }
+        function getProjects() {
+            return Array.from(document.querySelectorAll('.project-item')).map(item => ({
+                title: item.querySelector('input[placeholder="Project Name"]')?.value,
+                tech: item.querySelector('input[placeholder="e.g., React, Node.js, MongoDB"]')?.value,
+                description: item.querySelector('textarea')?.value
+            }));
+        }
+        const content = {
+            name: document.getElementById('name').value,
+            title: document.getElementById('title').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            summary: document.getElementById('summary').value,
+            skills: getSkills(),
+            experience: getExperience(),
+            projects: getProjects(),
+            profileImage: window.profileImage || null
+        };
+        const resumeId = urlParams.get('resumeId');
+        try {
+            if (resumeId) {
+                // Update existing resume
+                await resumeAPI.update(resumeId, { title, template, content }, token);
+                alert('Resume updated successfully!');
+            } else {
+                // Create new resume
+                await resumeAPI.create({ title, template, content }, token);
+                alert('Resume saved successfully!');
+            }
+        } catch (err) {
+            console.error('Failed to save resume:', err);
+            alert('Failed to save resume.');
+            return;
         }
     });
     </script>
@@ -1598,7 +1665,7 @@
 
         // Get template ID from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const templateId = urlParams.get('template') || 'default';
+        let templateId = urlParams.get('template') || 'default';
 
         // Preview functionality
         const previewToggle = document.getElementById('previewToggle');
@@ -1945,69 +2012,7 @@
         // Add event listeners
         previewToggle.addEventListener('click', togglePreview);
 
-        // Save Resume Functionality
-        document.getElementById('saveResumeBtn').addEventListener('click', async function() {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('You must be logged in to save your resume.');
-                return;
-            }
-            // Gather all form data
-            const title = document.getElementById('title').value || 'Untitled Resume';
-            const template = urlParams.get('template') || 'default';
-            // Gather all content (inputs, skills, experience, projects, etc.)
-            function getSkills() {
-                const skills = [];
-                document.querySelectorAll('.skills-list').forEach((list, i) => {
-                    const category = list.previousElementSibling.previousElementSibling.textContent;
-                    const items = Array.from(list.querySelectorAll('.skill-badge')).map(badge => badge.textContent.replace('×', '').trim());
-                    if (items.length) skills.push({ category, items });
-                });
-                return skills;
-            }
-            function getExperience() {
-                return Array.from(document.querySelectorAll('.experience-item')).map(item => ({
-                    company: item.querySelector('input[placeholder="Company Name"]')?.value,
-                    position: item.querySelector('input[placeholder="Job Title"]')?.value,
-                    startDate: item.querySelector('input[type="month"]:first-of-type')?.value,
-                    endDate: item.querySelector('input[type="month"]:last-of-type')?.value,
-                    description: item.querySelector('textarea')?.value
-                }));
-            }
-            function getProjects() {
-                return Array.from(document.querySelectorAll('.project-item')).map(item => ({
-                    title: item.querySelector('input[placeholder="Project Name"]')?.value,
-                    tech: item.querySelector('input[placeholder="e.g., React, Node.js, MongoDB"]')?.value,
-                    description: item.querySelector('textarea')?.value
-                }));
-            }
-            const content = {
-                name: document.getElementById('name').value,
-                title: document.getElementById('title').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                summary: document.getElementById('summary').value,
-                skills: getSkills(),
-                experience: getExperience(),
-                projects: getProjects(),
-                profileImage: window.profileImage || null
-            };
-            // AJAX POST to backend
-            const response = await fetch('http://localhost:3000/api/resume/save-resume', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({ title, template, content })
-            });
-            if (response.ok) {
-                alert('Resume saved successfully!');
-            } else {
-                alert('Failed to save resume.');
-            }
-        });
-
+       
         // Auto-resize textareas
         function autoResizeTextarea(textarea) {
             textarea.style.height = 'auto';
