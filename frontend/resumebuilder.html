@@ -2387,11 +2387,8 @@
                     formData.append('image_file', blob);
 
                     // Call background removal API
-                    const apiResponse = await fetch('https://api.remove.bg/v1.0/removebg', {
+                    const apiResponse = await fetch('http://localhost:3000/api/removebg/removebg', {
                         method: 'POST',
-                        headers: {
-                            'X-Api-Key': process.env.REMOVE_BG_API_KEY || '',
-                        },
                         body: formData,
                     });
 
