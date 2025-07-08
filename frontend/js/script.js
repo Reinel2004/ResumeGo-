@@ -1,3 +1,28 @@
+// Load face-api.js models on page load (for resumebuilder.html)
+async function loadFaceApiModels() {
+    await faceapi.nets.tinyFaceDetector.loadFromUri('/js/models');
+    await faceapi.nets.faceLandmark68Net.loadFromUri('/js/models');
+    // Add more models if needed
+}
+
+if (window.faceapi) loadFaceApiModels();
+
+// Helper to overlay suit on detected face
+async function overlaySuitOnFace(imageElement, canvasElement, suitSrc) {
+    const detection = await faceapi.detectSingleFace(imageElement, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks();
+    if (!detection) return false;
+    const ctx = canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    ctx.drawImage(imageElement, 0, 0, canvasElement.width, canvasElement.height);
+    // Load suit overlay
+    const suitImg = new Image();
+    suitImg.src = suitSrc;
+    await new Promise(res => { suitImg.onload = res; });
+    // Example: Draw suit at fixed position (improve by using landmarks)
+    ctx.drawImage(suitImg, canvasElement.width/2 - suitImg.width/2, canvasElement.height*0.6, suitImg.width, suitImg.height);
+    return true;
+}
+
 function addEducation() {
     const educationSection = document.getElementById('education-section');
     const newEntry = document.createElement('div');
@@ -102,34 +127,45 @@ function generateResume() {
 
 let processedImageUrl = null;
 
-document.getElementById("profile-pic").addEventListener("change", function (event) {
-    const file = event.target.files[0];
+// Profile photo upload logic for resumebuilder.html
+const profileUploadInput = document.getElementById('profile-upload');
+const previewImage = document.getElementById('previewImage');
+const suitOverlayCheckbox = document.getElementById('suitOverlayCheckbox');
 
-    if (file) {
-        // Preview the uploaded image before sending to backend
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById("image-preview").innerHTML = `<img src="${e.target.result}" alt="Uploaded Image" width="150">`;
-        };
-        reader.readAsDataURL(file);
+if (profileUploadInput && previewImage) {
+    profileUploadInput.addEventListener('change', async function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                previewImage.src = e.target.result;
+                // If suit overlay is checked, apply it
+                if (suitOverlayCheckbox && suitOverlayCheckbox.checked) {
+                    // Create a canvas to draw the overlay
+                    let canvas = document.createElement('canvas');
+                    canvas.width = previewImage.naturalWidth || 400;
+                    canvas.height = previewImage.naturalHeight || 400;
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = async function() {
+                        // Use the first suit as default, or let user pick
+                        const suitSrc = '../assets/img/suit-overlay/suit-overlay-1.png';
+                        await overlaySuitOnFace(img, canvas, suitSrc);
+                        previewImage.src = canvas.toDataURL();
+                    };
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
 
-        // Send the image to Flask for processing
-        const formData = new FormData();
-        formData.append("file", file);
-
-        fetch("http://127.0.0.1:5000/uploads", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.processedImageUrl) {
-                // Show the processed image
-                document.getElementById("image-preview").innerHTML = `<img src="${data.processedImageUrl}" alt="Processed Image" width="150">`;
-            } else {
-                console.error("Error processing image:", data.error);
-            }
-        })
-        .catch(error => console.error("Error uploading file:", error));
-    }
-});
+if (suitOverlayCheckbox && previewImage && profileUploadInput) {
+    suitOverlayCheckbox.addEventListener('change', function() {
+        // Re-trigger the change event to re-apply or remove the overlay
+        if (profileUploadInput.files && profileUploadInput.files[0]) {
+            const event = new Event('change');
+            profileUploadInput.dispatchEvent(event);
+        }
+    });
+}

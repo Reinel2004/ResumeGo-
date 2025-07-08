@@ -1303,6 +1303,10 @@
                                         <input type="checkbox" id="bgRemovalCheckbox" onchange="handleBackgroundRemoval(this)">
                                         <span>Automatic background removal</span>
                                     </label>
+                                    <label style="display: flex; align-items: center; gap: 10px; font-size: clamp(14px, 2vw, 16px);">
+                                        <input type="checkbox" id="suitOverlayCheckbox">
+                                        <span>Add suit overlay to my photo</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -2568,6 +2572,82 @@
             }
         });
     </script>
+    <script>
+// --- Suit Overlay Logic for Modal ---
+    let originalModalImage = null;
+    let selectedSuitSrc = '../assets/img/suit-overlay/suit-overlay-1.png'; // Default suit
+
+    // Track selected suit
+    function selectSuit(element) {
+        document.querySelectorAll('.suit-option').forEach(opt => {
+            opt.style.borderColor = 'transparent';
+        });
+        element.style.borderColor = '#3b82f6';
+        selectedSuitSrc = element.querySelector('img').src;
+        updateSuitOverlayPreview();
+    }
+
+    // When suit overlay checkbox is toggled
+    const suitOverlayCheckbox = document.getElementById('suitOverlayCheckbox');
+    if (suitOverlayCheckbox) {
+        suitOverlayCheckbox.addEventListener('change', updateSuitOverlayPreview);
+    }
+
+    // When image changes in modal
+    const previewImage = document.getElementById('previewImage');
+    if (previewImage) {
+        previewImage.addEventListener('load', function() {
+            if (!suitOverlayCheckbox || !suitOverlayCheckbox.checked) {
+                originalModalImage = previewImage.src;
+            }
+            updateSuitOverlayPreview();
+        });
+    }
+
+    // When suit is selected
+    const suitOptions = document.querySelectorAll('.suit-option');
+    suitOptions.forEach(opt => {
+        opt.addEventListener('click', function() {
+            selectSuit(this);
+        });
+    });
+
+    // Main function to update the preview with or without suit overlay
+    async function updateSuitOverlayPreview() {
+        if (!previewImage) return;
+        if (!suitOverlayCheckbox || !suitOverlayCheckbox.checked) {
+            // Show original image
+            if (originalModalImage) previewImage.src = originalModalImage;
+            return;
+        }
+        // Draw on a canvas
+        const img = new window.Image();
+        img.crossOrigin = 'anonymous';
+        img.src = originalModalImage;
+        img.onload = async function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            // Load suit image
+            const suitImg = new window.Image();
+            suitImg.crossOrigin = 'anonymous';
+            suitImg.src = selectedSuitSrc;
+            suitImg.onload = function() {
+                // Draw suit at bottom center, scale to width
+                const suitWidth = canvas.width * 0.8;
+                const suitHeight = suitImg.height * (suitWidth / suitImg.width);
+                const x = (canvas.width - suitWidth) / 2;
+                const y = canvas.height - suitHeight;
+                ctx.drawImage(suitImg, x, y, suitWidth, suitHeight);
+                previewImage.src = canvas.toDataURL('image/png');
+            };
+        };
+    }
+</script>
+
+
 </body>
 
 </html>
