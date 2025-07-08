@@ -313,16 +313,18 @@
             border-radius: 20px;
             font-weight: 500;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease
           
            
         }
         .industry-tags a {
             text-decoration: none;
             color: inherit;
+            display: inline-block;
         }
         
         .industry-tags a:hover .industry-tag {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
@@ -930,8 +932,11 @@
             const allTemplateCards = document.querySelectorAll('.template-card');
             
             // Hide IT templates grid by default
-            if (itTemplatesGrid) {
-                itTemplatesGrid.style.display = 'none';
+             
+            // Set default active tag (IT category)
+            const defaultTag = document.querySelector('.industry-tags a[data-category="it"]');
+            if (defaultTag) {
+                defaultTag.classList.add('active');
             }
             
             // Add click event listeners to industry tags
