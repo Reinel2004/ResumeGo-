@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const fileUpload = require('express-fileupload');
 const removebgRoutes = require('./routes/removebg.routes.js');
+const atsRoutes = require('./routes/ats.routes.js');
 const cors = require("cors");
 const db = require("./models");
 
@@ -23,6 +24,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use('/api/removebg', removebgRoutes);
+app.use('/api/ats', atsRoutes);
 
 // Database connection
 db.sequelize.sync().then(() => {

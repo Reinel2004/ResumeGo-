@@ -1201,6 +1201,7 @@
                         <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
                         <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
                         <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
+                        <a href="ats-checker.html" class="text-gray-700 hover:text-primary font-medium">ATS Checker</a>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -1402,20 +1403,20 @@
                     <div class="experience-item">
                             <div class="form-grid">
                                 <div class="input-group">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" placeholder="Company Name">
+                                    <label for="company">Company</label>
+                                    <input type="text" id="company" placeholder="Company Name">
                                 </div>
                                 <div class="input-group">
-                                <label for="position">Position</label>
-                                <input type="text" id="position" placeholder="Job Title">
+                                    <label for="position">Position</label>
+                                    <input type="text" id="position" placeholder="Job Title">
                                 </div>
                                 <div class="input-group">
-                                <label for="start-date">Start Date</label>
-                                <input type="month" id="start-date">
+                                    <label for="start-date">Start Date</label>
+                                    <input type="month" id="start-date">
                                 </div>
                                 <div class="input-group">
-                                <label for="end-date">End Date</label>
-                                <input type="month" id="end-date">
+                                    <label for="end-date">End Date</label>
+                                    <input type="month" id="end-date">
                                 </div>
                             <div class="input-group full-width">
                                 <label for="description">Description</label>
@@ -1433,28 +1434,28 @@
                     <div id="projects-container">
                         <div class="project-item">
                             <div class="form-grid">
-                            <div class="input-group">
-                                <label for="project-title">Project Title</label>
-                                <input type="text" id="project-title" placeholder="Project Name">
+                                <div class="input-group">
+                                    <label for="project-title">Project Title</label>
+                                    <input type="text" id="project-title" placeholder="Project Name">
                                 </div>
-                            <div class="input-group">
-                                <label for="project-tech">Technologies Used</label>
-                                <input type="text" id="project-tech" placeholder="e.g., React, Node.js, MongoDB">
+                                <div class="input-group">
+                                    <label for="project-tech">Technologies Used</label>
+                                    <input type="text" id="project-tech" placeholder="e.g., React, Node.js, MongoDB">
                                 </div>
                                 <div class="input-group full-width">
-                                <label for="project-desc">Project Description</label>
-                                <textarea id="project-desc" placeholder="Describe the project and your role..."></textarea>
-                                </div>
-                                </div>
+                                    <label for="project-desc">Project Description</label>
+                                    <textarea id="project-desc" placeholder="Describe the project and your role..."></textarea>
                                 </div>
                             </div>
-                <button class="add-project-btn">Add Another Project</button>
                         </div>
                     </div>
+                <button class="add-project-btn">Add Another Project</button>
+                    </div>
+            </div>
 
-        <div class="right-panel" id="resume-preview">
-            <!-- Resume preview will be generated here -->
-                </div>
+            <div class="right-panel" id="resume-preview">
+                <!-- Resume preview will be generated here -->
+            </div>
     </main>
 
     <button class="preview-toggle" id="previewToggle">Preview Resume</button>
@@ -1643,6 +1644,7 @@
                 // Create new resume
                 await resumeAPI.create({ title, template, content }, token);
                 alert('Resume saved successfully!');
+                window.location.href = 'dashboard.html';
             }
         } catch (err) {
             console.error('Failed to save resume:', err);
@@ -2427,7 +2429,7 @@
         let currentTextarea = null;
         let currentPopup = null;
         // TODO: Set up your OpenAI API key in your environment variables
-         const API_KEY = '5ace75c438754c588b6fd2ad4c4c570f' || process.env.OPENAI_API_KEY;
+         const API_KEY = process.env.OPENAI_API_KEY || '';
 
         function addAIEnhanceButtons() {
             const textareas = document.querySelectorAll('textarea');

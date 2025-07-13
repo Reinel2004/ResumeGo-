@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Checker - ResumeGo!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        .score-excellent { background: linear-gradient(135deg, #10b981, #059669); }
+        .score-good { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .score-poor { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <a href="dashboard.html" class="flex items-center space-x-2">
+                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
+                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
+                    </a>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
+                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
+                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
+                        <a href="ats-checker.html" class="text-primary font-medium">ATS Checker</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
+                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
+                            <span id="userName" class="hidden md:inline">User Name</span>
+                        </button>
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
+                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">ATS Resume Checker</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Optimize your resume for Applicant Tracking Systems (ATS) and increase your chances of getting noticed by recruiters.
+            </p>
+        </div>
+
+        <!-- Resume Selection Section -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Select Resume to Analyze</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="resumeSelect" class="block text-sm font-medium text-gray-700 mb-2">Choose Resume</label>
+                    <select id="resumeSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="">Select a resume...</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="jobTitle" class="block text-sm font-medium text-gray-700 mb-2">Target Job Title (Optional)</label>
+                    <input type="text" id="jobTitle" placeholder="e.g., Software Developer, Marketing Manager" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="industrySelect" class="block text-sm font-medium text-gray-700 mb-2">Industry</label>
+                <select id="industrySelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <option value="generic">Generic</option>
+                    <option value="it">Information Technology</option>
+                    <option value="accountant">Accounting & Finance</option>
+                    <option value="business">Business & Management</option>
+                    <option value="engineering">Engineering</option>
+                </select>
+            </div>
+            <div class="mt-6">
+                <button id="analyzeBtn" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-secondary transition-colors font-medium">
+                    Analyze Resume
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Section -->
+        <div id="loadingSection" class="hidden bg-white rounded-lg shadow-sm p-8 text-center">
+            <div class="loading-spinner mx-auto mb-4"></div>
+            <p class="text-gray-600">Analyzing your resume for ATS compatibility...</p>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden">
+            <!-- Overall Score -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">ATS Compatibility Score</h2>
+                    <div id="scoreCircle" class="score-circle"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Keyword Match</h3>
+                        <div id="keywordScore" class="text-3xl font-bold text-primary"></div>
+                        <p class="text-sm text-gray-600">Found keywords</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Formatting</h3>
+                        <div id="formattingScore" class="text-3xl font-bold text-primary"></div>
+                        <p class="text-sm text-gray-600">ATS-friendly format</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Structure</h3>
+                        <div id="structureScore" class="text-3xl font-bold text-primary"></div>
+                        <p class="text-sm text-gray-600">Resume structure</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Keyword Analysis -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Keyword Analysis</h3>
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-green-600 mb-2">Found Keywords</h4>
+                        <div id="foundKeywords" class="flex flex-wrap gap-2"></div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Missing Keywords</h4>
+                        <div id="missingKeywords" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- Issues & Recommendations -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Issues & Recommendations</h3>
+                    <div id="recommendations" class="space-y-4"></div>
+                </div>
+            </div>
+
+            <!-- Industry Keywords -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mt-8">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Industry Keywords for <span id="industryName"></span></h3>
+                <div id="industryKeywords" class="flex flex-wrap gap-2"></div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mt-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">ATS Optimization Tips</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">✅ Do's</h4>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Use standard fonts (Arial, Calibri, Times New Roman)</li>
+                        <li>• Include relevant keywords from job descriptions</li>
+                        <li>• Use simple formatting and avoid tables</li>
+                        <li>• Include all required sections (contact, experience, education)</li>
+                        <li>• Use bullet points for easy scanning</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">❌ Don'ts</h4>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Avoid images, graphics, or complex layouts</li>
+                        <li>• Don't use headers or footers</li>
+                        <li>• Avoid excessive formatting or colors</li>
+                        <li>• Don't use abbreviations without explanation</li>
+                        <li>• Avoid creative fonts or unusual formatting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Check authentication
+        if (!Auth.requireAuth()) {
+            // This will redirect to index.html if not authenticated
+        }
+
+        // User dropdown functionality
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userDropdown = document.getElementById('userDropdown');
+        const logoutButton = document.getElementById('logoutButton');
+
+        userMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        logoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            Auth.logout();
+        });
+
+        // Update user info
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('userName').textContent = user.fullName || 'User';
+            document.getElementById('userAvatar').textContent = (user.fullName || 'U')[0].toUpperCase();
+        }
+
+        // Load user's resumes
+        async function loadResumes() {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/resume', {
+                    headers: {
+                        'x-access-token': token
+                    }
+                });
+
+                if (response.ok) {
+                    const resumes = await response.json();
+                    const select = document.getElementById('resumeSelect');
+                    select.innerHTML = '<option value="">Select a resume...</option>';
+                    
+                    resumes.forEach(resume => {
+                        const option = document.createElement('option');
+                        option.value = resume.id;
+                        option.textContent = resume.title;
+                        select.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading resumes:', error);
+            }
+        }
+
+        // Analyze resume
+        async function analyzeResume() {
+            const resumeId = document.getElementById('resumeSelect').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const industry = document.getElementById('industrySelect').value;
+
+            if (!resumeId) {
+                alert('Please select a resume to analyze.');
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please log in to analyze resumes.');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loadingSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/ats/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token
+                    },
+                    body: JSON.stringify({
+                        resumeId: resumeId,
+                        jobTitle: jobTitle,
+                        industry: industry
+                    })
+                });
+
+                if (response.ok) {
+                    const analysis = await response.json();
+                    displayResults(analysis);
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Analysis failed');
+                }
+            } catch (error) {
+                console.error('Error analyzing resume:', error);
+                alert('Failed to analyze resume: ' + error.message);
+            } finally {
+                document.getElementById('loadingSection').classList.add('hidden');
+            }
+        }
+
+        // Display analysis results
+        function displayResults(analysis) {
+            // Update overall score
+            const scoreCircle = document.getElementById('scoreCircle');
+            const score = Math.round(analysis.score);
+            scoreCircle.textContent = score;
+            
+            if (score >= 80) {
+                scoreCircle.className = 'score-circle score-excellent';
+            } else if (score >= 60) {
+                scoreCircle.className = 'score-circle score-good';
+            } else {
+                scoreCircle.className = 'score-circle score-poor';
+            }
+
+            // Update individual scores
+            document.getElementById('keywordScore').textContent = Math.round(analysis.keywordMatch.score) + '%';
+            document.getElementById('formattingScore').textContent = Math.round(analysis.formatting.score) + '%';
+            document.getElementById('structureScore').textContent = Math.round(analysis.structure.score) + '%';
+
+            // Display found keywords
+            const foundKeywordsContainer = document.getElementById('foundKeywords');
+            foundKeywordsContainer.innerHTML = '';
+            analysis.keywordMatch.found.forEach(keyword => {
+                const badge = document.createElement('span');
+                badge.className = 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm';
+                badge.textContent = keyword;
+                foundKeywordsContainer.appendChild(badge);
+            });
+
+            // Display missing keywords
+            const missingKeywordsContainer = document.getElementById('missingKeywords');
+            missingKeywordsContainer.innerHTML = '';
+            analysis.keywordMatch.missing.slice(0, 10).forEach(keyword => {
+                const badge = document.createElement('span');
+                badge.className = 'bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm';
+                badge.textContent = keyword;
+                missingKeywordsContainer.appendChild(badge);
+            });
+
+            // Display recommendations
+            const recommendationsContainer = document.getElementById('recommendations');
+            recommendationsContainer.innerHTML = '';
+            analysis.recommendations.forEach(rec => {
+                const priorityColor = rec.priority === 'high' ? 'red' : rec.priority === 'medium' ? 'yellow' : 'green';
+                const card = document.createElement('div');
+                card.className = `border-l-4 border-${priorityColor}-500 bg-${priorityColor}-50 p-4`;
+                card.innerHTML = `
+                    <h4 class="font-semibold text-gray-900 mb-1">${rec.title}</h4>
+                    <p class="text-sm text-gray-700 mb-2">${rec.description}</p>
+                    <p class="text-xs text-gray-600"><strong>Action:</strong> ${rec.action}</p>
+                `;
+                recommendationsContainer.appendChild(card);
+            });
+
+            // Load industry keywords
+            loadIndustryKeywords(document.getElementById('industrySelect').value);
+
+            // Show results
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+
+        // Load industry keywords
+        async function loadIndustryKeywords(industry) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/ats/keywords/${industry}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('industryName').textContent = data.industry.charAt(0).toUpperCase() + data.industry.slice(1);
+                    
+                    const container = document.getElementById('industryKeywords');
+                    container.innerHTML = '';
+                    data.keywords.forEach(keyword => {
+                        const badge = document.createElement('span');
+                        badge.className = 'bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm';
+                        badge.textContent = keyword;
+                        container.appendChild(badge);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading industry keywords:', error);
+            }
+        }
+
+        // Event listeners
+        document.getElementById('analyzeBtn').addEventListener('click', analyzeResume);
+        document.getElementById('industrySelect').addEventListener('change', function() {
+            loadIndustryKeywords(this.value);
+        });
+
+        // Load resumes on page load
+        document.addEventListener('DOMContentLoaded', loadResumes);
+    </script>
+</body>
+</html> 

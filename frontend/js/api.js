@@ -119,6 +119,72 @@ export const userAPI = {
     },
 };
 
+// ATS API calls
+export const atsAPI = {
+    analyzeResume: async (resumeId, jobTitle, industry, token) => {
+        try {
+            const response = await fetch(`${API_URL}/ats/analyze`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': token,
+                },
+                body: JSON.stringify({
+                    resumeId: resumeId,
+                    jobTitle: jobTitle,
+                    industry: industry
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('ATS analysis API error:', error);
+            throw error;
+        }
+    },
+
+    getATSScore: async (resumeId, token) => {
+        try {
+            const response = await fetch(`${API_URL}/ats/score/${resumeId}`, {
+                headers: {
+                    'x-access-token': token,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Get ATS score API error:', error);
+            throw error;
+        }
+    },
+
+    getIndustryKeywords: async (industry) => {
+        try {
+            const response = await fetch(`${API_URL}/ats/keywords/${industry}`);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Get industry keywords API error:', error);
+            throw error;
+        }
+    }
+};
+
 // Resume API calls
 export const resumeAPI = {
     create: async (resumeData, token) => {

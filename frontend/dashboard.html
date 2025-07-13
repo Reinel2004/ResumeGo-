@@ -41,6 +41,7 @@
                         <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
                         <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
                         <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
+                        <a href="ats-checker.html" class="text-gray-700 hover:text-primary font-medium">ATS Checker</a>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -198,6 +199,9 @@
         document.addEventListener('DOMContentLoaded', async function() {
             const token = localStorage.getItem('token');
             const resumeCardsContainer = document.getElementById('resumeCardsContainer');
+            
+            // Import ATS API
+            const { atsAPI } = await import('./js/api.js');
             const noResumesMsg = document.getElementById('noResumesMsg');
 
             async function fetchResumes() {
@@ -225,9 +229,13 @@
                             <path d="M7 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.828a2 2 0 0 0-.586-1.414l-3.828-3.828A2 2 0 0 0 14.172 2H7zm5 1.414L18.586 8H15a1 1 0 0 1-1-1V4.414z" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                         </div>
-                        <div>
+                        <div class="flex-1">
                           <h3 class="text-lg font-semibold text-gray-900 mb-1 truncate">${resume.title}</h3>
                           <p class="text-xs text-gray-500">Last edited: ${new Date(resume.updatedAt).toLocaleString()}</p>
+                          <div class="flex items-center gap-2 mt-2">
+                            <span class="text-xs text-gray-600">ATS Score:</span>
+                            <div id="ats-score-${resume.id}" class="text-xs font-medium">Loading...</div>
+                          </div>
                         </div>
                       </div>
                       <div class="flex-1 flex flex-col justify-between p-6">
@@ -302,10 +310,36 @@
                 });
             }
 
+            async function loadATSScores() {
+                const resumes = await fetchResumes();
+                resumes.forEach(async (resume) => {
+                    try {
+                        const scoreData = await atsAPI.getATSScore(resume.id, token);
+                        const scoreElement = document.getElementById(`ats-score-${resume.id}`);
+                        if (scoreElement) {
+                            const score = Math.round(scoreData.score);
+                            let scoreClass = 'text-gray-600';
+                            if (score >= 80) scoreClass = 'text-green-600';
+                            else if (score >= 60) scoreClass = 'text-yellow-600';
+                            else scoreClass = 'text-red-600';
+                            
+                            scoreElement.innerHTML = `<span class="${scoreClass}">${score}% (${scoreData.grade})</span>`;
+                        }
+                    } catch (error) {
+                        console.error(`Error loading ATS score for resume ${resume.id}:`, error);
+                        const scoreElement = document.getElementById(`ats-score-${resume.id}`);
+                        if (scoreElement) {
+                            scoreElement.innerHTML = '<span class="text-gray-400">N/A</span>';
+                        }
+                    }
+                });
+            }
+
             async function loadResumes() {
                 const resumes = await fetchResumes();
                 renderResumes(resumes);
                 addActionListeners();
+                loadATSScores();
             }
 
             loadResumes();
