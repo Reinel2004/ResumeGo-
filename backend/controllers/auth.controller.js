@@ -57,4 +57,26 @@ exports.signin = async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: err.message });
     }
+};
+
+exports.checkEmail = async (req, res) => {
+    try {
+        const { email } = req.body;
+        
+        if (!email) {
+            return res.status(400).send({ message: "Email is required" });
+        }
+
+        // Check if email already exists
+        const existingUser = await User.findOne({
+            where: { email: email }
+        });
+
+        res.status(200).send({ 
+            exists: !!existingUser,
+            message: existingUser ? "Email already registered" : "Email available"
+        });
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
 }; 

@@ -2545,8 +2545,7 @@
             regenerateBtn.innerHTML = '🔄 Regenerating...';
             
             getAISuggestions(text).then(suggestions => {
-                currentPopup.innerHTML = `
-                    ${suggestions.map(text => `
+                currentPopup.innerHTML = `                    ${suggestions.map(text => `
                         <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
                             ${text}
                         </div>
@@ -2653,3 +2652,4 @@
 </body>
 
 </html>
+

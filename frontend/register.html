@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - ResumeGo!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -104,6 +105,69 @@
             border: 1px solid #a7f3d0;
         }
 
+        .message.show {
+            display: block;
+        }
+
+        .email-validation {
+            margin-top: 5px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .email-validation.validating {
+            color: #f59e0b;
+        }
+
+        .email-validation.available {
+            color: var(--success-color);
+        }
+
+        .email-validation.unavailable {
+            color: var(--error-color);
+        }
+
+        .email-validation.warning {
+            color: #f59e0b;
+        }
+
+        .email-validation i {
+            font-size: 16px;
+        }
+
+        .email-input-container {
+            position: relative;
+        }
+
+        .email-input-container input {
+            padding-right: 30px;
+        }
+
+        .email-spinner {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        .email-spinner.show {
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
         .login-link {
             text-align: center;
             margin-top: 20px;
@@ -126,8 +190,18 @@
             <div id="errorMessage" class="message"></div>
             
             <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" required>
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="middleName">Middle Name</label>
+                <input type="text" id="middleName" name="middleName">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
             </div>
 
             <div class="form-group">
@@ -137,7 +211,11 @@
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <div class="email-input-container">
+                    <input type="email" id="email" name="email" required>
+                    <div class="email-spinner" id="emailSpinner"></div>
+                </div>
+                <div class="email-validation" id="emailValidation"></div>
             </div>
 
             <div class="form-group">
@@ -158,6 +236,27 @@
         </form>
     </div>
 
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with public key from backend
+        async function initializeEmailJS() {
+            try {
+                const response = await fetch('http://localhost:3000/api/config/emailjs');
+                const config = await response.json();
+                emailjs.init(config.publicKey);
+                console.log('EmailJS initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize EmailJS:', error);
+                // Fallback to empty key if backend fails
+                emailjs.init("");
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeEmailJS);
+    </script>
+    
     <script type="module" src="js/api.js"></script>
     <script type="module" src="js/register.js"></script>
 </body>

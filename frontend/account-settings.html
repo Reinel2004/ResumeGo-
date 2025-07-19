@@ -446,6 +446,66 @@
             color: var(--primary);
             text-decoration: underline;
         }
+
+        /* Email Validation Styles */
+        .email-validation {
+            margin-top: 5px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .email-validation.validating {
+            color: #f59e0b;
+        }
+
+        .email-validation.available {
+            color: var(--success);
+        }
+
+        .email-validation.unavailable {
+            color: var(--danger);
+        }
+
+        .email-validation.warning {
+            color: #f59e0b;
+        }
+
+        .email-validation i {
+            font-size: 16px;
+        }
+
+        .email-input-container {
+            position: relative;
+        }
+
+        .email-input-container input {
+            padding-right: 30px;
+        }
+
+        .email-spinner {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        .email-spinner.show {
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -472,7 +532,6 @@
                         </button>
                         <div class="user-dropdown" id="userDropdown">
                             <a href="profile.html">Profile Settings</a>
-                            <a href="my-resumes.html">My Resumes</a>
                             <div class="divider"></div>
                             <a href="#" id="logoutButton">Logout</a>
                         </div>
@@ -495,10 +554,6 @@
                         <i>👤</i>
                         <span>Profile</span>
                     </li>
-                    <li class="menu-item">
-                        <i>📝</i>
-                        <span>My Resumes</span>
-                    </li>
                     <li class="menu-item active">
                         <i>⚙️</i>
                         <span>Account Settings</span>
@@ -518,13 +573,22 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" class="form-control" value="">
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="lastName">Last Name</label>
                         <input type="text" id="lastName" class="form-control" value="dela Cruz">
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" value="uscremail@email.com">
+                        <div class="email-input-container">
+                            <input type="email" id="email" class="form-control" value="uscremail@email.com">
+                            <div class="email-spinner" id="emailSpinner"></div>
+                        </div>
+                        <div class="email-validation" id="emailValidation"></div>
                         <p class="form-note">This is the email you use to log in to ResumeGo!</p>
                     </div>
                     
@@ -544,8 +608,34 @@
         </div>
     </div>
 
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with public key from backend
+        async function initializeEmailJS() {
+            try {
+                const response = await fetch('http://localhost:3000/api/config/emailjs');
+                const config = await response.json();
+                emailjs.init(config.publicKey);
+                console.log('EmailJS initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize EmailJS:', error);
+                // Fallback to empty key if backend fails
+                emailjs.init("");
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeEmailJS);
+    </script>
+
     <script type="module">
         import { authAPI } from './js/api.js';
+
+        // Email validation variables
+        let emailValidationTimeout;
+        let isEmailValid = false;
+        let originalEmail = '';
 
         // Check if user is logged in
         function checkAuth() {
@@ -560,7 +650,92 @@
             return true;
         }
 
-        // Initialize user menu
+        
+        function loadUserData() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                
+                const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+                let firstName, middleName, lastName;
+                
+                if (storedUser.firstName !== undefined) {
+                    
+                    firstName = storedUser.firstName || '';
+                    middleName = storedUser.middleName || '';
+                    lastName = storedUser.lastName || '';
+                } else {
+                  
+                    const nameParts = user.fullName ? user.fullName.split(' ') : ['User', 'Name'];
+                    firstName = nameParts[0] || '';
+                    lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+                    middleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
+                }
+                
+               
+                document.getElementById('firstName').value = firstName;
+                document.getElementById('middleName').value = middleName;
+                document.getElementById('lastName').value = lastName;
+                document.getElementById('email').value = user.email || '';
+                
+                // Store original email for validation
+                originalEmail = user.email || '';
+            }
+        }
+
+      
+        async function saveAccountChanges() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const middleName = document.getElementById('middleName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+          
+            if (!firstName) {
+                alert('First name is required');
+                return;
+            }
+            
+            if (!email || !email.includes('@')) {
+                alert('Valid email is required');
+                return;
+            }
+
+            // Check if email is available (if changed)
+            if (email !== originalEmail && !isEmailValid) {
+                alert('Please enter a valid and available email address');
+                return;
+            }
+            
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Not authenticated');
+                }
+
+                // Combine names
+                const fullName = [firstName, middleName, lastName].filter(name => name.trim()).join(' ');
+                
+                // Store individual name fields in localStorage
+                const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+                currentUser.firstName = firstName;
+                currentUser.middleName = middleName;
+                currentUser.lastName = lastName;
+                currentUser.fullName = fullName;
+                currentUser.email = email;
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                
+                // Update user menu display
+                document.getElementById('userName').textContent = fullName;
+                document.getElementById('userAvatar').textContent = firstName[0];
+                
+                alert('Account information updated successfully!');
+            } catch (error) {
+                console.error('Error updating account:', error);
+                alert('Failed to update account information. Please try again.');
+            }
+        }
+
+     
         function initUserMenu() {
             const userMenuButton = document.getElementById('userMenuButton');
             const userDropdown = document.getElementById('userDropdown');
@@ -568,8 +743,9 @@
             const user = JSON.parse(localStorage.getItem('user'));
 
             if (user) {
-                document.getElementById('userName').textContent = user.fullName || 'User Name';
-                document.getElementById('userAvatar').textContent = (user.fullName || 'U')[0];
+                const fullName = user.fullName || 'User Name';
+                document.getElementById('userName').textContent = fullName;
+                document.getElementById('userAvatar').textContent = fullName[0];
             }
 
             userMenuButton.addEventListener('click', () => {
@@ -594,11 +770,174 @@
             });
         }
 
+        // Email validation function
+        async function validateEmail(email) {
+            if (!email || !isValidEmail(email)) {
+                hideEmailValidation();
+                return false;
+            }
+
+            showEmailValidating();
+            
+            try {
+                // Step 1: Check if email exists in database (excluding current user)
+                const dbResponse = await fetch('http://localhost:3000/api/auth/check-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                const dbResult = await dbResponse.json();
+                
+                // If email exists and it's not the current user's email, it's unavailable
+                if (dbResult.exists && email !== originalEmail) {
+                    showEmailUnavailable();
+                    return false;
+                }
+
+                // Step 2: Verify email account exists (only if email changed)
+                if (email !== originalEmail) {
+                    try {
+                        const verifyResponse = await emailjs.send(
+                            'service_pmhrkn5', // TODO: Get from backend config
+                            'template_whdyqef', // TODO: Get from backend config
+                            {
+                                to_email: email,
+                                verification_code: '123456'
+                            }
+                        );
+                        
+                        showEmailAvailable();
+                        return true;
+                    } catch (emailError) {
+                        console.log('Email verification failed:', emailError);
+                        showEmailWarning('Email account verification failed. Please ensure the email address is correct.');
+                        return true; // Still allow update
+                    }
+                } else {
+                    // Email hasn't changed, no need to verify
+                    showEmailAvailable();
+                    return true;
+                }
+                
+            } catch (error) {
+                console.error('Email validation error:', error);
+                showEmailAvailable();
+                return true;
+            }
+        }
+
+        // Email validation event listener
+        function initEmailValidation() {
+            const emailInput = document.getElementById('email');
+            const emailValidation = document.getElementById('emailValidation');
+            const emailSpinner = document.getElementById('emailSpinner');
+            
+            // Store original email
+            originalEmail = emailInput.value;
+            
+            emailInput.addEventListener('input', (e) => {
+                const email = e.target.value.trim();
+                
+                // Clear previous timeout
+                if (emailValidationTimeout) {
+                    clearTimeout(emailValidationTimeout);
+                }
+                
+                // Hide validation if email is empty
+                if (!email) {
+                    hideEmailValidation();
+                    return;
+                }
+                
+                // Validate email format first
+                if (!isValidEmail(email)) {
+                    showEmailInvalid();
+                    return;
+                }
+                
+                // Debounce email validation (wait 500ms after user stops typing)
+                emailValidationTimeout = setTimeout(() => {
+                    validateEmail(email);
+                }, 500);
+            });
+        }
+
+        // Email validation display functions
+        function showEmailValidating() {
+            const emailSpinner = document.getElementById('emailSpinner');
+            const emailValidation = document.getElementById('emailValidation');
+            emailSpinner.classList.add('show');
+            emailValidation.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking email availability...';
+            emailValidation.className = 'email-validation validating';
+            isEmailValid = false;
+        }
+
+        function showEmailAvailable() {
+            const emailSpinner = document.getElementById('emailSpinner');
+            const emailValidation = document.getElementById('emailValidation');
+            emailSpinner.classList.remove('show');
+            emailValidation.innerHTML = '<i class="fas fa-check"></i> Email is available';
+            emailValidation.className = 'email-validation available';
+            isEmailValid = true;
+        }
+
+        function showEmailUnavailable() {
+            const emailSpinner = document.getElementById('emailSpinner');
+            const emailValidation = document.getElementById('emailValidation');
+            emailSpinner.classList.remove('show');
+            emailValidation.innerHTML = '<i class="fas fa-times"></i> Email is already registered';
+            emailValidation.className = 'email-validation unavailable';
+            isEmailValid = false;
+        }
+
+        function showEmailInvalid() {
+            const emailSpinner = document.getElementById('emailSpinner');
+            const emailValidation = document.getElementById('emailValidation');
+            emailSpinner.classList.remove('show');
+            emailValidation.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter a valid email address';
+            emailValidation.className = 'email-validation unavailable';
+            isEmailValid = false;
+        }
+
+        function showEmailWarning(message) {
+            const emailSpinner = document.getElementById('emailSpinner');
+            const emailValidation = document.getElementById('emailValidation');
+            emailSpinner.classList.remove('show');
+            emailValidation.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + message;
+            emailValidation.className = 'email-validation warning';
+            isEmailValid = true; // Still allow update
+        }
+
+        function hideEmailValidation() {
+            const emailSpinner = document.getElementById('emailSpinner');
+            const emailValidation = document.getElementById('emailValidation');
+            emailSpinner.classList.remove('show');
+            emailValidation.innerHTML = '';
+            emailValidation.className = 'email-validation';
+            isEmailValid = false;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
         // Initialize page
         document.addEventListener('DOMContentLoaded', () => {
             if (checkAuth()) {
+                loadUserData();
                 initUserMenu();
                 initMenuItems();
+                initEmailValidation();
+                
+                // Add event listener for save button
+                const saveButton = document.querySelector('.btn.btn-primary');
+                if (saveButton) {
+                    saveButton.addEventListener('click', saveAccountChanges);
+                }
             }
         });
 
@@ -619,9 +958,6 @@
                     switch(menuText) {
                         case 'Profile':
                             window.location.href = 'profile.html';
-                            break;
-                        case 'My Resumes':
-                            window.location.href = 'my-resumes.html';
                             break;
                         case 'Account Settings':
                             window.location.href = 'account-settings.html';

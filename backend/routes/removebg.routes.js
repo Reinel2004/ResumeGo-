@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const FormData = require('form-data');
+const apiConfig = require('../config/api.config');
 
 router.post('/removebg', async (req, res) => {
     try {
-        const apiKey = process.env.REMOVEBG_API_KEY;
+        const apiKey = apiConfig.removebg.apiKey;
         console.log('Remove.bg API Key:', apiKey, apiKey && apiKey.length);
         if (!req.files || !req.files.image_file) {
             return res.status(400).json({ error: 'No image file provided' });
