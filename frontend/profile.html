@@ -709,12 +709,8 @@
                     <div class="detail-card">
                         <h3>Personal Information</h3>
                         <div class="detail-row">
-                            <div class="detail-label">First Name</div>
-                            <div class="detail-value">Z</div>
-                        </div>
-                        <div class="detail-row">
-                            <div class="detail-label">Last Name</div>
-                            <div class="detail-value">dela Cruz</div>
+                            <div class="detail-label">Full Name</div>
+                            <div class="detail-value" id="fullNameValue">Zachary dela Cruz</div>
                         </div>
                         <div class="detail-row">
                             <div class="detail-label">Profile Photo</div>
@@ -910,10 +906,9 @@
                 const detailCards = document.querySelectorAll('.detail-card');
                 if (detailCards.length >= 3) {
                     // Personal Information
-                    const personalInfo = detailCards[0].querySelectorAll('.detail-value');
-                    if (personalInfo.length >= 2) {
-                        personalInfo[0].textContent = firstName;
-                        personalInfo[1].textContent = lastName;
+                    const fullNameValue = document.getElementById('fullNameValue');
+                    if (fullNameValue) {
+                        fullNameValue.textContent = userData.fullName || `${firstName} ${lastName}`;
                     }
                     
                     // Account Settings
@@ -1019,8 +1014,7 @@
                     document.querySelector('.profile-name').textContent = `${firstName} ${lastName}`;
                     
                     // Update account details
-                    document.querySelector('.detail-card:nth-child(1) .detail-row:nth-child(1) .detail-value').textContent = firstName;
-                    document.querySelector('.detail-card:nth-child(1) .detail-row:nth-child(2) .detail-value').textContent = lastName;
+                    document.getElementById('fullNameValue').textContent = `${firstName} ${lastName}`;
                     document.querySelector('.detail-card:nth-child(2) .detail-row:nth-child(2) .detail-value').textContent = email;
                     
                     // Update user menu

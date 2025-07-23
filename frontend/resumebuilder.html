@@ -2473,77 +2473,113 @@
             addAIEnhanceButtons();
         };
 
-        async function getAISuggestions(text) {
-            try {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [
-                            {
-                                role: "system",
-                                content: "You are a professional resume writer. Provide 3 different versions of the given text: 1) A professional version with impact, 2) A concise version that's clear and direct, 3) A detailed version with more context. Keep the core meaning but enhance the language and structure."
-                            },
-                            {
-                                role: "user",
-                                content: text
-                            }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 500
-                    })
-                });
+       
+        async function askAI(promptText) {
+          try {
+            const response = await fetch('http://localhost:3000/api/ai-assistant', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ promptText })
+            });
 
-                if (!response.ok) {
-                    throw new Error('API request failed');
-                }
-
-                const data = await response.json();
-                const suggestions = data.choices[0].message.content.split('\n\n').filter(s => s.trim());
-                return suggestions;
-            } catch (error) {
-                console.error('Error getting AI suggestions:', error);
-                return [
-                    "Professional version: " + text + " (enhanced for impact)",
-                    "Concise version: " + text + " (clear and direct)",
-                    "Detailed version: " + text + " (with more context)"
-                ];
+            if (!response.ok) {
+              const text = await response.text();
+              console.error('AI API HTTP error:', response.status, text);
+              return `Error: ${response.status} - ${text}`;
             }
+
+            // Try to parse JSON
+            let data;
+            try {
+              data = await response.json();
+            } catch (e) {
+              const text = await response.text();
+              console.error('AI API invalid JSON:', text);
+              return "Error: Invalid JSON from AI backend.";
+            }
+
+            console.log('AI API response:', data);
+
+            // Check for error in response
+            if (data.error) {
+              // Log the full error object for debugging
+              console.error('AI API backend error:', JSON.stringify(data, null, 2));
+
+              let details = data.details;
+              if (typeof details === 'object') {
+                details = JSON.stringify(details, null, 2);
+              }
+              if (!details) details = '';
+              return `Error: ${data.error}${details ? ' (' + details + ')' : ''}`;
+            }
+
+            // Return the AI suggestion
+            return data?.choices?.[0]?.message?.content || "No response from AI.";
+          } catch (err) {
+            console.error('AI API fetch failed:', err);
+            return "Error: Could not reach AI backend.";
+          }
+        }
+
+        async function getAISuggestions(text) {
+          try {
+            const result = await askAI(text);
+            
+            const suggestions = result.split(/\n\n|\n[1-3][).:-]?/).filter(s => s.trim());
+            return suggestions.length >= 3 ? suggestions : [result];
+          } catch (error) {
+            console.error('Error getting AI suggestions:', error);
+            return [
+              "Professional version: " + text + " (enhanced for impact)",
+              "Concise version: " + text + " (clear and direct)",
+              "Detailed version: " + text + " (with more context)"
+            ];
+          }
+        }
+
+        async function handleAIAssistant(textarea, popup) {
+          // Show loading state
+          popup.innerHTML = '<div class="ai-loading">Generating suggestions...</div>';
+
+          try {
+            const suggestionsText = await getAISuggestions(textarea.value);
+
+            // If getAISuggestions returns an array, show suggestions
+            if (Array.isArray(suggestionsText)) {
+              popup.innerHTML = `
+                ${suggestionsText.map(text => `
+                  <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
+                    ${text}
+                  </div>
+                `).join('')}
+                <button class="regenerate-btn" onclick="regenerateSuggestions('${textarea.value.replace(/'/g, "\\'")}')">
+                  🔄 Regenerate
+                </button>
+              `;
+            } else {
+              // If it's a string (error or single suggestion), show it
+              popup.innerHTML = `<div class="ai-suggestion">${suggestionsText}</div>`;
+            }
+          } catch (error) {
+            console.error('Error in AI assistant:', error);
+            popup.innerHTML = `<div class="ai-suggestion">Failed to get suggestions. Please try again.</div>`;
+          }
         }
 
         function openAIEnhancePopup(textarea, button) {
-            // Close any open popups
-            if (currentPopup) {
-                currentPopup.style.display = 'none';
-            }
+          // Close any open popups
+          if (currentPopup) {
+            currentPopup.style.display = 'none';
+          }
 
-            currentTextarea = textarea;
-            currentPopup = button.nextElementSibling;
-            
-            // Show popup and start generating
-            currentPopup.style.display = 'block';
-            currentPopup.innerHTML = '<div class="ai-loading">Generating suggestions</div>';
-            
-            // Get the current text
-            const currentText = textarea.value;
-            
-            // Get AI suggestions
-            getAISuggestions(currentText).then(suggestions => {
-                currentPopup.innerHTML = `
-                    ${suggestions.map(text => `
-                        <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
-                            ${text}
-                        </div>
-                    `).join('')}
-                    <button class="regenerate-btn" onclick="regenerateSuggestions('${currentText.replace(/'/g, "\\'")}')">
-                        🔄 Regenerate
-                    </button>
-                `;
-            });
+          currentTextarea = textarea;
+          currentPopup = button.nextElementSibling;
+
+          // Show popup and start generating
+          currentPopup.style.display = 'block';
+
+          // Use the improved handler
+          handleAIAssistant(textarea, currentPopup);
         }
 
         function regenerateSuggestions(text) {
@@ -2567,6 +2603,7 @@
         function applyEnhancement(text) {
             if (currentTextarea) {
                 currentTextarea.value = text;
+                currentTextarea.dispatchEvent(new Event('input', { bubbles: true }));
                 if (currentPopup) {
                     currentPopup.style.display = 'none';
                 }

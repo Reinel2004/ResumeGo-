@@ -3,7 +3,8 @@ function validateEnvVars() {
     const required = [
         'REMOVEBG_API_KEY',
         'JWT_SECRET',
-        'EMAILJS_PUBLIC_KEY'
+        'EMAILJS_PUBLIC_KEY',
+        'TOGETHER_API_KEY'
     ];
     
     const missing = required.filter(key => !process.env[key]);
@@ -38,6 +39,9 @@ function validateConfig() {
         },
         jwt: {
             secret: process.env.JWT_SECRET || ''
+        },
+        together: {
+            apiKey: process.env.TOGETHER_API_KEY || ''
         },
         database: {
             host: process.env.DB_HOST || 'localhost',

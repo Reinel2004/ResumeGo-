@@ -6,6 +6,7 @@ const atsRoutes = require('./routes/ats.routes.js');
 const cors = require("cors");
 const path = require("path"); // ✅ Added for serving frontend
 const db = require("./models");
+const fetch = require('node-fetch'); // Add this near the top with other requires
 
 const app = express();
 
@@ -26,6 +27,41 @@ app.use("/api/user", userRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use('/api/removebg', removebgRoutes);
 app.use('/api/ats', atsRoutes);
+
+// AI Assistant Proxy Route
+app.post('/api/ai-assistant', async (req, res) => {
+    const { promptText } = req.body;
+    try {
+        const response = await fetch('https://api.together.xyz/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.TOGETHER_API_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
+                messages: [
+                    { role: 'system', content: 'You are a professional resume writer. Provide 3 different versions of the following text for a resume: 1) A professional version with impact, 2) A concise version that\'s clear and direct, 3) A detailed version with more context.' },
+                    { role: 'user', content: promptText }
+                ],
+                temperature: 0.7
+            })
+        });
+
+        // If Together API returns non-JSON, handle gracefully
+        const text = await response.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            return res.status(502).json({ error: 'Invalid response from Together API', raw: text });
+        }
+
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'AI request failed', details: err.message });
+    }
+});
 
 // Import API config
 const apiConfig = require('./config/api.config');
