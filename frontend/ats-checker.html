@@ -21,6 +21,12 @@
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
+        .user-dropdown {
+            display: none;
+        }
+        .user-dropdown.active {
+            display: block;
+        }
         .score-circle {
             width: 120px;
             height: 120px;
@@ -52,36 +58,62 @@
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-8">
-                    <a href="dashboard.html" class="flex items-center space-x-2">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo" class="w-10 h-auto">
-                        <span class="text-xl font-bold text-primary">ResumeGo!</span>
-                    </a>
-                    <div class="hidden md:flex space-x-8">
-                        <a href="dashboard.html" class="text-gray-700 hover:text-primary font-medium">Dashboard</a>
-                        <a href="templates.html" class="text-gray-700 hover:text-primary font-medium">Templates</a>
-                        <a href="resumebuilder.html" class="text-gray-700 hover:text-primary font-medium">Create Resume</a>
-                        <a href="ats-checker.html" class="text-primary font-medium">ATS Checker</a>
-                    </div>
+        <nav class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-4 py-3">
+                <a href="dashboard.html" class="flex items-center space-x-3">
+                    <img src="../assets/img/logo.png" class="h-8" alt="ResumeGo Logo" />
+                    <span class="self-center text-2xl font-bold text-primary">ResumeGo!</span>
+                </a>
+                <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5 text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                        <li>
+                        <a href="dashboard.html" class="block py-2 px-3 text-gray-700 font-semibold rounded md:bg-transparent md:p-0" aria-current="page">Dashboard</a>
+                        </li>
+                        <li>
+                        <a href="templates.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Templates</a>
+                        </li>
+                        <li>
+                        <a href="resumebuilder.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Create Resume</a>
+                        </li>
+                        <li>
+                        <a href="ats-checker.html" class="block py-2 px-3 text-primary hover:text-primary rounded md:p-0">ATS Checker</a>
+                        </li>
+                    </ul>
                 </div>
+          
                 <div class="flex items-center">
                     <div class="relative">
                         <button id="userMenuButton" class="flex items-center space-x-2 px-4 py-2 border border-gray-200 rounded-md hover:border-primary transition-colors">
-                            <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
-                            <span id="userName" class="hidden md:inline">User Name</span>
+                        <div id="userAvatar" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">U</div>
+                        <span id="userName" class="hidden md:inline">User Name</span>
                         </button>
-                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
-                            <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
-                            <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
-                            <div class="border-t border-gray-200 my-1"></div>
-                            <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
+                        <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                        <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
+                        <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
+                        <div class="border-t border-gray-200 my-1"></div>
+                        <a href="#" id="feedbackLink" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Feedback</a>
+                        <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
                         </div>
                     </div>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
+            <script>
+            // Responsive nav toggle for Flowbite-style nav
+            const menuBtn = document.querySelector('[data-collapse-toggle="navbar-default"]');
+            const navLinks = document.getElementById('navbar-default');
+            if (menuBtn && navLinks) {
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+            });
+            }
+            </script>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
