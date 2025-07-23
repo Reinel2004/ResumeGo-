@@ -1661,7 +1661,7 @@
 
         // Get user data from localStorage
         const user = JSON.parse(localStorage.getItem('user'));
-        
+ 
         // Auto-fill name and email if user is logged in
         if (user) {
             if (user.fullName) {
@@ -1775,6 +1775,7 @@
                 `;
                 previewContainer.appendChild(preview);
             }
+            addAIEnhanceButtons();
 
             // Update skills preview
             const skillsLists = document.querySelectorAll('.skills-list');
@@ -1913,6 +1914,9 @@
                     updatePreview();
                 }
             });
+
+            // Add AI enhance buttons to new textarea(s)
+            addAIEnhanceButtons();
         }
 
         addExperienceBtn?.addEventListener('click', addExperience);
@@ -1963,6 +1967,9 @@
                     updatePreview();
                 }
             });
+
+            // Add AI enhance buttons to new textarea(s)
+            addAIEnhanceButtons();
         }
 
         addProjectBtn?.addEventListener('click', addProject);
