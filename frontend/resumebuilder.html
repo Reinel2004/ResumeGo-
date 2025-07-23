@@ -1045,13 +1045,17 @@
         background: #4CAF50;
         color: white;
         border: none;
-        padding: 5px 10px;
-        border-radius: 4px;
+        padding: 8px 12px;
+        border-radius: 6px;
         cursor: pointer;
-        font-size: 12px;
+        font-size: 13px;
+        font-weight: 500;
         display: flex;
         align-items: center;
         gap: 5px;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
     }
 
     .ai-enhance-btn:hover {
@@ -1587,6 +1591,13 @@
         if (typeof updatePreview === 'function') {
             updatePreview();
         }
+        
+        // Ensure AI buttons are added to any loaded content
+        setTimeout(() => {
+            if (typeof addAIEnhanceButtons === 'function') {
+                addAIEnhanceButtons();
+            }
+        }, 200);
     });
 
     document.getElementById('saveResumeBtn').addEventListener('click', async function() {
@@ -1913,6 +1924,13 @@
                     updatePreview();
                 }
             });
+
+            // Add AI enhancement button to the new textarea
+            setTimeout(() => {
+                if (typeof addAIEnhanceButtons === 'function') {
+                    addAIEnhanceButtons();
+                }
+            }, 100);
         }
 
         addExperienceBtn?.addEventListener('click', addExperience);
@@ -1963,6 +1981,13 @@
                     updatePreview();
                 }
             });
+
+            // Add AI enhancement button to the new textarea
+            setTimeout(() => {
+                if (typeof addAIEnhanceButtons === 'function') {
+                    addAIEnhanceButtons();
+                }
+            }, 100);
         }
 
         addProjectBtn?.addEventListener('click', addProject);
@@ -2077,11 +2102,17 @@
         }
 
         // Show preview immediately when page loads
-    
+        updatePreview();
 
-      // Initialize user menu
+        // Initialize user menu
         Auth.updateUserMenu();
         Auth.initUserMenu();
+
+        // Force add AI buttons to all existing textareas after everything is loaded
+        setTimeout(() => {
+            addAIEnhanceButtons();
+            console.log('AI buttons added to all textareas');
+        }, 500);
 
         // Profile Picture Upload Functionality
         const profileUpload = document.getElementById('profile-upload');
@@ -2429,7 +2460,7 @@
         let currentTextarea = null;
         let currentPopup = null;
         // TODO: Set up your OpenAI API key in your environment variables
-         const API_KEY = process.env.OPENAI_API_KEY || '';
+        const API_KEY = process.env.OPENAI_API_KEY || '';
 
         function addAIEnhanceButtons() {
             const textareas = document.querySelectorAll('textarea');
@@ -2439,8 +2470,10 @@
                     // Create button
                     const aiButton = document.createElement('button');
                     aiButton.className = 'ai-enhance-btn';
-                    aiButton.innerHTML = 'Get help with AI assistant';
+                    aiButton.type = 'button'; // Prevent form submission
+                    aiButton.innerHTML = '🤖 Ask AI assistant';
                     aiButton.onclick = (e) => {
+                        e.preventDefault();
                         e.stopPropagation();
                         openAIEnhancePopup(textarea, aiButton);
                     };
@@ -2456,15 +2489,43 @@
             });
         }
 
-        // Initialize AI enhancement buttons
+        // Initialize AI enhancement buttons when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Initial call
             addAIEnhanceButtons();
+            
+            // Re-add buttons after a short delay to catch any dynamically loaded content
+            setTimeout(addAIEnhanceButtons, 100);
         });
 
-        // Add AI enhancement buttons when new sections are added
-        addSection = function() {
-            addAIEnhanceButtons();
-        };
+        // Observer to watch for new textareas being added
+        function initTextareaObserver() {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(function(node) {
+                            if (node.nodeType === 1) { // Element node
+                                // Check if the added node contains textareas
+                                const textareas = node.querySelectorAll ? node.querySelectorAll('textarea') : [];
+                                if (textareas.length > 0 || node.tagName === 'TEXTAREA') {
+                                    setTimeout(addAIEnhanceButtons, 50);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        // Initialize the observer
+        document.addEventListener('DOMContentLoaded', function() {
+            initTextareaObserver();
+        });
 
         async function getAISuggestions(text) {
             try {
