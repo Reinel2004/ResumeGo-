@@ -4,7 +4,8 @@ function validateEnvVars() {
         'REMOVEBG_API_KEY',
         'JWT_SECRET',
         'EMAILJS_PUBLIC_KEY',
-        'TOGETHER_API_KEY'
+        'TOGETHER_API_KEY',
+        'TEXTGEARS_API_KEY'
     ];
     
     const missing = required.filter(key => !process.env[key]);
@@ -42,6 +43,9 @@ function validateConfig() {
         },
         together: {
             apiKey: process.env.TOGETHER_API_KEY || ''
+        },
+        textgears: {
+            apiKey: process.env.TEXTGEARS_API_KEY || ''
         },
         database: {
             host: process.env.DB_HOST || 'localhost',

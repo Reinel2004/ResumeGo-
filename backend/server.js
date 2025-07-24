@@ -7,6 +7,7 @@ const cors = require("cors");
 const path = require("path"); // ✅ Added for serving frontend
 const db = require("./models");
 const fetch = require('node-fetch'); // Add this near the top with other requires
+const grammarRoutes = require('./routes/grammar.routes');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use('/api/removebg', removebgRoutes);
 app.use('/api/ats', atsRoutes);
+app.use('/api', grammarRoutes);
 
 // AI Assistant Proxy Route
 app.post('/api/ai-assistant', async (req, res) => {

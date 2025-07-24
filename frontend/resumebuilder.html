@@ -1086,6 +1086,92 @@
     .skill-badge {
         animation: fadeIn 0.2s ease-out;
     }
+
+    /* --- Grammar Checker Styles (from reference) --- */
+    .grammar-checker-container {
+        margin-top: 10px;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        padding: 12px 16px 8px 16px;
+        font-size: 0.97em;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
+        animation: fadeIn 0.3s ease;
+    }
+    .grammar-checker-title {
+        font-weight: 600;
+        color: #2563eb;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1em;
+    }
+    .grammar-checker-icon {
+        width: 18px;
+        height: 18px;
+        background: #e74c3c;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .grammar-checker-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        max-height: 120px;
+        overflow-y: auto;
+    }
+    .grammar-checker-item {
+        padding: 7px 0 7px 0;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .grammar-checker-item:last-child {
+        border-bottom: none;
+    }
+    .grammar-checker-type {
+        background: #e74c3c;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 0.8em;
+        font-weight: bold;
+        min-width: 70px;
+        text-align: center;
+    }
+    .grammar-checker-message {
+        flex: 1;
+        color: #333;
+        font-size: 0.97em;
+    }
+    .grammar-checker-no-errors {
+        text-align: left;
+        color: #27ae60;
+        font-size: 0.97em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0 0 0;
+    }
+    .grammar-checker-success-icon {
+        width: 18px;
+        height: 18px;
+        background: #27ae60;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+    }
 </style>
 
 </head>
@@ -2476,7 +2562,7 @@
             if (Array.isArray(suggestionsText)) {
               popup.innerHTML = `
                 ${suggestionsText.map(text => `
-                  <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
+                  <div class="ai-suggestion" data-suggestion="${encodeURIComponent(text)}">
                     ${text}
                   </div>
                 `).join('')}
@@ -2484,6 +2570,12 @@
                   🔄 Regenerate
                 </button>
               `;
+              // Attach click handler for each suggestion
+              popup.querySelectorAll('.ai-suggestion').forEach(el => {
+                el.onclick = function() {
+                  applyEnhancement(decodeURIComponent(this.getAttribute('data-suggestion')));
+                };
+              });
             } else {
               // If it's a string (error or single suggestion), show it
               popup.innerHTML = `<div class="ai-suggestion">${suggestionsText}</div>`;
@@ -2513,11 +2605,10 @@
         function regenerateSuggestions(text) {
             const regenerateBtn = currentPopup.querySelector('.regenerate-btn');
             regenerateBtn.classList.add('loading');
-            regenerateBtn.innerHTML = '🔄 Regenerating...';
-            
+            regenerateBtn.innerHTML = '�� Regenerating...';
             getAISuggestions(text).then(suggestions => {
                 currentPopup.innerHTML = `                    ${suggestions.map(text => `
-                        <div class="ai-suggestion" onclick="applyEnhancement('${text.replace(/'/g, "\\'")}')">
+                        <div class="ai-suggestion" data-suggestion="${encodeURIComponent(text)}">
                             ${text}
                         </div>
                     `).join('')}
@@ -2525,6 +2616,12 @@
                         🔄 Regenerate
                     </button>
                 `;
+                // Attach click handler for each suggestion
+                currentPopup.querySelectorAll('.ai-suggestion').forEach(el => {
+                  el.onclick = function() {
+                    applyEnhancement(decodeURIComponent(this.getAttribute('data-suggestion')));
+                  };
+                });
             });
         }
 
@@ -2620,6 +2717,149 @@
     }
 </script>
 
+<script>
+// --- Grammar Checker Logic using TextGears API ---
+
+
+class GrammarChecker {
+    constructor(textarea) {
+        this.textarea = textarea;
+        this.container = document.createElement('div');
+        this.container.className = 'grammar-checker-container';
+        this.container.innerHTML = `
+            <div class="grammar-checker-title">
+                <span class="grammar-checker-icon">!</span>
+                Grammar Check
+            </div>
+            <ul class="grammar-checker-list"></ul>
+        `;
+        this.list = this.container.querySelector('.grammar-checker-list');
+        textarea.parentElement.appendChild(this.container);
+        this.debounceTimer = null;
+        this.textarea.addEventListener('input', () => this.debouncedCheckGrammar());
+        this.textarea.addEventListener('paste', () => setTimeout(() => this.debouncedCheckGrammar(), 10));
+        this.checkGrammar();
+    }
+    debouncedCheckGrammar() {
+        clearTimeout(this.debounceTimer);
+        this.showLoading();
+        this.debounceTimer = setTimeout(() => this.checkGrammar(), 600);
+    }
+    async checkGrammar() {
+        const text = this.textarea.value;
+        if (!text.trim()) {
+            this.list.innerHTML = `
+                <li class="grammar-checker-no-errors">
+                    <span class="grammar-checker-success-icon">✓</span>
+                    No grammar issues found.
+                </li>
+            `;
+            return;
+        }
+        this.showLoading();
+        try {
+            // Use full backend URL for grammar check to support dev servers on different ports
+            const response = await fetch('http://localhost:3000/api/grammar-check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+            const data = await response.json();
+            if (!data || !data.response || !data.response.errors || data.response.errors.length === 0) {
+                this.list.innerHTML = `
+                    <li class="grammar-checker-no-errors">
+                        <span class="grammar-checker-success-icon">✓</span>
+                        No grammar issues found.
+                    </li>
+                `;
+                return;
+            }
+            const errors = data.response.errors;
+            this.displayErrors(errors);
+        } catch (err) {
+            this.list.innerHTML = `<li class='grammar-checker-item'><span class='grammar-checker-type' style='background:#e74c3c'>Error</span><span class='grammar-checker-message'>Failed to check grammar. Please try again.</span></li>`;
+        }
+    }
+    showLoading() {
+        this.list.innerHTML = `<li class='grammar-checker-item'><span class='grammar-checker-message'>Checking grammar...</span></li>`;
+    }
+    displayErrors(errors) {
+        const severityColor = {
+            'error': '#e74c3c',
+            'warning': '#f39c12',
+            'suggestion': '#3498db'
+        };
+        this.list.innerHTML = errors.map(error => {
+            const color = severityColor[error.type] || '#e74c3c';
+            // Ensure all fields are strings
+            let description = '';
+            if (typeof error.description === 'string') {
+                description = error.description;
+            } else if (typeof error.message === 'string') {
+                description = error.message;
+            } else if (error.type) {
+                description = error.type + (error.offset !== undefined ? ` (at ${error.offset})` : '');
+            } else {
+                description = 'Grammar issue';
+            }
+            let bad = '';
+            if (typeof error.bad === 'string') {
+                bad = error.bad;
+            } else if (Array.isArray(error.bad)) {
+                bad = error.bad.join(', ');
+            } else if (error.bad) {
+                bad = String(error.bad);
+            }
+            let suggestions = '';
+            if (Array.isArray(error.better)) {
+                suggestions = error.better.length > 0 ? `<br><small style=\"color:#2563eb;\">Suggestion: ${error.better.join(', ')}</small>` : '';
+            } else if (Array.isArray(error.suggestions)) {
+                suggestions = error.suggestions.length > 0 ? `<br><small style=\"color:#2563eb;\">Suggestion: ${error.suggestions.join(', ')}</small>` : '';
+            }
+            return `
+                <li class="grammar-checker-item">
+                    <span class="grammar-checker-type" style="background:${color}">${error.type || 'error'}</span>
+                    <span class="grammar-checker-message">
+                        ${description}
+                        ${bad ? `<br><small style=\"color:#666;\">Found: \"${bad}\"</small>` : ''}
+                        ${suggestions}
+                    </span>
+                </li>
+            `;
+        }).join('');
+    }
+}
+// Attach grammar checker to all textareas (including dynamically added)
+function attachGrammarCheckers() {
+    document.querySelectorAll('textarea').forEach(textarea => {
+        if (!textarea._hasGrammarChecker) {
+            new GrammarChecker(textarea);
+            textarea._hasGrammarChecker = true;
+        }
+    });
+}
+// Initial attach
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachGrammarCheckers);
+} else {
+    attachGrammarCheckers();
+}
+// Attach after adding experience/project
+if (typeof addExperience === 'function') {
+    const origAddExperience = addExperience;
+    addExperience = function() {
+        origAddExperience();
+        attachGrammarCheckers();
+    };
+}
+if (typeof addProject === 'function') {
+    const origAddProject = addProject;
+    addProject = function() {
+        origAddProject();
+        attachGrammarCheckers();
+    };
+}
+</script>
 
 </body>
 
