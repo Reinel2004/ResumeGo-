@@ -1240,7 +1240,7 @@
         <button id="saveResumeBtn" class="fixed bottom-8 right-8 bg-primary text-white px-5 py-2 rounded shadow-md text-sm font-semibold hover:bg-secondary transition-all z-50">Save</button>
     <div class="left-panel">
             <!-- Profile Picture Upload -->
-            <div class="section-block">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
                 <h2 class="section-header">Profile Picture</h2>
                 <div class="profile-upload">
                     <div class="profile-preview" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; background: #fff; border: 3px solid #2563eb; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
@@ -1336,7 +1336,7 @@
             </div>
 
             <!-- Personal Information -->
-            <div class="section-block">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
                 <h2 class="section-header">Personal Information</h2>
                 <div class="form-grid">
                     <div class="input-group">
@@ -1354,12 +1354,48 @@
                     <div class="input-group">
                         <label for="phone">Phone</label>
                         <input type="tel" id="phone" placeholder="+1 234 567 890">
-                            </div>
-                            <div class="input-group full-width">
+                    </div>
+                    <div class="input-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" placeholder="123 Main St, City, State">
+                    </div>
+                    <div class="input-group full-width">
                         <label for="summary">Professional Summary</label>
                         <textarea id="summary" placeholder="Write a brief summary of your professional background..."></textarea>
                     </div>
                 </div>
+            </div>
+
+            <!-- Education -->
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h2 class="section-header">Education</h2>
+                <div id="education-container">
+                    <div class="education-item">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="education-degree">Degree</label>
+                                <input type="text" id="education-degree" placeholder="e.g., Bachelor of Information Technology">
+                            </div>
+                            <div class="input-group">
+                                <label for="education-school">School/University</label>
+                                <input type="text" id="education-school" placeholder="e.g., University Name">
+                            </div>
+                            <div class="input-group">
+                                <label for="education-year">Year</label>
+                                <input type="text" id="education-year" placeholder="e.g., 2022-2025">
+                            </div>
+                            <div class="input-group">
+                                <label for="education-gpa">GPA (Optional)</label>
+                                <input type="text" id="education-gpa" placeholder="e.g., 3.8/4.0">
+                            </div>
+                            <div class="input-group full-width">
+                                <label for="education-description">Description (Optional)</label>
+                                <textarea id="education-description" placeholder="Relevant coursework, achievements, or activities..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-education-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Education</button>
             </div>
 
             <!-- Technical Skills -->
@@ -1411,7 +1447,7 @@
             </div>
 
             <!-- Work Experience -->
-            <div class="section-block">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
                 <h2 class="section-header">Work Experience</h2>
                 <div id="work-experience-container">
                     <div class="experience-item">
@@ -1439,11 +1475,11 @@
                         </div>
                     </div>
                 </div>
-                <button class="add-experience-btn">Add Another Experience</button>
+                <button class="add-experience-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Experience</button>
             </div>
 
             <!-- Projects -->
-            <div class="section-block">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
                 <h2 class="section-header">Projects</h2>
                     <div id="projects-container">
                         <div class="project-item">
@@ -1463,7 +1499,7 @@
                             </div>
                         </div>
                     </div>
-                <button class="add-project-btn">Add Another Project</button>
+                <button class="add-project-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Project</button>
                     </div>
             </div>
 
@@ -1716,52 +1752,71 @@
             if (templateId === 'it-1') {
                 // IT Template 1 Preview
                 const preview = document.createElement('div');
-                preview.className = 'resume-container';
+                preview.className = 'w-full max-w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8';
                 preview.innerHTML = `
-                    <!-- Header Section -->
-                    <header class="header">
-                        ${profileImage ? `
-                            <div class="profile-picture">
-                                <img src="${profileImage}" alt="Profile Picture">
-                            </div>
-                        ` : ''}
-                        <h1>${document.getElementById('name')?.value || 'Your Name'}</h1>
-                        <h2>${document.getElementById('title')?.value || 'Professional Title'}</h2>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <span>📧</span>
-                                <span>${document.getElementById('email')?.value || 'email@example.com'}</span>
-                            </div>
-                            <div class="contact-item">
-                                <span>📱</span>
-                                <span>${document.getElementById('phone')?.value || '+1 234 567 890'}</span>
-                            </div>
+                    <!-- HEADER -->
+                    <div class="flex items-center p-6 bg-[#582b2a] text-white">
+                        <div class="shrink-0">
+                            <img src="${profileImage || '../assets/img/charles.png'}" alt="Profile Picture" class="w-[110px] h-[110px] object-cover rounded-full border-4 border-white">
                         </div>
-                    </header>
+                        <div class="ml-40">
+                            <h1 class="text-3xl font-bold leading-tight">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-sm">${document.getElementById('title')?.value || 'Professional Title'}</p>
+                        </div>
+                    </div>
 
-                    <!-- Professional Summary Section -->
-                    <section class="section">
-                        <h3 class="section-title">Professional Summary</h3>
-                        <p>${document.getElementById('summary')?.value || 'Your professional summary...'}</p>
-                    </section>
+                    <!-- MAIN -->
+                    <div class="flex bg-[#fdfaf8]">
+                        
+                        <!-- LEFT COLUMN -->
+                        <div class="w-[35%] p-8 border-r border-gray-300 flex flex-col items-center text-black">
 
-                    <!-- Technical Skills Section -->
-                    <section class="section">
-                        <h3 class="section-title">Technical Skills</h3>
-                        <div class="tech-skills" id="skills-preview"></div>
-                    </section>
+                            <div class="w-full mb-8">
+                                <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Contact</h2>
+                                <p class="text-sm mb-2"><strong>Phone</strong><br>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                <p class="text-sm mb-2"><strong>Email</strong><br>${document.getElementById('email')?.value || 'anymail@gmail.com'}</p>
+                                <p class="text-sm"><strong>Address</strong><br>${document.getElementById('address')?.value || '1234 Anywhere St., Any City'}</p>
+                            </div>
 
-                    <!-- Professional Experience Section -->
-                    <section class="section">
-                        <h3 class="section-title">Professional Experience</h3>
-                        <div id="experience-preview"></div>
-                    </section>
+                            <div class="w-full mb-8">
+                                <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Education</h2>
+                                <p class="text-sm"><strong>${document.getElementById('education-degree')?.value || 'Bachelor of Information Technology'}</strong><br>${document.getElementById('education-school')?.value || 'Capas Tarlac'}<br>${document.getElementById('education-year')?.value || '2022–2025'}</p>
+                            </div>
 
-                    <!-- Technical Projects Section -->
-                    <section class="section">
-                        <h3 class="section-title">Technical Projects</h3>
-                        <div class="projects" id="projects-preview"></div>
-                    </section>
+                            <div class="w-full">
+                                <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Skills</h2>
+                                <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
+                                    <li>Coding Languages</li>
+                                    <li>Logical Approach</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT COLUMN -->
+                        <div class="w-[65%] p-8 text-black">
+
+                            <section class="mb-8">
+                                <h2 class="text-lg uppercase border-b-2 border-gray-300 pb-2 mb-4">About</h2>
+                                <p class="text-sm leading-relaxed">
+                                    ${document.getElementById('summary')?.value || 'With more than 5 years of experience in web development, I have worked across various industries. I specialize in database development, coding, and thorough testing. I am skilled at identifying and fixing coding problems efficiently.'}
+                                </p>
+                            </section>
+
+                            <section>
+                                <h2 class="text-lg uppercase border-b-2 border-gray-300 pb-2 mb-4">Experience</h2>
+                                <div id="experience-preview">
+                                    <p class="text-sm font-bold">${document.getElementById('experience-year')?.value || '2019 - 2022'}</p>
+                                    <p class="text-sm mb-1">${document.getElementById('experience-title')?.value || 'Job position here'}</p>
+                                    <p class="text-sm mb-4">${document.getElementById('experience-company')?.value || 'Company Name | Location'}</p>
+                                    <p class="text-sm leading-relaxed">
+                                        ${document.getElementById('experience-description')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.'}
+                                    </p>
+                                </div>
+                            </section>
+
+                        </div>
+                    </div>
                 `;
                 previewContainer.appendChild(preview);
             } else {
@@ -1987,6 +2042,67 @@
         }
 
         addProjectBtn?.addEventListener('click', addProject);
+
+        // Add Education Functionality
+        const addEducationBtn = document.querySelector('.add-education-btn');
+        const educationContainer = document.getElementById('education-container');
+
+        function addEducation() {
+            const educationItem = document.createElement('div');
+            educationItem.className = 'education-item';
+            educationItem.innerHTML = `
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="education-degree">Degree</label>
+                        <input type="text" placeholder="e.g., Bachelor of Information Technology">
+                    </div>
+                    <div class="input-group">
+                        <label for="education-school">School/University</label>
+                        <input type="text" placeholder="e.g., University Name">
+                    </div>
+                    <div class="input-group">
+                        <label for="education-year">Year</label>
+                        <input type="text" placeholder="e.g., 2022-2025">
+                    </div>
+                    <div class="input-group">
+                        <label for="education-gpa">GPA (Optional)</label>
+                        <input type="text" placeholder="e.g., 3.8/4.0">
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="education-description">Description (Optional)</label>
+                        <textarea placeholder="Relevant coursework, achievements, or activities..."></textarea>
+                    </div>
+                </div>
+                <button class="remove-education-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+            `;
+
+            educationContainer.appendChild(educationItem);
+
+            // Add auto-resize to new textarea
+            const newTextarea = educationItem.querySelector('textarea');
+            if (newTextarea) {
+                newTextarea.addEventListener('input', () => {
+                    autoResizeTextarea(newTextarea);
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            }
+
+            // Add remove functionality
+            const removeBtn = educationItem.querySelector('.remove-education-btn');
+            removeBtn.addEventListener('click', () => {
+                educationItem.remove();
+                if (isPreviewActive) {
+                    updatePreview();
+                }
+            });
+
+            // Add AI enhance buttons to new textarea(s)
+            addAIEnhanceButtons();
+        }
+
+        addEducationBtn?.addEventListener('click', addEducation);
 
         // Add Skill Functionality
         const addSkillBtns = document.querySelectorAll('.add-skill-btn');
@@ -2488,12 +2604,27 @@
         };
 
        
+        function getSelectedCategory() {
+            const params = new URLSearchParams(window.location.search);
+            const template = params.get('template');
+            if (!template) return 'relevant';
+            // Map template codes to categories if needed
+            if (template.startsWith('it')) return 'IT';
+            if (template.startsWith('accountant')) return 'Accountancy';
+            if (template.startsWith('business-add')) return 'Business Administrator';
+            if (template.startsWith('civil-engineer')) return 'Civil Engineering';
+            if (template.startsWith('generic')) return 'relevant';
+            // Add more mappings as needed
+            return template;
+        }
+
         async function askAI(promptText) {
           try {
+            const category = getSelectedCategory();
             const response = await fetch('http://localhost:3000/api/ai-assistant', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ promptText })
+              body: JSON.stringify({ promptText, category })
             });
 
             if (!response.ok) {

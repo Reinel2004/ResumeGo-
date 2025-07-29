@@ -3,561 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Template 4 - Card Based Professional | ResumeGo</title>
-    <style>
-        :root {
-            --primary-color: #4f46e5;
-            --secondary-color: #6366f1;
-            --accent-color: #818cf8;
-            --text-color: #1f2937;
-            --light-gray: #f3f4f6;
-            --border-color: #e5e7eb;
-            --card-bg: #ffffff;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --tech-bg: #f8fafc;
-            --cert-bg: #e2e8f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .resume-container {
-            max-width: 210mm;
-            margin: 2rem auto;
-            padding: 2rem;
-            display: grid;
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--card-shadow);
-        }
-
-        .header {
-            background: var(--primary-color);
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .profile-picture {
-            width: 170px;
-            height: 170px;
-            border-radius: 20px;
-            border: 4px solid white;
-            margin: 0 auto 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-picture:hover {
-            transform: scale(1.05);
-        }
-
-        .profile-picture::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
-            z-index: -1;
-            border-radius: 22px;
-        }
-
-        .profile-picture img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .header h2 {
-            color: var(--secondary-color);
-            font-size: 1.25rem;
-            font-weight: 500;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent-color);
-        }
-
-        .tech-skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background: var(--tech-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-2px);
-        }
-
-        .skill-category h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-list li::before {
-            content: "▹";
-            color: var(--accent-color);
-        }
-
-        .experience-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: var(--tech-bg);
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .experience-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-title {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .experience-date {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .experience-company {
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .experience-description {
-            margin-top: 1rem;
-        }
-
-        .experience-description ul {
-            list-style: none;
-        }
-
-        .experience-description li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .experience-description li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-        }
-
-        .certifications {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .cert-item {
-            background: var(--cert-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .cert-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .cert-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-org {
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .projects {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .project-item {
-            background: var(--tech-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .project-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .project-title {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .tech-badge {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            transition: background-color 0.2s;
-        }
-
-        .tech-badge:hover {
-            background: var(--secondary-color);
-        }
-
-        .education-item {
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: var(--tech-bg);
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .education-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-degree {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .education-date {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .education-school {
-            color: var(--secondary-color);
-            margin-bottom: 0.25rem;
-            font-size: 0.95rem;
-        }
-
-        @media print {
-            body {
-                background: white;
-            }
-            .resume-container {
-                margin: 0;
-                padding: 1rem;
-            }
-            .card {
-                box-shadow: none;
-            }
-            .skill-category:hover,
-            .experience-item:hover,
-            .cert-item:hover,
-            .project-item:hover,
-            .education-item:hover {
-                transform: none;
-            }
-        }
-    </style>
+    <link href="../../src/output.css" rel="stylesheet">
+    <title>IT Template No 5</title>
 </head>
-<body>
-    <div class="resume-container">
-        <!-- Header Card -->
-        <div class="card">
-            <header class="header">
-                <div class="profile-picture">
-                    <img src="assets/images/profile-placeholder.jpg" alt="Profile Picture">
-                </div>
-                <h1>John Doe</h1>
-                <h2>Senior Software Engineer</h2>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <span>john.doe@example.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📱</span>
-                        <span>(123) 456-7890</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <span>San Francisco, CA</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>🔗</span>
-                        <span>linkedin.com/in/johndoe</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>💻</span>
-                        <span>github.com/johndoe</span>
-                    </div>
-                </div>
-            </header>
-        </div>
+<body class="bg-white flex justify-center py-10">
+  <div class="max-w-[210mm] w-full font-sans text-black bg-white shadow-md grid grid-cols-3 gap-0">
+    
+    <!-- Left Column -->
+    <div class="col-span-1 bg-gray-100 p-6 space-y-6 text-sm">
+      <!-- Image -->
+      <div class="flex justify-center">
+        <img src="../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-rose-300" />
+      </div>
 
-        <!-- Technical Skills Card -->
-        <div class="card">
-            <section class="section">
-                <h3 class="section-title">Technical Skills</h3>
-                <div class="tech-skills">
-                    <div class="skill-category">
-                        <h4>Programming Languages</h4>
-                        <ul class="skill-list">
-                            <li>Python</li>
-                            <li>JavaScript</li>
-                            <li>Java</li>
-                            <li>TypeScript</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Frameworks & Libraries</h4>
-                        <ul class="skill-list">
-                            <li>React</li>
-                            <li>Node.js</li>
-                            <li>Django</li>
-                            <li>Spring Boot</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Databases</h4>
-                        <ul class="skill-list">
-                            <li>PostgreSQL</li>
-                            <li>MongoDB</li>
-                            <li>Redis</li>
-                            <li>MySQL</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Tools & Technologies</h4>
-                        <ul class="skill-list">
-                            <li>Docker</li>
-                            <li>Kubernetes</li>
-                            <li>AWS</li>
-                            <li>Git</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
+      <!-- Contact -->
+      <div>
+        <h2 class="text-lg font-bold mb-2">Contact</h2>
+        <hr class="border-t-2 border-rose-300 mb-2" />
+        <p>📞 123-456-7890</p>
+        <p>✉️ example@email.com</p>
+        <p>📍 123 Main Street, City</p>
+      </div>
 
-        <!-- Professional Experience Card -->
-        <div class="card">
-            <section class="section">
-                <h3 class="section-title">Professional Experience</h3>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div class="experience-title">Senior Software Engineer</div>
-                        <div class="experience-date">Jan 2020 - Present</div>
-                    </div>
-                    <div class="experience-company">Tech Solutions Inc.</div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Led development of microservices architecture using Spring Boot and Docker</li>
-                            <li>Implemented CI/CD pipelines reducing deployment time by 60%</li>
-                            <li>Mentored junior developers and conducted code reviews</li>
-                            <li>Optimized database queries improving application performance by 40%</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div class="experience-title">Software Engineer</div>
-                        <div class="experience-date">Jun 2017 - Dec 2019</div>
-                    </div>
-                    <div class="experience-company">Digital Innovations LLC</div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Developed and maintained React-based web applications</li>
-                            <li>Implemented RESTful APIs using Node.js and Express</li>
-                            <li>Collaborated with UX team to improve user experience</li>
-                            <li>Reduced bug reports by 30% through improved testing practices</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
+      <!-- Skills -->
+      <div>
+        <h2 class="text-lg font-bold mb-2">Skills</h2>
+        <hr class="border-t-2 border-rose-300 mb-2" />
+        <ul class="list-disc list-inside space-y-1">
+          <li>JavaScript</li>
+          <li>HTML / CSS</li>
+          <li>Problem Solving</li>
+          <li>Team Collaboration</li>
+        </ul>
+      </div>
 
-        <!-- Technical Projects Card -->
-        <div class="card">
-            <section class="section">
-                <h3 class="section-title">Technical Projects</h3>
-                <div class="projects">
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div class="project-title">E-commerce Platform</div>
-                            <div>2022</div>
-                        </div>
-                        <p>Built a scalable e-commerce platform using microservices architecture</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">React</span>
-                            <span class="tech-badge">Node.js</span>
-                            <span class="tech-badge">MongoDB</span>
-                            <span class="tech-badge">Docker</span>
-                        </div>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div class="project-title">Real-time Analytics Dashboard</div>
-                            <div>2021</div>
-                        </div>
-                        <p>Developed a real-time data visualization dashboard for business metrics</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Django</span>
-                            <span class="tech-badge">PostgreSQL</span>
-                            <span class="tech-badge">WebSocket</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Certifications Card -->
-        <div class="card">
-            <section class="section">
-                <h3 class="section-title">Certifications</h3>
-                <div class="certifications">
-                    <div class="cert-item">
-                        <div class="cert-title">AWS Certified Solutions Architect</div>
-                        <div class="cert-org">Amazon Web Services</div>
-                        <div>Issued: June 2022</div>
-                        <div>Credential ID: ABC123XYZ</div>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-title">Google Cloud Professional Developer</div>
-                        <div class="cert-org">Google Cloud</div>
-                        <div>Issued: March 2021</div>
-                        <div>Credential ID: DEF456UVW</div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Education Card -->
-        <div class="card">
-            <section class="section">
-                <h3 class="section-title">Education</h3>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="education-degree">Master of Science in Computer Science</div>
-                        <div class="education-date">2015 - 2017</div>
-                    </div>
-                    <div class="education-school">Stanford University</div>
-                    <div>Specialization in Software Engineering</div>
-                </div>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="education-degree">Bachelor of Science in Computer Science</div>
-                        <div class="education-date">2011 - 2015</div>
-                    </div>
-                    <div class="education-school">University of California, Berkeley</div>
-                    <div>Dean's List, Computer Science Department</div>
-                </div>
-            </section>
-        </div>
+      <!-- Languages -->
+      <div>
+        <h2 class="text-lg font-bold mb-2">Languages</h2>
+        <hr class="border-t-2 border-rose-300 mb-2" />
+        <p>English</p>
+        <p>Spanish</p>
+      </div>
     </div>
+
+    <!-- Right Column -->
+    <div class="col-span-2 bg-white p-8 space-y-8">
+      <!-- Header -->
+      <div class="text-center">
+        <h1 class="text-3xl font-bold">John Roe</h1>
+        <p class="text-lg text-gray-600">IT Graduate</p>
+      </div>
+
+      <!-- About Section -->
+      <div class="bg-rose-300 text-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md">
+        <h2 class="text-xl font-bold mb-2">About Me</h2>
+        <p>
+          Dedicated IT graduate with a passion for software development and systems analysis. Strong
+          foundation in full-stack development and eager to contribute to innovative tech teams.
+        </p>
+      </div>
+
+      <!-- Work Experience -->
+      <div class="bg-rose-300 text-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md">
+        <h2 class="text-xl font-bold mb-2">Work Experience</h2>
+        <div class="mt-4 space-y-4">
+          <div>
+            <p class="font-bold">Junior Developer</p>
+            <p class="text-sm">TechCorp Inc. • 2022 – Present</p>
+            <p class="text-sm mt-1">
+              Assisted in developing responsive web applications and troubleshooting backend issues.
+            </p>
+          </div>
+          <div>
+            <p class="font-bold">Intern - IT Department</p>
+            <p class="text-sm">SoftSolutions • Summer 2021</p>
+            <p class="text-sm mt-1">
+              Supported the internal team with tech maintenance and created documentation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="bg-rose-300 text-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md">
+        <h2 class="text-xl font-bold mb-2">Education</h2>
+        <div class="mt-4 space-y-4">
+          <div>
+            <p class="font-bold">BSc in Information Technology</p>
+            <p class="text-sm">University of Techville • 2018 – 2022</p>
+          </div>
+        </div>
+        <div class="mt-4 space-y-4">
+          <div>
+            <p class="font-bold">BSc in Information Technology</p>
+            <p class="text-sm">University of Techville • 2018 – 2022</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-</html> 
+</html>

@@ -32,7 +32,8 @@ app.use('/api', grammarRoutes);
 
 // AI Assistant Proxy Route
 app.post('/api/ai-assistant', async (req, res) => {
-    const { promptText } = req.body;
+    const { promptText, category } = req.body;
+    const systemPrompt = `You are a professional resume writer for the ${category || 'relevant'} field. Provide 3 different versions of the following text for a resume: 1) A professional version with impact, 2) A concise version that's clear and direct, 3) A detailed version with more context.`;
     try {
         const response = await fetch('https://api.together.xyz/v1/chat/completions', {
             method: 'POST',
@@ -43,7 +44,7 @@ app.post('/api/ai-assistant', async (req, res) => {
             body: JSON.stringify({
                 model: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
                 messages: [
-                    { role: 'system', content: 'You are a professional resume writer. Provide 3 different versions of the following text for a resume: 1) A professional version with impact, 2) A concise version that\'s clear and direct, 3) A detailed version with more context.' },
+                    { role: 'system', content: systemPrompt },
                     { role: 'user', content: promptText }
                 ],
                 temperature: 0.7
