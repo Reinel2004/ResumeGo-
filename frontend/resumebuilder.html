@@ -1742,6 +1742,74 @@
             }
         }
 
+        // Helper function to generate education preview
+        function generateEducationPreview() {
+            const educationItems = document.querySelectorAll('.education-item');
+            let previewHTML = '';
+            
+            educationItems.forEach((item, index) => {
+                const inputs = item.querySelectorAll('input');
+                const textarea = item.querySelector('textarea');
+                
+                if (inputs.length >= 4) {
+                    const degree = inputs[0].value || 'Degree';
+                    const school = inputs[1].value || 'School/University';
+                    const year = inputs[2].value || 'Year';
+                    const gpa = inputs[3].value || '';
+                    const description = textarea ? textarea.value : '';
+                    
+                    previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree}</strong><br>${school}<br>${year}${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                }
+            });
+            
+            return previewHTML || '<p class="text-sm"><strong>Bachelor of Information Technology</strong><br>Capas Tarlac<br>2022–2025</p>';
+        }
+
+        // Helper function to generate experience preview
+        function generateExperiencePreview() {
+            const experienceItems = document.querySelectorAll('.experience-item');
+            let previewHTML = '';
+            
+            experienceItems.forEach((item, index) => {
+                const inputs = item.querySelectorAll('input');
+                const textarea = item.querySelector('textarea');
+                
+                if (inputs.length >= 4) {
+                    const company = inputs[0].value || 'Company Name';
+                    const position = inputs[1].value || 'Job Title';
+                    const startDate = inputs[2].value || '';
+                    const endDate = inputs[3].value || '';
+                    const description = textarea ? textarea.value : '';
+                    
+                    const dateRange = startDate && endDate ? `${startDate} - ${endDate}` : 
+                                    startDate ? `${startDate} - Present` : 'Date Range';
+                    
+                    previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${dateRange}</p>
+                            <p class="text-sm mb-1">${position}</p>
+                            <p class="text-sm mb-4">${company}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                }
+            });
+            
+            return previewHTML || `
+                <p class="text-sm font-bold">2019 - 2022</p>
+                <p class="text-sm mb-1">Job position here</p>
+                <p class="text-sm mb-4">Company Name | Location</p>
+                <p class="text-sm leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.
+                </p>
+            `;
+        }
+
         function updatePreview() {
             const previewContainer = document.getElementById('resume-preview');
             
@@ -1780,7 +1848,9 @@
 
                             <div class="w-full mb-8">
                                 <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Education</h2>
-                                <p class="text-sm"><strong>${document.getElementById('education-degree')?.value || 'Bachelor of Information Technology'}</strong><br>${document.getElementById('education-school')?.value || 'Capas Tarlac'}<br>${document.getElementById('education-year')?.value || '2022–2025'}</p>
+                                <div id="education-preview-list">
+                                    ${generateEducationPreview()}
+                                </div>
                             </div>
 
                             <div class="w-full">
@@ -1806,12 +1876,7 @@
                             <section>
                                 <h2 class="text-lg uppercase border-b-2 border-gray-300 pb-2 mb-4">Experience</h2>
                                 <div id="experience-preview">
-                                    <p class="text-sm font-bold">${document.getElementById('experience-year')?.value || '2019 - 2022'}</p>
-                                    <p class="text-sm mb-1">${document.getElementById('experience-title')?.value || 'Job position here'}</p>
-                                    <p class="text-sm mb-4">${document.getElementById('experience-company')?.value || 'Company Name | Location'}</p>
-                                    <p class="text-sm leading-relaxed">
-                                        ${document.getElementById('experience-description')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.'}
-                                    </p>
+                                    ${generateExperiencePreview()}
                                 </div>
                             </section>
 
@@ -1819,27 +1884,279 @@
                     </div>
                 `;
                 previewContainer.appendChild(preview);
+            } else if(templateId === 'it-2'){
+                // IT Template 2 Preview (matches static it-template-2.html)
+                const preview = document.createElement('div');
+                preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md grid grid-cols-3';
+                preview.innerHTML = `
+                    <!-- Left Column -->
+                    <div class="col-span-1 bg-gray-100 p-6 space-y-6 text-sm">
+                        <!-- Image -->
+                        <div class="flex justify-center">
+                            <img src="${profileImage || '...'}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-slate-700 object-cover" />
+                        </div>
+                        <!-- Contact -->
+                        <div>
+                            <h2 class="text-lg font-bold mb-2">Contact</h2>
+                            <hr class="border-t-2 border-slate-700 mb-2">
+                            <p>📞 ${document.getElementById('phone')?.value || '123-456-7890'}</p>
+                            <p>✉️ ${document.getElementById('email')?.value || 'example@email.com'}</p>
+                            <p>📍 ${document.getElementById('address')?.value || '123 Main Street, City'}</p>
+                        </div>
+                        <!-- About -->
+                        <div>
+                            <h2 class="text-lg font-bold mb-2">About</h2>
+                            <hr class="border-t-2 border-slate-700 mb-2">
+                            <p>
+                                ${document.getElementById('summary')?.value || 'Passionate and detail-oriented IT professional with strong problem-solving skills and a focus on results.'}
+                            </p>
+                        </div>
+                        <!-- Skills -->
+                        <div>
+                            <h2 class="text-lg font-bold mb-2">Skills</h2>
+                            <hr class="border-t-2 border-slate-700 mb-2">
+                            <ul class="list-disc list-inside space-y-1" id="skills-preview">
+                                <li>Logical Thinking</li>
+                                <li>HTML, CSS, JS</li>
+                                <li>Problem Solving</li>
+                                <li>Time Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="col-span-2 bg-slate-700 text-white p-8 space-y-8">
+                        <!-- Header -->
+                        <div>
+                            <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'John Roe'}</h1>
+                            <p class="text-lg">${document.getElementById('title')?.value || 'IT Professional'}</p>
+                        </div>
+                        <!-- Work Experience -->
+                        <div>
+                            <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Work Experience</h2>
+                            <div class="space-y-4 border-l-2 border-white pl-4" id="experience-preview"></div>
+                        </div>
+                        <!-- Education -->
+                        <div>
+                            <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Education</h2>
+                            <div class="space-y-4 border-l-2 border-white pl-4" id="education-preview-list">
+                                ${generateEducationPreview()}
+                            </div>
+                        </div>
+                        <!-- Language -->
+                        <div>
+                            <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Language</h2>
+                            <ul class="list-disc list-inside text-sm space-y-1 pl-2">
+                                <li>English</li>
+                                <li>Spanish</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                previewContainer.appendChild(preview);
+            } else if(templateId === 'it-3'){
+                // IT Template 3 Preview (matches static it-template-3.html)
+                const preview = document.createElement('div');
+                preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md';
+                preview.innerHTML = `
+                    <!-- Header -->
+                    <div class="bg-slate-800 text-white px-8 py-6 flex items-center gap-6">
+                        <!-- Profile Image -->
+                        <div>
+                            <img src="${profileImage || '...'}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
+                        </div>
+                        <!-- Name and Title -->
+                        <div>
+                            <h1 class="text-3xl font-bold leading-tight">${(document.getElementById('name')?.value || 'John Roe')}</h1>
+                            <p class="text-blue-300 text-lg">${document.getElementById('title')?.value || 'IT Graduate'}</p>
+                        </div>
+                    </div>
+                    <!-- Main Content -->
+                    <div class="grid grid-cols-10">
+                        <!-- Left Column -->
+                        <div class="col-span-3 bg-gray-100 p-6 space-y-6 text-sm">
+                            <!-- Contact -->
+                            <div>
+                                <h2 class="text-blue-700 font-bold text-lg mb-2">Contact</h2>
+                                <hr class="border-t-2 border-blue-700 mb-2" />
+                                <p>📞 ${document.getElementById('phone')?.value || '123-456-7890'}</p>
+                                <p>✉️ ${document.getElementById('email')?.value || 'john@email.com'}</p>
+                                <p>📍 ${document.getElementById('address')?.value || '123 Main St, City'}</p>
+                            </div>
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-blue-700 font-bold text-lg mb-2">Skills</h2>
+                                <hr class="border-t-2 border-blue-700 mb-2" />
+                                <ul class="list-disc list-inside space-y-1" id="skills-preview">
+                                    <li>HTML, CSS, JavaScript</li>
+                                    <li>Debugging & Troubleshooting</li>
+                                    <li>Database Management</li>
+                                    <li>Team Collaboration</li>
+                                </ul>
+                            </div>
+                            <!-- Languages -->
+                            <div>
+                                <h2 class="text-blue-700 font-bold text-lg mb-2">Languages</h2>
+                                <hr class="border-t-2 border-blue-700 mb-2" />
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>English</li>
+                                    <li>Spanish</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Right Column -->
+                        <div class="col-span-7 p-8 space-y-8">
+                            <!-- About -->
+                            <div>
+                                <h2 class="text-blue-700 font-bold text-lg mb-2">About Me</h2>
+                                <hr class="border-t-2 border-blue-700 mb-2" />
+                                <p class="text-sm">
+                                    ${document.getElementById('summary')?.value || 'Motivated IT graduate with a passion for software development, problem-solving, and systems architecture. Eager to contribute to team success through hard work, attention to detail, and excellent organizational skills.'}
+                                </p>
+                            </div>
+                            <!-- Work Experience -->
+                            <div>
+                                <h2 class="text-blue-700 font-bold text-lg mb-2">Work Experience</h2>
+                                <hr class="border-t-2 border-blue-700 mb-4" />
+                                <div class="space-y-4" id="experience-preview"></div>
+                            </div>
+                            <!-- Education -->
+                            <div>
+                                <h2 class="text-blue-700 font-bold text-lg mb-2">Education</h2>
+                                <hr class="border-t-2 border-blue-700 mb-4" />
+                                <div class="space-y-4" id="education-preview-list">
+                                    ${generateEducationPreview()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                previewContainer.appendChild(preview);
             } else {
                 // Default template preview
                 const preview = document.createElement('div');
-                preview.className = 'default-template-preview';
+                preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md';
                 preview.innerHTML = `
-                    <div class="preview-header"> 
-                        ${profileImage ? `
-                            <div class="profile-picture">
-                                <img src="${profileImage}" alt="Profile Picture">
-                </div>
-                        ` : ''}
-                        <h1>${document.getElementById('name')?.value || 'Your Name'}</h1>
-                        <h2>${document.getElementById('title')?.value || 'Professional Title'}</h2>
-                        <div class="contact-info">
-                            <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
-                            <p>${document.getElementById('phone')?.value || '+1 234 567 890'}</p>
-            </div>
-                    </div>
-                    <div class="preview-summary">
-                        <h3>Professional Summary</h3>
-                        <p>${document.getElementById('summary')?.value || 'Your professional summary...'}</p>
+                    <div class="max-w-[210mm] mx-auto bg-white shadow-lg p-8 space-y-6">
+    
+                        <!-- 🔹 Profile Section (Top) -->
+                        <div class="flex items-center gap-4">
+                        <img src="${profileImage || '...'}" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
+                        <div>
+                            <h1 class="text-2xl font-bold">${(document.getElementById('name')?.value || 'Jason Miller')}</h1>
+                            <p class="text-gray-600">${(document.getElementById('title')?.value || 'Amazon Associate')}</p>
+                        </div>
+                        </div>
+
+                        <!-- 🔹 Two Column Layout -->
+                        <div class="flex flex-col md:flex-row gap-6">
+                        
+                        <!-- Left Column -->
+                        <div class="md:w-2/3 space-y-6">
+
+                            <!-- Profile -->
+                            <div>
+                            <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
+                                <span>🧾</span> Profile
+                            </h2>
+                            <p class="text-sm leading-relaxed">
+                                ${document.getElementById('summary')?.value || ''}
+                            </p>
+                            </div>
+
+                            <!-- Employment History -->
+                            <div>
+                            <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
+                                <span>💼</span> Employment History
+                            </h2>
+
+                            <!-- Job 1 -->
+                            <div class="mb-4">
+                                <h3 class="font-bold">${document.getElementById('job-1-company')?.value || 'Amazon Warehouse Associate at Amazon, Miami Gardens'}</h3>
+                                <p class="text-sm italic">${document.getElementById('job-1-start-date')?.value || 'January 2021'} — ${document.getElementById('job-1-end-date')?.value || 'July 2022'}</p>
+                                <p class="text-sm mt-1">
+                                ${document.getElementById('job-1-description')?.value || 'Performed all warehouse laborer duties such as packing, picking, counting, record keeping, and maintaining a clean area.'}
+                                </p>
+                                <ul class="list-disc ml-6 mt-2 text-sm">
+                                <li>${document.getElementById('job-1-achievement-1')?.value || 'Consistently maintained picking/packing speeds in the 98th percentile.'}</li>
+                                <li>${document.getElementById('job-1-achievement-2')?.value || 'Picked all orders with 100% accuracy despite high speeds.'}</li>
+                                <li>${document.getElementById('job-1-achievement-3')?.value || 'Maintained a clean work area, meeting 97.5% of inspection requirements.'}</li>
+                                </ul>
+                            </div>
+
+                            <!-- Job 2 -->
+                            <div>
+                                <h3 class="font-bold">${document.getElementById('job-2-company')?.value || 'Laboratory Inventory Assistant at Dunrea Laboratories, Orlando'}</h3>
+                                <p class="text-sm italic">${document.getElementById('job-2-start-date')?.value || 'January 2019'} — ${document.getElementById('job-2-end-date')?.value || 'December 2020'}</p>
+                                <p class="text-sm mt-1">
+                                ${document.getElementById('job-2-description')?.value || 'Full-time lab assistant in a small, regional laboratory tasked with participating in Kaizen Events, Gemba walks, and 5S to remove barriers and improve productivity.'}
+                                </p>
+                                <ul class="list-disc ml-6 mt-2 text-sm">
+                                <li>${document.getElementById('job-2-achievement-1')?.value || 'Filled the warehouse helper job description, including packing, shipping, inventory management, and cleaning equipment.'}</li>
+                                <li>${document.getElementById('job-2-achievement-2')?.value || 'Saved 12% on UPS orders by staying on top of special deals.'}</li>
+                                <li>${document.getElementById('job-2-achievement-3')?.value || 'Cut down storage waste by 23% by switching to a Kanban system.'}</li>
+                                </ul>
+                            </div>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <div id="education-preview-list">
+                                    ${generateEducationPreview()}
+                                </div>
+                            </div>
+
+                            <!-- Courses -->
+                            <div>
+                            <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
+                                <span>📚</span> Courses
+                            </h2>
+                            <p class="text-sm">
+                                ${document.getElementById('course-1-name')?.value || 'Online Graduate Certificate in Warehousing & Supply Chain Management,'}<br>
+                                ${document.getElementById('course-1-school')?.value || 'Southern New Hampshire University (SNHU), NH.'}<br>
+                                <em>${document.getElementById('course-1-start-date')?.value || 'July 2022'} — ${document.getElementById('course-1-end-date')?.value || 'July 2022'}</em>
+                            </p>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="md:w-1/3 space-y-6">
+
+                            <!-- Details -->
+                            <div>
+                            <h3 class="text-lg font-semibold">Details</h3>
+                            <p class="text-sm">${document.getElementById('address')?.value || '1515 Pacific Ave<br>Los Angeles, CA 90291<br>United States'}</p>
+                            <p class="text-sm mt-2">${document.getElementById('phone')?.value || '09123456789'}<br><a href="#" class="text-blue-500">${document.getElementById('email')?.value || 'email@email.com'}</a></p>
+                            <p class="text-sm mt-2">Place of birth: ${document.getElementById('place-of-birth')?.value || 'San Antonio'}</p>
+                            <p class="text-sm">Driving license: ${document.getElementById('driving-license')?.value || 'Full'}</p>
+                            </div>
+
+                            <!-- Skills -->
+                            <div>
+                            <h3 class="text-lg font-semibold">Skills</h3>
+                            <ul class="text-sm space-y-1">
+                                <li class="flex justify-between"><span>${document.getElementById('skill-1')?.value || 'Cleaning Equipment'}</span></li>
+                                <li class="flex justify-between"><span>${document.getElementById('skill-2')?.value || 'Mathematics'}</span></li>
+                                <li class="flex justify-between"><span>${document.getElementById('skill-3')?.value || 'Deep Sanitation Practices'}</span></li>
+                            </ul>
+                            </div>
+
+                            <!-- Hobbies -->
+                            <div>
+                            <h3 class="text-lg font-semibold">Hobbies</h3>
+                            <p class="text-sm">Action Cricket, Rugby, Athletics</p>
+                            </div>
+
+                            <!-- Languages -->
+                            <div>
+                            <h3 class="text-lg font-semibold">Languages</h3>
+                            <ul class="text-sm space-y-1">
+                                <li class="flex justify-between"><span>English</span></li>
+                                <li class="flex justify-between"><span>Spanish</span></li>
+                            </ul>
+                            </div>
+
+                        </div>
+                        </div>
                     </div>
                 `;
                 previewContainer.appendChild(preview);
@@ -1869,33 +2186,9 @@
             }
 
             // Update experience preview
-            const experienceItems = document.querySelectorAll('.experience-item');
             const experiencePreview = previewContainer.querySelector('#experience-preview');
             if (experiencePreview) {
-                experiencePreview.innerHTML = '';
-                experienceItems.forEach(item => {
-                    const company = item.querySelector('input[placeholder="Company Name"]')?.value;
-                    const position = item.querySelector('input[placeholder="Job Title"]')?.value;
-                    const startDate = item.querySelector('input[type="month"]:first-of-type')?.value;
-                    const endDate = item.querySelector('input[type="month"]:last-of-type')?.value;
-                    const description = item.querySelector('textarea')?.value;
-
-                    if (company || position) {
-                        const experienceDiv = document.createElement('div');
-                        experienceDiv.className = 'experience-item';
-                        experienceDiv.innerHTML = `
-                            <div class="experience-header">
-                                <div class="experience-title">${position || 'Position'}</div>
-                                <div class="experience-date">${startDate || 'Start Date'} - ${endDate || 'End Date'}</div>
-                            </div>
-                            <div class="experience-company">${company || 'Company'}</div>
-                            <div class="experience-description">
-                                <p>${description || 'Description'}</p>
-                            </div>
-                        `;
-                        experiencePreview.appendChild(experienceDiv);
-                    }
-                });
+                experiencePreview.innerHTML = generateExperiencePreview();
             }
 
             // Update projects preview
@@ -1986,6 +2279,16 @@
 
             // Add AI enhance buttons to new textarea(s)
             addAIEnhanceButtons();
+
+            // Add event listeners to new inputs
+            const newInputs = experienceItem.querySelectorAll('input, textarea');
+            newInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            });
         }
 
         addExperienceBtn?.addEventListener('click', addExperience);
@@ -2100,9 +2403,45 @@
 
             // Add AI enhance buttons to new textarea(s)
             addAIEnhanceButtons();
+
+            // Add event listeners to new inputs
+            const newInputs = educationItem.querySelectorAll('input, textarea');
+            newInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            });
         }
 
         addEducationBtn?.addEventListener('click', addEducation);
+
+        // Add event listeners to existing education and experience inputs
+        function addInputEventListeners() {
+            // Education inputs
+            const educationInputs = document.querySelectorAll('.education-item input, .education-item textarea');
+            educationInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            });
+
+            // Experience inputs
+            const experienceInputs = document.querySelectorAll('.experience-item input, .experience-item textarea');
+            experienceInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (isPreviewActive) {
+                        updatePreview();
+                    }
+                });
+            });
+        }
+
+        // Initialize event listeners
+        addInputEventListeners();
 
         // Add Skill Functionality
         const addSkillBtns = document.querySelectorAll('.add-skill-btn');

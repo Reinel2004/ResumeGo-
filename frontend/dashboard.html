@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - ResumeGo!</title>
-    <!-- Add Tailwind CSS -->
+
+    <link href="../src/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -280,15 +281,227 @@
 
             async function handleDownload(id) {
                 // Fetch resume content
-                const res = await fetch(`/backend/routes/resume/${id}`, {
+                const res = await fetch(`http://localhost:3000/api/resume/${id}`, {
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
                 if (!res.ok) return alert('Failed to fetch resume for download');
                 const resume = await res.json();
-                // Create a temporary element for html2pdf
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = `<h2>${resume.title}</h2><pre>${JSON.stringify(resume.content, null, 2)}</pre>`;
-                html2pdf().from(tempDiv).save(`${resume.title}.pdf`);
+                const content = resume.content || {};
+                const template = resume.template || 'default';
+                const pdfContainer = document.getElementById('pdfPreviewContainer');
+
+                // Helper for education
+                function renderEducation(education) {
+                    if (!Array.isArray(education) || !education.length) return '<p class="text-sm"><strong>Bachelor of Information Technology</strong><br>Capas Tarlac<br>2022–2025</p>';
+                    return education.map(item => `
+                        <div class="education-preview-item" style="margin-bottom:1rem;">
+                            <p class="text-sm"><strong>${item.degree || 'Degree'}</strong><br>${item.school || 'School/University'}<br>${item.year || 'Year'}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                            ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                        </div>
+                    `).join('');
+                }
+                // Helper for experience
+                function renderExperience(experience) {
+                    if (!Array.isArray(experience) || !experience.length) return `<p class="text-sm font-bold">2019 - 2022</p><p class="text-sm mb-1">Job position here</p><p class="text-sm mb-4">Company Name | Location</p><p class="text-sm leading-relaxed">Lorem ipsum dolor sit amet...</p>`;
+                    return experience.map(item => {
+                        const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                        return `
+                            <div class="experience-preview-item" style="margin-bottom:2rem;">
+                                <p class="text-sm font-bold">${dateRange}</p>
+                                <p class="text-sm mb-1">${item.position || 'Job Title'}</p>
+                                <p class="text-sm mb-4">${item.company || 'Company Name'}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            </div>
+                        `;
+                    }).join('');
+                }
+                // Helper for skills
+                function renderSkills(skills) {
+                    if (!Array.isArray(skills) || !skills.length) return '<li>Coding Languages</li><li>Logical Approach</li>';
+                    return skills.map(cat => `
+                        <div class="skill-category">
+                            <h4>${cat.category}</h4>
+                            <ul class="skill-list">${(cat.items||[]).map(skill => `<li>${skill}</li>`).join('')}</ul>
+                        </div>
+                    `).join('');
+                }
+                // Helper for projects
+                function renderProjects(projects) {
+                    if (!Array.isArray(projects) || !projects.length) return '';
+                    return projects.map(item => `
+                        <div class="project-item">
+                            <div class="project-header">
+                                <div class="project-title">${item.title || 'Project Title'}</div>
+                                <div>2023</div>
+                            </div>
+                            <p>${item.description || 'Project Description'}</p>
+                            ${item.tech ? `<div class="tech-stack">${item.tech.split(',').map(t => `<span class="tech-badge">${t.trim()}</span>`).join('')}</div>` : ''}
+                        </div>
+                    `).join('');
+                }
+
+                // Render HTML for the selected template
+                let html = '';
+                if (template === 'it-1') {
+                    html = `
+                    <div class="w-full max-w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8">
+                        <div class="flex items-center p-6 bg-[#582b2a] text-white">
+                            <div class="shrink-0">
+                                <img src="${content.profileImage || '../assets/img/charles.png'}" alt="Profile Picture" class="w-[110px] h-[110px] object-cover rounded-full border-4 border-white">
+                            </div>
+                            <div class="ml-40">
+                                <h1 class="text-3xl font-bold leading-tight">${content.name || 'Your Name'}</h1>
+                                <p class="text-sm">${content.title || 'Professional Title'}</p>
+                            </div>
+                        </div>
+                        <div class="flex bg-[#fdfaf8]">
+                            <div class="w-[35%] p-8 border-r border-gray-300 flex flex-col items-center text-black">
+                                <div class="w-full mb-8">
+                                    <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Contact</h2>
+                                    <p class="text-sm mb-2"><strong>Phone</strong><br>${content.phone || '+123-456-7890'}</p>
+                                    <p class="text-sm mb-2"><strong>Email</strong><br>${content.email || 'anymail@gmail.com'}</p>
+                                    <p class="text-sm"><strong>Address</strong><br>${content.address || '1234 Anywhere St., Any City'}</p>
+                                </div>
+                                <div class="w-full mb-8">
+                                    <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Education</h2>
+                                    <div id="education-preview-list">${renderEducation(content.education)}</div>
+                                </div>
+                                <div class="w-full">
+                                    <h2 class="bg-[#9e4644] text-white text-center py-2 text-sm rounded mb-4">Skills</h2>
+                                    <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">${renderSkills(content.skills)}</ul>
+                                </div>
+                            </div>
+                            <div class="w-[65%] p-8 text-black">
+                                <section class="mb-8">
+                                    <h2 class="text-lg uppercase border-b-2 border-gray-300 pb-2 mb-4">About</h2>
+                                    <p class="text-sm leading-relaxed">${content.summary || 'With more than 5 years of experience in web development...'}</p>
+                                </section>
+                                <section>
+                                    <h2 class="text-lg uppercase border-b-2 border-gray-300 pb-2 mb-4">Experience</h2>
+                                    <div id="experience-preview">${renderExperience(content.experience)}</div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>`;
+                } else if (template === 'it-2') {
+                    html = `
+                    <div class="max-w-[210mm] w-full font-sans text-black bg-white shadow-md grid grid-cols-3">
+                        <div class="col-span-1 bg-gray-100 p-6 space-y-6 text-sm">
+                            <div class="flex justify-center">
+                                <img src="${content.profileImage || '../assets/img/charles.png'}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-slate-700 object-cover" />
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold mb-2">Contact</h2>
+                                <hr class="border-t-2 border-slate-700 mb-2">
+                                <p>📞 ${content.phone || '123-456-7890'}</p>
+                                <p>✉️ ${content.email || 'example@email.com'}</p>
+                                <p>📍 ${content.address || '123 Main Street, City'}</p>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold mb-2">About</h2>
+                                <hr class="border-t-2 border-slate-700 mb-2">
+                                <p>${content.summary || 'Passionate and detail-oriented IT professional...'}</p>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold mb-2">Skills</h2>
+                                <hr class="border-t-2 border-slate-700 mb-2">
+                                <ul class="list-disc list-inside space-y-1" id="skills-preview">${renderSkills(content.skills)}</ul>
+                            </div>
+                        </div>
+                        <div class="col-span-2 bg-slate-700 text-white p-8 space-y-8">
+                            <div>
+                                <h1 class="text-3xl font-bold">${content.name || 'John Roe'}</h1>
+                                <p class="text-lg">${content.title || 'IT Professional'}</p>
+                            </div>
+                            <div>
+                                <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Work Experience</h2>
+                                <div class="space-y-4 border-l-2 border-white pl-4" id="experience-preview">${renderExperience(content.experience)}</div>
+                            </div>
+                            <div>
+                                <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Education</h2>
+                                <div class="space-y-4 border-l-2 border-white pl-4" id="education-preview-list">${renderEducation(content.education)}</div>
+                            </div>
+                            <div>
+                                <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Language</h2>
+                                <ul class="list-disc list-inside text-sm space-y-1 pl-2"><li>English</li><li>Spanish</li></ul>
+                            </div>
+                        </div>
+                    </div>`;
+                } else if (template === 'it-3') {
+                    html = `
+                    <div class="max-w-[210mm] w-full font-sans text-black bg-white shadow-md">
+                        <div class="bg-slate-800 text-white px-8 py-6 flex items-center gap-6">
+                            <div>
+                                <img src="${content.profileImage || '../assets/img/charles.png'}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
+                            </div>
+                            <div>
+                                <h1 class="text-3xl font-bold leading-tight">${content.name || 'John Roe'}</h1>
+                                <p class="text-blue-300 text-lg">${content.title || 'IT Graduate'}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-10">
+                            <div class="col-span-3 bg-gray-100 p-6 space-y-6 text-sm">
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Contact</h2>
+                                    <hr class="border-t-2 border-blue-700 mb-2" />
+                                    <p>📞 ${content.phone || '123-456-7890'}</p>
+                                    <p>✉️ ${content.email || 'john@email.com'}</p>
+                                    <p>📍 ${content.address || '123 Main St, City'}</p>
+                                </div>
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Skills</h2>
+                                    <hr class="border-t-2 border-blue-700 mb-2" />
+                                    <ul class="list-disc list-inside space-y-1" id="skills-preview">${renderSkills(content.skills)}</ul>
+                                </div>
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Languages</h2>
+                                    <hr class="border-t-2 border-blue-700 mb-2" />
+                                    <ul class="list-disc list-inside space-y-1"><li>English</li><li>Spanish</li></ul>
+                                </div>
+                            </div>
+                            <div class="col-span-7 p-8 space-y-8">
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">About Me</h2>
+                                    <hr class="border-t-2 border-blue-700 mb-2" />
+                                    <p class="text-sm">${content.summary || 'Motivated IT graduate with a passion for software development...'}</p>
+                                </div>
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Work Experience</h2>
+                                    <hr class="border-t-2 border-blue-700 mb-4" />
+                                    <div class="space-y-4" id="experience-preview">${renderExperience(content.experience)}</div>
+                                </div>
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Education</h2>
+                                    <hr class="border-t-2 border-blue-700 mb-4" />
+                                    <div class="space-y-4" id="education-preview-list">${renderEducation(content.education)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                } else {
+                    // Default template
+                    html = `
+                    <div class="default-template-preview" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #334155; line-height: 1.6; padding: 2rem; background: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                        <div class="preview-header">
+                            ${(content.profileImage ? `<div class="profile-picture"><img src="${content.profileImage}" alt="Profile Picture"></div>` : '')}
+                            <h1>${content.name || 'Your Name'}</h1>
+                            <h2>${content.title || 'Professional Title'}</h2>
+                            <div class="contact-info">
+                                <p>${content.email || 'email@example.com'}</p>
+                                <p>${content.phone || '+1 234 567 890'}</p>
+                            </div>
+                        </div>
+                        <div class="preview-summary">
+                            <h3>Professional Summary</h3>
+                            <p>${content.summary || 'Your professional summary...'}</p>
+                        </div>
+                    </div>`;
+                }
+                pdfContainer.innerHTML = html;
+                pdfContainer.style.display = 'block';
+                await html2pdf().from(pdfContainer).save(`${resume.title}.pdf`);
+                pdfContainer.innerHTML = '';
+                pdfContainer.style.display = 'none';
             }
 
             async function handleDelete(id) {
@@ -365,5 +578,6 @@
             loadResumes();
         });
     </script>
+    <div id="pdfPreviewContainer" style="display:none;"></div>
 </body>
 </html>
