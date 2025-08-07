@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ResumeGo! - Professional Resume Templates</title>
-    <link rel="stylesheet" href="../src/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  
     <style>
         :root {
             --primary: #4361ee;
@@ -438,28 +439,42 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="nav-left">
-                    <a href="index.html" class="logo">
-                        <img src="../assets/img/logo.png" alt="ResumeGo Logo">
-                        <span class="logo-text text-2xl font-bold text-blue-600">ResumeGo!</span>
-                    </a>
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="../assets/img/logo.png" class="h-8 w-auto" alt="ResumeGo Logo" />
+                    <span class="text-2xl font-bold text-blue-600">ResumeGo!</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 text-blue-600 font-medium border border-blue-600 rounded hover:bg-blue-600 hover:text-white transition-colors">Login</a>
+                    <a href="register.html" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-colors">Sign Up</a>
                 </div>
-                <div class="nav-right">
-                    <div class="auth-buttons" id="authButtons">
-                        <a href="login.html" class="btn btn-outline text-blue-600 font-medium">Login</a>
-                        <a href="register.html" class="btn font-medium">Sign Up</a>
-                    </div>
-                </div>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </nav>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="login.html" class="px-4 py-2 text-blue-600 font-medium border border-blue-600 rounded hover:bg-blue-600 hover:text-white transition-colors text-center">Login</a>
+                    <a href="register.html" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-colors text-center">Sign Up</a>
+                </div>
+            </div>
         </div>
     </header>
 
     <section class="hero">
         <h1 class="text-5xl font-bold text-black mb-6 leading-tight">Free Resume Builder</h1>
-        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">Build a winning resume in minutes with our easy-to-use tools and professional templates</p>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">Build a winning resume in minutes with our easy-to-use tools and professional templates</p>
         <div class="hero-buttons">
             <a href="register.html" class="btn btn-primary">Get Started Free</a>
             <a href="#categories" class="btn btn-outline">View Templates</a>
@@ -481,12 +496,32 @@
             <div class="container">
                 <h2 class="text-4xl font-bold text-center text-gray-900 mb-8">Resume Templates for These Fields</h2>
                 
-                <div class="industry-tags">
-                  <a href="#" data-category="it"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Information Technology</span></a>
-                  <a href="#" data-category="accountant"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Accountant</span></a>
-                  <a href="#" data-category="business"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Business Administration</span></a>
-                  <a href="#" data-category="civil"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Civil Engineer</span></a>
-                  <a href="#" data-category="generic"><span class="industry-tag bg-white px-6 py-3 rounded-full font-medium text-gray-700 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">Generic Resume</span></a>
+                <div class="industry-tags flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 px-2 sm:px-4">
+                    <a href="#" data-category="it" class="flex-shrink-0">
+                        <span class="industry-tag block bg-white px-3 py-2 sm:px-4 sm:py-2.5 lg:px-6 lg:py-3 rounded-full font-medium text-gray-700 text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">
+                            Information Technology
+                        </span>
+                    </a>
+                    <a href="#" data-category="accountant" class="flex-shrink-0">
+                        <span class="industry-tag block bg-white px-3 py-2 sm:px-4 sm:py-2.5 lg:px-6 lg:py-3 rounded-full font-medium text-gray-700 text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">
+                            Accountant
+                        </span>
+                    </a>
+                    <a href="#" data-category="business" class="flex-shrink-0">
+                        <span class="industry-tag block bg-white px-3 py-2 sm:px-4 sm:py-2.5 lg:px-6 lg:py-3 rounded-full font-medium text-gray-700 text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">
+                            Business Administration
+                        </span>
+                    </a>
+                    <a href="#" data-category="civil" class="flex-shrink-0">
+                        <span class="industry-tag block bg-white px-3 py-2 sm:px-4 sm:py-2.5 lg:px-6 lg:py-3 rounded-full font-medium text-gray-700 text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">
+                            Civil Engineer
+                        </span>
+                    </a>
+                    <a href="#" data-category="generic" class="flex-shrink-0">
+                        <span class="industry-tag block bg-white px-3 py-2 sm:px-4 sm:py-2.5 lg:px-6 lg:py-3 rounded-full font-medium text-gray-700 text-xs sm:text-sm lg:text-base shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">
+                            Generic Resume
+                        </span>
+                    </a>
                 </div>
                 
                 <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mt-8 mb-12 leading-relaxed">
@@ -503,7 +538,7 @@
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">IT Professional - Modern</h3>
                             <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for IT professionals. Features a professional layout with emphasis on technical skills.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-1" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -518,7 +553,7 @@
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">IT Professional - Minimalist</h3>
                             <p class="text-gray-600 leading-relaxed mb-4">A minimalist design focusing on readability and content. Ideal for showcasing technical expertise.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-2" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -533,7 +568,7 @@
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">IT Professional - Sidebar</h3>
                             <p class="text-gray-600 leading-relaxed mb-4">Modern design with a sidebar layout. Perfect for highlighting technical skills and certifications.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-3" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -548,7 +583,7 @@
                             <h3>IT Professional - Card Based</h3>
                             <p>Card-based design with hover effects. Great for presenting technical projects and achievements.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-4" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -563,7 +598,7 @@
                             <h3>IT Professional - Timeline</h3>
                             <p>Timeline-based design for chronological presentation. Excellent for showcasing career progression.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-5" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -578,7 +613,7 @@
                             <h3>IT Professional - Split Layout</h3>
                             <p>Split layout with prominent sidebar. Ideal for emphasizing technical skills and certifications.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-6" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -593,7 +628,7 @@
                             <h3>IT Professional - Gradient</h3>
                             <p>Gradient-based design with modern aesthetics. Perfect for a contemporary tech professional.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-7" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -608,7 +643,7 @@
                             <h3>IT Professional - Dark Theme</h3>
                             <p>Dark theme design for a bold look. Great for making a strong impression.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-8" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -623,7 +658,7 @@
                             <h3>IT Professional - Minimalist Split</h3>
                             <p>Split layout with minimalist design. Perfect for a clean, professional presentation.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-9" class="btn btn-primary">Use Template</a>
+                                <a href="login.html" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -638,7 +673,7 @@
                             <h3>IT Professional - Card Gradient</h3>
                             <p>Card-based design with gradient accents. Modern and visually appealing.</p>
                             <div class="template-actions">
-                                <a href="resumebuilder.html?template=it-10" class="btn btn-primary">Use Template</a>
+                                <a href="login.html0" class="btn btn-primary">Use Template</a>
                                 <a href="templates/it-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
                             </div>
                         </div>
@@ -860,6 +895,18 @@
         // Initialize user menu
         Auth.updateUserMenu();
         Auth.initUserMenu();
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
         
         document.addEventListener('DOMContentLoaded', function() {
             const industryTags = document.querySelectorAll('.industry-tags a');
