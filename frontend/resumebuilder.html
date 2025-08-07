@@ -168,9 +168,21 @@
             display: block;
         }
 
-        .preview-toggle.active {
-            background: var(--secondary-color);
+            .preview-toggle.active {
+        background: var(--secondary-color);
+    }
+    
+   
+    @media (max-width: 768px) {
+        .preview-toggle {
+            min-height: 44px; 
+            min-width: 44px;
+            padding: 12px 24px;
+            font-size: 16px; 
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
+    }
     }
 
     /* Section Styling */
@@ -1541,7 +1553,14 @@
                                     const removeBtn = document.createElement('button');
                                     removeBtn.className = 'remove-skill-btn';
                                     removeBtn.textContent = '×';
-                                    removeBtn.addEventListener('click', () => skillBadge.remove());
+                                    removeBtn.addEventListener('click', () => {
+                                        console.log('Skill badge remove clicked');
+                                        skillBadge.remove();
+                                        if (isPreviewActive) {
+                                            updatePreview();
+                                        }
+                                    });
+
                                     skillBadge.appendChild(removeBtn);
                                     skillsList.appendChild(skillBadge);
                                 });
@@ -2516,10 +2535,14 @@
 
         // Close preview when clicking outside on mobile
         document.addEventListener('click', (e) => {
+            // Prevent the event from triggering if the click is on the preview toggle button
+            if (e.target.closest('.preview-toggle') || e.target.id === 'previewToggle') {
+                return;
+            }
+            
             if (window.innerWidth <= 768 && 
                 isPreviewActive && 
-                !rightPanel.contains(e.target) && 
-                !previewToggle.contains(e.target)) {
+                !rightPanel.contains(e.target)) {
                 togglePreview();
             }
         });
@@ -2905,7 +2928,6 @@
         let currentTextarea = null;
         let currentPopup = null;
         // TODO: Set up your OpenAI API key in your environment variables
-         const API_KEY = process.env.OPENAI_API_KEY || '';
 
         function addAIEnhanceButtons() {
             const textareas = document.querySelectorAll('textarea');

@@ -36,13 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 showError(response.message || 'Login failed');
             }
         } catch (error) {
-            showError('An error occurred during login');
+            showError(error.message || 'An error occurred during login');
             console.error('Login error:', error);
         }
     });
 
     function showError(message) {
         errorMessage.textContent = message;
+        errorMessage.className = 'message error-message';
         errorMessage.style.display = 'block';
     }
 }); 

@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../src/output.css" rel="stylesheet">
     <title>IT Template No 1</title>
-</head>
-<body class="bg-[#fdfaf8] font-sans">
+    
+    <style>
+      /* Auto-fit resume width to the screen */
+      div.w-\[210mm\] {
+        width: 210mm;                /* A4 width on desktop */
+        max-width: 100%;             /* never exceed screen width */
+      }
 
-  <div class="w-full max-w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8">
-    <br><br><br>
+      @media (max-width: 1024px) {
+        div.w-\[210mm\] {
+          width: 100%;               /* shrink to screen width */
+          transform: none;           /* remove manual scaling */
+        }
+      }
+    </style>
+
+</head>
+<body class="bg-[#fdfaf8] font-sans overflow-x-auto">
+  <div class="min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8">
+
 
     <!-- HEADER -->
     <div class="flex items-center p-6 bg-[#582b2a] text-white">
