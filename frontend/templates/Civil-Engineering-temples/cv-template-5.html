@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../../../src/output.css" rel="stylesheet" />
+  <title>CVTemplate No 5</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
+
+</head>
+<body class="bg-white justify-center py-10">
+  <div class="resume-container w-full font-sans text-black shadow-md bg-[#a8c6df]">
+
+    <!-- HEADER -->
+    <div class="bg-[#2b608a] px-8 py-6 flex items-center text-white">
+      <div class="w-1/3"></div>
+      <div class="w-1/2 flex flex-col items-center justify-center text-center">
+        <h1 class="text-4xl font-bold uppercase">Charles Andrew Torres</h1>
+        <p class="text-sm">Civil Engineering</p>
+      </div>
+      <div class="w-1/3 flex justify-center">
+        <div class="w-32 h-32 rounded-full border-4 border-white overflow-hidden">
+          <img src="../../../assets/img/charles.png" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT STRIP -->
+    <div class="bg-[#142a4e] text-white text-sm flex flex-wrap justify-center gap-6 px-4 py-3">
+      <div class="flex items-center gap-2"><span>📞</span> +123-456-7890</div>
+      <div class="flex items-center gap-2"><span>✉️</span> CharlesTorres@gmail.com</div>
+      <div class="flex items-center gap-2"><span>📍</span> 123 Anywhere St., Any City, ST 12345</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex w-full">
+      <!-- LEFT COLUMN (70%) -->
+      <div class="w-[70%] bg-[#2b608a] text-white flex flex-col gap-8 py-8 px-8">
+        <!-- ABOUT ME -->
+        <div>
+          <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">ABOUT ME</div>
+          <p class="text-sm leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+          </p>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div>
+          <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">EXPERIENCE</div>
+          <div class="space-y-4 text-sm">
+            <div>
+              <p class="font-bold">Job position here</p>
+              <p><span class="font-semibold">Company Name</span> | Jan 2019 - Jan 2022</p>
+              <ul class="list-disc pl-5 mt-1">
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-bold">Job position here</p>
+              <p><span class="font-semibold">Company Name</span> | Jan 2019 - Jan 2022</p>
+              <ul class="list-disc pl-5 mt-1">
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div>
+          <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">EDUCATION</div>
+          <div class="text-sm space-y-2">
+            <div>
+              <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
+              <p>Dominican College of Tarlac</p>
+            </div>
+            <div>
+              <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
+              <p>Cristo Rey High School – Senior Department</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN (30%) -->
+      <div class="w-[30%] flex flex-col justify-start py-8 px-8 space-y-8">
+        <!-- SKILLS -->
+        <div>
+          <div class="bg-[#2b608a] text-white font-bold rounded-full px-6 py-2 w-max mb-2">SKILLS</div>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>Communication</li>
+            <li>Creativity</li>
+            <li>Leadership</li>
+            <li>Teamwork</li>
+            <li>Problem Solving</li>
+          </ul>
+        </div>
+
+        <!-- LANGUAGES -->
+        <div>
+          <div class="bg-[#2b608a] text-white font-bold rounded-full px-6 py-2 w-max mb-2">LANGUAGE</div>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>ENGLISH</li>
+            <li>FILIPINO</li>
+            <li>SPANISH</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

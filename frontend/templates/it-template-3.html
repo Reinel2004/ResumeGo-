@@ -5,9 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../src/output.css" rel="stylesheet">
     <title>IT Template No 3</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
 </head>
-<body class="bg-white flex justify-center py-10">
-  <div class="max-w-[210mm] w-full font-sans text-black bg-white shadow-md">
+<body class="bg-white overflow-x-auto">
+  <div class="resume-container font-sans text-black bg-white shadow-md">
 
     <!-- Header -->
     <div class="bg-slate-800 text-white px-8 py-6 flex items-center gap-6">
@@ -18,7 +42,7 @@
 
     <!-- Name and Title -->
     <div>
-        <h1 class="text-3xl font-bold leading-tight">JohnRoe</h1>
+        <h1 class="text-3xl font-bold leading-tight">Charles Andrew Torres</h1>
         <p class="text-blue-300 text-lg">IT Graduate</p>
     </div>
     </div>
@@ -32,7 +56,7 @@
           <h2 class="text-blue-700 font-bold text-lg mb-2">Contact</h2>
           <hr class="border-t-2 border-blue-700 mb-2" />
           <p>📞 123-456-7890</p>
-          <p>✉️ john@email.com</p>
+          <p>✉️ CharlesTorres@gmail.com</p>
           <p>📍 123 Main St, City</p>
         </div>
 

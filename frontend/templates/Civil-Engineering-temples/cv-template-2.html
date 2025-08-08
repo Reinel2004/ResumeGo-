@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../src/output.css" rel="stylesheet" />
+    <title>CVTemplate No 2</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
+
+</head>
+  <body class="bg-white justify-center py-10">
+    <div class="resume-container font-sans text-black bg-white shadow-md p-8">
+    
+    <!-- Header -->
+    <div class="flex items-center gap-6">
+      <!-- Image -->
+      <div class="w-32 h-32 flex-shrink-0">
+        <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover rounded-full border-[6px] border-[#2A7F8E]" />
+      </div>
+
+      <!-- Name & Title -->
+      <div class="flex flex-col justify-center">
+        <h1 class="text-3xl font-bold text-[#2A7F8E]">Charles Andrew Torres</h1>
+        <hr class="border-t-4 border-[#2A7F8E] w-140 my-2" />
+        <p class="text-lg font-semibold text-[#2A7F8E]">Civil Engineering</p>
+      </div>
+    </div>
+
+    <br />
+
+    <!-- Two-Column Content with 40/60 split -->
+    <div class="flex gap-x-6">
+      
+      <!-- LEFT Column - 40% -->
+      <div class="basis-2/5 space-y-10">
+        
+        <!-- Contact -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#2A7F8E]">Contact</h2>
+          <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
+          <div class="text-sm space-y-1 pl-2">
+            <p>📧 CharlesTorres@gmail.com</p>
+            <p>📍 123 Anywhere St., Any City</p>
+            <p>📞 +123-456-7890</p>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Education</h2>
+          <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
+          <div class="space-y-4 text-sm pl-2">
+            <div>
+              <p class="text-[#2A7F8E] font-bold">2026</p>
+              <p class="font-semibold">Dominican College of Tarlac</p>
+              <p>B.S Information Technology</p>
+            </div>
+            <div>
+              <p class="text-[#2A7F8E] font-bold">2022</p>
+              <p class="font-semibold">Cristo Rey High School - Senior Dept.</p>
+              <p>HUMSS - Humanities Social and Sciences</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Skills</h2>
+          <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>Communication</li>
+            <li>Creativity</li>
+            <li>Leadership</li>
+            <li>Teamwork</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RIGHT Column - 60% -->
+      <div class="basis-3/5 space-y-10">
+        
+        <!-- Profile -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Profile</h2>
+          <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
+          <p class="text-sm text-gray-800 pl-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rutrum maximus mauris sed sodales.
+          </p>
+        </div>
+
+        <!-- Experience -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Experience</h2>
+          <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
+          <p class="font-semibold text-sm">Job position here</p>
+          <p class="text-sm"><strong>Company Name | Jan 2019 - Jan 2022</strong></p>
+          <ul class="list-disc pl-6 text-sm text-gray-800 mt-1">
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+          </ul>
+        </div>
+
+        <!-- Language -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Language</h2>
+          <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>English</li>
+            <li>Filipino</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

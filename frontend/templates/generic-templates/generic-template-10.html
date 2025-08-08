@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../src/output.css" rel="stylesheet">
+    <title>Generic Template No 10</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
+</head>
+<body class="bg-white justify-center py-10">
+  <div class="resume-container text-black font-sans space-y-8 bg-white p-8 shadow-md">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+        <p class="text-lg font-semibold">Hospitality Server</p>
+      </div>
+      <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
+    </div>
+
+    <hr />
+
+    <!-- Summary -->
+    <div>
+      <h2 class="font-semibold mb-1">Summary</h2>
+      <div class="pl-4 text-sm space-y-1">
+        <p>
+          Personable and professional Restaurant Server with 7 years of experience in fast casual,
+          and fine dining settings.
+        </p>
+        <p>
+          Extensive knowledge of wine and food pairings with a specialization in French cuisine.
+        </p>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div>
+      <h2 class="font-semibold mb-1">Education</h2>
+      <div class="pl-4 text-sm space-y-1">
+        <p>
+          Honors B.Sc. in Electrical Engineering, University of Waterloo, 2008
+        </p>
+        <p>
+          Partially completed M.S. in Automation Engineering Process Control, University of
+          Waterloo (currently in process)
+        </p>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div>
+      <h2 class="font-semibold mb-1">Skills</h2>
+      <ul class="list-disc list-inside text-sm pl-4 space-y-1">
+        <li>
+          Background in Electrical Circuits and Programming Concepts.
+        </li>
+        <li>
+          Experience with Allen Bradley RSLogix, WonderWare, VB, C#, MatLab, GE Proficy iFix, MS SQL Server, Oracle PL/SQL, HTML, ASP.NET, OPC, Excel VBA
+        </li>
+        <li>
+          Integration of legacy systems and support for level 1, 2, and 3 data collection.
+        </li>
+        <li>
+          Development of custom vision software and control systems for EAF.
+        </li>
+        <li>
+          Strong skills in data analysis, simulation, control design, and optimization.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Work Experience -->
+    <div>
+      <h2 class="font-semibold uppercase mb-1">Work Experience</h2>
+        <br>
+      <!-- Job 1 -->
+      <div class="pl-4 space-y-1">
+        <div class="flex justify-between font-medium">
+          <p>Chez Pierre<br />French Restaurant</p>
+          <p>Jan 2012 – Present</p>
+        </div>
+        <p class="italic font-semibold">Head Server</p>
+        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+          <li>Greeting guests in a prompt and courteous manner.</li>
+          <li>
+            Taking orders from patrons, often memorizing the orders if there were 5 patrons or less.
+          </li>
+        </ul>
+      </div>
+      <br>
+      <!-- Additional job? Just copy this format -->
+      
+      <div class="pl-4 space-y-1">
+        <div class="flex justify-between font-medium">
+          <p>Company Name<br />Location</p>
+          <p>Dates</p>
+        </div>
+        <p class="italic font-semibold">Job Title</p>
+        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+          <li>Responsibility 1</li>
+          <li>Responsibility 2</li>
+        </ul>
+      </div>
+      
+
+    </div>
+
+  </div>
+</body>
+</html>

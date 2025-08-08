@@ -5,10 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../src/output.css" rel="stylesheet">
     <title>IT Template No 2</title>
+
+  <style>
+
+    
+    /* Always keep resume fixed A4 width */
+    .resume-container {
+      width: 210mm;
+      max-width: 210mm;
+      min-width: 210mm;
+      margin: 0 auto;
+    }
+
+    /* Scale down on tablets */
+    @media (max-width: 1024px) {
+      .resume-container {
+        transform: scale(0.8);
+        transform-origin: top center;
+      }
+    }
+
+    /* Scale down more on phones */
+    @media (max-width: 600px) {
+      .resume-container {
+        transform: scale(0.6);
+        transform-origin: top center;
+      }
+    }
+  </style>
+
+
 </head>
-  <body class="bg-white flex justify-center py-10">
-    <div class="max-w-[210mm] w-full font-sans text-black bg-white shadow-md grid grid-cols-3">
-   
+<body class="bg-white overflow-x-auto">
+    <div class="resume-container font-sans text-black bg-white shadow-md grid grid-cols-3 min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto">
+
     <!-- Left Column -->
     <div class="col-span-1 bg-gray-100 p-6 space-y-6 text-sm">
     <!-- Image -->
@@ -53,7 +83,7 @@
       <div class="col-span-2 bg-slate-700 text-white p-8 space-y-8">
         <!-- Header -->
         <div>
-          <h1 class="text-3xl font-bold">John Roe</h1>
+          <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
           <p class="text-lg">IT Professional</p>
         </div>
 
@@ -104,4 +134,4 @@
       </div>
     </div>
   </body>
-</html> 
+</html>

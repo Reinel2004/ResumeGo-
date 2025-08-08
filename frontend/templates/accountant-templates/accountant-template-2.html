@@ -3,516 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accountant Template 2 - Modern | ResumeGo</title>
-    <style>
-        :root {
-            --primary-color: #2d3748;
-            --secondary-color: #4a5568;
-            --accent-color: #4299e1;
-            --text-color: #1a202c;
-            --bg-color: #ffffff;
-            --light-gray: #f7fafc;
-            --border-color: #e2e8f0;
-            --success-color: #48bb78;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    <link href="../../../src/output.css" rel="stylesheet" />
+    <title>Accountancy Template No 2</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
 
-        .resume-container {
-            max-width: 210mm;
-            margin: 2rem auto;
-            background: var(--bg-color);
-            box-shadow: var(--card-shadow);
-            border-radius: 12px;
-            overflow: hidden;
-        }
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
 
-        .header {
-            background: var(--primary-color);
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .profile-picture {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-color);
-            margin: 0 auto 1.5rem;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            position: relative;
-        }
-
-        .profile-picture::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent-color), transparent);
-            border-radius: 50%;
-            z-index: -1;
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .profile-picture img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .header h2 {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: var(--accent-color);
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .content {
-            padding: 2rem;
-        }
-
-        .section {
-            margin-bottom: 2.5rem;
-        }
-
-        .section-title {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-2px);
-        }
-
-        .skill-category h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-list li::before {
-            content: "▹";
-            color: var(--accent-color);
-        }
-
-        .experience-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .experience-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-title {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .experience-date {
-            color: var(--text-color);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        .experience-company {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .experience-description {
-            font-size: 0.9rem;
-        }
-
-        .experience-description ul {
-            list-style: none;
-            margin-top: 0.5rem;
-        }
-
-        .experience-description li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.25rem;
-        }
-
-        .experience-description li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-        }
-
-        .certifications {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .cert-item {
-            background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .cert-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .cert-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-org {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .education-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-degree {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .education-date {
-            color: var(--text-color);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        .education-school {
-            font-size: 0.95rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .achievements {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .achievement-item {
-            background: var(--light-gray);
-            padding: 1.25rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .achievement-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .achievement-content h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.25rem;
-        }
-
-        .achievement-content p {
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
-
-        @media print {
-            body {
-                background: white;
-            }
-            .resume-container {
-                margin: 0;
-                box-shadow: none;
-            }
-            .skill-category:hover,
-            .cert-item:hover {
-                transform: none;
-            }
-        }
-    </style>
 </head>
-<body>
-    <div class="resume-container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="profile-picture">
-                <img src="assets/images/profile-placeholder.jpg" alt="Profile Picture">
-            </div>
-            <h1>John Doe</h1>
-            <h2>Senior Accountant</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧</span>
-                    <span>john.doe@example.com</span>
-                </div>
-                <div class="contact-item">
-                    <span>📱</span>
-                    <span>(123) 456-7890</span>
-                </div>
-                <div class="contact-item">
-                    <span>📍</span>
-                    <span>New York, NY</span>
-                </div>
-                <div class="contact-item">
-                    <span>🔗</span>
-                    <span>linkedin.com/in/johndoe</span>
-                </div>
-            </div>
-        </header>
+<body class="bg-white font-sans justify-center py-10">
+  <div class="resume-container w-full font-sans text-black bg-white shadow-md mx-auto p-8 grid grid-cols-3 gap-8">
 
-        <div class="content">
-            <!-- Professional Summary Section -->
-            <section class="section">
-                <h3 class="section-title">Professional Summary</h3>
-                <p>Certified Public Accountant with over 8 years of experience in financial analysis, tax planning, and audit management. Proven track record of improving financial processes and reducing costs. Expert in GAAP, IFRS, and tax regulations.</p>
-            </section>
+    <!-- Left Column -->
+    <div class="col-span-1 space-y-8">
+    <!-- Profile Photo -->
+    <div class="flex justify-center">
+        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border-4 border-gray-700" />
+    </div>
 
-            <!-- Key Skills Section -->
-            <section class="section">
-                <h3 class="section-title">Key Skills</h3>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h4>Technical Skills</h4>
-                        <ul class="skill-list">
-                            <li>Financial Analysis</li>
-                            <li>Tax Planning</li>
-                            <li>Audit Management</li>
-                            <li>GAAP & IFRS</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Software Proficiency</h4>
-                        <ul class="skill-list">
-                            <li>QuickBooks</li>
-                            <li>SAP</li>
-                            <li>Excel Advanced</li>
-                            <li>Oracle Financials</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Specializations</h4>
-                        <ul class="skill-list">
-                            <li>Tax Compliance</li>
-                            <li>Financial Reporting</li>
-                            <li>Cost Analysis</li>
-                            <li>Budget Planning</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Professional Experience Section -->
-            <section class="section">
-                <h3 class="section-title">Professional Experience</h3>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div class="experience-title">Senior Accountant</div>
-                        <div class="experience-date">Jan 2020 - Present</div>
-                    </div>
-                    <div class="experience-company">Global Financial Services Inc.</div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Led financial reporting and analysis for a $50M portfolio</li>
-                            <li>Implemented new accounting software, reducing processing time by 40%</li>
-                            <li>Managed team of 5 junior accountants and provided mentorship</li>
-                            <li>Developed and maintained internal controls ensuring compliance with SOX</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div class="experience-title">Staff Accountant</div>
-                        <div class="experience-date">Jun 2017 - Dec 2019</div>
-                    </div>
-                    <div class="experience-company">Regional Accounting Firm</div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Prepared and reviewed financial statements for 20+ clients</li>
-                            <li>Conducted tax planning and preparation for corporate clients</li>
-                            <li>Assisted in external audits and implemented recommendations</li>
-                            <li>Reduced month-end closing time by 25% through process improvements</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Key Achievements Section -->
-            <section class="section">
-                <h3 class="section-title">Key Achievements</h3>
-                <div class="achievements">
-                    <div class="achievement-item">
-                        <div class="achievement-icon">🏆</div>
-                        <div class="achievement-content">
-                            <h4>Cost Reduction Initiative</h4>
-                            <p>Led a project that reduced operational costs by 15% through process optimization</p>
-                        </div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-icon">📈</div>
-                        <div class="achievement-content">
-                            <h4>Revenue Growth</h4>
-                            <p>Implemented new financial strategies resulting in 20% revenue increase</p>
-                        </div>
-                    </div>
-                    <div class="achievement-item">
-                        <div class="achievement-icon">🎯</div>
-                        <div class="achievement-content">
-                            <h4>Process Improvement</h4>
-                            <p>Developed automated reporting system reducing manual work by 60%</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Certifications Section -->
-            <section class="section">
-                <h3 class="section-title">Certifications</h3>
-                <div class="certifications">
-                    <div class="cert-item">
-                        <div class="cert-title">Certified Public Accountant (CPA)</div>
-                        <div class="cert-org">American Institute of CPAs</div>
-                        <div>Issued: June 2018</div>
-                        <div>License #: 123456</div>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-title">Certified Management Accountant (CMA)</div>
-                        <div class="cert-org">Institute of Management Accountants</div>
-                        <div>Issued: March 2019</div>
-                        <div>License #: 789012</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Education Section -->
-            <section class="section">
-                <h3 class="section-title">Education</h3>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="education-degree">Master of Accountancy</div>
-                        <div class="education-date">2015 - 2017</div>
-                    </div>
-                    <div class="education-school">New York University</div>
-                    <div>Specialization in Financial Accounting</div>
-                </div>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="education-degree">Bachelor of Science in Accounting</div>
-                        <div class="education-date">2011 - 2015</div>
-                    </div>
-                    <div class="education-school">University of Pennsylvania</div>
-                    <div>Dean's List, Accounting Department</div>
-                </div>
-            </section>
+    <!-- Contact -->
+    <div>
+        <h2 class="text-lg font-bold flex items-center gap-2">
+        <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+        Contact
+        </h2>
+        <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+        <p>+123-456-7890</p>
+        <p>CharlesTorres@gmail.com</p>
+        <p>123 Anywhere St., Any City</p>
         </div>
     </div>
+
+    <!-- Education -->
+    <div>
+        <h2 class="text-lg font-bold flex items-center gap-2">
+        <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+        Education
+        </h2>
+        <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+        <p>2025</p>
+        <p class="text-xs">Dominican College of Tarlac</p>
+        <p class="text-xs">Bachelor of Science Information Technology</p>
+        </div>
+    </div>
+
+    <!-- Skills -->
+    <div>
+        <h2 class="text-lg font-bold flex items-center gap-2">
+        <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+        Skills
+        </h2>
+        <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+        <ul class="list-disc list-inside">
+            <li>Financial Accounting</li>
+        </ul>
+        </div>
+    </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-span-2 space-y-6">
+      <!-- Header -->
+      <br>
+      <div class="text-left">
+        <h1 class="text-4xl font-bold leading-none">Charles Andrew Torres</h1>
+        <p class="text-sm text-gray-600">Accountant</p>
+      </div>
+      <br>
+      <!-- About -->
+      <div class="bg-blue-100 p-6 rounded shadow">
+        <h2 class="text-lg font-bold border-b border-gray-400 mb-2">ABOUT</h2>
+        <p class="text-sm text-gray-800">
+          I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+        </p>
+      </div>
+
+      <!-- Experience -->
+      <div class="bg-blue-100 p-6 rounded shadow">
+      <h2 class="text-lg font-bold border-b border-gray-400 mb-4">EXPERIENCE</h2>
+
+    <!-- Experience Entry 1 -->
+    <div class="mb-4">
+        <p class="text-sm font-semibold">2019 – 2022</p>
+        <p class="text-sm">Job position here<br>Company Name | Location</p>
+        <p class="text-sm mt-2 text-gray-800">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
+        </p>
+    </div>
+
+    <!-- Experience Entry 2 -->
+        <div class="mb-4">
+            <p class="text-sm font-semibold">2000 – 2000</p>
+            <p class="text-sm">Another position<br>Another Company | Location</p>
+            <p class="text-sm mt-2 text-gray-800">
+            Description of the responsibilities and achievements for this job position.
+            </p>
+        </div>
+     
+    <!-- Experience Entry 3 -->
+        <div class="mb-4">
+            <p class="text-sm font-semibold">2000 – 2000</p>
+            <p class="text-sm">Another position<br>Another Company | Location</p>
+            <p class="text-sm mt-2 text-gray-800">
+            Description of the responsibilities and achievements for this job position.
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+  </div>
+
 </body>
-</html> 
+</html>

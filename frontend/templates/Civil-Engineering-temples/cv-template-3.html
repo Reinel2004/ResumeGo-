@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../src/output.css" rel="stylesheet" />   
+    <title>CVTemplate No 3</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+    
+</head>
+<body class="bg-white justify-center py-10">
+  <div class="resume-container font-sans text-black shadow-md grid grid-cols-[30%_70%]">
+    
+    <!-- Left Column -->
+    <div class="bg-[#1C6F6A] text-white p-6 space-y-8">
+      <!-- Profile Image -->
+      <div class="flex justify-center">
+        <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 object-cover rounded shadow-lg border-4 border-white" />
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h2 class="text-xl font-bold uppercase mb-2">Contact</h2>
+        <div class="text-sm space-y-2">
+          <p>+123-456-7890</p>
+          <p>CharlesTorres@gmail.com</p>
+          <p>123 Anywhere St., Any City, ST 12345</p>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div>
+        <h2 class="text-xl font-bold uppercase mb-2">Skills</h2>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>Communication</li>
+          <li>Creativity</li>
+          <li>Leadership</li>
+          <li>Teamwork</li>
+          <li>Problem Solving</li>
+        </ul>
+      </div>
+
+      <!-- Language -->
+      <div>
+        <h2 class="text-xl font-bold uppercase mb-2">Language</h2>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>English</li>
+          <li>Filipino</li>
+          <li>Spanish</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="bg-white p-6 space-y-8">
+      <!-- Header -->
+       <br>
+      <div class="text-center">
+        <br>
+        <h1 class="text-3xl font-bold text-[#1C6F6A]">Charles Andrew Torres</h1>
+        <p class="text-lg font-semibold text-[#1C6F6A] tracking-widest">Civil Engineer</p>
+        <br>
+      </div>
+
+      <!-- About Me -->
+      <div>
+        <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">About Me</h2>
+        <p class="text-sm text-gray-700">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. 
+          Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+        </p>
+      </div>
+
+      <!-- Education -->
+      <div>
+        <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">Education</h2>
+        <div class="text-sm space-y-3">
+          <div>
+            <p class="font-semibold">B.S Information Technology | 2022 - 2026</p>
+            <p>Dominican College of Tarlac</p>
+          </div>
+          <div>
+            <p class="font-semibold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
+            <p>Cristo Rey High School – Senior Department</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div>
+        <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">Experience</h2>
+        <div class="text-sm space-y-3">
+          <div>
+            <p class="font-semibold">Job position here</p>
+            <p><strong>Company Name | Jan 2019 - Jan 2022</strong></p>
+            <ul class="list-disc list-inside pl-2 mt-1 text-gray-700">
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-semibold">Job position here</p>
+            <p><strong>Company Name | Jan 2019 - Jan 2022</strong></p>
+            <ul class="list-disc list-inside pl-2 mt-1 text-gray-700">
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

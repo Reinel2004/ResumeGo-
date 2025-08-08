@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../src/output.css" rel="stylesheet" />
+    <title>BA Template No 4</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
+</head>
+<body class="bg-white justify-center py-10">
+  <div class="resume-container w-full font-sans text-black bg-white shadow-md">
+    <div class="grid grid-cols-3">
+
+      <!-- Left Column -->
+      <div class="col-span-1 bg-[#20B2AA] text-white p-6 flex flex-col items-center">
+        <!-- Profile Image -->
+        <img src="../../../assets/img/charles.png" alt="Profile Photo"
+             class="w-32 h-32 object-cover rounded-lg border-4 border-white mb-6">
+
+        <!-- Profile -->
+        <div class="text-center mb-8">
+          <h2 class="text-lg font-bold tracking-wide">PROFILE</h2>
+          <hr class="border-t border-white/60 my-2">
+          <p class="text-sm leading-relaxed">
+            Business administration student.  
+            I consider myself a responsible and orderly person.  
+            I am looking forward to my first work experience.
+          </p>
+        </div>
+
+        <!-- Contact -->
+        <div class="w-full">
+          <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT ME</h2>
+          <hr class="border-t border-white/60 mb-3">
+          <p class="flex items-center text-sm mb-2">
+            <span class="mr-2">📞</span>123-456-7890
+          </p>
+          <p class="flex items-center text-sm mb-2">
+            <span class="mr-2">✉️</span>CharlesTorres@gmail.com
+          </p>
+          <p class="flex items-center text-sm">
+            <span class="mr-2">📍</span> 123 Anywhere St., Any City, ST 12345
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-span-2 bg-gray-50 p-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-2xl font-bold text-gray-800 tracking-wide">Charles Andrew Torres</h1>
+          <p class="text-lg italic text-gray-600">Business Administration</p>
+          <hr class="border-t-2 border-[#20B2AA] mt-4">
+        </div>
+
+        <!-- Education -->
+        <div class="mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-2">EDUCATION</h2>
+          <hr class="border-t border-[#20B2AA] mb-3">
+          <div class="mb-4">
+            <p class="font-semibold text-sm">B.S Business Administration</p>
+            <p class="text-sm italic">Business Administration career, in progress.</p>
+            <p class="text-sm text-gray-600">Dominican College of Tarlac — 2022–2026</p>
+          </div>
+          <div>
+            <p class="font-semibold text-sm">Cristo Rey High School</p>
+            <p class="text-sm italic">Senior Department</p>
+            <p class="text-sm text-gray-600">2020–2022</p>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-2">LANGUAGE</h2>
+          <hr class="border-t border-[#20B2AA] mb-3">
+          <ul class="list-none text-sm space-y-1">
+            <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+              English
+            </li>
+            <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+              Filipino
+            </li>
+          </ul>
+        </div>
+
+        <!-- Skills -->
+        <div class="mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-2">SKILLS</h2>
+          <hr class="border-t border-[#20B2AA] mb-3">
+          <ul class="list-none text-sm space-y-1">
+            <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+              Process Improvement
+            </li>
+            <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+              Financial Support
+            </li>
+            <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+              Negotiation
+            </li>
+            <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+              Leadership
+            </li>
+          </ul>
+        </div>
+
+        <!-- Work Experience -->
+        <div>
+          <h2 class="text-xl font-bold text-gray-800 mb-2">WORK EXPERIENCE</h2>
+          <hr class="border-t border-[#20B2AA] mb-3">
+          <div>
+            <p class="font-semibold text-sm">Job Position Here</p>
+            <p class="text-sm text-gray-600">Company Name — 2018–2019</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

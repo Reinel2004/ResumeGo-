@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../src/output.css" rel="stylesheet" />
+    <title>CVTemplate No 6</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
+</head>
+<body class="bg-white justify-center py-10">
+  <div class="resume-container w-full font-sans text-black shadow-md">
+
+    <!-- Header -->
+    <div class="relative bg-black text-white p-8 flex items-center">
+      <!-- Profile Image -->
+      <div class="w-34 h-34 rounded-full overflow-hidden border-4 border-gray-400">
+        <img src="../../../assets/img/charles.png" alt="Profile photo" class="w-full h-full object-cover" />
+      </div>
+      <!-- Name and Title -->
+      <div class="ml-6">
+        <h1 class="text-4xl font-bold">Charles Andrew Torres</h1>
+        <p class="text-lg tracking-wide">Civil Engineer</p>
+      </div>
+    </div>
+
+    <!-- Two Columns -->
+    <div class="grid grid-cols-2">
+      <!-- Left Column -->
+      <div class="bg-gray-200 p-8">
+        <!-- Education -->
+        <h2 class="text-lg font-bold border-b-2 border-black mb-4">EDUCATION</h2>
+        <div class="mb-6">
+          <p class="font-semibold">B.S Information Technology | 2022 - 2026</p>
+          <p class="text-sm">Dominican College of Tarlac</p>
+        </div>
+        <div class="mb-6">
+          <p class="font-semibold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
+          <p class="text-sm">Cristo Rey High School Senior Department</p>
+        </div>
+
+        <!-- Contact -->
+        <h2 class="text-lg font-bold border-b-2 border-black mb-4">CONTACT</h2>
+        <p class="flex items-center mb-2"><span class="mr-2">📞</span> +123-456-7890</p>
+        <p class="flex items-center mb-2"><span class="mr-2">✉️</span> CharlesTorres@gmail.com</p>
+        <p class="flex items-center"><span class="mr-2">📍</span> 123 Anywhere St., Any City, ST 12345</p>
+
+        <!-- Skills -->
+        <h2 class="text-lg font-bold border-b-2 border-black mt-6 mb-4">SKILLS</h2>
+        <div class="mb-4">
+          <p>Financial Accounting</p>
+         
+        </div>
+        <div class="mb-4">
+          <p>Financial Planning</p>
+          
+        </div>
+        <div>
+          <p>Public Speaking</p>
+         
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="bg-gray-100 p-8">
+        <!-- About -->
+        <h2 class="text-lg font-bold border-b-2 border-black mb-4">ABOUT</h2>
+        <p class="text-sm mb-6">
+          I am a graduate of a well-known and prestigious Accounting School. I am a fast learner and apply new
+          technology in the process of accurate calculations.
+        </p>
+
+        <!-- Experience -->
+        <h2 class="text-lg font-bold border-b-2 border-black mb-4">EXPERIENCE</h2>
+        <div class="mb-6">
+          <p class="font-bold">Job Position Here <span class="text-sm font-normal">2019 - 2022</span></p>
+          <p class="italic text-sm">Company Name | Location</p>
+          <p class="text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit libero eget est
+            tempor.</p>
+        </div>
+        <div>
+          <p class="font-bold">Job Position Here <span class="text-sm font-normal">2019 - 2022</span></p>
+          <p class="italic text-sm">Company Name | Location</p>
+          <p class="text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit libero eget est
+            tempor.</p>
+        </div>
+
+        <!-- Language -->
+        <h2 class="text-lg font-bold border-b-2 border-black mt-6 mb-4">LANGUAGE</h2>
+        <ul class="list-disc list-inside text-sm">
+          <li>English</li>
+          <li>Filipino</li>
+          <li>Spanish</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
