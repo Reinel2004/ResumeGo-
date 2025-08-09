@@ -1184,6 +1184,68 @@
         font-weight: bold;
         font-size: 12px;
     }
+
+    /* Success Modal Check Animation */
+    .check-animation-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .check-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #10b981;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: scaleIn 0.5s ease-out;
+    }
+
+    .check-mark {
+        width: 30px;
+        height: 15px;
+        border: 4px solid white;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+        animation: checkDraw 0.5s ease-out 0.3s both;
+        opacity: 0;
+    }
+
+    @keyframes scaleIn {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes checkDraw {
+        0% {
+            opacity: 0;
+            transform: rotate(-45deg) scale(0);
+        }
+        100% {
+            opacity: 1;
+            transform: rotate(-45deg) scale(1);
+        }
+    }
+
+    /* Success Modal Button Hover Effect */
+    #successModal button:hover {
+        background: #059669 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
 </style>
 
 </head>
@@ -1344,6 +1406,27 @@
                         <button onclick="closeModal()" style="padding: 12px 24px; background: #f3f4f6; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px); min-width: 100px;">Cancel</button>
                         <button onclick="applyChanges()" style="padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px); min-width: 100px;">Apply to Resume</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div id="successModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1100; overflow-y: auto;">
+                <div style="background: white; width: 90%; max-width: 400px; margin: 20% auto; padding: 40px 20px; border-radius: 12px; position: relative; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);">
+                    <!-- Check Animation Container -->
+                    <div class="check-animation-container" style="margin-bottom: 20px;">
+                        <div class="check-circle">
+                            <div class="check-mark"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Success Message -->
+                    <h2 style="font-size: 24px; font-weight: 600; color: #065f46; margin-bottom: 12px;">Success!</h2>
+                    <p id="successMessage" style="color: #374151; font-size: 16px; margin-bottom: 30px;">Resume saved successfully!</p>
+                    
+                    <!-- Action Button -->
+                    <button onclick="closeSuccessModal()" style="padding: 12px 32px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 500; transition: all 0.2s ease;">
+                        Continue
+                    </button>
                 </div>
             </div>
 
@@ -1708,12 +1791,11 @@
             if (resumeId) {
                 // Update existing resume
                 await resumeAPI.update(resumeId, { title, template, content }, token);
-                alert('Resume updated successfully!');
+                showSuccessModal('Resume updated successfully!');
             } else {
                 // Create new resume
                 await resumeAPI.create({ title, template, content }, token);
-                alert('Resume saved successfully!');
-                window.location.href = 'dashboard.html';
+                showSuccessModal('Resume saved successfully!', 'dashboard.html');
             }
         } catch (err) {
             console.error('Failed to save resume:', err);
@@ -1839,12 +1921,12 @@
             if (templateId === 'it-1') {
                 // IT Template 1 Preview
                 const preview = document.createElement('div');
-                preview.className = 'w-full max-w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8';
                 preview.innerHTML = `
                     <!-- HEADER -->
                     <div class="flex items-center p-6 bg-[#582b2a] text-white">
                         <div class="shrink-0">
-                            <img src="${profileImage || '../assets/img/charles.png'}" alt="Profile Picture" class="w-[110px] h-[110px] object-cover rounded-full border-4 border-white">
+                            <img src="${profileImage}" alt="Profile Picture" class="w-[110px] h-[110px] object-cover rounded-full border-4 border-white">
                         </div>
                         <div class="ml-40">
                             <h1 class="text-3xl font-bold leading-tight">${document.getElementById('name')?.value || 'Your Name'}</h1>
@@ -2050,7 +2132,231 @@
                     </div>
                 `;
                 previewContainer.appendChild(preview);
-            } else {
+            }
+            else if(templateId === 'it-4'){
+
+                
+                // IT Template 3 Preview (matches static it-template-3.html)
+                const preview = document.createElement('div');
+                preview.className = 'font-sans text-black bg-white shadow-md grid grid-cols-3 min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
+                preview.innerHTML = `
+                    <!-- Header -->
+                    <div class="col-span-1 bg-slate-700 text-white p-6 space-y-6 text-sm shadow-lg">
+                        <!-- Image -->
+                        <div class="flex justify-center">
+                            <img src="../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
+                        </div>
+
+                        <!-- Contact -->
+                        <div>
+                            <h2 class="text-lg font-bold mb-2">Contact</h2>
+                            <hr class="border-t-2 border-slate-500 mb-2" />
+                            <p class="text-gray-300">📞 123-456-7890</p>
+                            <p class="text-gray-300">✉️ example@email.com</p>
+                            <p class="text-gray-300">📍 123 Main Street, City</p>
+                        </div>
+
+                        <!-- Skills -->
+                        <div>
+                            <h2 class="text-lg font-bold mb-2">Skills</h2>
+                            <hr class="border-t-2 border-slate-500 mb-2" />
+                            <ul class="list-disc list-inside space-y-1 text-gray-200">
+                            <li>JavaScript</li>
+                            <li>HTML / CSS</li>
+                            <li>Problem Solving</li>
+                            <li>Team Collaboration</li>
+                            </ul>
+                        </div>
+
+                        <!-- Languages -->
+                        <div>
+                            <h2 class="text-lg font-bold mb-2">Languages</h2>
+                            <hr class="border-t-2 border-slate-500 mb-2" />
+                            <p class="text-gray-300">English</p>
+                            <p class="text-gray-300">Spanish</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Right Column -->
+                    <div class="col-span-2 bg-white p-8 space-y-8">
+                        <!-- Header -->
+                        <div class="text-center">
+                            <br>
+                            <h1 class="text-3xl font-bold text-slate-800">Charles Andrew Torres</h1>
+                            <p class="text-lg text-gray-600">IT Graduate</p>
+                        </div>
+
+                        <!-- About Section -->
+                        <div class="bg-slate-700 text-white p-6 shadow-lg">
+                            <h2 class="text-xl font-bold mb-2">About Me</h2>
+                            <p>
+                            Dedicated IT graduate with a passion for software development and systems analysis. Strong
+                            foundation in full-stack development and eager to contribute to innovative tech teams.
+                            </p>
+                        </div>
+
+                        <!-- Work Experience -->
+                        <div class="bg-slate-700 text-white p-6 shadow-lg">
+                            <h2 class="text-xl font-bold mb-2">Work Experience</h2>
+                            <div class="mt-4 space-y-4">
+                                <div>
+                                    <p class="font-bold">Junior Developer</p>
+                                    <p class="text-sm text-gray-200">TechCorp Inc. • 2022 – Present</p>
+                                    <p class="text-sm mt-1">
+                                    Assisted in developing responsive web applications and troubleshooting backend issues.
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Intern - IT Department</p>
+                                    <p class="text-sm text-gray-200">SoftSolutions • Summer 2021</p>
+                                    <p class="text-sm mt-1">
+                                    Supported the internal team with tech maintenance and created documentation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="bg-slate-700 text-white p-6 shadow-lg">
+                            <h2 class="text-xl font-bold mb-2">Education</h2>
+                                <div class="mt-4 space-y-4">
+                                <div>
+                                    <p class="font-bold">BSc in Information Technology</p>
+                                    <p class="text-sm text-gray-200">University of Techville • 2018 – 2022</p>
+                                </div>
+                            
+                                <div>
+                                    <p class="font-bold">BSc in Information Technology</p>
+                                    <p class="text-sm text-gray-200">University of Techville • 2018 – 2022</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                previewContainer.appendChild(preview);
+                } else if(templateId === 'it-5'){
+
+                    // IT Template 3 Preview (matches static it-template-3.html)
+                    const preview = document.createElement('div');
+                    preview.className = 'font-sans text-black bg-white shadow-m min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
+                    preview.innerHTML = `
+                        <!-- Red Bar -->
+                        <div class="bg-red-700 h-6 w-full"></div>
+
+                        <!-- Content: Two Columns -->
+                        <div class="grid grid-cols-3 gap-0">
+
+                            <!-- Left Column (Gray Background) -->
+                            <div class="col-span-1 bg-gray-100 p-6 flex flex-col items-center space-y-8">
+                                
+                                <!-- Profile Image -->
+                                <img src="../../assets/img/charles.png" alt="Profile" 
+                                    class="w-32 h-32 rounded-full border-4 border-red-700 object-cover">
+
+                                <!-- Contact -->
+                                <div class="w-full">
+                                    <h3 class="font-bold text-gray-700 mb-3">CONTACT</h3>
+                                    <p class="flex items-center gap-2 text-sm"><span>📞</span> +123-456-7890</p>
+                                    <p class="flex items-center gap-2 text-sm"><span>✉️</span> CharlesTorres@gmail.com</p>
+                                    <p class="flex items-center gap-2 text-sm"><span>📍</span> 123 Anywhere St., Any City</p>
+                                </div>
+
+                                <!-- Education -->
+                                <div class="w-full">
+                                    <h3 class="font-bold text-gray-700 mb-3">EDUCATION</h3>
+
+                                    <!-- School 1 -->
+                                    <div class="mb-4">
+                                        <p class="text-sm font-semibold">Bachelor of Information Technology</p>
+                                        <p class="text-sm">Capas Tarlac</p>
+                                        <p class="text-sm text-gray-600">2022 – 2025</p>
+                                    </div>
+
+                                    <!-- School 2 -->
+                                    <div>
+                                        <p class="text-sm font-semibold">High School Diploma</p>
+                                        <p class="text-sm">Sample High School</p>
+                                        <p class="text-sm text-gray-600">2016 – 2022</p>
+                                    </div>
+                                </div>
+
+                                <!-- Skills -->
+                                <div class="w-full">
+                                    <h3 class="font-bold text-gray-700 mb-3">SKILLS</h3>
+                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                        <li>Web Developing</li>
+                                        <li>Programming</li>
+                                        <li>Video Editing</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Languages -->
+                                <div class="w-full">
+                                    <h3 class="font-bold text-gray-700 mb-3">LANGUAGES</h3>
+                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                        <li>Filipino</li>
+                                        <li>English</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="col-span-2 p-8 space-y-8">
+                                
+                                <!-- Name -->
+                                <div class="border-b border-gray-300 pb-4">
+                                    <br>
+                                    <h2 class="text-4xl font-bold tracking-wide">Charles Andrew Torres</h2>
+                                    <br>
+                                </div>
+
+                                <!-- About -->
+                                <div>
+                                    <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">
+                                        ABOUT
+                                    </h3>
+                                    <p class="text-sm leading-relaxed text-gray-600">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.
+                                    </p>
+                                </div>
+
+                                <!-- Experience -->
+                                <div>
+                                    <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">
+                                        EXPERIENCE
+                                    </h3>
+
+                                    <!-- Job 1 -->
+                                    <div class="mb-6">
+                                        <div class="flex justify-between text-sm font-semibold">
+                                        <span>Company One</span>
+                                        <span>(2022–2026)</span>
+                                        </div>
+                                        <p class="text-sm leading-relaxed text-gray-600">
+                                        Developed responsive web applications and collaborated with cross-functional teams.
+                                        </p>
+                                    </div>
+
+                                    <!-- Job 2 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm font-semibold">
+                                        <span>Company Two</span>
+                                        <span>(2019–2022)</span>
+                                        </div>
+                                        <p class="text-sm leading-relaxed text-gray-600">
+                                        Assisted in software development, testing, and maintenance of company systems.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Red Bar -->
+                        <div class="bg-red-700 h-6 w-full"></div>
+                    `;
+                    previewContainer.appendChild(preview);
+                } else {
                 // Default template preview
                 const preview = document.createElement('div');
                 preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md';
@@ -2708,6 +3014,39 @@
 
         function closeModal() {
             document.getElementById('profileEditorModal').style.display = 'none';
+        }
+
+        // Success Modal Functions
+        function showSuccessModal(message = 'Resume saved successfully!', redirectUrl = null) {
+            document.getElementById('successMessage').textContent = message;
+            document.getElementById('successModal').style.display = 'block';
+            
+            // Reset animation by removing and re-adding classes
+            const checkCircle = document.querySelector('.check-circle');
+            const checkMark = document.querySelector('.check-mark');
+            
+            if (checkCircle && checkMark) {
+                checkCircle.style.animation = 'none';
+                checkMark.style.animation = 'none';
+                
+                setTimeout(() => {
+                    checkCircle.style.animation = 'scaleIn 0.5s ease-out';
+                    checkMark.style.animation = 'checkDraw 0.5s ease-out 0.3s both';
+                }, 10);
+            }
+            
+            // Store redirect URL for later use
+            window.successRedirectUrl = redirectUrl;
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+            
+            // Handle redirect if specified
+            if (window.successRedirectUrl) {
+                window.location.href = window.successRedirectUrl;
+                window.successRedirectUrl = null;
+            }
         }
 
         function selectSuit(element) {
