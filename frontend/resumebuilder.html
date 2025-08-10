@@ -2136,7 +2136,7 @@
             else if(templateId === 'it-4'){
 
                 
-                // IT Template 3 Preview (matches static it-template-3.html)
+                // IT Template 4 Preview (matches static it-template-4.html)
                 const preview = document.createElement('div');
                 preview.className = 'font-sans text-black bg-white shadow-md grid grid-cols-3 min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
                 preview.innerHTML = `
@@ -2144,27 +2144,27 @@
                     <div class="col-span-1 bg-slate-700 text-white p-6 space-y-6 text-sm shadow-lg">
                         <!-- Image -->
                         <div class="flex justify-center">
-                            <img src="../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
+                            <img src="${profileImage}" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
                         </div>
 
                         <!-- Contact -->
                         <div>
                             <h2 class="text-lg font-bold mb-2">Contact</h2>
                             <hr class="border-t-2 border-slate-500 mb-2" />
-                            <p class="text-gray-300">📞 123-456-7890</p>
-                            <p class="text-gray-300">✉️ example@email.com</p>
-                            <p class="text-gray-300">📍 123 Main Street, City</p>
+                            <p class="text-gray-300">📞 ${document.getElementById('phone')?.value || '123-456-7890'}</p>
+                            <p class="text-gray-300">✉️ ${document.getElementById('email')?.value || 'example@email.com'}</p>
+                            <p class="text-gray-300">📍 ${document.getElementById('address')?.value || '123 Main Street, City'}</p>
                         </div>
 
                         <!-- Skills -->
                         <div>
                             <h2 class="text-lg font-bold mb-2">Skills</h2>
                             <hr class="border-t-2 border-slate-500 mb-2" />
-                            <ul class="list-disc list-inside space-y-1 text-gray-200">
-                            <li>JavaScript</li>
-                            <li>HTML / CSS</li>
-                            <li>Problem Solving</li>
-                            <li>Team Collaboration</li>
+                            <ul class="list-disc list-inside space-y-1 text-gray-200" id="skills-preview">
+                                <li>JavaScript</li>
+                                <li>HTML / CSS</li>
+                                <li>Problem Solving</li>
+                                <li>Team Collaboration</li>
                             </ul>
                         </div>
 
@@ -2183,53 +2183,31 @@
                         <!-- Header -->
                         <div class="text-center">
                             <br>
-                            <h1 class="text-3xl font-bold text-slate-800">Charles Andrew Torres</h1>
-                            <p class="text-lg text-gray-600">IT Graduate</p>
+                            <h1 class="text-3xl font-bold text-slate-800">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-lg text-gray-600">${document.getElementById('title')?.value || 'IT Graduate'}</p>
                         </div>
 
                         <!-- About Section -->
                         <div class="bg-slate-700 text-white p-6 shadow-lg">
                             <h2 class="text-xl font-bold mb-2">About Me</h2>
                             <p>
-                            Dedicated IT graduate with a passion for software development and systems analysis. Strong
-                            foundation in full-stack development and eager to contribute to innovative tech teams.
+                            ${document.getElementById('summary')?.value || 'Dedicated IT graduate with a passion for software development and systems analysis. Strong foundation in full-stack development and eager to contribute to innovative tech teams.'}
                             </p>
                         </div>
 
                         <!-- Work Experience -->
                         <div class="bg-slate-700 text-white p-6 shadow-lg">
                             <h2 class="text-xl font-bold mb-2">Work Experience</h2>
-                            <div class="mt-4 space-y-4">
-                                <div>
-                                    <p class="font-bold">Junior Developer</p>
-                                    <p class="text-sm text-gray-200">TechCorp Inc. • 2022 – Present</p>
-                                    <p class="text-sm mt-1">
-                                    Assisted in developing responsive web applications and troubleshooting backend issues.
-                                    </p>
-                                </div>
-                                <div>
-                                    <p class="font-bold">Intern - IT Department</p>
-                                    <p class="text-sm text-gray-200">SoftSolutions • Summer 2021</p>
-                                    <p class="text-sm mt-1">
-                                    Supported the internal team with tech maintenance and created documentation.
-                                    </p>
-                                </div>
+                            <div class="mt-4 space-y-4" id="experience-preview">
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
 
                         <!-- Education -->
                         <div class="bg-slate-700 text-white p-6 shadow-lg">
                             <h2 class="text-xl font-bold mb-2">Education</h2>
-                                <div class="mt-4 space-y-4">
-                                <div>
-                                    <p class="font-bold">BSc in Information Technology</p>
-                                    <p class="text-sm text-gray-200">University of Techville • 2018 – 2022</p>
-                                </div>
-                            
-                                <div>
-                                    <p class="font-bold">BSc in Information Technology</p>
-                                    <p class="text-sm text-gray-200">University of Techville • 2018 – 2022</p>
-                                </div>
+                            <div class="mt-4 space-y-4" id="education-preview-list">
+                                ${generateEducationPreview()}
                             </div>
                         </div>
                     </div>
@@ -2237,7 +2215,7 @@
                 previewContainer.appendChild(preview);
                 } else if(templateId === 'it-5'){
 
-                    // IT Template 3 Preview (matches static it-template-3.html)
+                    // IT Template 5 Preview (matches static it-template-5.html)
                     const preview = document.createElement('div');
                     preview.className = 'font-sans text-black bg-white shadow-m min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
                     preview.innerHTML = `
@@ -2251,40 +2229,29 @@
                             <div class="col-span-1 bg-gray-100 p-6 flex flex-col items-center space-y-8">
                                 
                                 <!-- Profile Image -->
-                                <img src="../../assets/img/charles.png" alt="Profile" 
+                                <img src="${profileImage}" alt="Profile" 
                                     class="w-32 h-32 rounded-full border-4 border-red-700 object-cover">
 
                                 <!-- Contact -->
                                 <div class="w-full">
                                     <h3 class="font-bold text-gray-700 mb-3">CONTACT</h3>
-                                    <p class="flex items-center gap-2 text-sm"><span>📞</span> +123-456-7890</p>
-                                    <p class="flex items-center gap-2 text-sm"><span>✉️</span> CharlesTorres@gmail.com</p>
-                                    <p class="flex items-center gap-2 text-sm"><span>📍</span> 123 Anywhere St., Any City</p>
+                                    <p class="flex items-center gap-2 text-sm"><span>📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                    <p class="flex items-center gap-2 text-sm"><span>✉️</span> ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                    <p class="flex items-center gap-2 text-sm"><span>📍</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
                                 </div>
 
                                 <!-- Education -->
                                 <div class="w-full">
                                     <h3 class="font-bold text-gray-700 mb-3">EDUCATION</h3>
-
-                                    <!-- School 1 -->
-                                    <div class="mb-4">
-                                        <p class="text-sm font-semibold">Bachelor of Information Technology</p>
-                                        <p class="text-sm">Capas Tarlac</p>
-                                        <p class="text-sm text-gray-600">2022 – 2025</p>
-                                    </div>
-
-                                    <!-- School 2 -->
-                                    <div>
-                                        <p class="text-sm font-semibold">High School Diploma</p>
-                                        <p class="text-sm">Sample High School</p>
-                                        <p class="text-sm text-gray-600">2016 – 2022</p>
+                                    <div id="education-preview-list">
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
 
                                 <!-- Skills -->
                                 <div class="w-full">
                                     <h3 class="font-bold text-gray-700 mb-3">SKILLS</h3>
-                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                    <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                                         <li>Web Developing</li>
                                         <li>Programming</li>
                                         <li>Video Editing</li>
@@ -2307,7 +2274,7 @@
                                 <!-- Name -->
                                 <div class="border-b border-gray-300 pb-4">
                                     <br>
-                                    <h2 class="text-4xl font-bold tracking-wide">Charles Andrew Torres</h2>
+                                    <h2 class="text-4xl font-bold tracking-wide">${document.getElementById('name')?.value || 'Your Name'}</h2>
                                     <br>
                                 </div>
 
@@ -2317,7 +2284,7 @@
                                         ABOUT
                                     </h3>
                                     <p class="text-sm leading-relaxed text-gray-600">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.
+                                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}
                                     </p>
                                 </div>
 
@@ -2326,27 +2293,8 @@
                                     <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">
                                         EXPERIENCE
                                     </h3>
-
-                                    <!-- Job 1 -->
-                                    <div class="mb-6">
-                                        <div class="flex justify-between text-sm font-semibold">
-                                        <span>Company One</span>
-                                        <span>(2022–2026)</span>
-                                        </div>
-                                        <p class="text-sm leading-relaxed text-gray-600">
-                                        Developed responsive web applications and collaborated with cross-functional teams.
-                                        </p>
-                                    </div>
-
-                                    <!-- Job 2 -->
-                                    <div>
-                                        <div class="flex justify-between text-sm font-semibold">
-                                        <span>Company Two</span>
-                                        <span>(2019–2022)</span>
-                                        </div>
-                                        <p class="text-sm leading-relaxed text-gray-600">
-                                        Assisted in software development, testing, and maintenance of company systems.
-                                        </p>
+                                    <div id="experience-preview">
+                                        ${generateExperiencePreview()}
                                     </div>
                                 </div>
                             </div>
@@ -2354,6 +2302,386 @@
 
                         <!-- Red Bar -->
                         <div class="bg-red-700 h-6 w-full"></div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'it-6'){
+
+                    // IT Template 6 Preview (matches static it-template-6.html)
+                    const preview = document.createElement('div');
+                    preview.className = 'font-sans text-black bg-white shadow-m min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
+                    preview.innerHTML = `
+                        <!-- Main Grid -->
+                        <div class="grid grid-cols-3">
+                        <!-- Left Sidebar -->
+                        <div class="col-span-1 bg-red-400 p-6 flex flex-col space-y-8">
+                            <!-- Profile Image -->
+                            <img src="${profileImage}" alt="Profile"
+                                class="w-32 h-32 object-cover border-2 border-black mx-auto">
+
+                            <!-- About -->
+                            <div>
+                            <h3 class="text-white font-bold border-b border-white pb-1 mb-3">ABOUT</h3>
+                            <p class="text-sm text-white">
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}
+                            </p>
+                            </div>
+
+                            <!-- Skills -->
+                            <div>
+                            <h3 class="text-white font-bold border-b border-white pb-1 mb-3">SKILLS</h3>
+                            <ul class="list-disc list-inside text-white text-sm space-y-1" id="skills-preview">
+                                <li>Project Management</li>
+                                <li>Software Development</li>
+                            </ul>
+                            </div>
+
+                            <!-- Language -->
+                            <div>
+                            <h3 class="text-white font-bold border-b border-white pb-1 mb-3">LANGUAGE</h3>
+                            <ul class="list-disc list-inside text-white text-sm space-y-1">
+                                <li>Filipino</li>
+                                <li>English</li>
+                            </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="col-span-2 flex flex-col">
+                            <!-- Header -->
+                            <div class="bg-gray-50 p-8">
+                            <br>
+                            <h1 class="text-4xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <h2 class="text-lg text-gray-500 tracking-wide">${document.getElementById('title')?.value || 'IT PROJECT MANAGER'}</h2>
+                            </div>
+
+                            <!-- Main Content -->
+                            <div class="p-8 space-y-10">
+                            <!-- Work Experience -->
+                            <div>
+                                <h3 class="text-gray-700 font-bold text-lg border-b border-gray-300 pb-1 mb-4">WORK EXPERIENCE</h3>
+                                <div id="experience-preview">
+                                    ${generateExperiencePreview()}
+                                </div>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <h3 class="text-gray-700 font-bold text-lg border-b border-gray-300 pb-1 mb-4">EDUCATION</h3>
+                                <div id="education-preview-list">
+                                    ${generateEducationPreview()}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Footer Contact (outside grid) -->
+                        <div class="bg-gray-100 p-6 flex justify-around text-sm text-gray-700">
+                        <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                        <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                        <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'it-7'){
+
+                    // IT Template 7 Preview (matches static it-template-7.html)
+                    const preview = document.createElement('div');
+                    preview.className = 'font-sans text-black bg-white shadow-md flex text-[0.9rem] leading-relaxed min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
+                    preview.innerHTML = `
+                        <!-- Left Red Bar (5%) -->
+                        <div class="w-[0%]   border-r-2 border-black"></div>
+
+                        <!-- Middle Gray Column (30%) -->
+                        <div class="w-[30%] bg-gray-200 border-r-2 border-black p-5">
+                        <!-- Profile Image -->
+                        <div class="flex justify-center mb-5">
+                            <img src="${profileImage}" alt="Profile Photo" class="w-28 h-28 rounded-full border-4 border-white">
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="mb-5">
+                            <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">SKILLS</h2>
+                            <ul class="space-y-1.5" id="skills-preview">
+                            <li>• Coding Language</li>
+                            <li>• Logical Approach</li>
+                            <li>• Attention to Details</li>
+                            </ul>
+                        </div>
+
+                        <!-- Language -->
+                        <div class="mb-5">
+                            <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">LANGUAGE</h2>
+                            <ul class="space-y-1.5">
+                            <li>• Filipino</li>
+                            <li>• English</li>
+                            </ul>
+                        </div>
+
+                        <!-- Education -->
+                        <div>
+                            <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">EDUCATION</h2>
+                            <div id="education-preview-list">
+                                ${generateEducationPreview()}
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Right Main Column (65%) -->
+                        <div class="w-[65%]  p-7">
+                        <!-- Header -->
+                        <br>
+                        <h1 class="text-4xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-base text-gray-800 mb-4 pl-12">${document.getElementById('title')?.value || 'IT Professional'}</p>
+                        <br>
+                        <!-- Contact -->
+                        <div class="mb-6 space-y-1 pl-12">
+                            <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
+                        </div>
+                        <hr>
+                        <br>
+                        <!-- About -->
+                        <div class="mb-7">
+                            <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">ABOUT</h2>
+                            <p>
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed lorem nec nulla feugiat aliquet.'}
+                            </p>
+                        </div>
+
+                        <!-- Experience -->
+                        <div>
+                            <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">EXPERIENCE</h2>
+                            <div id="experience-preview">
+                                ${generateExperiencePreview()}
+                            </div>
+                        </div>
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'it-8'){
+
+                    // IT Template 8 Preview (matches static it-template-8.html)
+                    const preview = document.createElement('div');
+                    preview.className = 'font-sans text-black shadow-md flex overflow-hidden flex-col min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
+                    preview.innerHTML = `
+                         <!-- Header -->
+                        <div class="flex justify-between bg-gray-100 px-10 py-6 items-center">
+                            <div>
+                            <h1 class="text-4xl font-bold leading-none">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <div class="mt-4 text-sm text-gray-600">
+                                <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
+                            </div>
+                            </div>
+                            <div>
+                            <img src="${profileImage}" alt="Profile" class="w-36 h-36 rounded-full border-4 border-black object-cover" />
+                            </div>
+                        </div>
+
+                        <!-- Professional Title -->
+                        <div class="bg-black text-white font-bold text-center py-2 text-lg tracking-widest">
+                            ${document.getElementById('title')?.value || 'IT PROFESSIONAL'}
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="flex">
+
+                            <!-- Left Column -->
+                            <div class="w-[60%] bg-gray-100 px-10 py-6">
+                                
+                            <!-- Experiences -->
+                            <div class="mb-6">
+                            <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">
+                                EXPERIENCES
+                            </div>
+                            <div id="experience-preview">
+                                ${generateExperiencePreview()}
+                            </div>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">
+                                EDUCATION
+                                </div>
+                                <div id="education-preview-list">
+                                    ${generateEducationPreview()}
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="w-[40%] bg-white px-10 py-6">
+                            <!-- Summary -->
+                            <p class="text-sm text-gray-700 mb-6">
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}
+                            </p>
+
+                            <!-- Skills -->
+                            <div class="mb-6">
+                                <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">
+                                SKILLS
+                                </div>
+                                <ul class="list-disc list-inside text-sm space-y-2" id="skills-preview">
+                                <li>Coding Language</li>
+                                <li>Logical Approach</li>
+                                <li>Attention to Detail</li>
+                                </ul>
+                            </div>
+
+                            <!-- Languages -->
+                            <div>
+                                <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">
+                                LANGUAGES
+                                </div>
+                                <ul class="flex gap-10 text-sm text-gray-800 list-disc ml-5">
+                                <li>English</li>
+                                <li>Tagalog</li>
+                                </ul>
+                            </div>
+                            </div>
+
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'it-9'){
+
+                    // IT Template 9 Preview (matches static it-template-9.html)
+                    const preview = document.createElement('div');
+                    preview.className = 'font-sans text-black shadow-md flex overflow-hidden flex-col min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto';
+                    preview.innerHTML = `
+                        <!-- Header -->
+                        <div class="flex items-center px-10 pt-6">
+                        <img src="${profileImage}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
+                        <div class="relative -ml-8 w-full">
+                            <div class="bg-slate-700 text-white pl-16 py-4 clip-path-diagonal">
+                            <h1 class="text-4xl font-serif font-bold ">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class=" text-sm font-semibold tracking-wide">${document.getElementById('title')?.value || 'IT PROFESSIONAL'}</p>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="flex divide-x divide-black mt-6">
+
+                        <!-- Left Sidebar -->
+                        <div class="w-[40%] bg-gray-200 px-6 py-8 space-y-8">
+
+                            <!-- About -->
+                            <div>
+                            <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">ABOUT</div>
+                            <p class="text-sm">${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                            <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">EDUCATION</div>
+                            <div id="education-preview-list">
+                                ${generateEducationPreview()}
+                            </div>
+                            </div>
+
+                            <!-- Language -->
+                            <div>
+                            <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">LANGUAGE</div>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>Filipino</li>
+                                <li>English</li>
+                            </ul>
+                            </div>
+
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="w-[60%] px-6 py-8 space-y-8">
+
+                            <!-- Experience -->
+                            <div>
+                            <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-4 w-fit">EXPERIENCE</div>
+                            <div id="experience-preview">
+                                ${generateExperiencePreview()}
+                            </div>
+                            <hr class="border-gray-400">
+                            </div>
+
+                            <!-- Skills -->
+                            <div>
+                            <div class="font-bold mb-4 text-base">SKILLS</div>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Proficient in coding languages</li>
+                                <li>Strong logical approach to problem-solving</li>
+                                <li>High attention to detail</li>
+                            </ul>
+                            </div>
+
+                        </div>
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'it-10'){
+
+                    // IT Template 10 Preview (matches static it-template-10.html)
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md';
+                    preview.innerHTML = `
+                         <!-- Left Column -->
+                        <div class="w-1/2 p-8 bg-white border-r-2 border-gray-300">
+                        <div class="mb-8">
+                            <h1 class="text-3xl font-bold text-[#000] mb-1">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-gray-500 text-lg mb-6">${document.getElementById('title')?.value || 'IT Professional'}</p>
+                        </div>
+
+                        <div class="mb-8">
+                            <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Work Experience</h2>
+                            <div id="experience-preview">
+                                ${generateExperiencePreview()}
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Education</h2>
+                            <div id="education-preview-list">
+                                ${generateEducationPreview()}
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Language</h2>
+                            <p>English</p>
+                            <p>Filipino</p>
+                        </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="w-1/2 p-8 bg-[#f3dcdc]">
+                        <div class="flex justify-center mb-8">
+                            <img src="${profileImage}" alt="Profile Picture" class="w-[130px] h-[130px] object-cover rounded-full border-[4px] border-[#582b2a]">
+                        </div>
+
+                        <div class="mb-8">
+                            <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Contact</h2>
+                            <p class="mb-1">Phone: ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p class="mb-1">Email: ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p>Location: ${document.getElementById('address')?.value || 'Your City'}</p>
+                        </div>
+
+                        <div class="mb-8">
+                            <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">About</h2>
+                            <p>${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec quam vitae libero.'}</p>
+                        </div>
+
+                        <div>
+                            <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Skills</h2>
+                            <ul class="list-disc list-inside" id="skills-preview">
+                            <li>Web Development</li>
+                            <li>Database Management</li>
+                            <li>Problem Solving</li>
+                            </ul>
+                        </div>
+                        </div>
                     `;
                     previewContainer.appendChild(preview);
                 } else {
