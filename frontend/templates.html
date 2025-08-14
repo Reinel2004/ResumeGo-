@@ -149,7 +149,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .template-preview {
+                padding-top: 120%; /* Slightly shorter aspect ratio for mobile */
+            }
+            
+            .template-preview img {
+                padding: 5px;
+            }
         }
         
         .template-info {
@@ -203,7 +216,7 @@
         .industry-section {
             background: white;
             padding: 60px 0;
-            margin: 60px 0;
+            margin: 10px 0;
             text-align: center;
         }
         
@@ -243,32 +256,9 @@
         footer {
             background: #1e293b;
             color: white;
-            padding: 60px 0 20px;
+            padding: 0px 0 20px;
         }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column ul li a {
-            color: #cbd5e1;
-        }
+
         
         .footer-bottom {
             text-align: center;
@@ -526,683 +516,661 @@ if (menuBtn && navLinks) {
             </div>
 
 
-            <!-- Accountant Template 1 -->
-            <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+           <!-- Accountant Template 1 -->
+           <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-1.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 2 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+
+        <!-- Accountant Template 2 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-2.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 3 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 3 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-3.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 4 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 4 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-4.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 5 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 5 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-5.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 6 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 6 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-6.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 7 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 7 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-7.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 8 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 8 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-8.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 9 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 9 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-9.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Accountant Template 10 -->
-             <div class="template-card" data-category="accountant">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Accountant-templates/accountant-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Accountant Template 10 -->
+        <div class="template-card" data-category="accountant">
+            <div class="template-preview">
+                <img src="../assets/img/templates/accountancy-templates/accountancy-template-10.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Accountant-templates/accountant-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
 
-
-            <!-- BASBA Template 1 -->
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Business Administration Templates 1-->
+       
+        <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-1.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-1.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-              <!-- BASBA Template 2 -->
-
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 2-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-2.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-2.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-              <!-- BASBA Template 3 -->
-
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 3-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-3.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-3.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-
-              <!-- BASBA Template 4 -->
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 4-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-4.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-4.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-
-              <!-- BASBA Template 5 -->
-
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 5-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-5.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-5.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-
-              <!-- BASBA Template 6 -->
-
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 6-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-6.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-6.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-              <!-- BASBA Template 7 -->
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 7-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-7.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-7.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-              <!-- BASBA Template 8 -->
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 8-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-8.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-8.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-              <!-- BASBA Template 9 -->
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 9-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-9.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-9.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
-              <!-- BASBA Template 10 -->
-
-            <div class="template-card" data-category="business">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/BSBA-templates/ba-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Business Administration Templates 10-->
+       
+         <div class="template-card" data-category="business">
+            <div class="template-preview">
+                <img src="../assets/img/templates/BSBA-templates/ba-templates-10.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/BSBA-templates/ba-templates-10.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
 
-              <!-- Civil Engineering Template 1 -->
+        
+        <!-- Civi Engineering Templates 1-->
 
-              <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-1.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
+        <!-- Civi Engineering Templates 2-->
 
-            <!-- Civil Engineering Template 2 -->
-
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-2" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-2.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 3 -->
+        <!-- Civi Engineering Templates 3-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-3" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-3.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 4 -->
+        <!-- Civi Engineering Templates 4-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-4" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-4.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 5 -->
+        <!-- Civi Engineering Templates 5-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-5" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-5.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 6 -->
+        <!-- Civi Engineering Templates 6-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-6" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-6.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 7 -->
+        <!-- Civi Engineering Templates 7-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-7" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-7.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 8 -->
+        <!-- Civi Engineering Templates 8-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-8" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-8.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 9 -->
+        <!-- Civi Engineering Templates 9-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-9" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-9.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Civil Engineering Template 10 -->
+        
+        <!-- Civi Engineering Templates 10-->
 
-            <div class="template-card" data-category="civil">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=civil-10" class="btn btn-primary">Use Template</a>
-                        <a href="templates/Civil-Engineering-temples/cv-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <div class="template-card" data-category="civil">
+            <div class="template-preview">
+                <img src="../assets/img/templates/civil-engineering-templates/civil-templates-10.png" alt="Accountant Template 1">
+            </div>
+            <div class="template-info">
+                <h3>IT Professional - Card Gradient</h3>
+                <p>Card-based design with gradient accents. Modern and visually appealing.</p>
+                <div class="template-actions">
+                    <a href="login.html0" class="btn btn-primary">Use Template</a>
+                    <a href="templates/Civil-Engineering-temples/cv-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
 
 
-            <!-- Generic Template 1 -->
 
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+
+
+   
+
+
+        <!-- Generic Temaplte 1 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-1.png" alt="Generic Template 1">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">A clean, modern design perfect for any professional. Features a professional layout with emphasis on skills and experience.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-1" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-1.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 2 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-2.png" alt="Generic Template 2">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Minimalist</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A minimalist design focusing on readability and content. Ideal for showcasing experience and achievements.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-2" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 2 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-2.png" alt="Generic Template 2">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Minimalist</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">A minimalist design focusing on readability and content. Ideal for showcasing experience and achievements.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-2" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-2.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 3 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-3.png" alt="Generic Template 3">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Sidebar</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Modern design with a sidebar layout. Perfect for highlighting skills and certifications.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-3" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 3 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-3.png" alt="Generic Template 3">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Sidebar</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">Modern design with a sidebar layout. Perfect for highlighting skills and certifications.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-3" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-3.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 4 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-4.png" alt="Generic Template 4">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Classic</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A classic design that never goes out of style. Perfect for traditional industries and conservative companies.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-4" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 4 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-4.png" alt="Generic Template 4">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Classic</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">A classic design that never goes out of style. Perfect for traditional industries and conservative companies.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-4" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-4.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 5 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-5.png" alt="Generic Template 5">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Executive</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">An executive-level design with sophisticated layout. Ideal for senior professionals and managers.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-5" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 5 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-5.png" alt="Generic Template 5">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Executive</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">An executive-level design with sophisticated layout. Ideal for senior professionals and managers.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-5" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-5.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 6 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-6.png" alt="Generic Template 6">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Creative</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">A creative design with modern elements. Perfect for creative industries and innovative companies.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-6" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 6 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-6.png" alt="Generic Template 6">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Creative</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">A creative design with modern elements. Perfect for creative industries and innovative companies.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-6" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-6.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 7 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-7.png" alt="Generic Template 7">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern Grid</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Modern grid-based layout with clean typography. Great for showcasing projects and achievements.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-7" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 7 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-7.png" alt="Generic Template 7">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Modern Grid</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">Modern grid-based layout with clean typography. Great for showcasing projects and achievements.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-7" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-7.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-            <!-- Generic Template 8 -->
-            <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-8.png" alt="Generic Template 8">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Clean</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Clean and simple design focusing on content. Perfect for any professional seeking a straightforward approach.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-8" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+        <!-- Generic Template 8 -->
+        <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-8.png" alt="Generic Template 8">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Clean</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">Clean and simple design focusing on content. Perfect for any professional seeking a straightforward approach.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-8" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-8.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Generic Template 9 -->
-             <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-8.png" alt="Generic Template 8">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Clean</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Clean and simple design focusing on content. Perfect for any professional seeking a straightforward approach.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-9" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Generic Template 9 -->
+         <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-9.png" alt="Generic Template 9">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Clean</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">Clean and simple design focusing on content. Perfect for any professional seeking a straightforward approach.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-9" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-9.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
 
-             <!-- Generic Template 10 -->
-             <div class="template-card" data-category="generic">
-                <div class="template-preview">
-                    <img src="../assets/img/templates/generic-templates/generic-template-8.png" alt="Generic Template 8">
-                </div>
-                <div class="template-info">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Clean</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Clean and simple design focusing on content. Perfect for any professional seeking a straightforward approach.</p>
-                    <div class="template-actions">
-                        <a href="resumebuilder.html?template=generic-10" class="btn btn-primary">Use Template</a>
-                        <a href="templates/generic-templates/generic-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
-                    </div>
+         <!-- Generic Template 10 -->
+         <div class="template-card" data-category="generic">
+            <div class="template-preview">
+                <img src="../assets/img/templates/generic-templates/generic-template-10.png" alt="Generic Template 10">
+            </div>
+            <div class="template-info">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Professional Generic - Clean</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">Clean and simple design focusing on content. Perfect for any professional seeking a straightforward approach.</p>
+                <div class="template-actions">
+                    <a href="resumebuilder.html?template=generic-8" class="btn btn-primary">Use Template</a>
+                    <a href="templates/generic-templates/generic-template-10.html" class="btn btn-secondary" target="_blank">Preview</a>
                 </div>
             </div>
+        </div>
+    </div>
+
+
 
 
 
 
         </div>
-      
     </div>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>RESUME Go!</h3>
-                    <ul>
-                        <li><a href="#">Resume Builder</a></li>
-                        <li><a href="#">Resume Templates</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="#">About ResumeGo!</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Account Agreement</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Terms of Agreement</a></li>
-                        <li><a href="#">Give rating</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>© 2025 ResumeGO. All rights reserved.</p>
-            </div>
+        <div class="footer-bottom">
+            <p>© 2025 ResumeGO. All rights reserved.</p>
         </div>
     </footer>
     
