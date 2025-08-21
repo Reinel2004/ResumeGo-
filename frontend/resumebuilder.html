@@ -1314,7 +1314,7 @@
         <button id="saveResumeBtn" class="fixed bottom-8 right-8 bg-primary text-white px-5 py-2 rounded shadow-md text-sm font-semibold hover:bg-secondary transition-all z-50">Save</button>
     <div class="left-panel">
             <!-- Profile Picture Upload -->
-            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="personal-section">
                 <h2 class="section-header">Profile Picture</h2>
                 <div class="profile-upload">
                     <div class="profile-preview" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; background: #fff; border: 3px solid #2563eb; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
@@ -1462,7 +1462,7 @@
             </div>
 
             <!-- Education -->
-            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="education-section">
                 <h2 class="section-header">Education</h2>
                 <div id="education-container">
                     <div class="education-item">
@@ -1494,11 +1494,11 @@
             </div>
 
             <!-- Technical Skills -->
-            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Technical Skills</h2>
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="skills-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6" id="skills-section-title">Technical Skills</h2>
                 <div class="space-y-8">
-                    <!-- Programming Languages -->
-                    <div class="skill-category">
+                    <!-- Category 1 -->
+                    <div class="skill-category" id="skill-cat-1">
                         <h4 class="text-lg font-semibold text-gray-800 mb-3">Programming Languages</h4>
                         <div class="flex gap-2 mb-3">
                             <input type="text" 
@@ -1511,8 +1511,8 @@
                         <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
                     </div>
 
-                    <!-- Frameworks & Libraries -->
-                    <div class="skill-category">
+                    <!-- Category 2 -->
+                    <div class="skill-category" id="skill-cat-2">
                         <h4 class="text-lg font-semibold text-gray-800 mb-3">Frameworks & Libraries</h4>
                         <div class="flex gap-2 mb-3">
                             <input type="text" 
@@ -1525,8 +1525,8 @@
                         <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
                     </div>
 
-                    <!-- Tools & Technologies -->
-                    <div class="skill-category">
+                    <!-- Category 3 -->
+                    <div class="skill-category" id="skill-cat-3">
                         <h4 class="text-lg font-semibold text-gray-800 mb-3">Tools & Technologies</h4>
                         <div class="flex gap-2 mb-3">
                             <input type="text" 
@@ -1542,7 +1542,7 @@
             </div>
 
             <!-- Work Experience -->
-            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="experience-section">
                 <h2 class="section-header">Work Experience</h2>
                 <div id="work-experience-container">
                     <div class="experience-item">
@@ -1574,7 +1574,7 @@
             </div>
 
             <!-- Projects -->
-            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="projects-section">
                 <h2 class="section-header">Projects</h2>
                     <div id="projects-container">
                         <div class="project-item">
@@ -2684,7 +2684,2348 @@
                         </div>
                     `;
                     previewContainer.appendChild(preview);
-                } else {
+                }else if(templateId === 'accountant-1'){
+
+                    // Accountant Template 1 Preview 
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-mdresume-container mx-auto flex border border-gray-300 h-[297mm] overflow-hidden';
+                    preview.innerHTML = `
+                         <!-- Left Sidebar -->
+                        <div class="w-[200px] bg-[#8E735B] text-white flex flex-col items-center py-8 px-4 space-y-8">
+                            <!-- Profile Image -->
+                            <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-hidden">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+                            </div>
+
+                            <!-- Skills -->
+                            <div class="text-center">
+                                <h2 class="text-white text-lg font-bold mb-2 tracking-wide">SKILLS</h2>
+                                <ul class="text-sm space-y-1 list-disc list-inside">
+                                    <li>Financial Accounting</li>
+                                    <li>Communication Skills</li>
+                                </ul>
+                            </div>
+
+                            <!-- Contact Info -->
+                            <div class="text-center">
+                                <h2 class="text-white text-lg font-bold mb-2 tracking-wide">CONTACT</h2>
+                                <div class="space-y-4 text-sm">
+                                    <p>📞 +123-456-7890</p>
+                                    <p>✉️ CharlesTorres@gmail.com</p>
+                                    <p>📍 123 Anywhere St., Any City</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="flex-1 bg-white p-10">
+                        <!-- Header Name -->
+                            <div class="relative mb-10">
+                                <div class="bg-[#8E735B] h-28 flex items-center pl-4">
+                                    <h1 class="text-2xl tracking-wide text-white">
+                                        <span class="block font-bold justify-center">Charles Andrew Torres</span>
+                                    </h1>     
+                                </div>
+                            </div>
+
+                            <!-- Education -->
+                            <div class="mb-8">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-[#8E735B]"></div>
+                                    <h2 class="uppercase text-sm font-semibold tracking-wide">Education</h2>
+                                    </div>
+                                <div class="border-t border-[#F7F2EA] pt-4 text-sm">
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <p class="font-medium">Dominican College of Tarlac</p>
+                                            <p>Bachelor of Science Information Technology</p>
+                                        </div>
+                                        <p class="text-gray-600">2022 - 2025</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- About -->
+                            <div class="mb-8">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-[#8E735B]"></div>
+                                    <h2 class="uppercase text-sm font-semibold tracking-wide">About</h2>
+                                    </div>
+                                <div class="border-t border-[#F7F2EA] pt-4 text-sm">
+                                    <p>
+                                        I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Experience -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-3 h-3 bg-[#8E735B]"></div>
+                                    <h2 class="uppercase text-sm font-semibold tracking-wide">Experience</h2>
+                                    </div>
+                                <div class="border-t border-[#F7F2EA] pt-4 text-sm">
+                                <div class="flex justify-between mb-2">
+                                    <div>
+                                        <p class="font-medium">Job position here</p>
+                                        <p>Company Name | Location</p>
+                                    </div>
+                                    <p class="text-gray-600">2022 - 2025</p>
+                                </div>
+                                <p class="leading-snug">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }
+                else if(templateId === 'accountant-2'){
+
+                    // Accountant Template 2 
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans text-black bg-white shadow-md mx-auto p-8 grid grid-cols-3 gap-8';
+                    preview.innerHTML = `
+                        <!-- Left Column -->
+                        <div class="col-span-1 space-y-8">
+                        <!-- Profile Photo -->
+                            <div class="flex justify-center">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border-4 border-gray-700" />
+                            </div>
+
+                            <!-- Contact -->
+                            <div>
+                                <h2 class="text-lg font-bold flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                    Contact
+                                </h2>
+                                <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+                                    <p>+123-456-7890</p>
+                                    <p>CharlesTorres@gmail.com</p>
+                                    <p>123 Anywhere St., Any City</p>
+                                </div>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <h2 class="text-lg font-bold flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                    Education
+                                </h2>
+                                <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+                                    <p>2025</p>
+                                    <p class="text-xs">Dominican College of Tarlac</p>
+                                    <p class="text-xs">Bachelor of Science Information Technology</p>
+                                </div>
+                            </div>
+
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-lg font-bold flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                    Skills
+                                </h2>
+                                <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+                                    <ul class="list-disc list-inside">
+                                        <li>Financial Accounting</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-span-2 space-y-6">
+                            <!-- Header -->
+                            <br>
+                            <div class="text-left">
+                                <h1 class="text-4xl font-bold leading-none">Charles Andrew Torres</h1>
+                                <p class="text-sm text-gray-600">Accountant</p>
+                            </div>
+                            <br>
+                            <!-- About -->
+                            <div class="bg-blue-100 p-6 rounded shadow">
+                                <h2 class="text-lg font-bold border-b border-gray-400 mb-2">ABOUT</h2>
+                                <p class="text-sm text-gray-800">
+                                I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                </p>
+                            </div>
+
+                        <!-- Experience -->
+                        <div class="bg-blue-100 p-6 rounded shadow">
+                            <h2 class="text-lg font-bold border-b border-gray-400 mb-4">EXPERIENCE</h2>
+
+                            <!-- Experience Entry 1 -->
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold">2019 – 2022</p>
+                                <p class="text-sm">Job position here<br>Company Name | Location</p>
+                                <p class="text-sm mt-2 text-gray-800">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
+                                </p>
+                            </div>
+
+                            <!-- Experience Entry 2 -->
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold">2000 – 2000</p>
+                                <p class="text-sm">Another position<br>Another Company | Location</p>
+                                <p class="text-sm mt-2 text-gray-800">
+                                Description of the responsibilities and achievements for this job position.
+                                </p>
+                            </div>
+                        
+                            <!-- Experience Entry 3 -->
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold">2000 – 2000</p>
+                                <p class="text-sm">Another position<br>Another Company | Location</p>
+                                <p class="text-sm mt-2 text-gray-800">
+                                Description of the responsibilities and achievements for this job position.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-3'){
+
+                    // Accountant Template 3
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md';
+                    preview.innerHTML = `
+                        <!-- Header -->
+                        <div class="grid grid-cols-3 gap-6 p-8 items-center bg-gray-800 text-white font-sans">
+                            <!-- Left: Image -->
+                            <div class="flex justify-center">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border-4 border-bg-blue-100 shadow-md" />
+                            </div>
+
+                        <!-- Right: Name, Title, About -->
+                            <div class="col-span-2">
+                                <h1 class="text-4xl font-bold">Charles Andrew Torres</h1>
+                                <p class="text-lg text-gray-300 mb-2">Accountant</p>
+                                <p class="text-sm text-gray-200">
+                                I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="grid grid-cols-3 gap-8 px-8 pb-8">
+                            <!-- Left Column -->
+                            <div class="col-span-1 space-y-8 bg-blue-100 text-black p-6 rounded font-sans">
+                                <!-- Education -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-2">Education</h2>
+                                    <ul class="space-y-4 text-sm">
+                                        <li>
+                                        <p class="font-semibold">* Dominican College of Tarlac</p>
+                                        <p>Bachelor of Science in Information Technology</p>
+                                        </li>
+                                        <li>
+                                        <p class="font-semibold">* Sample School Name</p>
+                                        <p>Additional degree or short course</p>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Languages -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-2">Language</h2>
+                                    <ul class="text-sm space-y-1">
+                                        <li>Filipino</li>
+                                        <li>English</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Skills -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-2">Skills</h2>
+                                    <ul class="text-sm space-y-1">
+                                        <li>Financial Accounting</li>
+                                        <li>Communication Skills</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        <!-- Right Column -->
+                        <div class="col-span-2 space-y-6">
+                            <br>
+                            <div>
+                                <h2 class="text-lg font-bold border-b border-gray-400 mb-4">Experience</h2>
+
+                                <!-- Experience Block 1 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">Job Position here</p>
+                                    <p class="text-sm text-gray-600">Company name | Jan 2021 - Jan 2022</p>
+                                    <p class="text-sm mt-1 text-gray-800">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet sem nec risus egestas accumsan.
+                                    </p>
+                                </div>
+
+                                <!-- Experience Block 2 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">Job Position here</p>
+                                    <p class="text-sm text-gray-600">Company name | Jan 2020 - Dec 2020</p>
+                                    <p class="text-sm mt-1 text-gray-800">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet sem nec risus egestas accumsan.
+                                    </p>
+                                </div>
+
+                                <!-- Experience Block 3 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">Job Position here</p>
+                                    <p class="text-sm text-gray-600">Company name | Jan 2017 - Dec 2029</p>
+                                    <p class="text-sm mt-1 text-gray-800">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet sem nec risus egestas accumsan.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-4'){
+
+                    // Accountant Template 4
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md flex';
+                    preview.innerHTML = `
+                        <!-- Left Column (50%) -->
+                        <div class="w-1/2 p-6 space-y-6">
+
+                            <!-- Black Rounded Image Container -->
+                            <div class="bg-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md flex justify-end">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-md" />
+                            </div>
+
+                            <!-- Name and Title -->
+                            <div class="text-center mt-4">
+                                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+                                <p class="text-sm text-gray-700">Accountant</p>
+                            </div>
+
+                            <!-- About -->
+                            <div class="px-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">About</div>
+                                    <hr class="flex-grow border-t border-gray-400" />
+                                </div>
+                                <p class="text-sm text-gray-800">
+                                I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                </p>
+                            </div>
+
+                        <!-- Skills -->
+                        <div class="px-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Skills</div>
+                                <hr class="flex-grow border-t border-gray-400" />
+                            </div>
+                            <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
+                                <li>Financial Accounting</li>
+                                <li>Communication</li>
+                                <li>Excel Proficiency</li>
+                            </ul>
+                        </div>
+
+                        <!-- Languages -->
+                        <div class="px-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Languages</div>
+                                <hr class="flex-grow border-t border-gray-400" />
+                            </div>
+                            <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
+                                <li>English</li>
+                                <li>Filipino</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column (50%) -->
+                    <div class="w-1/2 p-8 space-y-6">
+
+                    <!-- Experience -->
+                    <br><br>
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Experience</div>
+                            <hr class="flex-grow border-t border-gray-400" />
+                            </div>
+                            <div class="space-y-4">
+
+                            <div>
+                                <p class="text-base font-semibold">Job Position</p>
+                                <p class="text-sm text-gray-600">Company Name | 2021 - 2022</p>
+                                <p class="text-base mt-1">Handled daily accounting tasks and managed budget reports for internal and external audits.</p>
+                            </div>
+
+                            <div>
+                                <p class="text-base font-semibold">Another Position</p>
+                                <p class="text-sm text-gray-600">Company Name | 2020 - 2021</p>
+                                <p class="text-base mt-1">Coordinated with finance team to streamline expense tracking and documentation processes.</p>
+                            </div>
+
+                            <div>
+                                <p class="text-base font-semibold">Another Position</p>
+                                <p class="text-sm text-gray-600">Company Name | 2020 - 2021</p>
+                                <p class="text-base mt-1">Coordinated with finance team to streamline expense tracking and documentation processes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Education</div>
+                            <hr class="flex-grow border-t border-gray-400" />
+                            </div>
+                            <div class="space-y-4">
+                            <div>
+                                <p class="text-base font-semibold">Dominican College of Tarlac</p>
+                                <p class="text-base">BS in Information Technology</p>
+                            </div>
+                            <div>
+                                <p class="text-base font-semibold">Sample School</p>
+                                <p class="text-base">Short Course or Certification</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                    `;
+                previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-5'){
+
+                    // Accountant Template 5
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md';
+                    preview.innerHTML = `
+                         <!-- Header Section -->
+                        <div class="bg-white flex flex-col items-center py-6 space-y-4 border-b border-black">
+                            <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-black">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+                            </div>
+                            <h1 class="text-2xl font-bold uppercase text-black">Charles Andrew Torres</h1>
+                        </div>
+
+                        <!-- Job Title Bar -->
+                        <div class="bg-black text-white text-center py-2 font-semibold uppercase text-sm">
+                            
+                        </div>
+                        <!-- Main Content: Two Columns -->
+                        <div class="grid grid-cols-2">
+
+                            <!-- Left Column -->
+                            <div class="col-span-1 bg-white p-6 border-r border-black">
+                                <h2 class="text-lg font-bold mb-4">EXPERIENCES</h2>
+                                <div class="space-y-4 text-sm pl-6">
+                                    <div>
+                                        <p class="font-bold">Company Name <span class="float-right font-normal">(2022–2026)</span></p>
+                                        <p class="mt-1">Position</p>
+                                        <p class="mt-1 pl-6">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad quam nesciunt dolore repudiandae voluptatem, et harum incidunt cum impedit praesentium officiis doloremque, iure vel omnis explicabo asperiores magni quis esse?</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold">Another Company <span class="float-right font-normal">(2020–2022)</span></p>
+                                        <p class="mt-1">Position</p>
+                                        <p class="mt-1 pl-6">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad quam nesciunt dolore repudiandae voluptatem, et harum incidunt cum impedit praesentium officiis doloremque, iure vel omnis explicabo asperiores magni quis esse?</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="col-span-1.5 bg-white p-6 space-y-6">
+
+                                <!-- Education -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-4">EDUCATION</h2>
+                                    <div class="pl-6">
+                                        <p class="font-semibold">Bachelor of Information Technology</p>
+                                        <p class="italic text-sm">Capas Tarlac | 2022 – 2025</p><br>
+                                    </div>
+                                    <div class="pl-6">
+                                        <p class="font-semibold">Senior High School - STEM</p>
+                                        <p class="italic text-sm">Tarlac High School | 2020 – 2022</p><br>
+                                    </div>
+                                    <div class="pl-6">
+                                        <p class="font-semibold">Junior High School</p>
+                                        <p class="italic text-sm">San Roque National High School | 2016 – 2020</p><br>
+                                    </div>
+                                </div>
+
+                                <!-- Languages -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-4">LANGUAGES</h2>
+                                    <ul class="list-disc list-inside text-sm pl-6">
+                                        <li>English</li>
+                                        <li>Tagalog</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Skills -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-4">SKILLS</h2>
+                                    <ul class="text-sm space-y-2 pl-6">
+                                        <li>Financial Accounting</li>
+                                        <li>Teamwork</li>
+                                        <li>Communication Skills</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-6'){
+
+                    // Accountant Template 6
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] w-full font-sans text-black shadow-md flex flex-col overflow-hidden';
+                    preview.innerHTML = `
+                        <!-- Header -->
+                    <div class="flex w-full">
+                        <div class="w-1/2 bg-blue-100 px-10 pt-10">
+                            <br>
+                            <br>
+                            <h2 class="text-3xl font-semibold text-gray-800">Charles Andrew Torres</h2>
+                            <hr />
+                            <p class="uppercase tracking-widest mt-1 pt-2 w-fit">Accountant</p>
+                        </div>
+                        <div class="w-1/2 bg-gray-800 flex items-center justify-center p-10">
+                            <img
+                            src="../../../assets/img/charles.png"
+                            class="rounded-full w-40 h-40 border-4 border-white object-cover shadow-lg"
+                            alt="Profile"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Main Body -->
+                    <div class="flex w-full h-full">
+                        <!-- Left Column -->
+                        <div class="w-1/2 bg-blue-100 px-10 py-8 space-y-6">
+
+                            <!-- About Me -->
+                            <div>
+                                <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">About Me:</div>
+                                <p class="text-sm text-gray-800">
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, quam.
+                                </p>
+                            </div>
+
+
+                        <!-- Contact -->
+                        <div>
+                            <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Contact:</div>
+                                <ul class="text-sm space-y-1">
+                                    <li>+123-456-7890</li>
+                                    <li>CharlesTorres@gmail.com</li>
+                                    <li>123 Anywhere St., Any City</li>
+                                </ul>
+                            </div>
+
+                        <!-- Education -->
+                        <div>
+                            <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Education:</div>
+                            <p class="text-sm font-semibold">Bachelor of Information Technology</p>
+                            <p class="text-sm italic">Capas Tarlac<br />2022 - 2025</p>
+                        </div>
+
+                        <!-- Skills -->
+                        <div>
+                            <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Skills:</div>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>Accounting Financial</li>
+                                <li>Teamwork</li>
+                                <li>Communication skills</li>
+                            </ul>
+                        </div>
+
+                        <!-- Language -->
+                        <div>
+                            <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Language:</div>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>English</li>
+                                <li>Filipino</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="w-1/2 bg-gray-800 text-white px-10 py-8 space-y-6">
+                        <div>
+                            <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-4">Work Experience:</div>
+
+                            <!-- Job 1 -->
+                            <div class="mb-4">
+                                <p class="font-semibold text-base">Job position here</p>
+                                <p class="text-sm italic">Company Name | Location<br />Date</p>
+                                <ul class="list-disc list-inside text-sm mt-1">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Mauris convallis, mi at mattis malesuada.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Job 2 -->
+                            <div class="mb-4">
+                                <p class="font-semibold text-base">Job position here</p>
+                                <p class="text-sm italic">Company Name | Location<br />Date</p>
+                                <ul class="list-disc list-inside text-sm mt-1">
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Mauris convallis, mi at mattis malesuada.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    `;
+                previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-7'){
+
+                        // Accountant Template 7
+                        const preview = document.createElement('div');
+                        preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md flex overflow-hidden';
+                        preview.innerHTML = `
+                            <!-- Left Sidebar -->
+                            <div class="w-[35%] bg-white flex flex-col items-center py-10 px-6 relative">
+                                <img src="../../../assets/img/charles.png" class="w-36 h-36 object-cover border-4 border-black shadow-md mb-8" alt="Profile" />
+
+                                <!-- Contact -->
+                                <div class="w-full mb-6">
+                                    <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
+                                        Contact
+                                    </div>
+                                    <div class="mt-2 text-sm space-y-2">
+                                        <div>
+                                            <p class="font-semibold">Phone</p>
+                                            <p>+123-456-7890</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold">Email</p>
+                                            <p>CharlesTorres@gmail.com</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold">Address</p>
+                                            <p>1234 Anywhere St., Any City</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Education -->
+                                <div class="w-full mb-6">
+                                    <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
+                                        Education
+                                    </div>
+                                    <div class="mt-4 text-sm space-y-4">
+
+                                        <!-- School 1 -->
+                                        <div>
+                                            <p class="font-bold">Bachelor of Information Technology</p>
+                                            <p class="italic">Capas Tarlac</p>
+                                            <p>2022 - 2025</p>
+                                        </div>
+
+                                        <!-- School 2 -->
+                                        <div>
+                                            <p class="font-bold">Senior High School - ABM Strand</p>
+                                            <p class="italic">Tarlac National High School</p>
+                                            <p>2020 - 2022</p>
+                                        </div>
+
+                                        <!-- School 3 -->
+                                        <div>
+                                            <p class="font-bold">Junior High School</p>
+                                            <p class="italic">San Vicente High School</p>
+                                            <p>2016 - 2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            <!-- Skills -->
+                            <div class="w-full">
+                                <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
+                                    Skills
+                                </div>
+                                <ul class="mt-4 text-sm list-disc list-inside space-y-2">
+                                    <li>Accounting Financial</li>
+                                    <li>Teamwork</li>
+                                    <li>Communication skills</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                            <!-- Right Content -->
+                            <div class="w-[65%] bg-white px-10 py-10 space-y-8">
+                                <!-- Header -->
+                                <div>
+                                    <h1 class="text-3xl font-extrabold leading-none">Charles Andrew Torres</h1>
+                                    <p class="uppercase tracking-widest text-sm mt-1">Accountant</p>
+                                </div>
+
+                                <!-- About -->
+                                <div>
+                                    <h2 class="text-xl font-extrabold tracking-wide mb-2">ABOUT</h2>
+                                    <hr class="border-black mb-2" />
+                                    <p class="text-sm leading-relaxed">
+                                        With more than 5 years of experience in web development, I have worked across various industries. I specialize in database development, coding, and thorough testing. I am skilled at identifying and fixing coding problems efficiently.
+                                    </p>
+                                </div>
+
+                                <!-- Experience -->
+                                <div class="w-full mb-6">
+                                    <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
+                                        Experience
+                                    </div>
+                                    <div class="mt-4 text-sm space-y-4">
+
+                                        <!-- Job 1 -->
+                                        <div>
+                                            <p class="font-bold">2019 - 2022</p>
+                                            <p class="font-semibold">Job Position Title</p>
+                                            <p class="italic">Company Name | Location</p>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.
+                                            </p>
+                                        </div>
+
+                                        <!-- Job 2 -->
+                                        <div>
+                                            <p class="font-bold">2016 - 2019</p>
+                                            <p class="font-semibold">Job Position Title</p>
+                                            <p class="italic">Company Name | Location</p>
+                                            <p>
+                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+                                            </p>
+                                        </div>
+
+                                        <!-- Job 3 -->
+                                        <div>
+                                            <p class="font-bold">2014 - 2016</p>
+                                            <p class="font-semibold">Job Position Title</p>
+                                            <p class="italic">Company Name | Location</p>
+                                            <p>
+                                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-8'){
+
+                // Accountant Template 8
+                const preview = document.createElement('div');
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md overflow-hidden bg-white';
+                preview.innerHTML = `
+                    <!-- Header -->
+                    <div class="text-center border-b border-black pb-4">
+                        <img src="../../../assets/img/charles.png" class="w-32 h-32 rounded object-cover mx-auto mt-4 border" alt="Profile">
+                        <h1 class="text-4xl font-bold mt-2">Charles Andrew Torres</h1>
+                        <p class="uppercase tracking-widest text-sm">Accountant</p>
+                    </div>
+
+                    <!-- Main Section -->
+                    <div class="flex divide-x divide-black">
+                        <!-- Left Column -->
+                        <div class="w-1/2 p-6">
+                            <!-- Contact -->
+                            <div class="mb-6">
+                                <div class="bg-black border-t-4 border-white px-4 py-1">
+                                    <h2 class="text-white font-bold text-lg tracking-wide">Contact</h2>
+                                </div>
+                                <ul class="mt-4 space-y-3 text-sm">
+                                    <li class="flex items-start gap-2"><span class="text-lg">☎️</span> <div><span class="font-semibold">Phone</span><br>+123-456-7890</div></li>
+                                    <li class="flex items-start gap-2"><span class="text-lg">🌐</span> <div><span class="font-semibold">Email</span><br>CharlesTorres@gmail.com</div></li>
+                                    <li class="flex items-start gap-2"><span class="text-lg">📍</span> <div><span class="font-semibold">Address</span><br>123 Anywhere St., Any City</div></li>
+                                </ul>
+                            </div>
+
+                            <!-- Education Section -->
+                            <div>
+                                <div class="bg-black border-t-4 border-white px-4 py-1">
+                                    <h2 class="text-white font-bold text-lg tracking-wide">Education</h2>
+                                </div>
+                                <div class="mt-2 space-y-4 text-sm pl-2">
+                                    <!-- School 1 -->
+                                    <div>
+                                        <p class="font-semibold">School name here</p>
+                                        <p class="italic">Year level</p>
+                                        <p>2022 - 2025</p>
+                                    </div>
+                                    <!-- School 2 -->
+                                    <div>
+                                        <p class="font-semibold">School name here</p>
+                                        <p class="italic">Year level</p>
+                                        <p>2020 - 2023</p>
+                                    </div>
+                                    <!-- School 3 -->
+                                    <div>
+                                        <p class="font-semibold">School name here</p>
+                                        <p class="italic">Year level</p>
+                                        <p>2018 - 2020</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Skills -->
+                            <div class="mb-4">
+                                <br>
+                                <div class="bg-black border-t-4 border-white px-4 py-1">
+                                    <h2 class="text-white font-bold text-lg tracking-wide">Skills</h2>
+                                </div>
+                                <ul class="list-disc list-inside mt-4 space-y-2 text-sm">
+                                    <li>Accounting Financial</li>
+                                    <li>Teamwork</li>
+                                    <li>Communication skills</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="w-1/2 p-6">
+                            <!-- About -->
+                            <div class="mb-10">
+                                <div class="bg-black border-t-4 border-white px-4 py-1">
+                                    <h2 class="text-white font-bold text-lg tracking-wide">About</h2>
+                                </div>
+                                <p class="mt-4 text-sm leading-relaxed">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.
+                                </p>
+                            </div>
+
+                            <!-- Experience Section -->
+                            <div>
+                                <div class="bg-black border-t-4 border-white px-4 py-1">
+                                    <h2 class="text-white font-bold text-lg tracking-wide">Experience</h2>
+                                </div>
+                                <div class="mt-2 space-y-4 text-sm">
+                                    <div>
+                                        <p class="italic">2019 - 2022</p>
+                                        <p class="font-medium">Company name</p>
+                                        <p class="mt-1">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="italic">2016 - 2019</p>
+                                        <p class="font-medium">Company name</p>
+                                        <p class="mt-1">
+                                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer nec odio vel erat vehicula lacinia.
+                                        </p>
+                                    </div>
+                                    <div>
+                                    <p class="italic">2013 - 2016</p>
+                                        <p class="font-medium">Company name</p>
+                                        <p class="mt-1">
+                                            Suspendisse potenti. Curabitur bibendum, sapien non iaculis facilisis, sem odio feugiat libero, eget luctus est felis at erat.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                `;
+                previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-9'){
+
+                    // Accountant Template 9
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-[#e8ecf2] shadow-md';
+                    preview.innerHTML = `
+                         <!-- Header -->
+                        <div class="flex items-center border-b-2 border-black">
+                            <div class="w-1/3 p-6">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full rounded shadow-md" />
+                            </div>
+                            <div class="w-2/3 px-6 border-t-2 border-b-2 border-black py-4">
+                                <h1 class="text-4xl font-bold">Charles Andrew Torres</h1>
+                                <p class="uppercase text-sm tracking-widest">Accountant</p>
+                            </div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="grid grid-cols-2 gap-6 p-8">
+                            <!-- Left Column -->
+                            <div class="space-y-6 pr-6 border-r border-gray-400">
+                                <!-- About -->
+                                <div>
+                                    <h2 class="text-xl font-bold border-b-2 border-black mb-4">ABOUT</h2>
+                                <p class="text-sm leading-relaxed">
+                                    Lorem ipsum dolor sit amet, consecteturadipiscing elit. Nullam pharetra in lorem at laoreet. 
+                                    Donec hendrerit libero eget est tempor.
+                                </p>
+                                </div>
+
+                                <!-- EDUCATION -->
+                                <div class="mb-8">
+                                    <h2 class="text-xl font-bold border-b-2 border-black mb-4">EDUCATION</h2>
+
+                                    <div class="mb-4">
+                                        <p class="font-semibold">Bachelor of Information Technology</p>
+                                        <p class="italic">Dominican College | 2022 - 2025</p>
+                                        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <p class="font-semibold">High School Diploma</p>
+                                        <p class="italic">Capas High School | 2018 - 2022</p>
+                                        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+
+                                    <div>
+                                        <p class="font-semibold">Elementary School</p>
+                                        <p class="italic">Capas Elementary | 2012 - 2018</p>
+                                        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Skills -->
+                                <div>
+                                    <h2 class="text-xl font-bold border-b-2 border-black mb-4">SKILLS</h2>
+                                    <div class="mb-3">
+                                        <p class="text-sm">Accounting Financial</p>
+                                        <div class="w-full bg-gray-300 h-2 rounded">
+                                        <div class="bg-blue-500 h-2 rounded" style="width:90%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <p class="text-sm">Teamwork</p>
+                                        <div class="w-full bg-gray-300 h-2 rounded">
+                                        <div class="bg-blue-500 h-2 rounded" style="width:80%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm">Communication</p>
+                                        <div class="w-full bg-gray-300 h-2 rounded">
+                                        <div class="bg-blue-500 h-2 rounded" style="width:77%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="space-y-6 pl-6">
+
+                                <!-- EXPERIENCE -->
+                                <div>
+                                    <h2 class="text-xl font-bold border-b-2 border-black mb-4">EXPERIENCE</h2>
+                                    <div class="mb-4">
+                                        <p class="font-semibold">Social Media Manager</p>
+                                        <p class="italic">Larana Inc. | 2018 - 2019</p>
+                                        <ul class="list-disc list-inside text-sm">
+                                        <li>Handled social media campaigns</li>
+                                        <li>Managed a team for social uploads</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <p class="font-semibold">Digital Marketing Manager</p>
+                                        <p class="italic">Shodwe Cosmetics | 2019 - Present</p>
+                                        <ul class="list-disc list-inside text-sm">
+                                        <li>Oversaw company digital marketing strategies</li>
+                                        <li>Boosted client engagement through SEO</li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <p class="font-semibold">Intern</p>
+                                        <p class="italic">XYZ Corp | 2017</p>
+                                        <ul class="list-disc list-inside text-sm">
+                                        <li>Assisted in daily administrative tasks</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Contact -->
+                                <div>
+                                    <h2 class="text-xl font-bold border-b-2 border-black mb-4">CONTACT</h2>
+                                    <p class="text-sm">+123-456-7890</p>
+                                    <p class="text-sm">CharlesTorres@gmail.com</p>
+                                    <p class="text-sm">123 Anywhere St., Any City</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'accountant-10'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-gray-100 shadow-md';
+                    preview.innerHTML = `
+                        <!-- Header -->
+                        <div class="bg-black text-white flex items-center">
+                            <div class="w-1/4">
+                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-auto object-cover p-4" />
+                            </div>
+                            <div class="w-3/4 px-8">
+                                <h1 class="text-5xl font-bold tracking-wide">Charles Andrew Torres</h1>
+                                <p class="uppercase text-lg tracking-wider mt-2">Accountant</p>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="grid grid-cols-[40%_60%] gap-8 px-10 py-10">
+                        
+                            <!-- Left Column (40%) -->
+                            <div class="space-y-8">
+                                <!-- About -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-2">ABOUT ME</h2>
+                                    <p class="text-sm leading-relaxed">
+                                        Lorem ipsum dolor sit amet, consectetueradipiscing elit. Nullam
+                                        pharetra in lorem at laoreet. Donec hendrerit libero eget est
+                                        tempor, donec hendrerit libero eget est tempor.
+                                    </p>
+                                </div>
+
+                                <!-- Skills -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-4">SKILLS</h2>
+                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                        <li>Financial Accounting</li>
+                                        <li>Teamwork</li>
+                                        <li>Communication</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Contact -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-4">CONTACT</h2>
+                                    <p class="text-sm flex items-center gap-2 mb-2">📞 +123-456-7890</p>
+                                    <p class="text-sm flex items-center gap-2 mb-2">✉️ CharlesTorres@gmail.com</p>
+                                    <p class="text-sm flex items-center gap-2">📍 123 Anywhere St, Any City, ST 12345</p>
+                                </div>
+                            </div>
+
+                            <!-- Right Column (60%) -->
+                            <div class="space-y-8">
+
+                                <!-- Education -->
+                                <div>
+                                <h2 class="text-lg font-bold mb-4">EDUCATION</h2>
+                                    <div class="mb-4">
+                                        <h3 class="font-bold text-sm">CAPAS TARLAC, 2022 – 2025</h3>
+                                        <p class="text-sm">• Bachelor of Information Technology</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-sm">CAPAS TARLAC, 2026</h3>
+                                        <p class="text-sm">• Bachelor of Information Technology</p>
+                                    </div>
+                                </div>
+
+                                <!-- Experience -->
+                                <div>
+                                <h2 class="text-lg font-bold mb-4">EXPERIENCE</h2>
+                                    <div class="mb-4">
+                                        <h3 class="font-bold text-sm">COMPANY NAME</h3>
+                                        <p class="italic text-xs mb-1">2021 / 2022 – Job Position</p>
+                                        <p class="text-sm leading-relaxed">
+                                        Pharetra in lorem at laoreet. Donec hendrerit libero eget est
+                                        tempor, pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-sm">COMPANY NAME</h3>
+                                        <p class="italic text-xs mb-1">2022 / 2023 – Job Position</p>
+                                        <p class="text-sm leading-relaxed">
+                                        Pharetra in lorem at laoreet. Donec hendrerit libero eget est
+                                        tempor, pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Language -->
+                                <div>
+                                    <h2 class="text-lg font-bold mb-4">LANGUAGE</h2>
+                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                        <li>Filipino</li>
+                                        <li>English</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-1'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans shadow-md flex overflow-hidden';
+                    preview.innerHTML = `
+                        <!-- Left Sidebar -->
+                        <div class="w-1/3 pr-6 border-r border-gray-300 pl-4 bg-gray-50">
+                            <div class="flex justify-center">
+                                <div class="border-[10px] border-white rounded-full w-40 h-40 overflow-hidden">
+                                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+                                </div>
+                            </div>
+
+                            <!-- Contact -->
+                            <div class="mt-6">
+                                <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2">CONTACT</h2>
+                                <ul class="mt-2 text-sm space-y-2 text-black">
+                                    <li class="flex items-center gap-2">
+                                    <span>📞</span> 123-456-7890
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                    <span>✉️</span> CharlesTorres@gmail.com
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                    <span>📍</span> 123 Anywhere St., Any City, ST 12345
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Skills -->
+                            <div class="mt-6">
+                                <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2">SKILLS</h2>
+                                <ul class="mt-2 text-sm text-black space-y-2">
+                                    <li>Process Improvement</li>
+                                    <li>Financial Support</li>
+                                    <li>Leadership</li>
+                                    <li>Negotiation</li>
+                                </ul>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="mt-6">
+                                <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2">LANGUAGE</h2>
+                                <ul class="mt-2 text-sm text-black space-y-1">
+                                    <li>English</li>
+                                    <li>Filipino</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="w-2/3 pl-6 flex flex-col bg-white">
+                            <!-- Header -->
+                            <div class="text-center mb-6">
+                                <div class="bg-gray-700 text-white font-bold py-4 text-2xl leading-tight">
+                                    Charles Andrew Torres
+                                    <div class="text-sm font-normal">BUSINESS ADMINISTRATION</div>
+                                </div>
+                            </div>
+
+                            <!-- Profile Summary -->
+                            <div class="text-sm text-black mb-6">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                                    pharetra in lorem at laoreet. Donec hendrerit libero eget est
+                                    tempor, quis tempus arcu elementum. In elementum elit at dui
+                                    tristique feugiat. Mauris convallis, mi at mattis malesuada, neque
+                                    nulla volutpat dolor.
+                                </p>
+                            </div>
+
+                            <!-- Experience -->
+                            <div class="mb-6">
+                                <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2 mb-2">EXPERIENCE</h2>
+                                <div class="mb-4">
+                                    <p class="font-bold text-sm">Job position here</p>
+                                    <p class="text-sm text-gray-600 font-semibold">Company Name | Jan 2022 – Present</p>
+                                    <ul class="text-sm text-black list-disc ml-5">
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+                                    </ul>
+                                </div>
+                            <div>
+                                <p class="font-bold text-sm">Job position here</p>
+                                <p class="text-sm text-gray-600 font-semibold">Company Name | Jan 2022 – Present</p>
+                                <ul class="text-sm text-black list-disc ml-5">
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div>
+                            <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2 mb-2">EDUCATION</h2>
+                            <div class="text-sm text-black mb-2">
+                                <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
+                                <p class="text-gray-600">Dominican College of Tarlac</p>
+                            </div>
+                            <div class="text-sm text-black">
+                                <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
+                                <p class="text-gray-600">Cristo Rey High School – Senior Department</p>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-2'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-gray-800 bg-white shadow-md';
+                    preview.innerHTML = `
+                       <!-- Header -->
+                    <div class="bg-gradient-to-r from-blue-900 to-blue-600 flex items-center px-8 py-6 ">
+                        <!-- Profile Image -->
+                        <img src="../../../assets/img/charles.png" alt="Profile" 
+                            class="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md">
+                        <!-- Name and Title -->
+                        <div class="ml-6 text-white">
+                            <h1 class="text-3xl font-extrabold">Charles Andrew Torres</h1>
+                            <p class="text-lg font-medium tracking-wide">BUSINESS ADMINISTRATION</p>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <!-- Left Sidebar -->
+                        <div class="w-1/3 bg-gray-50 p-6 space-y-8">
+                            <!-- Contact -->
+                            <div>
+                                <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+                                <p class="text-sm flex items-center"><span class="mr-2">📞</span> +123-456-7890</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">✉️</span> CharlesTorres@gmail.com</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">📍</span>123 Anywhere St., Any City</p>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <h2 class="text-xl font-bold tracking-wide mb-2">EDUCATION</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+
+                                <!-- School 1 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">2022 - 2026</p>
+                                    <p class="text-base font-bold">DOMINICAN COLLEGE OF TARLAC</p>
+                                    <p class="text-sm">B.S Business Administration</p>
+                                </div>
+
+                                <!-- School 2 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">2018 - 2020</p>
+                                    <p class="text-base font-bold">Sample University</p>
+                                    <p class="text-sm">Associate Degree in Business</p>
+                                </div>
+                            </div>
+
+
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-lg font-bold tracking-wide mb-2">SKILLS</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Project Management</li>
+                                    <li>Public Relations</li>
+                                    <li>Teamwork</li>
+                                    <li>Time Management</li>
+                                    <li>Leadership</li>
+                                    <li>Effective Communication</li>
+                                    <li>Critical Thinking</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="w-2/3 p-8 space-y-8">
+
+                            <!-- Profile -->
+                            <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">PROFILE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+                                <p class="text-sm leading-relaxed">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam quis nostrud exercitation.
+                                </p>
+                            </div>
+
+                            <!-- Work Experience -->
+                            <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">WORK EXPERIENCE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+
+                                <div class="space-y-6">
+
+                                    <!-- Job 1 -->
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-7px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
+                                        <div class="flex justify-between items-center ml-4">
+                                            <p class="text-base font-semibold">Job Position One</p>
+                                            <p class="text-sm text-gray-600">2018 - 2019</p>
+                                        </div>
+                                        <p class="text-sm text-gray-700 ml-4">Company Name</p>
+                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
+                                            <li>Developed and executed marketing strategies.</li>
+                                            <li>Led a high-performing team to meet goals.</li>
+                                            <li>Ensured brand consistency across channels.</li>
+                                        </ul>
+                                    </div>
+                                    <!-- Job 2 -->
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-6px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
+                                        <div class="flex justify-between items-center ml-4">
+                                            <p class="text-base font-semibold">Job Position Two</p>
+                                            <p class="text-sm text-gray-600">2020 - 2022</p>
+                                        </div>
+                                        <p class="text-sm text-gray-700 ml-4">Another Company</p>
+                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
+                                            <li>Coordinated finance and budget reports.</li>
+                                            <li>Improved workflow efficiency by 20%.</li>
+                                            <li>Trained new team members and interns.</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Language -->
+                                <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">LANGUAGE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+                                <p class="text-sm font-semibold">ENGLISH</p>
+                                <p class="text-sm font-semibold">FILIPINO</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="w-full h-3 bg-blue-800"></div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-3'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md flex';
+                    preview.innerHTML = `
+                   <!-- Left Column -->
+                    <div class="w-1/3 bg-gray-800 text-white p-8 space-y-8">
+                        <!-- Profile Image -->
+                        <div class="flex justify-center">
+                            <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 object-cover rounded-lg shadow-md" />
+                        </div>
+
+                        <!-- Title -->
+                        <div class="text-center">
+                            <hr class="border-t border-gray-500 mb-3">
+                            <h2 class="text-lg font-bold tracking-wide">BUSINESS ADMINISTRATION</h2>
+                            <hr class="border-t border-gray-500 mt-3">
+                            <p class="text-sm mt-2 text-gray-300">
+                                Dedicated and results-driven professional passionate about organizational growth and leadership.
+                            </p>
+                        </div>
+
+                        <!-- Contact -->
+                        <div>
+                            <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">CONTACT</h3>
+                            <p class="flex items-center gap-2 text-sm"><span>📞</span> +123-456-7890</p>
+                            <p class="flex items-center gap-2 text-sm"><span>📧</span> CharlesTorres@gmail.com</p>
+                            <p class="flex items-center gap-2 text-sm"><span>📍</span> 123 Anywhere St, Any City</p>
+                        </div>
+
+                        <!-- Skills -->
+                        <div>
+                            <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">SKILLS</h3>
+                            <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                                <li>Process Improvement</li>
+                                <li>Financial Support</li>
+                                <li>Negotiation</li>
+                                <li>Leadership</li>
+                            </ul>
+                        </div>
+
+                        <!-- Language -->
+                        <div>
+                            <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">LANGUAGE</h3>
+                            <p class="text-sm">English</p>
+                            <p class="text-sm">Filipino</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="w-2/3 bg-white p-10 space-y-8">
+                        <!-- Header -->
+                        <div class="text-center">
+                            <h1 class="text-3xl font-bold text-gray-800 tracking-wide">Charles Andrew Torres</h1>
+                        </div>
+                        <!-- Education -->
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2">EDUCATION</h2>
+                            <hr class="border-t border-gray-400 mb-4">
+
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold">2022 - 2026</p>
+                                <p class="text-sm font-bold">Dominican College of Tarlac</p>
+                                <p class="text-sm text-gray-600">B.S Business Administration</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm font-semibold">2020 - 2022</p>
+                                <p class="text-sm font-bold">Cristo Rey High School</p>
+                                <p class="text-sm text-gray-600">Senior High Department</p>
+                            </div>
+                        </div>
+
+                        <!-- Experience -->
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800 mb-2">EXPERIENCE</h2>
+                            <hr class="border-t border-gray-400 mb-4">
+
+                            <!-- Job 1 -->
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="text-base font-semibold">Job Position One</p>
+                                    <p class="text-sm text-gray-600">2018 - 2019</p>
+                                </div>
+                                <p class="text-sm text-gray-700">Company Name</p>
+                                <ul class="list-disc list-inside text-sm mt-2 space-y-1 text-gray-600">
+                                    <li>Developed and executed marketing strategies.</li>
+                                    <li>Led a high-performing team to meet goals.</li>
+                                    <li>Ensured brand consistency across channels.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Job 2 -->
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="text-base font-semibold">Job Position Two</p>
+                                    <p class="text-sm text-gray-600">2020 - 2022</p>
+                                </div>
+                                <p class="text-sm text-gray-700">Another Company</p>
+                                <ul class="list-disc list-inside text-sm mt-2 space-y-1 text-gray-600">
+                                    <li>Coordinated finance and budget reports.</li>
+                                    <li>Improved workflow efficiency by 20%.</li>
+                                    <li>Trained new team members and interns.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Job 3 -->
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="text-base font-semibold">Job Position Three</p>
+                                    <p class="text-sm text-gray-600">2020 - 2022</p>
+                                </div>
+                                <p class="text-sm text-gray-700">Another Company</p>
+                                <ul class="list-disc list-inside text-sm mt-2 space-y-1 text-gray-600">
+                                    <li>Coordinated finance and budget reports.</li>
+                                    <li>Improved workflow efficiency by 20%.</li>
+                                    <li>Trained new team members and interns.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-4'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md';
+                    preview.innerHTML = `
+                    <div class="grid grid-cols-3">
+                        <!-- Left Column -->
+                        <div class="col-span-1 bg-[#20B2AA] text-white p-6 flex flex-col items-center">
+                            <!-- Profile Image -->
+                            <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 h-32 object-cover rounded-lg border-4 border-white mb-6">
+                            <!-- Profile -->
+                            <div class="text-center mb-8">
+                                <h2 class="text-lg font-bold tracking-wide">PROFILE</h2>
+                                <hr class="border-t border-white/60 my-2">
+                                <p class="text-sm leading-relaxed">
+                                    Business administration student.  
+                                    I consider myself a responsible and orderly person.  
+                                    I am looking forward to my first work experience.
+                                </p>
+                            </div>
+
+                            <!-- Contact -->
+                            <div class="w-full">
+                                <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT ME</h2>
+                                <hr class="border-t border-white/60 mb-3">
+                                <p class="flex items-center text-sm mb-2">
+                                    <span class="mr-2">📞</span>123-456-7890
+                                </p>
+                                <p class="flex items-center text-sm mb-2">
+                                    <span class="mr-2">✉️</span>CharlesTorres@gmail.com
+                                </p>
+                                <p class="flex items-center text-sm">
+                                    <span class="mr-2">📍</span> 123 Anywhere St., Any City, ST 12345
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-span-2 bg-gray-50 p-8">
+                            <!-- Header -->
+                            <div class="text-center mb-8">
+                                <h1 class="text-2xl font-bold text-gray-800 tracking-wide">Charles Andrew Torres</h1>
+                                <p class="text-lg italic text-gray-600">Business Administration</p>
+                                <hr class="border-t-2 border-[#20B2AA] mt-4">
+                            </div>
+
+                            <!-- Education -->
+                            <div class="mb-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">EDUCATION</h2>
+                                <hr class="border-t border-[#20B2AA] mb-3">
+                                <div class="mb-4">
+                                    <p class="font-semibold text-sm">B.S Business Administration</p>
+                                    <p class="text-sm italic">Business Administration career, in progress.</p>
+                                    <p class="text-sm text-gray-600">Dominican College of Tarlac — 2022–2026</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm">Cristo Rey High School</p>
+                                    <p class="text-sm italic">Senior Department</p>
+                                    <p class="text-sm text-gray-600">2020–2022</p>
+                                </div>
+                            </div>
+
+                            <!-- Languages -->
+                            <div class="mb-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">LANGUAGE</h2>
+                                <hr class="border-t border-[#20B2AA] mb-3">
+                                <ul class="list-none text-sm space-y-1">
+                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+                                    English
+                                    </li>
+                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+                                    Filipino
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Skills -->
+                            <div class="mb-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">SKILLS</h2>
+                                <hr class="border-t border-[#20B2AA] mb-3">
+                                <ul class="list-none text-sm space-y-1">
+                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+                                    Process Improvement
+                                    </li>
+                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+                                    Financial Support
+                                    </li>
+                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+                                    Negotiation
+                                    </li>
+                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
+                                    Leadership
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Work Experience -->
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">WORK EXPERIENCE</h2>
+                                <hr class="border-t border-[#20B2AA] mb-3">
+                                <div>
+                                    <p class="font-semibold text-sm">Job Position Here</p>
+                                    <p class="text-sm text-gray-600">Company Name — 2018–2019</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-5'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md';
+                    preview.innerHTML = `
+                     <!-- Header -->
+                    <div class="bg-gray-200 p-6 flex items-center space-x-6">
+                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 h-32 object-cover border border-black" />
+                        <div  class="text-sm text-gray-700">
+                            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+                            <p class="text-lg text-gray-700">Business Administration</p>
+                            <p>123 Main Street, Cityville</p>
+                            <p>CharlesTorres@gmail.com</p>
+                            <p>+63 912 345 6789</p>
+                        </div>
+                    </div>
+
+                    <!-- Main Body -->
+                    <div class="grid grid-cols-[30%_70%] gap-6 p-6">
+                    
+                        <!-- Left Column -->
+                        <div class="space-y-6">
+                            <div>
+                                <h2 class="text-lg font-semibold">Profile</h2>
+                                <p class="text-sm text-gray-700 mt-1">
+                                    Results-driven Mechanical Engineer with over 5 years of experience in designing and optimizing mechanical systems across automotive and industrial applications.
+                                </p>
+                            </div>
+
+                            <hr class="border-gray-300" />
+
+                            <div>
+                                <h2 class="text-lg font-semibold">Skills</h2>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                                    <li>CAD Design</li>
+                                    <li>Thermodynamics</li>
+                                    <li>Project Management</li>
+                                </ul>
+                            </div>
+                            <hr class="border-gray-300" />
+                            <div>
+                                <h2 class="text-lg font-semibold">Languages</h2>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                                    <li>English</li>
+                                    <li>Filipino</li>
+                                </ul>
+                            </div>
+                            <hr class="border-gray-300" />
+                            <div>
+                                <h2 class="text-lg font-semibold">Hobbies</h2>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                                    <li>Chess</li>
+                                    <li>Cycling</li>
+                                    <li>Photography</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                            <div class="space-y-6">
+                            <!-- Education Section -->
+                                <div>
+                                    <h2 class="text-xl font-bold">Education</h2> 
+                                    <div class="mt-2">
+                                    <p class="text-sm font-semibold text-gray-800">Bachelor of Science in Mechanical Engineering</p>
+                                    <p class="text-sm text-gray-600">University of the Philippines, 2014 - 2018</p>
+                                </div>
+                                <div class="mt-4">
+                                    <p class="text-sm font-semibold text-gray-800">Senior High School – STEM Strand</p>
+                                    <p class="text-sm text-gray-600">City Science High School, 2012 - 2014</p>
+                                </div>
+                            </div>
+                        <hr class="border-gray-300" />
+
+                        <!-- Work Experience Section -->
+                        <div>
+                            <h2 class="text-xl font-bold">Work Experience</h2>
+
+                            <div class="mt-2">
+                                <p class="font-semibold text-gray-800">Mechanical Engineer – XYZ Corp</p>
+                                <p class="text-sm italic text-gray-600">Jan 2020 – Present</p>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                                    <li>Led product design for industrial machines.</li>
+                                    <li>Improved thermal systems by 25% efficiency.</li>
+                                    <li>Managed a cross-functional team of 8 engineers.</li>
+                                </ul>
+                            </div>
+
+                            <div class="mt-4">
+                                <p class="font-semibold text-gray-800">Junior Engineer – ABC Industries</p>
+                                <p class="text-sm italic text-gray-600">Jul 2018 – Dec 2019</p>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                                    <li>Drafted and reviewed technical blueprints.</li>
+                                    <li>Tested HVAC systems and reported analysis.</li>
+                                    <li>Assisted senior engineers in fabrication tasks.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                `;
+                previewContainer.appendChild(preview);
+                }else if(templateId === 'business-6'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md p-8 md:flex gap-6';
+                    preview.innerHTML = `
+                    <!-- Left Column -->
+                    <div class="md:w space-y-6">
+                    
+                        <!-- Profile -->
+                        <div class="flex flex-col items-center text-center">
+                            <img src="../../../assets/img/charles.png" class="border-2 border-black w-32 h-32 object-cover" alt="Profile image">
+                            <h1 class="text-2xl font-semibold mt-4">Charles Andrew Torres</h1>
+                            <p class="text-gray-500">Business Administration</p>
+                            <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/></svg>
+                            MY PROFILE
+                            </h2>
+                            <p class="mt-2 text-sm text-gray-700">
+                            My name is John Doe, I am a business owner age, I worked with several well-known fashion brands. Several famous artists have used my work.
+                            </p>
+                        </div>
+
+                        <!-- Education -->
+                        <div>
+                            <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/></svg>
+                                EDUCATION
+                            </h2>
+
+                            <div class="mt-4 space-y-4">
+                                <div class="bg-gray-100 p-4 rounded-xl w-full">
+                                    <p class="font-semibold">2022–2026</p>
+                                    <p class="text-sm">B.S Business Administration - Dominican College of Tarlac</p>
+                                </div>
+
+                                <div class="bg-gray-100 p-4 rounded-xl w-full">
+                                    <p class="font-semibold">2020–2022</p>
+                                    <p class="text-sm">HUMSS - Humanities, Social and Sciences - Cristo Rey High School</p>
+                                </div>
+
+                                <div class="bg-gray-100 p-4 rounded-xl w-full">
+                                    <p class="font-semibold">2020–2022</p>
+                                    <p class="text-sm">HUMSS - Humanities, Social and Sciences - Cristo Rey High School</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Experience -->
+                        <div>
+                            <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+                                EXPERIENCE
+                            </h2>
+                        <div class="mt-4 space-y-4">
+                            <!-- Job 1 -->
+                            <div class="bg-gray-100 p-4 rounded-xl w-full">
+                                <p class="font-semibold">2018–2019</p>
+                                <p class="text-sm">Job Position Here</p>
+                                <p class="text-sm italic text-gray-500">Company Name</p>
+                            </div>
+                            <!-- Job 2 -->
+                            <div class="bg-gray-100 p-4 rounded-xl w-full">
+                                <p class="font-semibold">2020–2022</p>
+                                <p class="text-sm">Job Position Here</p>
+                                <p class="text-sm italic text-gray-500">Company Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="md:w-1/3 mt-8 md:mt-0">
+                    <div class="bg-gray-100 rounded-xl p-6 space-y-6 h-full">
+                        <!-- Skills (List Style) -->
+                        <div>
+                            <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v6l4 2"/></svg>
+                                SKILLS
+                            </h2>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                <li>Creative</li>
+                                <li>Communication</li>
+                                <li>Project Management</li>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <!-- Contact -->
+                        <div class="space-y-2">
+                            <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 8l10 6 10-6"/></svg>
+                                CONTACT
+                            </h2>
+                            <p class="text-sm">+123-456-7890</p>
+                            <p class="text-sm">CharlesTorres@gmail.com</p>
+                            <p class="text-sm">123 Anywhere Street., Any City</p>
+                        </div>
+                    </div>
+                </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-7'){
+
+                    // BSBA Template 7
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md';
+                    preview.innerHTML = `
+                     <!-- Header -->
+                    <div class="flex justify-center items-center gap-6 px-6 py-6 border-b border-gray-300">
+                         <img src="../../../assets/img/charles.png" class="w-13 h-13  object-cover" alt="Profile" />
+                        <div class="text-center">
+                            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+                            <p class="text-sm text-gray-600">Business Administration</p>
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="flex">
+                        <!-- Left Column (5%) white -->
+                        <div class="w-[5%] bg-white"></div>
+
+                        <!-- Middle Column (35%) - Sidebar, colored -->
+                        <div class="w-[35%] p-6 space-y-6 bg-[#c7986b] text-white">
+
+                            <!-- About -->
+                            <div>
+                                <h2 class="text-sm font-bold uppercase mb-1">About Me</h2>
+                                <p class="text-sm">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
+                                </p>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <h2 class="text-sm font-bold uppercase mb-1">Education</h2>
+                                <div class="text-sm space-y-2">
+                                    <div>
+                                        <p class="font-semibold">2022 – 2026</p>
+                                        <p>Dominican College of Tarlac</p>
+                                        <p class="italic">B.S Business Administration</p>
+                                        </div>
+                                        <div>
+                                        <p class="font-semibold">2020 – 2022</p>
+                                        <p>Cristo Rey High School</p>
+                                        <p class="italic">Senior Department</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-sm font-bold uppercase mb-1">Skill</h2>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Process Improvement</li>
+                                    <li>Financial Support</li>
+                                    <li>Negotiation</li>
+                                    <li>Leadership</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Column (60%) -->
+                        <div class="w-[60%] p-6 space-y-6">
+
+                        <!-- Experience -->
+                        <div>
+                            <h2 class="text-sm font-bold uppercase mb-2 bg-[#c7986b] text-white inline-block px-3 py-1 rounded">
+                                Experience
+                            </h2>
+                            <div class="text-sm text-gray-700 space-y-4">
+                                <!-- Job 1 -->
+                                <div>
+                                    <p class="font-bold">Job Position One</p>
+                                    <p class="italic text-gray-500">Company Name</p>
+                                    <p class="text-gray-600">2018 – 2019</p>
+                                    <ul class="list-disc list-inside mt-1">
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                        <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Job 2 -->
+                                <div>
+                                    <p class="font-bold">Job Position Two</p>
+                                    <p class="italic text-gray-500">Company Name</p>
+                                    <p class="text-gray-600">2019 – 2020</p>
+                                    <ul class="list-disc list-inside mt-1">
+                                        <li>Praesent suscipit turpis quis sapien tempus, ac ultricies turpis luctus.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Job 3 -->
+                                <div>
+                                    <p class="font-bold">Job Position Three</p>
+                                    <p class="italic text-gray-500">Company Name</p>
+                                    <p class="text-gray-600">2020 – 2021</p>
+                                    <ul class="list-disc list-inside mt-1">
+                                        <li>Aliquam erat volutpat. Sed et mauris non nisi euismod fermentum.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Contact -->
+                        <div>
+                            <h2 class="text-sm font-bold uppercase mb-2 bg-[#c7986b] text-white inline-block px-3 py-1 rounded">
+                                Contact
+                            </h2>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <p>📞 123-456-7890</p>
+                                <p>✉️ CharlesTorres@gmail.com</p>
+                                <p>📍 123 Anywhere St., Any City, ST 12345</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-8'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-gray-800 bg-white shadow-md';
+                    preview.innerHTML = `
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-blue-900 to-blue-600 flex items-center px-8 py-6 ">
+                        <!-- Profile Image -->
+                        <img src="../../../assets/img/charles.png" alt="Profile" 
+                            class="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md">
+                        <!-- Name and Title -->
+                        <div class="ml-6 text-white">
+                            <h1 class="text-3xl font-extrabold">Charles Andrew Torres</h1>
+                            <p class="text-lg font-medium tracking-wide">BUSINESS ADMINISTRATION</p>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <!-- Left Sidebar -->
+                        <div class="w-1/3 bg-gray-50 p-6 space-y-8">
+                            <!-- Contact -->
+                            <div>
+                                <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+                                <p class="text-sm flex items-center"><span class="mr-2">📞</span> +123-456-7890</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">✉️</span> CharlesTorres@gmail.com</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">📍</span>123 Anywhere St., Any City</p>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <h2 class="text-xl font-bold tracking-wide mb-2">EDUCATION</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+
+                                <!-- School 1 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">2022 - 2026</p>
+                                    <p class="text-base font-bold">DOMINICAN COLLEGE OF TARLAC</p>
+                                    <p class="text-sm">B.S Business Administration</p>
+                                </div>
+
+                                <!-- School 2 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">2018 - 2020</p>
+                                    <p class="text-base font-bold">Sample University</p>
+                                    <p class="text-sm">Associate Degree in Business</p>
+                                </div>
+                            </div>
+
+
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-lg font-bold tracking-wide mb-2">SKILLS</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Project Management</li>
+                                    <li>Public Relations</li>
+                                    <li>Teamwork</li>
+                                    <li>Time Management</li>
+                                    <li>Leadership</li>
+                                    <li>Effective Communication</li>
+                                    <li>Critical Thinking</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="w-2/3 p-8 space-y-8">
+
+                            <!-- Profile -->
+                            <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">PROFILE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+                                <p class="text-sm leading-relaxed">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam quis nostrud exercitation.
+                                </p>
+                            </div>
+
+                            <!-- Work Experience -->
+                            <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">WORK EXPERIENCE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+
+                                <div class="space-y-6">
+
+                                    <!-- Job 1 -->
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-7px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
+                                        <div class="flex justify-between items-center ml-4">
+                                            <p class="text-base font-semibold">Job Position One</p>
+                                            <p class="text-sm text-gray-600">2018 - 2019</p>
+                                        </div>
+                                        <p class="text-sm text-gray-700 ml-4">Company Name</p>
+                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
+                                            <li>Developed and executed marketing strategies.</li>
+                                            <li>Led a high-performing team to meet goals.</li>
+                                            <li>Ensured brand consistency across channels.</li>
+                                        </ul>
+                                    </div>
+                                    <!-- Job 2 -->
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-6px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
+                                        <div class="flex justify-between items-center ml-4">
+                                            <p class="text-base font-semibold">Job Position Two</p>
+                                            <p class="text-sm text-gray-600">2020 - 2022</p>
+                                        </div>
+                                        <p class="text-sm text-gray-700 ml-4">Another Company</p>
+                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
+                                            <li>Coordinated finance and budget reports.</li>
+                                            <li>Improved workflow efficiency by 20%.</li>
+                                            <li>Trained new team members and interns.</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Language -->
+                                <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">LANGUAGE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+                                <p class="text-sm font-semibold">ENGLISH</p>
+                                <p class="text-sm font-semibold">FILIPINO</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="w-full h-3 bg-blue-800"></div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-9'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-white bg-white shadow-md';
+                    preview.innerHTML = `
+                    <!-- Header Section -->
+                    <div class="bg-[#0a2149] text-white text-center py-8 px-4">
+                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 mx-auto rounded-full border-4 border-white mb-4">
+                        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+                        <p class="text-lg">Business Administration</p>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="text-[#0a2149] px-6 py-4">
+                        <p class="text-sm text-center text-black">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est
+                            tempor, quis tempus arcu elementum.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 px-6 py-6">
+
+                        <!-- Left Column -->
+                        <div class="space-y-6">
+
+                            <!-- Contact -->
+                            <div>
+                                <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Contact</h2>
+                                <ul class="mt-2 space-y-1 text-black text-sm">
+                                    <li>123-456-7890</li>
+                                    <li>CharlesTorres@gmail.com</li>
+                                    <li>123 Anywhere St., Any City, ST 12345</li>
+                                </ul>
+                            </div>
+
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Skill</h2>
+                                <ul class="mt-2 list-disc list-inside text-black text-sm">
+                                    <li>Process Improvement</li>
+                                    <li>Financial Support</li>
+                                    <li>Negotiation</li>
+                                    <li>Leadership</li>
+                                </ul>
+                            </div>
+
+                            <!-- Language -->
+                            <div>
+                                <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Language</h2>
+                                <ul class="mt-2 text-black text-sm">
+                                    <li>English</li>
+                                    <li>Filipino</li>
+                                </ul>
+                            </div>
+                        </div>
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+
+                        <!-- Education -->
+                        <div>
+                            <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Education</h2>
+                            <div class="text-black mt-2 text-sm space-y-2">
+
+                                <div>
+                                    <p class="font-bold">B.S Business Administration</p>
+                                    <p>2018–2022</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-bold">Dominican College of Tarlac</p>
+                                    <p>2018–2022</p>
+                                </div>
+                                
+                                <div>
+                                    <p class="font-bold">Dominican College of Tarlac</p>
+                                    <p>2018–2022</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Experience -->
+                        <div>
+                            <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Experience</h2>
+                            <div class="text-black mt-2 text-sm space-y-2 ">
+
+                                <div>
+                                    <p class="font-bold">Job position here</p>
+                                    <p class="uppercase tracking-wide pl-3">Company Name</p>
+                                    <p class="pl-3">2018 – 2019</p>
+                                    <ul class="list-disc list-inside mt-1 pl-3">
+                                        <li>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
+                                        Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p class="font-bold">Job position here</p>
+                                    <p class="uppercase tracking-wide pl-3">Company Name</p>
+                                    <p class="pl-3">2018 – 2019</p>
+                                    <ul class="list-disc list-inside mt-1 pl-3">
+                                        <li>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
+                                        Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                }else if(templateId === 'business-10'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screenw-full font-sans text-black bg-white shadow-md grid grid-cols-[35%_65%]';
+                    preview.innerHTML = `
+                    <!-- Left Column -->
+                    <div class="bg-[#5c4431] text-white p-6 flex flex-col space-y-6">
+                        <!-- Profile Image, Name & Title Centered -->
+                        <div class="flex flex-col items-center text-center space-y-2">
+                            <img src="../../../assets/img/charles.png" alt="Profile Image" class="w-34 h-34 object-cover border-4 border-white" />
+
+                            <div>
+                                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+                                <p class="text-sm mt-1 tracking-wide uppercase">Business Administration</p>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- Profile Info -->
+                        <div class="text-sm">
+                            <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Profile Info</h2>
+                            <p class="text-white leading-relaxed">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                            </p>
+                        </div>
+
+                        <!-- Contact Info -->
+                        <div class="text-sm">
+                            <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Contact</h2>
+                            <p class="mb-1">123-456-7890</p>
+                            <p class="mb-1">CharlesTorres@gmail.com</p>
+                            <p>123 Anywhere St., Any City</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Right Column -->
+                    <div class="bg-white p-8 space-y-8">
+
+                        <!-- Education -->
+                        <div>
+                            <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Education History</h2>
+                            
+                            <div class="mb-4">
+                                <p class="font-bold">Dominican College of Tarlac <span class="float-right font-normal">2022 - 2026</span></p>
+                                <p class="text-sm">Bachelor Science in Information Technology</p>
+                            </div>
+
+                            <div>
+                                <p class="font-bold">Cristo Rey High School - Senior Department <span class="float-right font-normal">2020 - 2022</span></p>
+                                <p class="text-sm">HUMSS - Humanities Social and Sciences</p>
+                            </div>
+                        </div>
+
+                        <!-- Work Experience -->
+                        <div>
+                            <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Work Experience</h2>
+                            <div>
+                                <p class="font-bold">Job position here</p>
+                                <p class="uppercase text-sm tracking-wide">Company Name</p>
+                                <p class="text-sm mb-2">2018 – 2019</p>
+                                <ul class="list-disc list-inside text-sm text-gray-800">
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.</li>
+                                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Skills -->
+                        <div>
+                            <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Skills</h2>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-800">
+                                <li>Process Improvement</li>
+                                <li>Financial Support</li>
+                                <li>Negotiation</li>
+                                <li>Leadership</li>
+                            </ul>
+                        </div>
+
+                        <!-- Language -->
+                        <div>
+                            <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Language</h2>
+                            <ul class="list-disc list-inside text-sm text-gray-800">
+                                <li>English</li>
+                                <li>Filipino</li>
+                            </ul>
+                        </div>
+                    </div>
+                    `;
+                    previewContainer.appendChild(preview);
+                    }else if(templateId === 'business-2'){
+
+                    // Accountant Template 10
+                    const preview = document.createElement('div');
+                    preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-gray-800 bg-white shadow-md';
+                    preview.innerHTML = `
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-blue-900 to-blue-600 flex items-center px-8 py-6 ">
+                        <!-- Profile Image -->
+                        <img src="../../../assets/img/charles.png" alt="Profile" 
+                            class="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md">
+                        <!-- Name and Title -->
+                        <div class="ml-6 text-white">
+                            <h1 class="text-3xl font-extrabold">Charles Andrew Torres</h1>
+                            <p class="text-lg font-medium tracking-wide">BUSINESS ADMINISTRATION</p>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <!-- Left Sidebar -->
+                        <div class="w-1/3 bg-gray-50 p-6 space-y-8">
+                            <!-- Contact -->
+                            <div>
+                                <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+                                <p class="text-sm flex items-center"><span class="mr-2">📞</span> +123-456-7890</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">✉️</span> CharlesTorres@gmail.com</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">📍</span>123 Anywhere St., Any City</p>
+                            </div>
+
+                            <!-- Education -->
+                            <div>
+                                <h2 class="text-xl font-bold tracking-wide mb-2">EDUCATION</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+
+                                <!-- School 1 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">2022 - 2026</p>
+                                    <p class="text-base font-bold">DOMINICAN COLLEGE OF TARLAC</p>
+                                    <p class="text-sm">B.S Business Administration</p>
+                                </div>
+
+                                <!-- School 2 -->
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold">2018 - 2020</p>
+                                    <p class="text-base font-bold">Sample University</p>
+                                    <p class="text-sm">Associate Degree in Business</p>
+                                </div>
+                            </div>
+
+
+                            <!-- Skills -->
+                            <div>
+                                <h2 class="text-lg font-bold tracking-wide mb-2">SKILLS</h2>
+                                <hr class="border-t border-gray-400 mb-3">
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Project Management</li>
+                                    <li>Public Relations</li>
+                                    <li>Teamwork</li>
+                                    <li>Time Management</li>
+                                    <li>Leadership</li>
+                                    <li>Effective Communication</li>
+                                    <li>Critical Thinking</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="w-2/3 p-8 space-y-8">
+
+                            <!-- Profile -->
+                            <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">PROFILE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+                                <p class="text-sm leading-relaxed">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam quis nostrud exercitation.
+                                </p>
+                            </div>
+
+                            <!-- Work Experience -->
+                            <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">WORK EXPERIENCE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+
+                                <div class="space-y-6">
+
+                                    <!-- Job 1 -->
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-7px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
+                                        <div class="flex justify-between items-center ml-4">
+                                            <p class="text-base font-semibold">Job Position One</p>
+                                            <p class="text-sm text-gray-600">2018 - 2019</p>
+                                        </div>
+                                        <p class="text-sm text-gray-700 ml-4">Company Name</p>
+                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
+                                            <li>Developed and executed marketing strategies.</li>
+                                            <li>Led a high-performing team to meet goals.</li>
+                                            <li>Ensured brand consistency across channels.</li>
+                                        </ul>
+                                    </div>
+                                    <!-- Job 2 -->
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-6px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
+                                        <div class="flex justify-between items-center ml-4">
+                                            <p class="text-base font-semibold">Job Position Two</p>
+                                            <p class="text-sm text-gray-600">2020 - 2022</p>
+                                        </div>
+                                        <p class="text-sm text-gray-700 ml-4">Another Company</p>
+                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
+                                            <li>Coordinated finance and budget reports.</li>
+                                            <li>Improved workflow efficiency by 20%.</li>
+                                            <li>Trained new team members and interns.</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Language -->
+                                <div>
+                                <h2 class="text-xl font-bold text-blue-900 mb-2">LANGUAGE</h2>
+                                <hr class="border-t border-blue-900 mb-3">
+                                <p class="text-sm font-semibold">ENGLISH</p>
+                                <p class="text-sm font-semibold">FILIPINO</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="w-full h-3 bg-blue-800"></div>
+                    `;
+                    previewContainer.appendChild(preview);
+                    } else {
                 // Default template preview
                 const preview = document.createElement('div');
                 preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md';
@@ -3553,16 +5894,18 @@
                     loadingText.textContent = 'Removing background...';
                     previewImage.parentElement.appendChild(loadingText);
 
-                    // Convert image to blob
+                   
                     const response = await fetch(previewImage.src);
                     const blob = await response.blob();
 
-                    // Create form data
+                   
                     const formData = new FormData();
-                    formData.append('image_file', blob);
+                    // formData.append('image_file', blob);
+                    formData.append('file', blob, 'upload.png');
 
-                    // Call background removal API
-                    const apiResponse = await fetch('http://localhost:3000/api/removebg/removebg', {
+                    // Call background removal API (Hugging Face Space)
+                    //  const apiResponse = await fetch('http://localhost:3000/api/removebg/removebg', {
+                    const apiResponse = await fetch('https://resumego-bg-remove-resumego.hf.space/remove-background/', {
                         method: 'POST',
                         body: formData,
                     });
@@ -3636,15 +5979,80 @@
             const params = new URLSearchParams(window.location.search);
             const template = params.get('template');
             if (!template) return 'relevant';
-            // Map template codes to categories if needed
-            if (template.startsWith('it')) return 'IT';
-            if (template.startsWith('accountant')) return 'Accountancy';
-            if (template.startsWith('business-add')) return 'Business Administrator';
-            if (template.startsWith('civil-engineer')) return 'Civil Engineering';
-            if (template.startsWith('generic')) return 'relevant';
-            // Add more mappings as needed
-            return template;
+            // Map template codes to categories
+            const lower = template.toLowerCase();
+            if (lower.startsWith('it-')) return 'IT';
+            if (lower.startsWith('accountant-')) return 'Accountancy';
+            if (lower.startsWith('business-') || lower.startsWith('ba-') || lower.startsWith('bsba-') || lower.startsWith('business-admin') || lower.startsWith('business-add')) return 'Business Administrator';
+            if (lower.startsWith('cv-') || lower.startsWith('civil-') || lower.startsWith('civil-engineer')) return 'Civil Engineering';
+            if (lower.startsWith('generic-') || lower.startsWith('generic')) return 'relevant';
+            // Default category
+            return 'relevant';
         }
+
+        function updateFormForCategory() {
+            const category = getSelectedCategory();
+            const skillsSection = document.getElementById('skills-section');
+            const skillsTitle = document.getElementById('skills-section-title');
+            const cat1 = document.getElementById('skill-cat-1');
+            const cat2 = document.getElementById('skill-cat-2');
+            const cat3 = document.getElementById('skill-cat-3');
+            const projectsSection = document.getElementById('projects-section');
+
+            if (!skillsSection || !skillsTitle || !cat1 || !cat2 || !cat3) return;
+
+            // Reset defaults
+            skillsSection.style.display = '';
+            projectsSection && (projectsSection.style.display = '');
+            cat1.style.display = '';
+            cat2.style.display = '';
+            cat3.style.display = '';
+            cat1.querySelector('h4').textContent = 'Programming Languages';
+            cat2.querySelector('h4').textContent = 'Frameworks & Libraries';
+            cat3.querySelector('h4').textContent = 'Tools & Technologies';
+            skillsTitle.textContent = 'Technical Skills';
+
+            switch (category) {
+                case 'IT':
+                    // Keep all three skill categories and projects visible
+                    projectsSection && (projectsSection.style.display = '');
+                    break;
+                case 'Business Administrator':
+                    skillsTitle.textContent = 'Business Skills';
+                    cat1.querySelector('h4').textContent = 'Business & Office Tools';
+                    cat2.querySelector('h4').textContent = 'Soft Skills';
+                    cat3.querySelector('h4').textContent = 'Accounting/Finance Tools';
+                    // Hide projects section for business-oriented templates
+                    projectsSection && (projectsSection.style.display = 'none');
+                    break;
+                case 'Accountancy':
+                    skillsTitle.textContent = 'Accountancy Skills';
+                    cat1.querySelector('h4').textContent = 'Accounting Software (e.g., QuickBooks, SAP)';
+                    cat2.querySelector('h4').textContent = 'Financial/Analytical Skills';
+                    cat3.querySelector('h4').textContent = 'Compliance & Reporting';
+                    // Projects often not used; hide
+                    projectsSection && (projectsSection.style.display = 'none');
+                    break;
+                case 'Civil Engineering':
+                    skillsTitle.textContent = 'Engineering Skills';
+                    cat1.querySelector('h4').textContent = 'Design/CAD (e.g., AutoCAD, Revit)';
+                    cat2.querySelector('h4').textContent = 'Analysis/Tools (e.g., STAAD, ETABS)';
+                    cat3.querySelector('h4').textContent = 'Construction/Project Skills';
+                    // Keep projects visible (for portfolio projects)
+                    projectsSection && (projectsSection.style.display = '');
+                    break;
+                default: // Generic
+                    skillsTitle.textContent = 'Skills';
+                    cat1.querySelector('h4').textContent = 'Core Skills';
+                    cat2.querySelector('h4').textContent = 'Tools & Methods';
+                    cat3.querySelector('h4').textContent = 'Other Skills';
+                    projectsSection && (projectsSection.style.display = 'none');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try { updateFormForCategory(); } catch (e) { console.error(e); }
+        });
 
         async function askAI(promptText) {
           try {
@@ -4021,6 +6429,4 @@ if (typeof addProject === 'function') {
 </script>
 
 </body>
-
 </html>
-
