@@ -5,108 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/output.css" rel="stylesheet">
     <title>Generic Template No 5</title>
-</head>
-<body class="bg-white flex justify-center py-10">
-  <div class="max-w-[210mm] w-full text-black font-sans space-y-8 bg-white p-8 shadow-md">
-
-    <!-- Header -->
-    <div class="text-center">
-      <hr>
-      <h1 class="text-xl font-bold">JACKY WILSON</h1>
-      <p>5032 Westridge Dr. Valrico, FL 33596</p>
-      <p>• 000-5451-45 • example@resumeviking.com</p>
-      <hr>
-    </div>
-
-    <!-- Top Section: Title + Image + Objective + Skills -->
-    <div class="grid grid-cols-2 gap-6 items-start">
-      <!-- Title and Image -->
-      <div class="space-y-4">
-        <h2 class="font-semibold text-center">Human Resources Manager</h2>
-        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-34 h-34 object-cover rounded-md mx-auto" />
-      </div>
-
-      <!-- Objective and Skills -->
-      <div>
-        <h2 class="font-semibold">OBJECTIVE</h2>
-        <p class="text-sm">
-          My primary goal is to secure a challenging position in which I can utilize my acquired
-          skills within the field of tools manufacturing.
-        </p>
-
-        <h2 class="font-semibold mt-3">SKILLS</h2>
-        <ul class="list-disc list-inside text-sm">
-          <li>Proficient in CNC machining</li>
-          <li>OSHA Trained</li>
-          <li>Can work Lathes Machines</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Professional Experience -->
-    <div>
-      <hr class="mb-2" />
-      <h2 class="font-semibold uppercase mb-2">Professional Experience</h2>
-      <hr class="mb-4" />
-
-      <!-- Job 1 -->
-      <div class="mb-6">
-        <p><span class="font-semibold">Keyer Tools</span>, <em>Human Resources Manager</em><br />Erlanger, KY</p>
-        <p class="text-sm mb-2">Oct 2021 – Aug 2024</p>
-        <ul class="list-disc list-inside space-y-1 text-sm">
-          <li>Maintain inventory of assorted products and order management.</li>
-          <li>Operate a CNC machine to machine parts for turbine engines in Abram Tanks and Airplanes.</li>
-          <li>Load parts in CNC machine with precision. Unload and measure the part for accuracy.</li>
-          <li>Load and unload dry freight and materials and maintain the warehouse workflow.</li>
-        </ul>
-      </div>
-
-      <!-- Job 2 -->
-      <div>
-        <p><span class="font-semibold">ProTools</span>, <em>Human Resources Manager</em><br />Brooklyn, NY</p>
-        <p class="text-sm mb-2">Jan 2019 – Sep 2021</p>
-        <ul class="list-disc list-inside space-y-1 text-sm">
-          <li>Performed manual lathe, mill, grinder, and band saw operation</li>
-          <li>Block squaring</li>
-          <li>Minor G code/M code editing</li>
-          <li>Operate CNC Haas VM6 (3 axes) machinery</li>
-          <li>Responsible for in-process QC inspection, machine and shop maintenance</li>
-          <li>Utilize all methods necessary to make fixtures including hand-drawn, and computer-aided models</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Certifications -->
-    <div>
-      <hr class="mb-2" />
-      <h2 class="font-semibold uppercase mb-2">Certifications</h2>
-      <hr class="mb-4" />
-
-      <div class="mb-4 text-sm">
-        <p><span class="font-semibold">Human Sciences College</span></p>
-        <p><em>National Institute for Metalworking Skills Certification</em></p>
-        <p>October 2020</p>
-      </div>
-
-      <div class="text-sm">
-        <p><span class="font-semibold">Forklifter Association of America</span></p>
-        <p><em>Certified Forklift Driver</em></p>
-        <p>January 2014</p>
-      </div>
-    </div>
-
-    <!-- References -->
-    <div>
-      <hr class="mb-2" />
-      <h2 class="font-semibold uppercase mb-2">References</h2>
-      <hr class="mb-4" />
-      <p class="text-sm">
-        <span class="font-semibold">Keyer Tools, Joe Smith</span><br />
-        Plant Manager<br />
-        Tel: 888-999-0000
-      </p>
-    </div>
-
-  </div>
-</body>
+    <style>
+      .resume-container {
+        width: 210mm;
+        max-width: 210mm;
+        min-width: 210mm;
+        margin: 0 auto;
+      }
+    
+      @media (max-width: 1024px) {
+        .resume-container {
+          transform: scale(0.8);
+          transform-origin: top center;
+        }
+      }
+    
+      @media (max-width: 600px) {
+        .resume-container {
+          transform: scale(0.6);
+          transform-origin: top center;
+        }
+      }
+    </style>
+    
+    
+    </head>
+     <body class="bg-white text-gray-800 font-serif">
+        <div class="resume-container mx-auto p-10 flex flex-col">
+          <!-- Header with Image + Contact Info -->
+          <div class="flex items-center justify-between mb-10">
+            <div class="flex items-center space-x-6">
+              <!-- Image -->
+              <img src="/imgs/charles.png" alt="Profile Photo" class="w-24 h-24 object-cover rounded-md" />
+    
+              <!-- Name and Contact -->
+              <div>
+                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+                <p class="text-md font-medium mb-2">Technical Assistant</p>
+                <p class="text-sm">3056478349</p>
+                <p class="text-sm">email@email.com</p>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Main Content -->
+          <div class="space-y-10">
+            <!-- Role + Summary -->
+            <div class="flex">
+              <!-- Right: Summary -->
+              
+                <p class="italic text-sm leading-relaxed">
+                  Devoted and detail-oriented Technical Assistant with 3+ years of experience in aircraft management
+                  and four years more with industrial processes. FAA-APT certified and received FAA-AMT award.
+                  Saved $45K in fuel expenses. Looking to use aircraft maintenance abilities by working at General
+                  Aviation Services as the new head maintenance Technical Assistant.
+                </p>
+              
+            </div>
+    
+            <!-- Skills and Languages -->
+            <div class="grid grid-cols-2 gap-6 text-sm">
+              <div>
+                <h2 class="font-semibold mb-2">Skills</h2>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Maintenance Equipment and Tools</li>
+                  <li>Computers and Electronics</li>
+                  <li>Ground Service Equipment Maintenance</li>
+                  <li>Electronic Control Systems</li>
+                  <li>Pneumatic Systems</li>
+                </ul>
+              </div>
+              <div>
+                <h2 class="font-semibold mb-2">Languages</h2>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>English</li>
+                  <li>Spanish</li>
+                </ul>
+              </div>
+            </div>
+    
+            <!-- Employment History -->
+            <div>
+              <h2 class="font-semibold text-md mb-4">Employment History</h2>
+    
+              <!-- Job 1 -->
+              <div class="mb-6">
+                <p class="font-semibold">Technical Assistant at Algorax, Knoxville</p>
+                <p class="text-sm">January 2019 — June 2021</p>
+                <p class="italic text-sm mt-1">
+                  Experienced in interpreting United States Trade and Development Agency (USTDA) contract scope...
+                </p>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                  <li>Formed Excel and Visio tools for engineering setting.</li>
+                  <li>Revised and translated U.S. patent applications.</li>
+                  <li>Collaborated with attorneys and translators on technical specs.</li>
+                  <li>Helped web designers on new company website.</li>
+                </ul>
+              </div>
+    
+              <!-- Job 2 -->
+              <div>
+                <p class="font-semibold">Technical Assistant at Nissan, Casilda</p>
+                <p class="text-sm">January 2018 — December 2018</p>
+                <p class="italic text-sm mt-1">
+                  Accountable for organizing international travel for the site visit to Bangkok...
+                </p>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                  <li>Collaborated with staff and assorted companies for operational support.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+      </body>
 </html>

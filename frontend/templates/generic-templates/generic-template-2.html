@@ -4,123 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/output.css" rel="stylesheet">
-    <title>Generic Template No 2</title>
-</head>
-  <body class="bg-white flex justify-center py-10">
-    <div class="max-w-[210mm]  mx-auto p-10 grid grid-cols-3 gap-10">
-      <!-- Left Content (2/3) -->
-      <div class="col-span-2 space-y-8">
-        <!-- Header: Image + Name/Contact -->
-        <div class="flex">
-          <div class="w-24 h-24 shrink-0">
-            <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+    <title>Generic Template No 4</title>
+    <style>
+      .resume-container {
+        width: 210mm;
+        max-width: 210mm;
+        min-width: 210mm;
+        margin: 0 auto;
+      }
+    
+      @media (max-width: 1024px) {
+        .resume-container {
+          transform: scale(0.8);
+          transform-origin: top center;
+        }
+      }
+    
+      @media (max-width: 600px) {
+        .resume-container {
+          transform: scale(0.6);
+          transform-origin: top center;
+        }
+      }
+    </style>
+    
+    </head>
+      <body class="bg-white justify-center py-10">
+        <div class="resume-container  mx-auto p-10 grid grid-cols-3 gap-10">
+          <!-- Left Content (2/3) -->
+          <div class="col-span-2 space-y-8">
+            <!-- Header: Image + Name/Contact -->
+            <div class="flex">
+              <div class="w-24 h-24 shrink-0">
+                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+              </div>
+              <div class="ml-6 flex flex-col justify-center">
+                <h1 class="text-4xl font-bold text-blue-600">Charles Andrew Torres</h1>
+                <h1 class="text-1xl font-bold text-blue-600">Project Assistant</h1>
+                <div class="mt-1 text-sm text-gray-700">
+                  <p>1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
+                  <p>email@email.com &middot; 3860863442</p>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Profile -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Profile</h2>
+              <p class="text-sm leading-relaxed">
+                Expert project assistant with more than nine years of experience with diverse types of projects.
+                Highly prepared with solid attention to detail and the capability to monitor and maintain schedules
+                meticulously. Inspired, driven, and able to work individually or in groups. Willing to travel and work
+                long hours.
+              </p>
+            </div>
+    
+            <!-- Employment History -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-4">Employment History</h2>
+    
+              <!-- Job 1 -->
+              <div class="mb-6">
+                <h3 class="font-semibold">Project Assistant, Malaski</h3>
+                <p class="text-sm italic text-gray-600">May 2021 — Present, Seattle</p>
+                <p class="text-sm italic mt-1">Functioned on a team of 3 Project Assistants in a fast-paced construction firm. Controlled all project assistance for $2.6 million in development annually.</p>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                  <li>Wrote up reports, Excel spreadsheets, and PowerPoint decks for 180+ meetings of cross-functional team members.</li>
+                  <li>Utilized conflict resolution skills to sort out all arguments between clients, employees, and vendors.</li>
+                  <li>Frequently educated 130+ employees in the right understanding of all project plans.</li>
+                  <li>Ran budget for four projects, each valued at over $190,000.</li>
+                </ul>
+              </div>
+    
+              <!-- Job 2 -->
+              <div>
+                <h3 class="font-semibold">Project Assistant, Rippled Rock Resources</h3>
+                <p class="text-sm italic text-gray-600">Jan 2018 — Jan 2021, Minato</p>
+                <p class="text-sm italic mt-1">Controlled all Project Assistant obligations for 13 excavation and water-line installation construction projects annually, each valued at $82,000.</p>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                  <li>Cut rework and failure backlog by 30% via attentive inspection and retraining.</li>
+                  <li>Supervised budgets up to $42,000 and assisted in completing projects ahead of schedule.</li>
+                  <li>Discussed design implementation strategies, focusing on sustainability.</li>
+                  <li>Supervised equipment and supplies for labor crews.</li>
+                </ul>
+              </div>
+            </div>
+    
+            <!-- Education -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-4">Education</h2>
+              <div class="mb-4">
+                <h3 class="font-semibold">Certified Associate in Project Management (CAPM), Project Management Institute (PMI)</h3>
+                <p class="text-sm text-gray-600">May 2021 — May 2021, Texas University</p>
+              </div>
+              <div>
+                <h3 class="font-semibold">Newtown Square University, Bachelor’s Degree in Industrial Engineering</h3>
+                <p class="text-sm text-gray-600">May 2019 — May 2021, Philipsburg</p>
+              </div>
+            </div>
           </div>
-          <div class="ml-6 flex flex-col justify-center">
-            <h1 class="text-4xl font-bold text-blue-600">Jennifer Adams</h1>
-            <h1 class="text-1xl font-bold text-blue-600">Project Assistant</h1>
-            <div class="mt-1 text-sm text-gray-700">
-              <p>1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
-              <p>email@email.com &middot; 3860863442</p>
+    
+          <!-- Right Sidebar (1/3) -->
+          <div class="space-y-8 text-sm text-gray-800">
+            <!-- Details -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Details</h2>
+              <p class="text-gray-600">Place of Birth</p>
+              <p class="font-semibold mb-2">San Antonio</p>
+            </div>
+    
+            <!-- Skills -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Skills</h2>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Microsoft PowerPoint</li>
+                <li>Data Analysis</li>
+                <li>Scheduling</li>
+                <li>Crystal Reports</li>
+                <li>Agile Project Management</li>
+              </ul>
+            </div>
+    
+            <!-- Hobbies -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Hobbies</h2>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Hockey</li>
+                <li>Tennis</li>
+                <li>Basketball</li>
+              </ul>
+            </div>
+    
+            <!-- Languages -->
+            <div>
+              <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Languages</h2>
+              <ul class="list-disc list-inside space-y-1">
+                <li>English</li>
+                <li>French</li>
+              </ul>
             </div>
           </div>
         </div>
-
-        <!-- Profile -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Profile</h2>
-          <p class="text-sm leading-relaxed">
-            Expert project assistant with more than nine years of experience with diverse types of projects.
-            Highly prepared with solid attention to detail and the capability to monitor and maintain schedules
-            meticulously. Inspired, driven, and able to work individually or in groups. Willing to travel and work
-            long hours.
-          </p>
-        </div>
-
-        <!-- Employment History -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-4">Employment History</h2>
-
-          <!-- Job 1 -->
-          <div class="mb-6">
-            <h3 class="font-semibold">Project Assistant, Malaski</h3>
-            <p class="text-sm italic text-gray-600">May 2021 — Present, Seattle</p>
-            <p class="text-sm italic mt-1">Functioned on a team of 3 Project Assistants in a fast-paced construction firm. Controlled all project assistance for $2.6 million in development annually.</p>
-            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-              <li>Wrote up reports, Excel spreadsheets, and PowerPoint decks for 180+ meetings of cross-functional team members.</li>
-              <li>Utilized conflict resolution skills to sort out all arguments between clients, employees, and vendors.</li>
-              <li>Frequently educated 130+ employees in the right understanding of all project plans.</li>
-              <li>Ran budget for four projects, each valued at over $190,000.</li>
-            </ul>
-          </div>
-
-          <!-- Job 2 -->
-          <div>
-            <h3 class="font-semibold">Project Assistant, Rippled Rock Resources</h3>
-            <p class="text-sm italic text-gray-600">Jan 2018 — Jan 2021, Minato</p>
-            <p class="text-sm italic mt-1">Controlled all Project Assistant obligations for 13 excavation and water-line installation construction projects annually, each valued at $82,000.</p>
-            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-              <li>Cut rework and failure backlog by 30% via attentive inspection and retraining.</li>
-              <li>Supervised budgets up to $42,000 and assisted in completing projects ahead of schedule.</li>
-              <li>Discussed design implementation strategies, focusing on sustainability.</li>
-              <li>Supervised equipment and supplies for labor crews.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Education -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-4">Education</h2>
-          <div class="mb-4">
-            <h3 class="font-semibold">Certified Associate in Project Management (CAPM), Project Management Institute (PMI)</h3>
-            <p class="text-sm text-gray-600">May 2021 — May 2021, Texas University</p>
-          </div>
-          <div>
-            <h3 class="font-semibold">Newtown Square University, Bachelor’s Degree in Industrial Engineering</h3>
-            <p class="text-sm text-gray-600">May 2019 — May 2021, Philipsburg</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Sidebar (1/3) -->
-      <div class="space-y-8 text-sm text-gray-800">
-        <!-- Details -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Details</h2>
-          <p class="text-gray-600">Place of Birth</p>
-          <p class="font-semibold mb-2">San Antonio</p>
-        </div>
-
-        <!-- Skills -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Skills</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Microsoft PowerPoint</li>
-            <li>Data Analysis</li>
-            <li>Scheduling</li>
-            <li>Crystal Reports</li>
-            <li>Agile Project Management</li>
-          </ul>
-        </div>
-
-        <!-- Hobbies -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Hobbies</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Hockey</li>
-            <li>Tennis</li>
-            <li>Basketball</li>
-          </ul>
-        </div>
-
-        <!-- Languages -->
-        <div>
-          <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Languages</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li>English</li>
-            <li>French</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </body>
+      </body>
 </html>
+

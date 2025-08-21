@@ -1,120 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/output.css" rel="stylesheet">
-    <title>Generic Template No 4</title>
-</head>
-<body class="bg-white flex justify-center py-10">
-  <div class="max-w-[210mm] w-full  text-black font-sans space-y-8 bg-white p-8 shadow-md">
+    <title>Generic Template No 2</title>
 
-    <!-- Header -->
-    <div class="flex items-start">
-    <!-- Image on the far left -->
-    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-34 h-34 object-cover rounded-md mr-6" />
-
-    <!-- Right side: Name/Title + Email/Phone + Line + Address -->
-    <div class="flex-1">
-        <!-- Top row: Name + Title and Email + Phone -->
-        <div class="flex justify-between items-start">
-        <div>
-            <h1 class="text-2xl font-bold">GENE HOFFMAN</h1>
-            <p class="text-sm font-medium">Bar Manager</p>
-        </div>
-        <div class="text-sm text-right space-y-1">
-            <p>email@email.com</p>
-            <p>3868683442</p>
-        </div>
-        </div>
-
-        <!-- Horizontal line -->
-        <hr class="my-3 border-black" />
-
-        <!-- Address details -->
-        <div class="text-sm space-y-1">
-        <p>Place of birth: San Antonio</p>
-        <p>1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
-        </div>
-    </div>
-    </div>
-
-    <!-- Summary -->
-    <div>
-      <p class="italic text-[15px] leading-relaxed">
-        Proficient Bar Manager with over eight years in the foodservice industry in a management capacity.
-        I hold an Associate Degree in Hotel and Restaurant Administration and have worked in the restaurant’s
-        main responsibility areas.
-      </p>
-    </div>
-
-    <!-- Skills -->
-    <div>
-      <h2 class="text-md font-semibold mb-2">Skills</h2>
-      <ul class="list-disc pl-5 text-sm flex flex-wrap gap-x-8 gap-y-1">
-        <li>Beverage & Food Purchasing</li>
-        <li>Bar Operations</li>
-        <li>Health & Safety Compliance</li>
-        <li>Wine Pairing</li>
-        <li>Hospitality Marketing</li>
-      </ul>
-    </div>
-
-    <!-- Employment History -->
-    <div class="space-y-6">
-      <h2 class="text-md font-semibold">Employment History</h2>
-
-      <!-- Job 1 -->
-      <div class="flex gap-8">
-        <!-- Left 30% -->
-        <div class="w-1/3 text-sm font-semibold">
-          <p class="mb-1">Bar Manager</p>
-          <p class="text-xs font-normal">St Tropez Seafood Restaurant, Orange County</p>
-          <p class="text-xs font-normal">May 2020 — March 2021</p>
-        </div>
-
-        <!-- Right 70% -->
-        <div class="w-2/3 text-sm space-y-1">
-          <p class="italic mb-1">
-            Liable for building a friendly and professional bar service team and guaranteed well-trained staff and always supported.
-          </p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Handled recruiting, developing, and managing employee relations and evaluations.</li>
-            <li>Changed bar menu based on seasons, vendors, and holidays.</li>
-            <li>Monitored bar traffic data for informed decision-making and prep.</li>
-            <li>Ensured cooking equipment stayed well-maintained and operational.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Job 2 -->
-      <div class="flex gap-8">
-        <!-- Left 30% -->
-        <div class="w-1/3 text-sm font-semibold">
-          <p class="mb-1">Bar Manager</p>
-          <p class="text-xs font-normal">Gladstone Food Emporium, Miami</p>
-          <p class="text-xs font-normal">Jan 2012 — Feb 2020</p>
-        </div>
-
-        <!-- Right 70% -->
-        <div class="w-2/3 text-sm space-y-1">
-          <p class="italic mb-1">
-            Accountable for promoting and managing bar hygiene and safety policies, ensuring the 370sqm bar area stays clean and neat.
-          </p>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Designed and monitored systems that ensured restaurant excellence.</li>
-            <li>Maintained compliance with health and local standards.</li>
-            <li>Delivered consistent, professional service to guests.</li>
-            <li>Managed bar inventory, ordering, and stocking.</li>
-          </ul>
-        </div>
-      </div>
-
-
-
-      
-    </div>
+    <style>
+      .resume-container {
+        width: 210mm;
+        max-width: 210mm;
+        min-width: 210mm;
+        margin: 0 auto;
+      }
     
+      @media (max-width: 1024px) {
+        .resume-container {
+          transform: scale(0.8);
+          transform-origin: top center;
+        }
+      }
+    
+      @media (max-width: 600px) {
+        .resume-container {
+          transform: scale(0.6);
+          transform-origin: top center;
+        }
+      }
+    </style>
+</head>
+<body class="bg-white justify-center py-10">
+  <div class="resume-container bg-white p-8 shadow-md">
+    
+    <!-- Header -->
+    <div class="grid grid-cols-[30%_70%] gap-6 mb-6 text-black p-6 rounded border border-black">
+        
+        <!-- Left: Image -->
+        <div class="flex justify-center items-center">
+            <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-40 h-40 object-cover border-2 border-black">
+        </div>
+
+        <!-- Right: Name and Contact Info -->
+        <div class="space-y-2 text-left">
+            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+            <p class="text-xl">Sales Engineer</p>
+
+            <div class="mt-4 space-y-1">
+            <p class="text-sm">1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
+            </div>
+            <div class="space-y-1">
+            <p class="text-sm">3868683442</p>
+            </div>
+            <div class="space-y-1">
+            <p class="text-sm">CharlesTorres@gmail.com</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Body: 2 Column Layout (30% / 70%) -->
+    <div class="grid grid-cols-[30%_70%] gap-6">
+      
+      <!-- Left Column -->
+    <div class="space-y-4">
+
+    <div>
+        <h2 class="text-lg font-semibold text-gray-800">Place of Birth</h2>
+        <p class="text-sm text-gray-700">San Antonio</p>
+    </div>
+
+    <div>
+        <h2 class="text-lg font-semibold text-gray-800">Languages</h2>
+        <ul class="list-disc list-inside text-sm text-gray-700">
+        <li>English</li>
+        <li>Dutch</li>
+        </ul>
+    </div>
+
+  <div>
+    <h2 class="text-lg font-semibold text-gray-800">Hobbies</h2>
+    <ul class="list-disc list-inside text-sm text-gray-700">
+      <li>Piano</li>
+      <li>Debate</li>
+      <li>Triathlon</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="text-lg font-semibold text-gray-800">Skills</h2>
+    <ul class="list-disc list-inside text-sm text-gray-700">
+      <li>Technical Sales</li>
+      <li>Client Relationship</li>
+      <li>Contract Negotiation</li>
+      <li>Territory Management</li>
+    </ul>
+  </div>
+</div>
+
+
+      <!-- Right Column -->
+      <div class="space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-1">Profile</h2>
+          <p class="text-sm text-gray-800 leading-relaxed">
+            Deadline-focused Sales Engineer with six years experience in technical sales, contributing to the 30% growth of income for regional technology solutions provider over five states, producing and assisting long-term contracts with Fortune 500 clients, and growing Territory sixfold up to $350M.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-2">Employment History</h2>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-800">Sales Engineer, Engen Oil, Jacksonville</p>
+            <p class="text-sm text-gray-600 italic">May 2022 — May 2022</p>
+            <ul class="list-disc list-inside text-sm text-gray-800 mt-1 space-y-1">
+              <li>Initiated Lubrication Fundamentals classes for employees and customers.</li>
+              <li>Designed and applied a highly effective industrial filtration program.</li>
+              <li>Designed and applied for numerous lubrication programs.</li>
+              <li>Functioned as a consultant on Best-in-Class Lubrication programs.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Sales Engineer, Quest Medical, Los Angeles</p>
+            <p class="text-sm text-gray-600 italic">January 2019 — April 2021</p>
+            <ul class="list-disc list-inside text-sm text-gray-800 mt-1 space-y-1">
+              <li>Designed and presented tailored technical solutions to automotive dealers.</li>
+              <li>Supervised logistics and proof of concept pilots worth up to $800,000.</li>
+              <li>Exceeded yearly quota by 145%, providing 97.5% satisfaction support.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-1">Education</h2>
+          <p class="text-sm text-gray-800 font-semibold">Masters in Industrial Engineering, Harvard University, Miami</p>
+          <p class="text-sm text-gray-600">January 2019 — May 2022</p>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
