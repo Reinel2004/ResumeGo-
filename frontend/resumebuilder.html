@@ -6266,576 +6266,698 @@
                 </div>
                 `;
                 previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
+                }else if(templateId === 'generic-4'){
 
-                // Generic Template 1
+                // Generic Template 4
                 const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md';
                 preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
-                    <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
-                    </div>
-                    <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                <!-- Header -->
+                <div class="flex items-start">
+                    <!-- Image on the far left -->
+                    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 object-cover rounded-md mr-6" />
+
+                    <!-- Right side: Name/Title + Email/Phone + Line + Address -->
+                    <div class="flex-1">
+                        <!-- Top row: Name + Title and Email + Phone -->
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+                                <p class="text-sm font-medium">Bar Manager</p>
+                            </div>
+                            <div class="text-sm text-right space-y-1">
+                                <p>email@email.com</p>
+                                <p>3868683442</p>
+                            </div>
+                        </div>
+
+                        <!-- Horizontal line -->
+                        <hr class="my-3 border-black" />
+
+                        <!-- Address details -->
+                        <div class="text-sm space-y-1">
+                            <p>Place of birth: San Antonio</p>
+                            <p>1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
-                    <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
+                <!-- Summary -->
+                <div>
+                    <p class="italic text-[15px] leading-relaxed">
+                    Proficient Bar Manager with over eight years in the foodservice industry in a management capacity.
+                    I hold an Associate Degree in Hotel and Restaurant Administration and have worked in the restaurant’s
+                    main responsibility areas.
+                    </p>
+                </div>
+
+                <!-- Skills -->
+                <div>
+                    <h2 class="text-md font-semibold mb-2">Skills</h2>
+                    <ul class="list-disc pl-5 text-sm flex flex-wrap gap-x-8 gap-y-1">
+                        <li>Beverage & Food Purchasing</li>
+                        <li>Bar Operations</li>
+                        <li>Health & Safety Compliance</li>
+                        <li>Wine Pairing</li>
+                        <li>Hospitality Marketing</li>
+                    </ul>
+                </div>
+
+                <!-- Employment History -->
+                <div class="space-y-6">
+                    <h2 class="text-md font-semibold">Employment History</h2>
+
+                    <!-- Job 1 -->
+                    <div class="flex gap-8">
+                        <!-- Left 30% -->
+                        <div class="w-1/3 text-sm font-semibold">
+                            <p class="mb-1">Bar Manager</p>
+                            <p class="text-xs font-normal">St Tropez Seafood Restaurant, Orange County</p>
+                            <p class="text-xs font-normal">May 2020 — March 2021</p>
                         </div>
 
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
+                        <!-- Right 70% -->
+                        <div class="w-2/3 text-sm space-y-1">
+                            <p class="italic mb-1">
+                            Liable for building a friendly and professional bar service team and guaranteed well-trained staff and always supported.
+                            </p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Handled recruiting, developing, and managing employee relations and evaluations.</li>
+                                <li>Changed bar menu based on seasons, vendors, and holidays.</li>
+                                <li>Monitored bar traffic data for informed decision-making and prep.</li>
+                                <li>Ensured cooking equipment stayed well-maintained and operational.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                            </p>
+                    <!-- Job 2 -->
+                    <div class="flex gap-8">
+                        <!-- Left 30% -->
+                        <div class="w-1/3 text-sm font-semibold">
+                            <p class="mb-1">Bar Manager</p>
+                            <p class="text-xs font-normal">Gladstone Food Emporium, Miami</p>
+                            <p class="text-xs font-normal">Jan 2012 — Feb 2020</p>
                         </div>
 
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
+                        <!-- Right 70% -->
+                        <div class="w-2/3 text-sm space-y-1">
+                            <p class="italic mb-1">
+                            Accountable for promoting and managing bar hygiene and safety policies, ensuring the 370sqm bar area stays clean and neat.
                             </p>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Designed and monitored systems that ensured restaurant excellence.</li>
+                                <li>Maintained compliance with health and local standards.</li>
+                                <li>Delivered consistent, professional service to guests.</li>
+                                <li>Managed bar inventory, ordering, and stocking.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 `;
                 previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
+                }else if(templateId === 'generic-5'){
 
-                // Generic Template 1
+                // Generic Template 5
                 const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen mx-auto p-10 flex flex-col shadow-md rounded-md';
                 preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
-                    <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
-                    </div>
-                    <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                <!-- Header with Image + Contact Info -->
+                <div class="flex items-center justify-between mb-10">
+                    <div class="flex items-center space-x-6">
+                        <!-- Image -->
+                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-24 h-24 object-cover rounded-md" />
+            
+                        <!-- Name and Contact -->
+                        <div>
+                            <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+                            <p class="text-md font-medium mb-2">Technical Assistant</p>
+                            <p class="text-sm">3056478349</p>
+                            <p class="text-sm">email@email.com</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
-                    <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
+            
+                <!-- Main Content -->
+                <div class="space-y-10">
+                    <!-- Role + Summary -->
+                    <div class="flex">
+                    <!-- Right: Summary -->
+                        <p class="italic text-sm leading-relaxed">
+                        Devoted and detail-oriented Technical Assistant with 3+ years of experience in aircraft management
+                        and four years more with industrial processes. FAA-APT certified and received FAA-AMT award.
+                        Saved $45K in fuel expenses. Looking to use aircraft maintenance abilities by working at General
+                        Aviation Services as the new head maintenance Technical Assistant.
+                        </p>
+                    </div>
+            
+                    <!-- Skills and Languages -->
+                    <div class="grid grid-cols-2 gap-6 text-sm">
                         <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
+                            <h2 class="font-semibold mb-2">Skills</h2>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Maintenance Equipment and Tools</li>
+                                <li>Computers and Electronics</li>
+                                <li>Ground Service Equipment Maintenance</li>
+                                <li>Electronic Control Systems</li>
+                                <li>Pneumatic Systems</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="font-semibold mb-2">Languages</h2>
+                                <ul class="list-disc list-inside space-y-1">
+                                <li>English</li>
+                                <li>Spanish</li>
+                            </ul>
                         </div>
                     </div>
-
-                    <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+            
+                    <!-- Employment History -->
+                    <div>
+                        <h2 class="font-semibold text-md mb-4">Employment History</h2>
+                
+                        <!-- Job 1 -->
+                        <div class="mb-6">
+                            <p class="font-semibold">Technical Assistant at Algorax, Knoxville</p>
+                            <p class="text-sm">January 2019 — June 2021</p>
+                            <p class="italic text-sm mt-1">
+                            Experienced in interpreting United States Trade and Development Agency (USTDA) contract scope...
                             </p>
+                            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                                <li>Formed Excel and Visio tools for engineering setting.</li>
+                                <li>Revised and translated U.S. patent applications.</li>
+                                <li>Collaborated with attorneys and translators on technical specs.</li>
+                                <li>Helped web designers on new company website.</li>
+                            </ul>
                         </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
-                            </p>
-                        </div>
-
+                
+                        <!-- Job 2 -->
                         <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
+                            <p class="font-semibold">Technical Assistant at Nissan, Casilda</p>
+                            <p class="text-sm">January 2018 — December 2018</p>
+                            <p class="italic text-sm mt-1">
+                            Accountable for organizing international travel for the site visit to Bangkok...
+                            </p>
+                            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                                <li>Collaborated with staff and assorted companies for operational support.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 `;
                 previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
+                }else if(templateId === 'generic-6'){
 
-                // Generic Template 1
+                // Generic Template 6
                 const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full text-black font-sans space-y-8 bg-white p-8 shadow-md';
                 preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
+                <!-- Header -->
+                <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
+                        <h1 class="text-3xl font-bold">Ellen. C Harret</h1>
+                        <p class="text-lg font-semibold">Hospitality Server</p>
                     </div>
-                    <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
+                </div>
+
+                <hr />
+
+                <!-- Summary -->
+                <div>
+                    <h2 class="font-semibold mb-1">Summary</h2>
+                    <div class="pl-4 text-sm space-y-1">
+                        <p>
+                        Personable and professional Restaurant Server with 7 years of experience in fast casual,
+                        and fine dining settings.
+                        </p>
+                        <p>
+                        Extensive knowledge of wine and food pairings with a specialization in French cuisine.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
+                <!-- Education -->
+                <div>
+                    <h2 class="font-semibold mb-1">Education</h2>
+                    <div class="pl-4 text-sm space-y-1">
+                        <p>
+                        Honors B.Sc. in Electrical Engineering, University of Waterloo, 2008
+                        </p>
+                        <p>
+                        Partially completed M.S. in Automation Engineering Process Control, University of
+                        Waterloo (currently in process)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div>
+                    <h2 class="font-semibold mb-1">Skills</h2>
+                    <ul class="list-disc list-inside text-sm pl-4 space-y-1">
+                        <li>
+                        Background in Electrical Circuits and Programming Concepts.
+                        </li>
+                        <li>
+                        Experience with Allen Bradley RSLogix, WonderWare, VB, C#, MatLab, GE Proficy iFix, MS SQL Server, Oracle PL/SQL, HTML, ASP.NET, OPC, Excel VBA
+                        </li>
+                        <li>
+                        Integration of legacy systems and support for level 1, 2, and 3 data collection.
+                        </li>
+                        <li>
+                        Development of custom vision software and control systems for EAF.
+                        </li>
+                        <li>
+                        Strong skills in data analysis, simulation, control design, and optimization.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Work Experience -->
+                <div>
+                    <h2 class="font-semibold uppercase mb-1">Work Experience</h2>
+                        <br>
+                    <!-- Job 1 -->
+                    <div class="pl-4 space-y-1">
+                        <div class="flex justify-between font-medium">
+                        <p>Chez Pierre<br />French Restaurant</p>
+                        <p>Jan 2012 – Present</p>
+                        </div>
+                        <p class="italic font-semibold">Head Server</p>
+                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+                        <li>Greeting guests in a prompt and courteous manner.</li>
+                        <li>
+                            Taking orders from patrons, often memorizing the orders if there were 5 patrons or less.
+                        </li>
+                        </ul>
+                    </div>
+                    <br>
+                    <!-- Additional job? Just copy this format -->
+                    
+                    <div class="pl-4 space-y-1">
+                        <div class="flex justify-between font-medium">
+                        <p>Company Name<br />Location</p>
+                        <p>Dates</p>
+                        </div>
+                        <p class="italic font-semibold">Job Title</p>
+                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+                        <li>Responsibility 1</li>
+                        <li>Responsibility 2</li>
+                        </ul>
+                    </div>
+                </div>
+                `;
+                previewContainer.appendChild(preview);
+                }else if(templateId === 'generic-7'){
+
+                // Generic Template 7
+                const preview = document.createElement('div');
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full text-black font-sans space-y-8 bg-white p-8 shadow-md';
+                preview.innerHTML = `
+                <!-- Header -->
+                <div class="flex items-start gap-6">
+                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 object-cover rounded-md" />
+                
+                    <div class="flex-1 space-y-1">
+                        <!-- Name on full-width line -->
+                        <div class="relative">
+                        <hr class="border-t-4 border-[#0BA29C]" />
+                        <span class="absolute left-0 -top-3 bg-white pr-3 text-xl font-bold text-[#0BA29C]">Charlotte Johnson</span>
+                        </div>
+                        <br>
+                        <p class="font-semibold text-sm">Senior IT Project Manager</p>
+                        <p class="text-sm"><span class="font-bold">Phone:</span> 555-578-6001</p>
+                        <p class="text-sm"><span class="font-bold">Address:</span> 1257 Ocean Lane, LA County, CA-91202</p>
+                        <p class="text-sm"><span class="font-bold">Email:</span> charlotte@email.com</p>
+                    </div>
+                </div>
+
+
+                <p class="text-sm">
+                11.5 years of experience in business liaison and technological areas improvement to achieve timely project completion. Meet project deliverables by combining user requirements with business prerequisites and budgetary allowance.
+                </p>
+
+                <!-- Experience -->
+                <div>
+                    <div class="relative mb-4">
+                        <hr class="border-t-4 border-[#0BA29C]" />
+                        <span class="absolute left-0 -top-3 bg-white pr-4 text-lg font-bold text-[#0BA29C] uppercase">
+                            Experience
+                        </span>
+                    </div>
+                    <br>
+
+                    <!-- Job 1 -->
+                    <div class="mb-4">
+                        <p class="font-bold text-sm">Techni Lite Ltd.</p>
+                        <p class="text-sm">Project Manager, Technology Integration Group</p>
+                        <p class="text-sm mb-1">2008 to Present</p>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Promoted to project manager position to plan, schedule and implement all stages of hardware and software implementations.</li>
+                            <li>Enabled business improvements by analyzing the core business and developing IT systems.</li>
+                            <li>Improved data processing efficiency by 35%, saving $1.26M annually.</li>
+                            <li>Defined goals, scopes, and translated needs into requirements and action plans.</li>
+                            <li>Enhanced decision-making by implementing cost-benefit analysis and risk assessments.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div>
+                        <p class="font-bold text-sm">Edusoft Inc.</p>
+                        <p class="text-sm">Assistant Project Administrator</p>
+                        <p class="text-sm mb-1">2004 to 2008</p>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Built up a strong technical background in a multi-platform environment.</li>
+                            <li>Surged network uptime to 98.9%, drove a milestone network upgrade, and bolstered systems' security and reliability.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <div class="relative mb-4">
+                        <hr class="border-t-4 border-[#0BA29C]" />
+                        <span class="absolute left-0 -top-3 bg-white pr-4 text-lg font-bold text-[#0BA29C] uppercase">
+                                Education
+                        </span>
+                    </div>
+
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>MBA (GPA: 3.79/4.0), Arizona State University, 2004</li>
+                        <li>BS in CS (GPA: 3.82/4.0), Arizona University, 2000</li>
+                        <li>AS in Accounting, Texas University, 1997</li>
+                        <li>Project Management Professional (PMI-Certified), 2009</li>
+                        <li>Six Sigma Black Belt, 2010</li>
+                    </ul>
+                </div>
+            `;
+            previewContainer.appendChild(preview);
+            }else if(templateId === 'generic-8'){
+
+                // Generic Template 8
+                const preview = document.createElement('div');
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white p-8 shadow-md space-y-6';
+                preview.innerHTML = `
+                <!-- Header Row -->
+                <div class="flex justify-between items-start gap-6">
+                    <!-- Name and Contact Info -->
+                    <div class="space-y-1">
+                        <h1 class="text-2xl font-bold">Thomas Beasley</h1>
+                        <p class="text-sm font-medium">Senior Graphic Design Specialist</p>
+                        <div class="text-sm space-y-1 mt-2">
+                            <p><span class="font-bold">Phone:</span> 917-570-1144</p>
+                            <p><span class="font-bold">Email:</span> thomas@email.com</p>
+                            <p><span class="font-bold">Address:</span> 123 Anywhere Street</p>
+                            <p><span class="font-bold">LinkedIn:</span> linkedin.com/thomas</p>
+                        </div>
+                    </div>
+                <!-- Profile Image -->
+                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 rounded-full object-cover" />
+                </div>
+
+                <!-- Main Grid Layout -->
+                <div class="grid grid-cols-3 gap-6">
+                
                     <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
+                    <div class="col-span-2 space-y-6">
+                        <!-- Professional Experience -->
                         <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
+                            <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Professional Experience</h2>
+
+                            <!-- Job 1 -->
+                            <div class="mb-4">
+                                <p class="font-bold text-sm">Graphic Designer, Mighty Agency <span class="float-right font-normal">2020 – Present</span></p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mt-1">
+                                    <li>Created graphics and layouts for client marketing campaigns.</li>
+                                    <li>Managed a team of junior designers to streamline workflow.</li>
+                                    <li>Collaborated with stakeholders to meet branding objectives.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Job 2 -->
+                            <div class="mb-4">
+                                <p class="font-bold text-sm">Full Artist, DesignHut <span class="float-right font-normal">2017 – 2020</span></p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mt-1">
+                                    <li>Designed print and digital ads for regional campaigns.</li>
+                                    <li>Coordinated directly with clients for design direction.</li>
+                                    <li>Improved project delivery by 15% through new design workflows.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Job 3 -->
+                            <div>
+                                <p class="font-bold text-sm">Junior Designer, VisualLab Studio <span class="float-right font-normal">2015 – 2017</span></p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mt-1">
+                                    <li>Supported senior designers with concept mockups.</li>
+                                    <li>Managed design assets and organized digital libraries.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                            </p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
-                            </p>
-                        </div>
-
+                    <div class="col-span-1 space-y-6">
+                        <!-- Profile -->
                         <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
+                            <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Profile</h2>
+                            <p class="text-sm">
+                                Creative and driven Project Specialist with over 8 years of experience designing for web, print, and brand identity. Proven ability to collaborate across departments and translate client ideas into high-impact visuals.
+                            </p>
+                        </div>
+
+                        <!-- Education -->
+                        <div>
+                            <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Education</h2>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>B.A. in Graphic Design, NY School of Art – 2015</li>
+                            </ul>
+                        </div>
+
+                        <!-- Key Skills -->
+                        <div>
+                            <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Key Skills</h2>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>Adobe Creative Suite</li>
+                                <li>UX/UI Design</li>
+                                <li>Typography</li>
+                                <li>Brand Identity</li>
+                            </ul>
+                        </div>
+
+                        <!-- Additional Skills -->
+                        <div>
+                            <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Additional Skills</h2>
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>Team Leadership</li>
+                                <li>Client Communication</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 `;
                 previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
+                }else if(templateId === 'generic-9'){
 
-                // Generic Template 1
+                // Generic Template 9
                 const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md';
                 preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
-                    <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
+                <!-- Header -->
+                <div class="text-center">
+                    <hr>
+                    <h1 class="text-xl font-bold">Charles Andrew Torres</h1>
+                    <p>5032 Westridge Dr. Valrico, FL 33596</p>
+                    <p>• 000-5451-45 • example@resumeviking.com</p>
+                    <hr>
+                </div>
+
+                <!-- Top Section: Title + Image + Objective + Skills -->
+                <div class="grid grid-cols-2 gap-6 items-start">
+                    <!-- Title and Image -->
+                    <div class="space-y-4">
+                        <h2 class="font-semibold text-center">Human Resources Manager</h2>
+                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 object-cover rounded-md mx-auto" />
                     </div>
+
+                    <!-- Objective and Skills -->
                     <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                        <h2 class="font-semibold">OBJECTIVE</h2>
+                        <p class="text-sm">
+                        My primary goal is to secure a challenging position in which I can utilize my acquired
+                        skills within the field of tools manufacturing.
+                        </p>
+
+                        <h2 class="font-semibold mt-3">SKILLS</h2>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Proficient in CNC machining</li>
+                            <li>OSHA Trained</li>
+                            <li>Can work Lathes Machines</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
-                    <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
-                        </div>
+                <!-- Professional Experience -->
+                <div>
+                    <hr class="mb-2" />
+                    <h2 class="font-semibold uppercase mb-2">Professional Experience</h2>
+                    <hr class="mb-4" />
 
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
-                        </div>
+                    <!-- Job 1 -->
+                    <div class="mb-6">
+                        <p><span class="font-semibold">Keyer Tools</span>, <em>Human Resources Manager</em><br />Erlanger, KY</p>
+                        <p class="text-sm mb-2">Oct 2021 – Aug 2024</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>Maintain inventory of assorted products and order management.</li>
+                            <li>Operate a CNC machine to machine parts for turbine engines in Abram Tanks and Airplanes.</li>
+                            <li>Load parts in CNC machine with precision. Unload and measure the part for accuracy.</li>
+                            <li>Load and unload dry freight and materials and maintain the warehouse workflow.</li>
+                        </ul>
                     </div>
 
-                    <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                            </p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
-                            </ul>
-                        </div>
+                    <!-- Job 2 -->
+                    <div>
+                        <p><span class="font-semibold">ProTools</span>, <em>Human Resources Manager</em><br />Brooklyn, NY</p>
+                        <p class="text-sm mb-2">Jan 2019 – Sep 2021</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>Performed manual lathe, mill, grinder, and band saw operation</li>
+                            <li>Block squaring</li>
+                            <li>Minor G code/M code editing</li>
+                            <li>Operate CNC Haas VM6 (3 axes) machinery</li>
+                            <li>Responsible for in-process QC inspection, machine and shop maintenance</li>
+                            <li>Utilize all methods necessary to make fixtures including hand-drawn, and computer-aided models</li>
+                        </ul>
                     </div>
+                </div>
+
+                <!-- Certifications -->
+                <div>
+                    <hr class="mb-2" />
+                    <h2 class="font-semibold uppercase mb-2">Certifications</h2>
+                    <hr class="mb-4" />
+
+                    <div class="mb-4 text-sm">
+                        <p><span class="font-semibold">Human Sciences College</span></p>
+                        <p><em>National Institute for Metalworking Skills Certification</em></p>
+                        <p>October 2020</p>
+                    </div>
+
+                    <div class="text-sm">
+                        <p><span class="font-semibold">Forklifter Association of America</span></p>
+                        <p><em>Certified Forklift Driver</em></p>
+                        <p>January 2014</p>
+                    </div>
+                </div>
+
+                <!-- References -->
+                <div>
+                    <hr class="mb-2" />
+                    <h2 class="font-semibold uppercase mb-2">References</h2>
+                    <hr class="mb-4" />
+                    <p class="text-sm">
+                        <span class="font-semibold">Keyer Tools, Joe Smith</span><br />
+                        Plant Manager<br />
+                        Tel: 888-999-0000
+                    </p>
                 </div>
                 `;
                 previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
+                }else if(templateId === 'generic-10'){
 
-                // Generic Template 1
+                // Generic Template 10
                 const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md';
                 preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
+                <!-- Header -->
+                <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
+                        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+                        <p class="text-lg font-semibold">Hospitality Server</p>
                     </div>
-                    <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
+                </div>
+
+                <hr />
+
+                <!-- Summary -->
+                <div>
+                    <h2 class="font-semibold mb-1">Summary</h2>
+                    <div class="pl-4 text-sm space-y-1">
+                        <p>
+                            Personable and professional Restaurant Server with 7 years of experience in fast casual,
+                            and fine dining settings.
+                        </p>
+                        <p>
+                            Extensive knowledge of wine and food pairings with a specialization in French cuisine.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
-                    <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
-                        </div>
-                    </div>
-
-                    <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                            </p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                `;
-                previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
-
-                // Generic Template 1
-                const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
-                preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
-                    <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
-                    </div>
-                    <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                <!-- Education -->
+                <div>
+                    <h2 class="font-semibold mb-1">Education</h2>
+                    <div class="pl-4 text-sm space-y-1">
+                        <p>
+                            Honors B.Sc. in Electrical Engineering, University of Waterloo, 2008
+                        </p>
+                        <p>
+                            Partially completed M.S. in Automation Engineering Process Control, University of
+                            Waterloo (currently in process)
+                        </p>
                     </div>
                 </div>
 
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
-                    <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
-                        </div>
-                    </div>
-
-                    <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                            </p>
-                        </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                `;
-                previewContainer.appendChild(preview);
-                }else if(templateId === 'generic-1'){
-
-                // Generic Template 1
-                const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md';
-                preview.innerHTML = `
-                <!-- Header: Name, Title, and Photo -->
-                <div class="flex items-center justify-between px-10 pt-10 mb-8">
-                    <div>
-                        <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                        <p class="text-lg text-gray-800">Civil Engineering</p>
-                    </div>
-                    <div>
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
-                    </div>
+                <!-- Skills -->
+                <div>
+                    <h2 class="font-semibold mb-1">Skills</h2>
+                    <ul class="list-disc list-inside text-sm pl-4 space-y-1">
+                        <li>
+                            Background in Electrical Circuits and Programming Concepts.
+                        </li>
+                        <li>
+                            Experience with Allen Bradley RSLogix, WonderWare, VB, C#, MatLab, GE Proficy iFix, MS SQL Server, Oracle PL/SQL, HTML, ASP.NET, OPC, Excel VBA
+                        </li>
+                        <li>
+                            Integration of legacy systems and support for level 1, 2, and 3 data collection.
+                        </li>
+                        <li>
+                            Development of custom vision software and control systems for EAF.
+                        </li>
+                        <li>
+                            Strong skills in data analysis, simulation, control design, and optimization.
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- Body Content -->
-                <div class="flex flex-1 px-10 pb-10">
-                    <!-- Left Column -->
-                    <div class="w-1/2 pr-4">
-                        <div class="space-y-2 text-sm text-gray-700 mb-8">
-                            <p>📧 CharlesTorres@gmail.com</p>
-                            <p>📍 123 Anywhere St., Any City</p>
-                            <p>📞 +123-456-7890</p>
+                <!-- Work Experience -->
+                <div>
+                    <h2 class="font-semibold uppercase mb-1">Work Experience</h2>
+                    <br>
+                    <!-- Job 1 -->
+                    <div class="pl-4 space-y-1">
+                        <div class="flex justify-between font-medium">
+                            <p>Chez Pierre<br />French Restaurant</p>
+                            <p>Jan 2012 – Present</p>
                         </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">STUDIES</h2>
-                            <div class="mb-4">
-                                <p class="text-blue-600 font-medium">
-                                B.S Information Technology 
-                                <span class="float-right text-gray-500">2018</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                            </div>
-                            <div>
-                                <p class="text-blue-600 font-medium">
-                                HUMSS - Humanities Social and Sciences 
-                                <span class="float-right text-gray-500">2014</span>
-                                </p>
-                                <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
-                        </div>
+                        <p class="italic font-semibold">Head Server</p>
+                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+                            <li>Greeting guests in a prompt and courteous manner.</li>
+                            <li>
+                            Taking orders from patrons, often memorizing the orders if there were 5 patrons or less.
+                            </li>
+                        </ul>
                     </div>
-
-                    <!-- Right Column -->
-                    <div class="w-1/2 pl-4">
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">PROFILE</h2>
-                            <p class="text-sm text-gray-700">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                            </p>
+                    <br>
+                    <!-- Additional job? Just copy this format -->
+                    
+                    <div class="pl-4 space-y-1">
+                        <div class="flex justify-between font-medium">
+                            <p>Company Name<br />Location</p>
+                            <p>Dates</p>
                         </div>
-
-                        <div class="mb-8">
-                            <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                            <p class="text-blue-600 font-medium">Job position here</p>
-                            <p class="text-sm text-gray-700">
-                                Knowledge of engineering principles and programming languages to build software products.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                            <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
-                                <li>Communication</li>
-                                <li>Creativity</li>
-                                <li>Leadership</li>
-                                <li>Teamwork</li>
-                            </ul>
-                        </div>
+                        <p class="italic font-semibold">Job Title</p>
+                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
+                            <li>Responsibility 1</li>
+                            <li>Responsibility 2</li>
+                        </ul>
                     </div>
                 </div>
                 `;
