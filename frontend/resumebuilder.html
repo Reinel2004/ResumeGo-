@@ -129,6 +129,14 @@
         cursor: pointer;
         z-index: 1000;
         font-weight: 600;
+        /* Prevent text selection and improve touch handling */
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        /* Improve touch handling on mobile */
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .preview-toggle:hover {
@@ -181,6 +189,10 @@
             font-size: 16px; 
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            /* Ensure proper touch target size and prevent interference */
+            pointer-events: auto;
+            /* Prevent any accidental interactions */
+            isolation: isolate;
         }
     }
     }
@@ -1289,7 +1301,6 @@
                         </button>
                         <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                         <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
-                        <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
                         <div class="border-t border-gray-200 my-1"></div>
                         <a href="#" id="feedbackLink" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Feedback</a>
                         <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
@@ -1827,6 +1838,14 @@
         const urlParams = new URLSearchParams(window.location.search);
         let templateId = urlParams.get('template') || 'default';
 
+        // Add dynamic form handling specific to this template
+        addDynamicFormHandlers(templateId, {
+            profileImage: `#profileImg-${templateId}`,
+            nameElement: `#name-${templateId}`,
+            titleElement: `#title-${templateId}`,
+            // Add more selectors specific to this template
+        });
+
         // Preview functionality
         const previewToggle = document.getElementById('previewToggle');
         const rightPanel = document.querySelector('.right-panel');
@@ -2057,7 +2076,7 @@
             } else if(templateId === 'it-3'){
                 // IT Template 3 Preview (matches static it-template-3.html)
                 const preview = document.createElement('div');
-                preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] w-full font-sans text-black bg-white shadow-md';
                 preview.innerHTML = `
                     <!-- Header -->
                     <div class="bg-slate-800 text-white px-8 py-6 flex items-center gap-6">
@@ -2694,13 +2713,13 @@
                         <div class="w-[200px] bg-[#8E735B] text-white flex flex-col items-center py-8 px-4 space-y-8">
                             <!-- Profile Image -->
                             <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-hidden">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-full h-full object-cover" />
                             </div>
 
                             <!-- Skills -->
                             <div class="text-center">
                                 <h2 class="text-white text-lg font-bold mb-2 tracking-wide">SKILLS</h2>
-                                <ul class="text-sm space-y-1 list-disc list-inside">
+                                <ul class="text-sm space-y-1 list-disc list-inside" id="skills-preview">
                                     <li>Financial Accounting</li>
                                     <li>Communication Skills</li>
                                 </ul>
@@ -2710,9 +2729,9 @@
                             <div class="text-center">
                                 <h2 class="text-white text-lg font-bold mb-2 tracking-wide">CONTACT</h2>
                                 <div class="space-y-4 text-sm">
-                                    <p>📞 +123-456-7890</p>
-                                    <p>✉️ CharlesTorres@gmail.com</p>
-                                    <p>📍 123 Anywhere St., Any City</p>
+                                    <p>📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                    <p>✉️ ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                    <p>📍 ${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
                                 </div>
                             </div>
                         </div>
@@ -2723,7 +2742,7 @@
                             <div class="relative mb-10">
                                 <div class="bg-[#8E735B] h-28 flex items-center pl-4">
                                     <h1 class="text-2xl tracking-wide text-white">
-                                        <span class="block font-bold justify-center">Charles Andrew Torres</span>
+                                        <span class="block font-bold justify-center">${document.getElementById('name')?.value || 'Your Name'}</span>
                                     </h1>     
                                 </div>
                             </div>
@@ -2734,14 +2753,8 @@
                                     <div class="w-3 h-3 bg-[#8E735B]"></div>
                                     <h2 class="uppercase text-sm font-semibold tracking-wide">Education</h2>
                                     </div>
-                                <div class="border-t border-[#F7F2EA] pt-4 text-sm">
-                                    <div class="flex justify-between">
-                                        <div>
-                                            <p class="font-medium">Dominican College of Tarlac</p>
-                                            <p>Bachelor of Science Information Technology</p>
-                                        </div>
-                                        <p class="text-gray-600">2022 - 2025</p>
-                                    </div>
+                                <div class="border-t border-[#F7F2EA] pt-4 text-sm" id="education-preview-list">
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
 
@@ -2753,7 +2766,7 @@
                                     </div>
                                 <div class="border-t border-[#F7F2EA] pt-4 text-sm">
                                     <p>
-                                        I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                        ${document.getElementById('summary')?.value || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}
                                     </p>
                                 </div>
                             </div>
@@ -2764,17 +2777,9 @@
                                     <div class="w-3 h-3 bg-[#8E735B]"></div>
                                     <h2 class="uppercase text-sm font-semibold tracking-wide">Experience</h2>
                                     </div>
-                                <div class="border-t border-[#F7F2EA] pt-4 text-sm">
-                                <div class="flex justify-between mb-2">
-                                    <div>
-                                        <p class="font-medium">Job position here</p>
-                                        <p>Company Name | Location</p>
-                                    </div>
-                                    <p class="text-gray-600">2022 - 2025</p>
+                                <div class="border-t border-[#F7F2EA] pt-4 text-sm" id="experience-preview">
+                                    ${generateExperiencePreview()}
                                 </div>
-                                <p class="leading-snug">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                                </p>
                             </div>
                         </div>
                         </div>
@@ -2791,7 +2796,7 @@
                         <div class="col-span-1 space-y-8">
                         <!-- Profile Photo -->
                             <div class="flex justify-center">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border-4 border-gray-700" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-32 h-32 object-cover border-4 border-gray-700" />
                             </div>
 
                             <!-- Contact -->
@@ -2801,9 +2806,9 @@
                                     Contact
                                 </h2>
                                 <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
-                                    <p>+123-456-7890</p>
-                                    <p>CharlesTorres@gmail.com</p>
-                                    <p>123 Anywhere St., Any City</p>
+                                    <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                    <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                    <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
                                 </div>
                             </div>
 
@@ -2813,10 +2818,8 @@
                                     <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
                                     Education
                                 </h2>
-                                <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
-                                    <p>2025</p>
-                                    <p class="text-xs">Dominican College of Tarlac</p>
-                                    <p class="text-xs">Bachelor of Science Information Technology</p>
+                                <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm" id="education-preview-list">
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
 
@@ -2827,8 +2830,9 @@
                                     Skills
                                 </h2>
                                 <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
-                                    <ul class="list-disc list-inside">
+                                    <ul class="list-disc list-inside" id="skills-preview">
                                         <li>Financial Accounting</li>
+                                        <li>Communication Skills</li>
                                     </ul>
                                 </div>
                             </div>
@@ -2839,7 +2843,7 @@
                             <!-- Header -->
                             <br>
                             <div class="text-left">
-                                <h1 class="text-4xl font-bold leading-none">Charles Andrew Torres</h1>
+                                <h1 class="text-4xl font-bold leading-none">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <p class="text-sm text-gray-600">Accountant</p>
                             </div>
                             <br>
@@ -2847,39 +2851,15 @@
                             <div class="bg-blue-100 p-6 rounded shadow">
                                 <h2 class="text-lg font-bold border-b border-gray-400 mb-2">ABOUT</h2>
                                 <p class="text-sm text-gray-800">
-                                I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                ${document.getElementById('summary')?.value || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}
                                 </p>
                             </div>
 
                         <!-- Experience -->
                         <div class="bg-blue-100 p-6 rounded shadow">
                             <h2 class="text-lg font-bold border-b border-gray-400 mb-4">EXPERIENCE</h2>
-
-                            <!-- Experience Entry 1 -->
-                            <div class="mb-4">
-                                <p class="text-sm font-semibold">2019 – 2022</p>
-                                <p class="text-sm">Job position here<br>Company Name | Location</p>
-                                <p class="text-sm mt-2 text-gray-800">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
-                                </p>
-                            </div>
-
-                            <!-- Experience Entry 2 -->
-                            <div class="mb-4">
-                                <p class="text-sm font-semibold">2000 – 2000</p>
-                                <p class="text-sm">Another position<br>Another Company | Location</p>
-                                <p class="text-sm mt-2 text-gray-800">
-                                Description of the responsibilities and achievements for this job position.
-                                </p>
-                            </div>
-                        
-                            <!-- Experience Entry 3 -->
-                            <div class="mb-4">
-                                <p class="text-sm font-semibold">2000 – 2000</p>
-                                <p class="text-sm">Another position<br>Another Company | Location</p>
-                                <p class="text-sm mt-2 text-gray-800">
-                                Description of the responsibilities and achievements for this job position.
-                                </p>
+                            <div id="experience-preview">
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
 
@@ -2896,15 +2876,15 @@
                         <div class="grid grid-cols-3 gap-6 p-8 items-center bg-gray-800 text-white font-sans">
                             <!-- Left: Image -->
                             <div class="flex justify-center">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border-4 border-bg-blue-100 shadow-md" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-32 h-32 object-cover border-4 border-bg-blue-100 shadow-md" />
                             </div>
 
                         <!-- Right: Name, Title, About -->
                             <div class="col-span-2">
-                                <h1 class="text-4xl font-bold">Charles Andrew Torres</h1>
+                                <h1 class="text-4xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <p class="text-lg text-gray-300 mb-2">Accountant</p>
                                 <p class="text-sm text-gray-200">
-                                I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                ${document.getElementById('summary')?.value || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}
                                 </p>
                             </div>
                         </div>
@@ -2916,16 +2896,9 @@
                                 <!-- Education -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-2">Education</h2>
-                                    <ul class="space-y-4 text-sm">
-                                        <li>
-                                        <p class="font-semibold">* Dominican College of Tarlac</p>
-                                        <p>Bachelor of Science in Information Technology</p>
-                                        </li>
-                                        <li>
-                                        <p class="font-semibold">* Sample School Name</p>
-                                        <p>Additional degree or short course</p>
-                                        </li>
-                                    </ul>
+                                    <div id="education-preview-list">
+                                        ${generateEducationPreview()}
+                                    </div>
                                 </div>
 
                                 <!-- Languages -->
@@ -2940,7 +2913,7 @@
                                 <!-- Skills -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-2">Skills</h2>
-                                    <ul class="text-sm space-y-1">
+                                    <ul class="text-sm space-y-1" id="skills-preview">
                                         <li>Financial Accounting</li>
                                         <li>Communication Skills</li>
                                     </ul>
@@ -2952,32 +2925,8 @@
                             <br>
                             <div>
                                 <h2 class="text-lg font-bold border-b border-gray-400 mb-4">Experience</h2>
-
-                                <!-- Experience Block 1 -->
-                                <div class="mb-4">
-                                    <p class="text-sm font-semibold">Job Position here</p>
-                                    <p class="text-sm text-gray-600">Company name | Jan 2021 - Jan 2022</p>
-                                    <p class="text-sm mt-1 text-gray-800">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet sem nec risus egestas accumsan.
-                                    </p>
-                                </div>
-
-                                <!-- Experience Block 2 -->
-                                <div class="mb-4">
-                                    <p class="text-sm font-semibold">Job Position here</p>
-                                    <p class="text-sm text-gray-600">Company name | Jan 2020 - Dec 2020</p>
-                                    <p class="text-sm mt-1 text-gray-800">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet sem nec risus egestas accumsan.
-                                    </p>
-                                </div>
-
-                                <!-- Experience Block 3 -->
-                                <div class="mb-4">
-                                    <p class="text-sm font-semibold">Job Position here</p>
-                                    <p class="text-sm text-gray-600">Company name | Jan 2017 - Dec 2029</p>
-                                    <p class="text-sm mt-1 text-gray-800">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet sem nec risus egestas accumsan.
-                                    </p>
+                                <div id="experience-preview">
+                                    ${generateExperiencePreview()}
                                 </div>
                             </div>
                         </div>
@@ -2995,12 +2944,12 @@
 
                             <!-- Black Rounded Image Container -->
                             <div class="bg-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md flex justify-end">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-md" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-md" />
                             </div>
 
                             <!-- Name and Title -->
                             <div class="text-center mt-4">
-                                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+                                <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <p class="text-sm text-gray-700">Accountant</p>
                             </div>
 
@@ -3011,7 +2960,7 @@
                                     <hr class="flex-grow border-t border-gray-400" />
                                 </div>
                                 <p class="text-sm text-gray-800">
-                                I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+                                ${document.getElementById('summary')?.value || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}
                                 </p>
                             </div>
 
@@ -3021,7 +2970,7 @@
                                 <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Skills</div>
                                 <hr class="flex-grow border-t border-gray-400" />
                             </div>
-                            <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
+                            <ul class="text-sm list-disc list-inside space-y-1 text-gray-800" id="skills-preview">
                                 <li>Financial Accounting</li>
                                 <li>Communication</li>
                                 <li>Excel Proficiency</li>
@@ -3139,17 +3088,8 @@
                                 <!-- Education -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-4">EDUCATION</h2>
-                                    <div class="pl-6">
-                                        <p class="font-semibold">Bachelor of Information Technology</p>
-                                        <p class="italic text-sm">Capas Tarlac | 2022 – 2025</p><br>
-                                    </div>
-                                    <div class="pl-6">
-                                        <p class="font-semibold">Senior High School - STEM</p>
-                                        <p class="italic text-sm">Tarlac High School | 2020 – 2022</p><br>
-                                    </div>
-                                    <div class="pl-6">
-                                        <p class="font-semibold">Junior High School</p>
-                                        <p class="italic text-sm">San Roque National High School | 2016 – 2020</p><br>
+                                    <div id="education-preview-list">
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
 
@@ -3165,7 +3105,7 @@
                                 <!-- Skills -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-4">SKILLS</h2>
-                                    <ul class="text-sm space-y-2 pl-6">
+                                    <ul class="text-sm space-y-2 pl-6" id="skills-preview">
                                         <li>Financial Accounting</li>
                                         <li>Teamwork</li>
                                         <li>Communication Skills</li>
@@ -3186,13 +3126,13 @@
                         <div class="w-1/2 bg-blue-100 px-10 pt-10">
                             <br>
                             <br>
-                            <h2 class="text-3xl font-semibold text-gray-800">Charles Andrew Torres</h2>
+                            <h2 class="text-3xl font-semibold text-gray-800">${document.getElementById('name')?.value || 'Your Name'}</h2>
                             <hr />
                             <p class="uppercase tracking-widest mt-1 pt-2 w-fit">Accountant</p>
                         </div>
                         <div class="w-1/2 bg-gray-800 flex items-center justify-center p-10">
                             <img
-                            src="../../../assets/img/charles.png"
+                            src="${profileImage || 'assets/img/profile.png'}"
                             class="rounded-full w-40 h-40 border-4 border-white object-cover shadow-lg"
                             alt="Profile"
                             />
@@ -3208,7 +3148,7 @@
                             <div>
                                 <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">About Me:</div>
                                 <p class="text-sm text-gray-800">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, quam.
+                                    ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, quam.'}
                                 </p>
                             </div>
 
@@ -3217,23 +3157,24 @@
                         <div>
                             <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Contact:</div>
                                 <ul class="text-sm space-y-1">
-                                    <li>+123-456-7890</li>
-                                    <li>CharlesTorres@gmail.com</li>
-                                    <li>123 Anywhere St., Any City</li>
+                                    <li>${document.getElementById('phone')?.value || '+123-456-7890'}</li>
+                                    <li>${document.getElementById('email')?.value || 'email@example.com'}</li>
+                                    <li>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</li>
                                 </ul>
                             </div>
 
                         <!-- Education -->
                         <div>
                             <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Education:</div>
-                            <p class="text-sm font-semibold">Bachelor of Information Technology</p>
-                            <p class="text-sm italic">Capas Tarlac<br />2022 - 2025</p>
+                            <div id="education-preview-list">
+                                ${generateEducationPreview()}
+                            </div>
                         </div>
 
                         <!-- Skills -->
                         <div>
                             <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Skills:</div>
-                            <ul class="list-disc list-inside text-sm space-y-1">
+                            <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                                 <li>Accounting Financial</li>
                                 <li>Teamwork</li>
                                 <li>Communication skills</li>
@@ -3254,25 +3195,8 @@
                     <div class="w-1/2 bg-gray-800 text-white px-10 py-8 space-y-6">
                         <div>
                             <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-4">Work Experience:</div>
-
-                            <!-- Job 1 -->
-                            <div class="mb-4">
-                                <p class="font-semibold text-base">Job position here</p>
-                                <p class="text-sm italic">Company Name | Location<br />Date</p>
-                                <ul class="list-disc list-inside text-sm mt-1">
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Mauris convallis, mi at mattis malesuada.</li>
-                                </ul>
-                            </div>
-
-                            <!-- Job 2 -->
-                            <div class="mb-4">
-                                <p class="font-semibold text-base">Job position here</p>
-                                <p class="text-sm italic">Company Name | Location<br />Date</p>
-                                <ul class="list-disc list-inside text-sm mt-1">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Mauris convallis, mi at mattis malesuada.</li>
-                                </ul>
+                            <div id="experience-preview">
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
                     </div>
@@ -3287,7 +3211,7 @@
                         preview.innerHTML = `
                             <!-- Left Sidebar -->
                             <div class="w-[35%] bg-white flex flex-col items-center py-10 px-6 relative">
-                                <img src="../../../assets/img/charles.png" class="w-36 h-36 object-cover border-4 border-black shadow-md mb-8" alt="Profile" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" class="w-36 h-36 object-cover border-4 border-black shadow-md mb-8" alt="Profile" />
 
                                 <!-- Contact -->
                                 <div class="w-full mb-6">
@@ -3297,15 +3221,15 @@
                                     <div class="mt-2 text-sm space-y-2">
                                         <div>
                                             <p class="font-semibold">Phone</p>
-                                            <p>+123-456-7890</p>
+                                            <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
                                         </div>
                                         <div>
                                             <p class="font-semibold">Email</p>
-                                            <p>CharlesTorres@gmail.com</p>
+                                            <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
                                         </div>
                                         <div>
                                             <p class="font-semibold">Address</p>
-                                            <p>1234 Anywhere St., Any City</p>
+                                            <p>${document.getElementById('address')?.value || '1234 Anywhere St., Any City'}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -3315,28 +3239,8 @@
                                     <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
                                         Education
                                     </div>
-                                    <div class="mt-4 text-sm space-y-4">
-
-                                        <!-- School 1 -->
-                                        <div>
-                                            <p class="font-bold">Bachelor of Information Technology</p>
-                                            <p class="italic">Capas Tarlac</p>
-                                            <p>2022 - 2025</p>
-                                        </div>
-
-                                        <!-- School 2 -->
-                                        <div>
-                                            <p class="font-bold">Senior High School - ABM Strand</p>
-                                            <p class="italic">Tarlac National High School</p>
-                                            <p>2020 - 2022</p>
-                                        </div>
-
-                                        <!-- School 3 -->
-                                        <div>
-                                            <p class="font-bold">Junior High School</p>
-                                            <p class="italic">San Vicente High School</p>
-                                            <p>2016 - 2020</p>
-                                        </div>
+                                    <div id="education-preview-list">
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
 
@@ -3346,7 +3250,7 @@
                                 <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
                                     Skills
                                 </div>
-                                <ul class="mt-4 text-sm list-disc list-inside space-y-2">
+                                <ul class="mt-4 text-sm list-disc list-inside space-y-2" id="skills-preview">
                                     <li>Accounting Financial</li>
                                     <li>Teamwork</li>
                                     <li>Communication skills</li>
@@ -3358,7 +3262,7 @@
                             <div class="w-[65%] bg-white px-10 py-10 space-y-8">
                                 <!-- Header -->
                                 <div>
-                                    <h1 class="text-3xl font-extrabold leading-none">Charles Andrew Torres</h1>
+                                    <h1 class="text-3xl font-extrabold leading-none">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                     <p class="uppercase tracking-widest text-sm mt-1">Accountant</p>
                                 </div>
 
@@ -3367,7 +3271,7 @@
                                     <h2 class="text-xl font-extrabold tracking-wide mb-2">ABOUT</h2>
                                     <hr class="border-black mb-2" />
                                     <p class="text-sm leading-relaxed">
-                                        With more than 5 years of experience in web development, I have worked across various industries. I specialize in database development, coding, and thorough testing. I am skilled at identifying and fixing coding problems efficiently.
+                                        ${document.getElementById('summary')?.value || 'With more than 5 years of experience in web development, I have worked across various industries. I specialize in database development, coding, and thorough testing. I am skilled at identifying and fixing coding problems efficiently.'}
                                     </p>
                                 </div>
 
@@ -3376,38 +3280,8 @@
                                     <div class="bg-black text-white text-lg font-semibold px-4 py-2 w-fit pr-10 relative z-10">
                                         Experience
                                     </div>
-                                    <div class="mt-4 text-sm space-y-4">
-
-                                        <!-- Job 1 -->
-                                        <div>
-                                            <p class="font-bold">2019 - 2022</p>
-                                            <p class="font-semibold">Job Position Title</p>
-                                            <p class="italic">Company Name | Location</p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.
-                                            </p>
-                                        </div>
-
-                                        <!-- Job 2 -->
-                                        <div>
-                                            <p class="font-bold">2016 - 2019</p>
-                                            <p class="font-semibold">Job Position Title</p>
-                                            <p class="italic">Company Name | Location</p>
-                                            <p>
-                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-                                            </p>
-                                        </div>
-
-                                        <!-- Job 3 -->
-                                        <div>
-                                            <p class="font-bold">2014 - 2016</p>
-                                            <p class="font-semibold">Job Position Title</p>
-                                            <p class="italic">Company Name | Location</p>
-                                            <p>
-                                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
-                                            </p>
-                                        </div>
-
+                                    <div id="experience-preview">
+                                        ${generateExperiencePreview()}
                                     </div>
                                 </div>
                             </div>
@@ -3422,8 +3296,8 @@
                 preview.innerHTML = `
                     <!-- Header -->
                     <div class="text-center border-b border-black pb-4">
-                        <img src="../../../assets/img/charles.png" class="w-32 h-32 rounded object-cover mx-auto mt-4 border" alt="Profile">
-                        <h1 class="text-4xl font-bold mt-2">Charles Andrew Torres</h1>
+                        <img src="${profileImage || 'assets/img/profile.png'}" class="w-32 h-32 rounded object-cover mx-auto mt-4 border" alt="Profile">
+                        <h1 class="text-4xl font-bold mt-2">${document.getElementById('name')?.value || 'Your Name'}</h1>
                         <p class="uppercase tracking-widest text-sm">Accountant</p>
                     </div>
 
@@ -3476,7 +3350,7 @@
                                 <div class="bg-black border-t-4 border-white px-4 py-1">
                                     <h2 class="text-white font-bold text-lg tracking-wide">Skills</h2>
                                 </div>
-                                <ul class="list-disc list-inside mt-4 space-y-2 text-sm">
+                                <ul class="list-disc list-inside mt-4 space-y-2 text-sm" id="skills-preview">
                                     <li>Accounting Financial</li>
                                     <li>Teamwork</li>
                                     <li>Communication skills</li>
@@ -3492,7 +3366,7 @@
                                     <h2 class="text-white font-bold text-lg tracking-wide">About</h2>
                                 </div>
                                 <p class="mt-4 text-sm leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.
+                                    ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.'}
                                 </p>
                             </div>
 
@@ -3501,28 +3375,8 @@
                                 <div class="bg-black border-t-4 border-white px-4 py-1">
                                     <h2 class="text-white font-bold text-lg tracking-wide">Experience</h2>
                                 </div>
-                                <div class="mt-2 space-y-4 text-sm">
-                                    <div>
-                                        <p class="italic">2019 - 2022</p>
-                                        <p class="font-medium">Company name</p>
-                                        <p class="mt-1">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p class="italic">2016 - 2019</p>
-                                        <p class="font-medium">Company name</p>
-                                        <p class="mt-1">
-                                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer nec odio vel erat vehicula lacinia.
-                                        </p>
-                                    </div>
-                                    <div>
-                                    <p class="italic">2013 - 2016</p>
-                                        <p class="font-medium">Company name</p>
-                                        <p class="mt-1">
-                                            Suspendisse potenti. Curabitur bibendum, sapien non iaculis facilisis, sem odio feugiat libero, eget luctus est felis at erat.
-                                        </p>
-                                    </div>
+                                <div id="experience-preview">
+                                    ${generateExperiencePreview()}
                                 </div>
                             </div>
                         </div>
@@ -3539,10 +3393,10 @@
                          <!-- Header -->
                         <div class="flex items-center border-b-2 border-black">
                             <div class="w-1/3 p-6">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full rounded shadow-md" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-full rounded shadow-md" />
                             </div>
                             <div class="w-2/3 px-6 border-t-2 border-b-2 border-black py-4">
-                                <h1 class="text-4xl font-bold">Charles Andrew Torres</h1>
+                                <h1 class="text-4xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <p class="uppercase text-sm tracking-widest">Accountant</p>
                             </div>
                         </div>
@@ -3555,38 +3409,22 @@
                                 <div>
                                     <h2 class="text-xl font-bold border-b-2 border-black mb-4">ABOUT</h2>
                                 <p class="text-sm leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consecteturadipiscing elit. Nullam pharetra in lorem at laoreet. 
-                                    Donec hendrerit libero eget est tempor.
+                                    ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consecteturadipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.'}
                                 </p>
                                 </div>
 
                                 <!-- EDUCATION -->
                                 <div class="mb-8">
                                     <h2 class="text-xl font-bold border-b-2 border-black mb-4">EDUCATION</h2>
-
-                                    <div class="mb-4">
-                                        <p class="font-semibold">Bachelor of Information Technology</p>
-                                        <p class="italic">Dominican College | 2022 - 2025</p>
-                                        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <p class="font-semibold">High School Diploma</p>
-                                        <p class="italic">Capas High School | 2018 - 2022</p>
-                                        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-
-                                    <div>
-                                        <p class="font-semibold">Elementary School</p>
-                                        <p class="italic">Capas Elementary | 2012 - 2018</p>
-                                        <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <div id="education-preview-list">
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
 
                                 <!-- Skills -->
                                 <div>
                                     <h2 class="text-xl font-bold border-b-2 border-black mb-4">SKILLS</h2>
-                                    <div class="mb-3">
+                                    <div class="mb-3" id="skills-preview">
                                         <p class="text-sm">Accounting Financial</p>
                                         <div class="w-full bg-gray-300 h-2 rounded">
                                         <div class="bg-blue-500 h-2 rounded" style="width:90%"></div>
@@ -3613,39 +3451,17 @@
                                 <!-- EXPERIENCE -->
                                 <div>
                                     <h2 class="text-xl font-bold border-b-2 border-black mb-4">EXPERIENCE</h2>
-                                    <div class="mb-4">
-                                        <p class="font-semibold">Social Media Manager</p>
-                                        <p class="italic">Larana Inc. | 2018 - 2019</p>
-                                        <ul class="list-disc list-inside text-sm">
-                                        <li>Handled social media campaigns</li>
-                                        <li>Managed a team for social uploads</li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <p class="font-semibold">Digital Marketing Manager</p>
-                                        <p class="italic">Shodwe Cosmetics | 2019 - Present</p>
-                                        <ul class="list-disc list-inside text-sm">
-                                        <li>Oversaw company digital marketing strategies</li>
-                                        <li>Boosted client engagement through SEO</li>
-                                        </ul>
-                                    </div>
-
-                                    <div>
-                                        <p class="font-semibold">Intern</p>
-                                        <p class="italic">XYZ Corp | 2017</p>
-                                        <ul class="list-disc list-inside text-sm">
-                                        <li>Assisted in daily administrative tasks</li>
-                                        </ul>
+                                    <div id="experience-preview">
+                                        ${generateExperiencePreview()}
                                     </div>
                                 </div>
 
                                 <!-- Contact -->
                                 <div>
                                     <h2 class="text-xl font-bold border-b-2 border-black mb-4">CONTACT</h2>
-                                    <p class="text-sm">+123-456-7890</p>
-                                    <p class="text-sm">CharlesTorres@gmail.com</p>
-                                    <p class="text-sm">123 Anywhere St., Any City</p>
+                                    <p class="text-sm">${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                    <p class="text-sm">${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                    <p class="text-sm">${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
                                 </div>
                             </div>
                         </div>
@@ -3660,10 +3476,10 @@
                         <!-- Header -->
                         <div class="bg-black text-white flex items-center">
                             <div class="w-1/4">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-auto object-cover p-4" />
+                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-full h-auto object-cover p-4" />
                             </div>
                             <div class="w-3/4 px-8">
-                                <h1 class="text-5xl font-bold tracking-wide">Charles Andrew Torres</h1>
+                                <h1 class="text-5xl font-bold tracking-wide">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <p class="uppercase text-lg tracking-wider mt-2">Accountant</p>
                             </div>
                         </div>
@@ -3677,9 +3493,7 @@
                                 <div>
                                     <h2 class="text-lg font-bold mb-2">ABOUT ME</h2>
                                     <p class="text-sm leading-relaxed">
-                                        Lorem ipsum dolor sit amet, consectetueradipiscing elit. Nullam
-                                        pharetra in lorem at laoreet. Donec hendrerit libero eget est
-                                        tempor, donec hendrerit libero eget est tempor.
+                                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetueradipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, donec hendrerit libero eget est tempor.'}
                                     </p>
                                 </div>
 
@@ -3696,9 +3510,9 @@
                                 <!-- Contact -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-4">CONTACT</h2>
-                                    <p class="text-sm flex items-center gap-2 mb-2">📞 +123-456-7890</p>
-                                    <p class="text-sm flex items-center gap-2 mb-2">✉️ CharlesTorres@gmail.com</p>
-                                    <p class="text-sm flex items-center gap-2">📍 123 Anywhere St, Any City, ST 12345</p>
+                                    <p class="text-sm flex items-center gap-2 mb-2">📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                    <p class="text-sm flex items-center gap-2 mb-2">✉️ ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                    <p class="text-sm flex items-center gap-2">📍 ${document.getElementById('address')?.value || '123 Anywhere St, Any City, ST 12345'}</p>
                                 </div>
                             </div>
 
@@ -3708,34 +3522,16 @@
                                 <!-- Education -->
                                 <div>
                                 <h2 class="text-lg font-bold mb-4">EDUCATION</h2>
-                                    <div class="mb-4">
-                                        <h3 class="font-bold text-sm">CAPAS TARLAC, 2022 – 2025</h3>
-                                        <p class="text-sm">• Bachelor of Information Technology</p>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-sm">CAPAS TARLAC, 2026</h3>
-                                        <p class="text-sm">• Bachelor of Information Technology</p>
+                                    <div id="education-preview-list">
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
 
                                 <!-- Experience -->
                                 <div>
                                 <h2 class="text-lg font-bold mb-4">EXPERIENCE</h2>
-                                    <div class="mb-4">
-                                        <h3 class="font-bold text-sm">COMPANY NAME</h3>
-                                        <p class="italic text-xs mb-1">2021 / 2022 – Job Position</p>
-                                        <p class="text-sm leading-relaxed">
-                                        Pharetra in lorem at laoreet. Donec hendrerit libero eget est
-                                        tempor, pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-sm">COMPANY NAME</h3>
-                                        <p class="italic text-xs mb-1">2022 / 2023 – Job Position</p>
-                                        <p class="text-sm leading-relaxed">
-                                        Pharetra in lorem at laoreet. Donec hendrerit libero eget est
-                                        tempor, pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.
-                                        </p>
+                                    <div id="experience-preview">
+                                        ${generateExperiencePreview()}
                                     </div>
                                 </div>
 
@@ -5951,7 +5747,7 @@
                 </div>
 
                 <!-- 🔹 Two Column Layout -->
-                <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex gap-6">
                 
                     <!-- Left Column -->
                     <div class="md:w-2/3 space-y-6">
@@ -6026,7 +5822,7 @@
                     </div>
 
                 <!-- Right Column -->
-                <div class="md:w-1/3 space-y-6">
+                <div class="w-1/3 space-y-6">
                     <!-- Details -->
                     <div>
                         <h3 class="text-lg font-semibold">Details</h3>
@@ -6965,7 +6761,7 @@
                 } else {
                 // Default template preview
                 const preview = document.createElement('div');
-                preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] w-full bg-white shadow-lg p-8 space-y-6';
                 preview.innerHTML = `
                     <div class="max-w-[210mm] mx-auto bg-white shadow-lg p-8 space-y-6">
     
@@ -6979,7 +6775,7 @@
                         </div>
 
                         <!-- 🔹 Two Column Layout -->
-                        <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex gap-6">
                         
                         <!-- Left Column -->
                         <div class="md:w-2/3 space-y-6">
@@ -7050,7 +6846,7 @@
                         </div>
 
                         <!-- Right Column -->
-                        <div class="md:w-1/3 space-y-6">
+                        <div class="w-1/3 space-y-6">
 
                             <!-- Details -->
                             <div>
@@ -7193,9 +6989,7 @@
             if (newTextarea) {
                 newTextarea.addEventListener('input', () => {
                     autoResizeTextarea(newTextarea);
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             }
 
@@ -7203,9 +6997,7 @@
             const removeBtn = experienceItem.querySelector('.remove-experience-btn');
             removeBtn.addEventListener('click', () => {
                 experienceItem.remove();
-                if (isPreviewActive) {
-                    updatePreview();
-                }
+                debouncedUpdatePreview();
             });
 
             // Add AI enhance buttons to new textarea(s)
@@ -7215,9 +7007,7 @@
             const newInputs = experienceItem.querySelectorAll('input, textarea');
             newInputs.forEach(input => {
                 input.addEventListener('input', () => {
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             });
         }
@@ -7256,9 +7046,7 @@
             if (newTextarea) {
                 newTextarea.addEventListener('input', () => {
                     autoResizeTextarea(newTextarea);
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             }
 
@@ -7266,9 +7054,7 @@
             const removeBtn = projectItem.querySelector('.remove-project-btn');
             removeBtn.addEventListener('click', () => {
                 projectItem.remove();
-                if (isPreviewActive) {
-                    updatePreview();
-                }
+                debouncedUpdatePreview();
             });
 
             // Add AI enhance buttons to new textarea(s)
@@ -7317,9 +7103,7 @@
             if (newTextarea) {
                 newTextarea.addEventListener('input', () => {
                     autoResizeTextarea(newTextarea);
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             }
 
@@ -7327,9 +7111,7 @@
             const removeBtn = educationItem.querySelector('.remove-education-btn');
             removeBtn.addEventListener('click', () => {
                 educationItem.remove();
-                if (isPreviewActive) {
-                    updatePreview();
-                }
+                debouncedUpdatePreview();
             });
 
             // Add AI enhance buttons to new textarea(s)
@@ -7339,9 +7121,7 @@
             const newInputs = educationItem.querySelectorAll('input, textarea');
             newInputs.forEach(input => {
                 input.addEventListener('input', () => {
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             });
         }
@@ -7354,9 +7134,7 @@
             const educationInputs = document.querySelectorAll('.education-item input, .education-item textarea');
             educationInputs.forEach(input => {
                 input.addEventListener('input', () => {
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             });
 
@@ -7364,9 +7142,7 @@
             const experienceInputs = document.querySelectorAll('.experience-item input, .experience-item textarea');
             experienceInputs.forEach(input => {
                 input.addEventListener('input', () => {
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 });
             });
         }
@@ -7395,9 +7171,7 @@
                         skillBadge.style.animation = 'fadeOut 0.2s ease-out';
                         setTimeout(() => {
                             skillBadge.remove();
-                            if (isPreviewActive) {
-                                updatePreview();
-                            }
+                            debouncedUpdatePreview();
                         }, 200);
                     });
                     
@@ -7405,9 +7179,7 @@
                     skillsList.appendChild(skillBadge);
                     input.value = '';
                     
-                    if (isPreviewActive) {
-                        updatePreview();
-                    }
+                    debouncedUpdatePreview();
                 }
             });
         });
@@ -7426,7 +7198,18 @@
         });
 
         // Add event listeners
-        previewToggle.addEventListener('click', togglePreview);
+        previewToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            togglePreview();
+        });
+
+        // Add touch event listener for mobile
+        previewToggle.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            togglePreview();
+        });
 
        
         // Auto-resize textareas
@@ -7439,9 +7222,7 @@
         document.querySelectorAll('textarea').forEach(textarea => {
             textarea.addEventListener('input', () => {
                 autoResizeTextarea(textarea);
-                if (isPreviewActive) {
-                    updatePreview();
-                }
+                // updatePreview() is now handled by the general input event handler below
             });
         });
 
@@ -7452,6 +7233,7 @@
                 return;
             }
             
+            // Only close preview on mobile if clicking outside the right panel
             if (window.innerWidth <= 768 && 
                 isPreviewActive && 
                 !rightPanel.contains(e.target)) {
@@ -7459,12 +7241,37 @@
             }
         });
 
-        // Update preview when form inputs change
+        // Add touch event handling for mobile to prevent unwanted preview toggles
+        document.addEventListener('touchstart', (e) => {
+            // Prevent touch events on the preview toggle button from bubbling
+            if (e.target.closest('.preview-toggle') || e.target.id === 'previewToggle') {
+                e.stopPropagation();
+            }
+        }, { passive: false });
+
+        // Debounced preview update to prevent excessive calls
+        let previewUpdateTimer;
+        function debouncedUpdatePreview() {
+            if (!isPreviewActive) return;
+            clearTimeout(previewUpdateTimer);
+            previewUpdateTimer = setTimeout(() => {
+                updatePreview();
+            }, 300); // Wait 300ms after last input change
+        }
+
+        // Update preview when form inputs change (only on actual input, not on focus/click)
         document.querySelectorAll('.input-group input, .input-group textarea').forEach(input => {
             input.addEventListener('input', () => {
-                if (isPreviewActive) {
-                    updatePreview();
-                }
+                debouncedUpdatePreview();
+            });
+            
+            // Prevent preview update on focus/click events
+            input.addEventListener('focus', (e) => {
+                e.stopPropagation();
+            });
+            
+            input.addEventListener('click', (e) => {
+                e.stopPropagation();
             });
         });
 
@@ -7559,9 +7366,7 @@
             }
             
             // Update the preview if it's active
-            if (isPreviewActive) {
-                updatePreview();
-            }
+            debouncedUpdatePreview();
             
             // Close the modal
             document.getElementById('profileEditorModal').style.display = 'none';
@@ -7964,7 +7769,7 @@
                     break;
                 case 'Accountancy':
                     skillsTitle.textContent = 'Accountancy Skills';
-                    cat1.querySelector('h4').textContent = 'Accounting Software (e.g., QuickBooks, SAP)';
+                    cat1.querySelector('h4').textContent = 'Accounting Software';
                     cat2.querySelector('h4').textContent = 'Financial/Analytical Skills';
                     cat3.querySelector('h4').textContent = 'Compliance & Reporting';
                     // Projects often not used; hide
@@ -7972,8 +7777,8 @@
                     break;
                 case 'Civil Engineering':
                     skillsTitle.textContent = 'Engineering Skills';
-                    cat1.querySelector('h4').textContent = 'Design/CAD (e.g., AutoCAD, Revit)';
-                    cat2.querySelector('h4').textContent = 'Analysis/Tools (e.g., STAAD, ETABS)';
+                    cat1.querySelector('h4').textContent = 'Design/CAD';
+                    cat2.querySelector('h4').textContent = 'Analysis/Tools';
                     cat3.querySelector('h4').textContent = 'Construction/Project Skills';
                     // Keep projects visible (for portfolio projects)
                     projectsSection && (projectsSection.style.display = '');
@@ -8145,6 +7950,275 @@
                 currentPopup.style.display = 'none';
             }
         });
+
+        // Function to add dynamic form handlers
+        function addDynamicFormHandlers(templateId, selectors) {
+            // Profile Image Change
+            const profileImageInput = document.getElementById('profileImageInput');
+            if (profileImageInput) {
+                profileImageInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            const imgElement = document.querySelector(selectors.profileImage);
+                            if (imgElement) {
+                                imgElement.src = event.target.result;
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+            
+            // Name Change
+            const nameInput = document.getElementById('nameInput');
+            if (nameInput && selectors.nameElement) {
+                nameInput.addEventListener('input', function(e) {
+                    const nameElements = document.querySelectorAll(selectors.nameElement);
+                    nameElements.forEach(el => {
+                        el.textContent = e.target.value || 'Charles Andrew Torres';
+                    });
+                });
+            }
+            
+            // Title/Position Change
+            const titleInput = document.getElementById('titleInput');
+            if (titleInput && selectors.titleElement) {
+                titleInput.addEventListener('input', function(e) {
+                    const titleElements = document.querySelectorAll(selectors.titleElement);
+                    titleElements.forEach(el => {
+                        el.textContent = e.target.value || 'Accountant';
+                    });
+                });
+            }
+            
+            // Add more dynamic handlers as needed
+            addContactHandlers(templateId);
+            addSkillsHandlers(templateId);
+            addLanguageHandlers(templateId);
+            addExperienceHandlers(templateId);
+        }
+
+        function addContactHandlers(templateId) {
+            const phoneInput = document.getElementById('phoneInput');
+            const emailInput = document.getElementById('emailInput');
+            const addressInput = document.getElementById('addressInput');
+            
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    const phoneElements = document.querySelectorAll(`[data-field="phone"]`);
+                    phoneElements.forEach(el => {
+                        el.textContent = e.target.value || '+123-456-7890';
+                    });
+                });
+            }
+            
+            if (emailInput) {
+                emailInput.addEventListener('input', function(e) {
+                    const emailElements = document.querySelectorAll(`[data-field="email"]`);
+                    emailElements.forEach(el => {
+                        el.textContent = e.target.value || 'CharlesTorres@gmail.com';
+                    });
+                });
+            }
+            
+            if (addressInput) {
+                addressInput.addEventListener('input', function(e) {
+                    const addressElements = document.querySelectorAll(`[data-field="address"]`);
+                    addressElements.forEach(el => {
+                        el.textContent = e.target.value || '123 Anywhere St., Any City';
+                    });
+                });
+            }
+        }
+
+        function addSkillsHandlers(templateId) {
+            const skillsContainer = document.getElementById('skillsContainer');
+            if (skillsContainer) {
+                // Listen for skill changes
+                skillsContainer.addEventListener('input', function(e) {
+                    if (e.target.matches('.skill-input')) {
+                        updateSkillsInPreview();
+                    }
+                });
+                
+                // Add/Remove skill buttons
+                skillsContainer.addEventListener('click', function(e) {
+                    if (e.target.matches('.add-skill-btn')) {
+                        addSkillInput();
+                    } else if (e.target.matches('.remove-skill-btn')) {
+                        removeSkillInput(e.target);
+                    }
+                });
+            }
+        }
+
+        function updateSkillsInPreview() {
+            const skillInputs = document.querySelectorAll('.skill-input');
+            const skills = Array.from(skillInputs).map(input => input.value).filter(skill => skill.trim() !== '');
+            
+            // Update skills in the preview
+            const skillsLists = document.querySelectorAll('[data-field="skills-list"]');
+            skillsLists.forEach(list => {
+                list.innerHTML = skills.map(skill => `<li>${skill}</li>`).join('');
+            });
+        }
+
+        function addExperienceHandlers(templateId) {
+            // Experience handlers can be added here
+            // This function can be extended based on your needs
+        }
+
+        function addLanguageHandlers(templateId) {
+            const languagesContainer = document.getElementById('languagesContainer');
+            if (languagesContainer) {
+                // Listen for language changes
+                languagesContainer.addEventListener('input', function(e) {
+                    if (e.target.matches('.language-input') || e.target.matches('.proficiency-select')) {
+                        updateLanguagesInPreview();
+                    }
+                });
+                
+                // Add/Remove language buttons
+                languagesContainer.addEventListener('click', function(e) {
+                    if (e.target.matches('.add-language-btn')) {
+                        addLanguageInput();
+                    } else if (e.target.matches('.remove-language-btn')) {
+                        removeLanguageInput(e.target);
+                    }
+                });
+            }
+        }
+
+        function updateLanguagesInPreview() {
+            const languageInputs = document.querySelectorAll('.language-input');
+            const proficiencySelects = document.querySelectorAll('.proficiency-select');
+            const languages = [];
+            
+            for (let i = 0; i < languageInputs.length; i++) {
+                const language = languageInputs[i].value.trim();
+                const proficiency = proficiencySelects[i] ? proficiencySelects[i].value : 'Fluent';
+                if (language !== '') {
+                    languages.push({ language, proficiency });
+                }
+            }
+            
+            // Update languages in the preview
+            const languageLists = document.querySelectorAll('[data-field="languages-list"]');
+            languageLists.forEach(list => {
+                list.innerHTML = languages.map(lang => `<li>${lang.language} - ${lang.proficiency}</li>`).join('');
+            });
+        }
+
+        function addLanguageInput() {
+            const languagesContainer = document.getElementById('languagesContainer');
+            if (languagesContainer) {
+                const languageItem = document.createElement('div');
+                languageItem.className = 'language-item';
+                languageItem.innerHTML = `
+                    <input type="text" class="language-input" placeholder="Enter language">
+                    <select class="proficiency-select">
+                        <option value="Basic">Basic</option>
+                        <option value="Conversational">Conversational</option>
+                        <option value="Fluent">Fluent</option>
+                        <option value="Native">Native</option>
+                    </select>
+                    <button type="button" class="remove-language-btn">×</button>
+                `;
+                languagesContainer.appendChild(languageItem);
+            }
+        }
+
+        function removeLanguageInput(button) {
+            const languageItem = button.closest('.language-item');
+            if (languageItem) {
+                removeLanguageInput(languageItem);
+                updateLanguagesInPreview();
+            }
+        }
+
+        function addSkillInput() {
+            const skillsContainer = document.getElementById('skillsContainer');
+            if (skillsContainer) {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `
+                    <input type="text" class="skill-input" placeholder="Enter skill">
+                    <button type="button" class="remove-skill-btn">×</button>
+                `;
+                skillsContainer.appendChild(skillItem);
+            }
+        }
+
+        function removeSkillInput(button) {
+            const skillItem = button.closest('.skill-item');
+            if (skillItem) {
+                skillItem.remove();
+                updateSkillsInPreview();
+            }
+        }
+
+        // Example HTML structure for your form
+        const formHTML = `
+        <div id="dynamicForm" class="form-container">
+            <div class="form-group">
+                <label for="profileImageInput">Profile Image:</label>
+                <input type="file" id="profileImageInput" accept="image/*">
+            </div>
+            
+            <div class="form-group">
+                <label for="nameInput">Full Name:</label>
+                <input type="text" id="nameInput" placeholder="Charles Andrew Torres">
+            </div>
+            
+            <div class="form-group">
+                <label for="titleInput">Job Title:</label>
+                <input type="text" id="titleInput" placeholder="Accountant">
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneInput">Phone:</label>
+                <input type="text" id="phoneInput" placeholder="+123-456-7890">
+            </div>
+            
+            <div class="form-group">
+                <label for="emailInput">Email:</label>
+                <input type="email" id="emailInput" placeholder="CharlesTorres@gmail.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="addressInput">Address:</label>
+                <input type="text" id="addressInput" placeholder="123 Anywhere St., Any City">
+            </div>
+            
+            <div class="form-group">
+                <label>Skills:</label>
+                <div id="skillsContainer">
+                    <div class="skill-item">
+                        <input type="text" class="skill-input" placeholder="Enter skill">
+                        <button type="button" class="add-skill-btn">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Languages:</label>
+                <div id="languagesContainer">
+                    <div class="language-item">
+                        <input type="text" class="language-input" placeholder="Enter language">
+                        <select class="proficiency-select">
+                            <option value="Basic">Basic</option>
+                            <option value="Conversational">Conversational</option>
+                            <option value="Fluent">Fluent</option>
+                            <option value="Native">Native</option>
+                        </select>
+                        <button type="button" class="add-language-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
     </script>
     <script>
 // --- Suit Overlay Logic for Modal ---

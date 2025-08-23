@@ -68,7 +68,6 @@
                         </button>
                         <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                         <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
-                        <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
                         <div class="border-t border-gray-200 my-1"></div>
                         <a href="#" id="feedbackLink" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Feedback</a>
                         <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
@@ -479,7 +478,10 @@
                             </div>
                         </div>
                     </div>`;
-                } else {
+                }else if(template === 'it-3'){
+
+                }
+                 else {
                     // Default template
                     html = `
                     <div class="default-template-preview" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #334155; line-height: 1.6; padding: 2rem; background: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">

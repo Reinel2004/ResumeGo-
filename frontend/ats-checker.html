@@ -95,7 +95,6 @@
                         </button>
                         <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                         <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
-                        <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
                         <div class="border-t border-gray-200 my-1"></div>
                         <a href="#" id="feedbackLink" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Feedback</a>
                         <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
@@ -261,12 +260,12 @@
 
         userMenuButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            userDropdown.classList.toggle('hidden');
+            userDropdown.classList.toggle('active');
         });
 
         document.addEventListener('click', (e) => {
             if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
-                userDropdown.classList.add('hidden');
+                userDropdown.classList.remove('active');
             }
         });
 

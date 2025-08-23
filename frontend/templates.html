@@ -165,6 +165,24 @@
             }
         }
         
+        @media (max-width: 480px) {
+            .template-preview {
+                padding-top: 100%; /* Square aspect ratio for very small screens */
+            }
+            
+            .template-preview img {
+                padding: 3px;
+            }
+            .template-actions {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .template-actions .btn {
+                width: auto;
+            }
+        }
+        
         .template-info {
             padding: 20px;
         }
@@ -184,6 +202,13 @@
         .template-actions {
             display: flex;
             gap: 10px;
+            margin-top: 15px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .template-actions .btn {
+            width: 100%;
+            text-align: center;
         }
         
         .btn {
@@ -305,7 +330,6 @@
         </button>
         <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
           <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
-          <a href="my-resumes.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">My Resumes</a>
           <div class="border-t border-gray-200 my-1"></div>
           <a href="#" id="feedbackLink" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Feedback</a>
           <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
