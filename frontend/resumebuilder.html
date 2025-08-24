@@ -1338,84 +1338,116 @@
             </div>
 
             <!-- Profile Editor Modal -->
-            <div id="profileEditorModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
-                <div style="background: white; width: 95%; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 8px; position: relative;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-                        <div>
-                            <h2 style="font-size: clamp(20px, 4vw, 24px); font-weight: 600; color: #333;">Profile Photo Editor</h2>
-                            <p style="color: #666; font-size: clamp(14px, 2vw, 16px);">Crop and apply professional suit overlay for your resume</p>
-                        </div>
-                        <button onclick="closeModal()" style="background: none; border: none; cursor: pointer; font-size: 24px; padding: 5px;">×</button>
-                    </div>
+            <div id="profileEditorModal" class="hidden fixed inset-0 w-full h-full bg-black/50 z-50 overflow-y-auto flex items-center justify-center">
+                <div class="bg-white w-11/12 max-w-4xl p-5 rounded-lg relative">
+                    <!-- Close Button -->
+                    <button onclick="closeModal()" class="absolute top-5 right-5 bg-transparent border-none cursor-pointer text-2xl p-1 hover:text-gray-700 transition-colors">×</button>
                     
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                        <!-- Image Preview Section -->
-                        <div>
-                            <div style="aspect-ratio: 1; background: #f3f4f6; border-radius: 8px; overflow: auto; position: relative; min-height: 300px; max-width: 300px; margin: 0 auto;">
-                                <img id="previewImage" src="https://placehold.co/400x400?text=Upload+Photo" alt="Profile Preview" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                                <div id="dragText" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #666; pointer-events: none;">
-                                    Drag to  reposition image
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; max-width: 300px; margin: 10px auto;">
-                                <button onclick="zoomOut()" style="padding: 8px; background: #f3f4f6; border-radius: 50%; border: none; cursor: pointer; min-width: 36px; min-height: 36px;">-</button>
-                                <input type="range" id="zoomSlider" min="50" max="200" value="100" style="flex: 1;">
-                                <button onclick="zoomIn()" style="padding: 8px; background: #f3f4f6; border-radius: 50%; border: none; cursor: pointer; min-width: 36px; min-height: 36px;">+</button>
-                            </div>
-                        </div>
+                    <!-- Header -->
+                    <div class="mb-5">
+                        <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-800">Profile Photo Editor</h2>
+                        <p class="text-gray-600 text-sm md:text-base">Crop and apply professional suit overlay for your resume</p>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row gap-5">
                         
-                        <!-- Controls Section -->
-                        <div>
-                            <!-- Suit Options -->
-                            <div style="margin-bottom: 20px;">
-                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;">👔 Select Suit Overlay</h3>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
-                                    <div onclick="selectSuit(this)" class="suit-option" style="cursor: pointer; padding: 10px; border: 2px solid #3b82f6; border-radius: 8px;">
-                                        <img src="../assets/img/suit-overlay/suit-overlay-1.png" alt="Business Suit" style="width: 100%; border-radius: 4px;">
-                                        <span style="display: block; text-align: center; margin-top: 5px; font-size: 14px;">Business</span>
-                                    </div>
-                                    <div onclick="selectSuit(this)" class="suit-option" style="cursor: pointer; padding: 10px; border: 2px solid transparent; border-radius: 8px;">
-                                        <img src="../assets/img/suit-overlay/suit-overlay-2.png" alt="Executive Suit" style="width: 100%; border-radius: 4px;">
-                                        <span style="display: block; text-align: center; margin-top: 5px; font-size: 14px;">Executive</span>
-                                    </div>
-                                    <div onclick="selectSuit(this)" class="suit-option" style="cursor: pointer; padding: 10px; border: 2px solid transparent; border-radius: 8px;">
-                                        <img src="../assets/img/suit-overlay/suit-overlay-3.png" alt="Formal Suit" style="width: 100%; border-radius: 4px;">
-                                        <span style="display: block; text-align: center; margin-top: 5px; font-size: 14px;">Formal</span>
-                                    </div>
+                        <!-- Left: Canvas Preview -->
+                        <div class="flex flex-col items-center w-full lg:w-1/2">
+                            <!-- Canvas Preview Container -->
+                            <div id="previewWrapper" class="border-2 border-gray-300 w-75 h-75 flex items-center justify-center bg-gray-50 rounded-lg">
+                                <canvas id="previewCanvas" width="300" height="300" class="max-w-full max-h-full cursor-grab"></canvas>
+                            </div>
+
+                            <!-- Download Button -->
+                            <a id="downloadImageBtn" 
+                                class="bg-blue-600 text-white px-4 py-2 rounded-md mt-3 text-decoration-none hidden hover:bg-blue-700 transition-colors"
+                                download="resume-photo.png">
+                                Download Image
+                            </a>
+
+                            <!-- Hidden Upload Control -->
+                            <input type="file" id="uploadInput" accept="image/*" class="hidden" />
+
+                            <!-- Image Sizer -->
+                            <div class="mt-6">
+                                <p class="font-semibold mb-1 text-gray-700">Image Sizer</p>
+                                <div class="flex items-center w-75">
+                                    <button id="zoomOutBtn" class="text-xl px-2 py-1 bg-gray-100 border-none rounded cursor-pointer hover:bg-gray-200 transition-colors">−</button>
+                                    <input type="range" min="50" max="300" value="100" id="zoomSlider" class="flex-1 mx-2" />
+                                    <button id="zoomInBtn" class="text-xl px-2 py-1 bg-gray-100 border-none rounded cursor-pointer hover:bg-gray-200 transition-colors">+</button>
                                 </div>
                             </div>
-                            
-                            <!-- Upload Options -->
-                            <div style="margin-bottom: 20px;">
-                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;"> Upload New Image</h3>
-                                <div style="display: flex; flex-direction: column; gap: 10px;">
-                                    <button onclick="document.getElementById('profile-upload').click()" style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px);">Select Photo from Device</button>
-                                    <button style="width: 100%; padding: 12px; background: #f3f4f6; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px);">Take a Selfie</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Advanced Settings -->
-                            <div>
-                                <h3 style="font-size: clamp(16px, 3vw, 18px); margin-bottom: 10px;">⚙️ Advanced Settings</h3>
-                                <div style="display: flex; flex-direction: column; gap: 10px;">
-                                    <label style="display: flex; align-items: center; gap: 10px; font-size: clamp(14px, 2vw, 16px);">
-                                        <input type="checkbox" id="bgRemovalCheckbox" onchange="handleBackgroundRemoval(this)">
-                                        <span>Automatic background removal</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 10px; font-size: clamp(14px, 2vw, 16px);">
-                                        <input type="checkbox" id="suitOverlayCheckbox">
-                                        <span>Add suit overlay to my photo</span>
-                                    </label>
+
+                            <!-- Suit Sizer (hidden by default) -->
+                            <div id="suitSizerWrapper" class="mt-6 hidden">
+                                <p class="font-semibold mb-1 text-gray-700">Suit Sizer</p>
+                                <div class="flex items-center w-75">
+                                    <button id="suitZoomOut" class="text-xl px-2 py-1 bg-gray-100 border-none rounded cursor-pointer hover:bg-gray-200 transition-colors">−</button>
+                                    <input type="range" min="50" max="200" value="100" id="suitZoomSlider" class="flex-1 mx-2" />
+                                    <button id="suitZoomIn" class="text-xl px-2 py-1 bg-gray-100 border-none rounded cursor-pointer hover:bg-gray-200 transition-colors">+</button>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Right Side Controls -->
+                        <div class="w-full lg:w-1/2 flex flex-col gap-4">
+
+                            <!-- Suit Selection -->
+                            <div>
+                                <p class="text-sm font-medium mb-2 text-gray-700">Select Suit Overlay</p>
+                                <div class="flex gap-3" id="suitOptions">
+                                    <div class="border-2 border-blue-500 rounded-md p-1 suit-option cursor-pointer hover:border-blue-600 transition-colors" data-suit="../assets/img/suit-overlay/suit-overlay-1.png">
+                                        <img src="../assets/img/suit-overlay/suit-overlay-1.png" alt="Business" class="w-24 h-24 object-cover rounded" />
+                                    </div>
+                                    <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="../assets/img/suit-overlay/suit-overlay-2.png">
+                                        <img src="../assets/img/suit-overlay/suit-overlay-2.png" alt="Executive" class="w-24 h-24 object-cover rounded" />
+                                    </div>
+                                    <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="../assets/img/suit-overlay/suit-overlay-3.png">
+                                        <img src="../assets/img/suit-overlay/suit-overlay-3.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Upload Options -->
+                            <div class="flex flex-col gap-2">
+                                <!-- Use device -->
+                                <button id="triggerUploadBtn" class="w-full bg-blue-600 text-white py-3 border-none rounded-md cursor-pointer text-sm hover:bg-blue-700 transition-colors">
+                                    Select Photo from Device
+                                </button>
+
+                                <!-- Take a selfie -->
+                                <button id="startCameraBtn" class="w-full bg-gray-100 text-gray-700 py-3 border border-gray-300 rounded-md cursor-pointer text-sm hover:bg-gray-200 transition-colors">
+                                    Take a Selfie
+                                </button>
+
+                                <!-- Webcam view -->
+                                <div id="cameraWrapper" class="hidden flex flex-col gap-2">
+                                    <video id="cameraFeed" autoplay class="rounded-md w-full h-48 object-cover border border-gray-300"></video>
+                                    <button id="captureBtn" class="w-full bg-green-600 text-white py-3 border-none rounded-md cursor-pointer text-sm hover:bg-green-700 transition-colors">
+                                        Capture Selfie
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Advanced Settings -->
+                            <div class="flex flex-col gap-2">
+                                <p class="text-sm font-medium text-gray-700">Advanced Settings</p>
+                                <label class="flex items-center gap-2 text-sm text-gray-700">
+                                    <input type="checkbox" id="autoBgCheckbox" class="form-checkbox" />
+                                    Automatic background removal
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-gray-700">
+                                    <input type="checkbox" id="suitCheckbox" class="form-checkbox" />
+                                    Add suit overlay to my photo
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <!-- Footer Actions -->
-                    <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="closeModal()" style="padding: 12px 24px; background: #f3f4f6; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px); min-width: 100px;">Cancel</button>
-                        <button onclick="applyChanges()" style="padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: clamp(14px, 2vw, 16px); min-width: 100px;">Apply to Resume</button>
+
+                    <!-- Footer Buttons -->
+                    <div class="flex justify-end mt-6 gap-3">
+                        <button onclick="closeModal()" class="px-6 py-3 bg-gray-100 text-gray-700 border-none rounded-md cursor-pointer text-sm hover:bg-gray-200 transition-colors">Cancel</button>
+                        <button id="applyToResumeBtn" class="px-6 py-3 bg-blue-600 text-white border-none rounded-md cursor-pointer text-sm hover:bg-blue-700 transition-colors">Apply to Resume</button>
                     </div>
                 </div>
             </div>
@@ -1786,6 +1818,9 @@
                 description: item.querySelector('textarea')?.value
             }));
         }
+        // Compress profile image if it exists to reduce payload size
+        // Use profile image directly (server limits have been increased)
+        
         const content = {
             name: document.getElementById('name').value,
             title: document.getElementById('title').value,
@@ -1945,7 +1980,7 @@
                     <!-- HEADER -->
                     <div class="flex items-center p-6 bg-[#582b2a] text-white">
                         <div class="shrink-0">
-                            <img src="${profileImage}" alt="Profile Picture" class="w-[110px] h-[110px] object-cover rounded-full border-4 border-white">
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile Picture" class="w-[110px] h-[110px] object-cover rounded-full border-4 border-white bg-white">
                         </div>
                         <div class="ml-40">
                             <h1 class="text-3xl font-bold leading-tight">${document.getElementById('name')?.value || 'Your Name'}</h1>
@@ -2013,7 +2048,7 @@
                     <div class="col-span-1 bg-gray-100 p-6 space-y-6 text-sm">
                         <!-- Image -->
                         <div class="flex justify-center">
-                            <img src="${profileImage || '...'}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-slate-700 object-cover" />
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-slate-700 object-cover" />
                         </div>
                         <!-- Contact -->
                         <div>
@@ -2163,7 +2198,7 @@
                     <div class="col-span-1 bg-slate-700 text-white p-6 space-y-6 text-sm shadow-lg">
                         <!-- Image -->
                         <div class="flex justify-center">
-                            <img src="${profileImage}" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
                         </div>
 
                         <!-- Contact -->
@@ -2248,7 +2283,7 @@
                             <div class="col-span-1 bg-gray-100 p-6 flex flex-col items-center space-y-8">
                                 
                                 <!-- Profile Image -->
-                                <img src="${profileImage}" alt="Profile" 
+                                <img src="${window.profileImage || profileImage || ''}" alt="Profile" 
                                     class="w-32 h-32 rounded-full border-4 border-red-700 object-cover">
 
                                 <!-- Contact -->
@@ -2334,7 +2369,7 @@
                         <!-- Left Sidebar -->
                         <div class="col-span-1 bg-red-400 p-6 flex flex-col space-y-8">
                             <!-- Profile Image -->
-                            <img src="${profileImage}" alt="Profile"
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile"
                                 class="w-32 h-32 object-cover border-2 border-black mx-auto">
 
                             <!-- About -->
@@ -2415,7 +2450,7 @@
                         <div class="w-[30%] bg-gray-200 border-r-2 border-black p-5">
                         <!-- Profile Image -->
                         <div class="flex justify-center mb-5">
-                            <img src="${profileImage}" alt="Profile Photo" class="w-28 h-28 rounded-full border-4 border-white">
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile Photo" class="w-28 h-28 rounded-full border-4 border-white">
                         </div>
 
                         <!-- Skills -->
@@ -2496,7 +2531,7 @@
                             </div>
                             </div>
                             <div>
-                            <img src="${profileImage}" alt="Profile" class="w-36 h-36 rounded-full border-4 border-black object-cover" />
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile" class="w-36 h-36 rounded-full border-4 border-black object-cover" />
                             </div>
                         </div>
 
@@ -2574,7 +2609,7 @@
                     preview.innerHTML = `
                         <!-- Header -->
                         <div class="flex items-center px-10 pt-6">
-                        <img src="${profileImage}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
+                        <img src="${window.profileImage || profileImage || ''}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
                         <div class="relative -ml-8 w-full">
                             <div class="bg-slate-700 text-white pl-16 py-4 clip-path-diagonal">
                             <h1 class="text-4xl font-serif font-bold ">${document.getElementById('name')?.value || 'Your Name'}</h1>
@@ -2677,7 +2712,7 @@
                         <!-- Right Column -->
                         <div class="w-1/2 p-8 bg-[#f3dcdc]">
                         <div class="flex justify-center mb-8">
-                            <img src="${profileImage}" alt="Profile Picture" class="w-[130px] h-[130px] object-cover rounded-full border-[4px] border-[#582b2a]">
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile Picture" class="w-[130px] h-[130px] object-cover rounded-full border-[4px] border-[#582b2a]">
                         </div>
 
                         <div class="mb-8">
@@ -2713,7 +2748,7 @@
                         <div class="w-[200px] bg-[#8E735B] text-white flex flex-col items-center py-8 px-4 space-y-8">
                             <!-- Profile Image -->
                             <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-hidden">
-                                <img src="${profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-full h-full object-cover" />
+                                <img src="${window.profileImage || profileImage || 'assets/img/profile.png'}" alt="Profile" class="w-full h-full object-cover" />
                             </div>
 
                             <!-- Skills -->
@@ -6767,7 +6802,7 @@
     
                         <!-- 🔹 Profile Section (Top) -->
                         <div class="flex items-center gap-4">
-                        <img src="${profileImage || '...'}" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
+                        <img src="${window.profileImage || profileImage || ''}" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
                         <div>
                             <h1 class="text-2xl font-bold">${(document.getElementById('name')?.value || 'Jason Miller')}</h1>
                             <p class="text-gray-600">${(document.getElementById('title')?.value || 'Amazon Associate')}</p>
@@ -7305,108 +7340,11 @@
         const profileUpload = document.getElementById('profile-upload');
         const profilePreview = document.querySelector('.profile-preview');
         const removePhoto = document.querySelector('.remove-photo');
-        let profileImage = null;
+        let profileImage = '';
 
-        // Update applyChanges function to handle the edited photo
-        function applyChanges() {
-            const previewImage = document.getElementById('previewImage');
-            const profilePreview = document.querySelector('.profile-preview');
-            const removePhoto = document.querySelector('.remove-photo');
-            
-            if (!previewImage.src || previewImage.src.includes('placeholder.com')) {
-                alert('Please upload an image first');
-                return;
-            }
+        // New canvas-based profile editor functionality will be handled by the new implementation
 
-            // Create a canvas to capture exactly what's visible in the editor
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Set canvas size to match the editor container (300x300)
-            canvas.width = 300;
-            canvas.height = 300;
-            
-            // Get the current transform values
-            const transform = new WebKitCSSMatrix(getComputedStyle(previewImage).transform);
-            const scale = transform.m11; // Get the scale value
-            const translateX = transform.m41; // Get the X translation
-            const translateY = transform.m42; // Get the Y translation
-            
-            // Calculate the image dimensions after scaling
-            const scaledWidth = previewImage.naturalWidth * scale;
-            const scaledHeight = previewImage.naturalHeight * scale;
-            
-            // Calculate the position to center the image
-            const x = translateX + (canvas.width - scaledWidth) / 2;
-            const y = translateY + (canvas.height - scaledHeight) / 2;
-            
-            // Fill the background with white
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw the image exactly as it appears in the editor
-            ctx.drawImage(
-                previewImage,
-                x,
-                y,
-                scaledWidth,
-                scaledHeight
-            );
-            
-            // Convert to PNG and update profile preview
-            const finalImage = canvas.toDataURL('image/png');
-            profileImage = finalImage;
-            
-            // Update the profile preview with the new image
-            profilePreview.innerHTML = `<img src="${finalImage}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">`;
-            
-            // Show remove photo button
-            if (removePhoto) {
-                removePhoto.classList.add('active');
-            }
-            
-            // Update the preview if it's active
-            debouncedUpdatePreview();
-            
-            // Close the modal
-            document.getElementById('profileEditorModal').style.display = 'none';
-        }
-
-        // Update file upload handler to not show in preview immediately
-        document.getElementById('profile-upload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const previewImage = document.getElementById('previewImage');
-                    previewImage.src = e.target.result;
-                    
-                    // Reset position and scale when new image is loaded
-                    translateX = 0;
-                    translateY = 0;
-                    previewImage.style.transform = 'translate(-50%, -50%) scale(1)';
-                    
-                    // Reset zoom slider
-                    document.getElementById('zoomSlider').value = 100;
-                    
-                    // Store the original image for background removal
-                    originalImage = e.target.result;
-                    
-                    // Reset background removal checkbox
-                    document.getElementById('bgRemovalCheckbox').checked = false;
-                    
-                    // Ensure profile preview remains empty until Save to Resume is clicked
-                    const profilePreview = document.querySelector('.profile-preview');
-                    if (profilePreview) {
-                        profilePreview.innerHTML = '<div class="placeholder">👤</div>';
-                    }
-                    
-                    // Initialize drag and drop for the new image
-                    initDragAndDrop();
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+        // File upload handler will be handled by the new canvas-based implementation
 
         // Initialize profile preview to be empty
         document.addEventListener('DOMContentLoaded', function() {
@@ -7416,15 +7354,28 @@
             }
         });
 
-        // Modal functions
+        // Modal functions - updated for new implementation
         function openModal() {
-            document.getElementById('profileEditorModal').style.display = 'block';
-            // Initialize drag and drop when modal opens
-            initDragAndDrop();
+            document.getElementById('profileEditorModal').classList.remove('hidden');
+            // Reset the modal state when opening
+            if (typeof resetModal === 'function') {
+                resetModal();
+            }
         }
 
         function closeModal() {
-            document.getElementById('profileEditorModal').style.display = 'none';
+            console.log('closeModal function called');
+            const modal = document.getElementById('profileEditorModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                console.log('Modal hidden');
+            } else {
+                console.error('Modal element not found');
+            }
+            // Stop camera if it's running
+            if (typeof stopCamera === 'function') {
+                stopCamera();
+            }
         }
 
         // Success Modal Functions
@@ -7460,221 +7411,544 @@
             }
         }
 
-        function selectSuit(element) {
-            document.querySelectorAll('.suit-option').forEach(opt => {
-                opt.style.borderColor = 'transparent';
-            });
-            element.style.borderColor = '#3b82f6';
+        // ... existing code ...
+
+// --- New Profile Editor Logic with Canvas ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Canvas setup
+    const canvas = document.getElementById("previewCanvas");
+    const ctx = canvas.getContext("2d");
+    let img = null;
+    let overlayImg = null;
+    let imgPos = { x: 150, y: 150, scale: 1, baseScale: 1 }; // Center initially
+    let overlayScale = 1;
+    let originalImageData = null; // Store original image data for background removal
+
+    // Element queries
+    const autoBgCheckbox = document.getElementById('autoBgCheckbox');
+    const suitCheckbox = document.getElementById('suitCheckbox');
+    const modal = document.getElementById('profileEditorModal');
+    const uploadInput = document.getElementById('uploadInput');
+    const triggerUploadBtn = document.getElementById('triggerUploadBtn');
+    const startCameraBtn = document.getElementById('startCameraBtn');
+    const captureBtn = document.getElementById('captureBtn');
+    const cameraFeed = document.getElementById('cameraFeed');
+    const cameraWrapper = document.getElementById('cameraWrapper');
+    const zoomSlider = document.getElementById('zoomSlider');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const suitOptions = document.querySelectorAll('.suit-option');
+    const suitSizerWrapper = document.getElementById('suitSizerWrapper');
+    const suitZoomSlider = document.getElementById('suitZoomSlider');
+    const suitZoomOut = document.getElementById('suitZoomOut');
+    const suitZoomIn = document.getElementById('suitZoomIn');
+    const downloadImageBtn = document.getElementById("downloadImageBtn");
+    const applyToResumeBtn = document.getElementById("applyToResumeBtn");
+   
+
+    // State
+    let stream = null;
+    let selectedSuit = null;
+
+    // Canvas functions
+    let overlayPos = { x: 0, y: 0 }; // Add overlay position tracking
+
+    function loadMainImage(src) {
+        console.log('Loading main image from:', src.substring(0, 100) + '...');
+        img = new Image();
+        img.src = src;
+        originalImageData = src; // Store original image data
+        img.onload = () => {
+            console.log('Image loaded successfully. Dimensions:', img.width, 'x', img.height);
+            
+            // Calculate the "fit to canvas" scale as our baseline (this becomes 100%)
+            const fitScale = Math.min(canvas.width / img.width, canvas.height / img.height);
+            console.log('Fit scale calculated:', fitScale);
+            
+            // Set this fitted scale as our "original" scale (100% on slider)
+            imgPos.baseScale = fitScale; // Store the base scale
+            imgPos.scale = fitScale; // Start at the fitted size
+            imgPos.x = (canvas.width - img.width * fitScale) / 2;
+            imgPos.y = (canvas.height - img.height * fitScale) / 2;
+            console.log('Image position set to:', imgPos);
+            
+            zoomSlider.value = 100; // Slider starts at middle (100%)
+            drawPreview();
+            console.log('Preview drawn after image load');
+            downloadImageBtn.style.display = "inline-block";
+        };
+        img.onerror = (error) => {
+            console.error('Error loading image:', error);
+        };
+    }
+
+    function loadSuitOverlay(src) {
+        overlayImg = new Image();
+        overlayImg.src = src;
+        overlayImg.onload = () => {
+            // Start scale so it roughly fills the preview
+            const targetSize = canvas.width * 0.9; // suit fills 90% of width
+            overlayScale = targetSize / overlayImg.width; 
+
+            overlayPos = {
+                x: (canvas.width - overlayImg.width * overlayScale) / 2,
+                y: (canvas.height - overlayImg.height * overlayScale) / 2
+            };
+
+            drawPreview();
+        };
+    }
+
+    function clearSuitOverlay() {
+        overlayImg = null;
+        overlayPos = { x: 0, y: 0 };
+        drawPreview();
+    }
+
+    function drawPreview() {
+        console.log('Drawing preview...');
+        console.log('Canvas context:', !!ctx);
+        console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (img) {
+            console.log('Drawing main image at position:', imgPos);
+            ctx.save();
+            ctx.translate(imgPos.x + img.width * imgPos.scale / 2, imgPos.y + img.height * imgPos.scale / 2);
+            ctx.scale(imgPos.scale, imgPos.scale);
+            ctx.drawImage(img, -img.width / 2, -img.height / 2);
+            ctx.restore();
+            console.log('Main image drawn');
+        } else {
+            console.log('No main image to draw');
         }
 
-        function zoomIn() {
-            const slider = document.getElementById('zoomSlider');
-            slider.value = parseInt(slider.value) + 10;
-            updateZoom();
+        if (overlayImg && suitCheckbox.checked) {
+            console.log('Drawing suit overlay at position:', overlayPos, 'scale:', overlayScale);
+            ctx.save();
+            ctx.translate(
+                overlayPos.x + (overlayImg.width * overlayScale) / 2,
+                overlayPos.y + (overlayImg.height * overlayScale) / 2
+            );
+            ctx.scale(overlayScale, overlayScale);
+            ctx.drawImage(overlayImg, -overlayImg.width / 2, -overlayImg.height / 2);
+            ctx.restore();
+            console.log('Suit overlay drawn');
+        } else {
+            console.log('No suit overlay to draw or checkbox not checked');
         }
+        
+        console.log('Preview drawing complete');
+    }
 
-        function zoomOut() {
-            const slider = document.getElementById('zoomSlider');
-            slider.value = parseInt(slider.value) - 10;
-            updateZoom();
-        }
+    // Helper: robustly set the label text for autoBgCheckbox
+    function setAutoBgLabelText(text) {
+        const label = autoBgCheckbox.closest('label');
+        if (!label) return;
+        Array.from(label.childNodes).forEach(node => {
+            if (node === autoBgCheckbox) return;
+            label.removeChild(node);
+        });
+        label.appendChild(document.createTextNode(text));
+    }
 
-        function updateZoom() {
-            const slider = document.getElementById('zoomSlider');
-            const image = document.getElementById('previewImage');
-            const container = image.parentElement;
-            
-            // Calculate the scale based on slider value
-            const scale = slider.value / 100;
-            
-            // Calculate bounds
-            const rect = container.getBoundingClientRect();
-            const imageWidth = image.naturalWidth * scale;
-            const imageHeight = image.naturalHeight * scale;
-            const maxX = (imageWidth - rect.width) / 2;
-            const maxY = (imageHeight - rect.height) / 2;
-            
-            // Constrain the translation within bounds
-            translateX = Math.max(-maxX, Math.min(maxX, translateX));
-            translateY = Math.max(-maxY, Math.min(maxY, translateY));
-            
-            // Update the transform to include both translation and scale
-            image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-        }
+    // Reset editor state
+    function resetModal() {
+        img = null;
+        overlayImg = null;
+        selectedSuit = null;
+        originalImageData = null; // Reset original image data
+        imgPos = { x: 150, y: 150, scale: 1, baseScale: 1 }; // Add baseScale
+        overlayPos = { x: 0, y: 0 }; // Reset overlay position
+        overlayScale = 1;
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        zoomSlider.value = 100;
+        suitZoomSlider.value = 100;
+        
+        autoBgCheckbox.checked = false;
+        autoBgCheckbox.disabled = true;
+        setAutoBgLabelText('Automatic background removal');
+        
+        suitCheckbox.checked = false;
+        suitCheckbox.disabled = true;
+        
+        setSuitInteractivity(false);
+        downloadImageBtn.style.display = "none";
+    }
 
-        // Add drag functionality
-        let isDragging = false;
-        let startX, startY, translateX = 0, translateY = 0;
-
-        function initDragAndDrop() {
-            const image = document.getElementById('previewImage');
-            const container = image.parentElement;
+      // Apply to resume
+      applyToResumeBtn.addEventListener("click", () => {
+        console.log('Apply to Resume clicked');
+        
+        if (img) {
+            // First draw the current state to ensure everything is rendered
+            drawPreview();
+            console.log('Preview drawn');
             
-            // Make container relative for absolute positioning of image
-            container.style.position = 'relative';
-            container.style.overflow = 'hidden'; // Keep overflow hidden to contain the image
+            // Get the canvas data as image
+            const dataURL = canvas.toDataURL("image/png");
+          
+            // Find the profile preview element in the resume
+            const profilePreview = document.querySelector('.profile-preview');
+            console.log('Profile preview element found:', !!profilePreview);
             
-            // Make image absolute for dragging
-            image.style.position = 'absolute';
-            image.style.cursor = 'move';
-            image.style.userSelect = 'none';
-            image.style.maxWidth = 'none';
-            image.style.maxHeight = 'none';
-            
-            // Center the image initially
-            image.style.top = '50%';
-            image.style.left = '50%';
-            image.style.transform = 'translate(-50%, -50%)';
-            
-            // Mouse events for dragging
-            image.addEventListener('mousedown', startDrag);
-            image.addEventListener('mousemove', drag);
-            image.addEventListener('mouseup', endDrag);
-            image.addEventListener('mouseleave', endDrag);
-            
-            // Touch events for mobile
-            image.addEventListener('touchstart', startDrag);
-            image.addEventListener('touchmove', drag);
-            image.addEventListener('touchend', endDrag);
-        }
-
-        function startDrag(e) {
-            isDragging = true;
-            const image = document.getElementById('previewImage');
-            
-            if (e.type === 'touchstart') {
-                startX = e.touches[0].clientX - translateX;
-                startY = e.touches[0].clientY - translateY;
-            } else {
-                startX = e.clientX - translateX;
-                startY = e.clientY - translateY;
-            }
-            
-            // Hide drag text when dragging starts
-            const dragText = document.getElementById('dragText');
-            if (dragText) {
-                dragText.style.display = 'none';
-            }
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            
-            const image = document.getElementById('previewImage');
-            const container = image.parentElement;
-            const rect = container.getBoundingClientRect();
-            
-            let currentX, currentY;
-            if (e.type === 'touchmove') {
-                currentX = e.touches[0].clientX;
-                currentY = e.touches[0].clientY;
-            } else {
-                currentX = e.clientX;
-                currentY = e.clientY;
-            }
-            
-            // Calculate new position
-            let newTranslateX = currentX - startX;
-            let newTranslateY = currentY - startY;
-            
-            // Get the current scale
-            const scale = document.getElementById('zoomSlider').value / 100;
-            
-            // Calculate image dimensions
-            const imageWidth = image.naturalWidth * scale;
-            const imageHeight = image.naturalHeight * scale;
-            
-            // Calculate bounds
-            const maxX = (imageWidth - rect.width) / 2;
-            const maxY = (imageHeight - rect.height) / 2;
-            
-            // Constrain the translation within bounds
-            translateX = Math.max(-maxX, Math.min(maxX, newTranslateX));
-            translateY = Math.max(-maxY, Math.min(maxY, newTranslateY));
-            
-            // Apply the translation
-            image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-        }
-
-        function endDrag() {
-            isDragging = false;
-            
-            // Show drag text when dragging ends
-            const dragText = document.getElementById('dragText');
-            if (dragText) {
-                dragText.style.display = 'flex';
-            }
-        }
-
-        // Background removal functionality
-        let originalImage = null; // Store the original image
-
-        async function handleBackgroundRemoval(checkbox) {
-            const previewImage = document.getElementById('previewImage');
-            
-            if (!previewImage.src || previewImage.src.includes('placeholder.com')) {
-                alert('Please upload an image first');
-                checkbox.checked = false;
-                return;
-            }
-
-            try {
-                if (checkbox.checked) {
-                    // Store original image if not already stored
-                    if (!originalImage) {
-                        originalImage = previewImage.src;
-                    }
-
-                    // Show loading state
-                    const loadingText = document.createElement('div');
-                    loadingText.style.position = 'absolute';
-                    loadingText.style.top = '50%';
-                    loadingText.style.left = '50%';
-                    loadingText.style.transform = 'translate(-50%, -50%)';
-                    loadingText.style.color = '#666';
-                    loadingText.textContent = 'Removing background...';
-                    previewImage.parentElement.appendChild(loadingText);
-
-                   
-                    const response = await fetch(previewImage.src);
-                    const blob = await response.blob();
-
-                   
-                    const formData = new FormData();
-                    // formData.append('image_file', blob);
-                    formData.append('file', blob, 'upload.png');
-
-                    // Call background removal API (Hugging Face Space)
-                    //  const apiResponse = await fetch('http://localhost:3000/api/removebg/removebg', {
-                    const apiResponse = await fetch('https://resumego-bg-remove-resumego.hf.space/remove-background/', {
-                        method: 'POST',
-                        body: formData,
-                    });
-
-                    if (!apiResponse.ok) {
-                        throw new Error('Failed to remove background');
-                    }
-
-                    // Convert response to blob and create URL
-                    const processedBlob = await apiResponse.blob();
-                    const processedUrl = URL.createObjectURL(processedBlob);
-
-                    // Update image
-                    previewImage.src = processedUrl;
-                    loadingText.remove();
+            if (profilePreview) {
+                // Clear any existing content first
+                profilePreview.innerHTML = '';
+                
+                // Create and add the new image
+                const profileImg = document.createElement('img');
+                profileImg.src = dataURL;
+                profileImg.alt = 'Profile Picture';
+                profileImg.className = 'w-full h-full object-contain';
+                
+                profilePreview.appendChild(profileImg);
+                console.log('Profile preview updated with image');
+                
+                // IMPORTANT: Update the global profileImage variable for the resume template
+                window.profileImage = dataURL;
+                console.log('Global profileImage updated:', window.profileImage);
+                
+                // Update the resume preview on the right side
+                if (typeof updatePreview === 'function') {
+                    updatePreview();
+                    console.log('Resume preview updated');
                 } else {
-                    // Revert to original image if available
-                    if (originalImage) {
-                        previewImage.src = originalImage;
-                    }
+                    console.log('updatePreview function not found');
                 }
-            } catch (error) {
-                console.error('Error removing background:', error);
-                alert('Failed to remove background. Please try again.');
-                checkbox.checked = false;
+            } else {
+                console.error('Profile preview element not found');
+                alert('Profile preview element not found');
+            }
+            
+            // Close the modal
+            closeModal();
+        } else {
+            console.error('No image loaded. Please upload an image first.');
+            alert('Please upload an image first');
+        }
+    });
+
+
+    // Upload trigger
+    triggerUploadBtn.addEventListener('click', () => {
+        uploadInput.click();
+    });
+
+    // File input handler
+    uploadInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            loadMainImage(e.target.result);
+            
+            // Enable checkboxes now that image exists
+            autoBgCheckbox.disabled = false;
+            suitCheckbox.disabled = false;
+
+            // Run BG removal only if user actually enabled it
+            if (autoBgCheckbox.checked) {
+                runBackgroundRemoval();
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Camera / Selfie
+    startCameraBtn.addEventListener('click', async () => {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            cameraFeed.srcObject = stream;
+            cameraWrapper.style.display = "flex";
+        } catch (err) {
+            alert('Camera access denied or not available.');
+            console.error(err);
+        }
+    });
+
+    function stopCamera() {
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            stream = null;
+            cameraWrapper.style.display = "none";
+        }
+    }
+
+    captureBtn.addEventListener('click', () => {
+        const captureCanvas = document.createElement('canvas');
+        captureCanvas.width = cameraFeed.videoWidth;
+        captureCanvas.height = cameraFeed.videoHeight;
+        const captureCtx = captureCanvas.getContext('2d');
+        captureCtx.drawImage(cameraFeed, 0, 0, captureCanvas.width, captureCanvas.height);
+        const imageData = captureCanvas.toDataURL('image/png');
+
+        loadMainImage(imageData);
+        
+        // Enable checkboxes now that image exists
+        autoBgCheckbox.disabled = false;
+        suitCheckbox.disabled = false;
+
+        stopCamera();
+
+        if (autoBgCheckbox.checked) {
+            runBackgroundRemoval();
+        }
+    });
+
+    // Canvas interaction - Zoom with mouse wheel (center-based scaling using baseScale)
+    canvas.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const delta = e.deltaY * -0.001;
+        const oldScale = imgPos.scale;
+        const newScale = Math.max(imgPos.baseScale * 0.5, Math.min(imgPos.scale + delta, imgPos.baseScale * 3));
+        
+        // Calculate the center point for scaling
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        
+        // Adjust position to scale from center
+        const scaleRatio = newScale / oldScale;
+        imgPos.x = centerX - (centerX - imgPos.x) * scaleRatio;
+        imgPos.y = centerY - (centerY - imgPos.y) * scaleRatio;
+        
+        imgPos.scale = newScale;
+        // Update slider to reflect current scale relative to base
+        zoomSlider.value = Math.round((newScale / imgPos.baseScale) * 100);
+        drawPreview();
+    });
+
+    // Canvas interaction - Drag
+    let isDragging = false;
+    let isDraggingSuit = false;
+    let dragStart = { x: 0, y: 0 };
+
+    // Helper function to check if click is on suit overlay
+    function isClickOnSuit(x, y) {
+        if (!overlayImg || !suitCheckbox.checked) return false;
+        
+        const centerX = overlayPos.x + (overlayImg.width * overlayScale) / 2;
+        const centerY = overlayPos.y + (overlayImg.height * overlayScale) / 2;
+        const halfWidth = (overlayImg.width * overlayScale) / 2;
+        const halfHeight = (overlayImg.height * overlayScale) / 2;
+        
+        return x >= centerX - halfWidth && x <= centerX + halfWidth && 
+               y >= centerY - halfHeight && y <= centerY + halfHeight;
+    }
+
+    canvas.addEventListener("mousedown", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Check if clicking on suit overlay first (higher priority)
+        if (isClickOnSuit(x, y)) {
+            isDraggingSuit = true;
+            dragStart.x = x - overlayPos.x;
+            dragStart.y = y - overlayPos.y;
+            canvas.style.cursor = 'grabbing';
+        } else if (img) {
+            isDragging = true;
+            dragStart.x = x - imgPos.x;
+            dragStart.y = y - imgPos.y;
+            canvas.style.cursor = 'grabbing';
+        }
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (isDraggingSuit) {
+            overlayPos.x = x - dragStart.x;
+            overlayPos.y = y - dragStart.y;
+            drawPreview();
+        } else if (isDragging && img) {
+            imgPos.x = x - dragStart.x;
+            imgPos.y = y - dragStart.y;
+            drawPreview();
+        } else {
+            // Update cursor based on what's under the mouse
+            if (isClickOnSuit(x, y)) {
+                canvas.style.cursor = 'grab';
+            } else if (img) {
+                canvas.style.cursor = 'grab';
+            } else {
+                canvas.style.cursor = 'default';
             }
         }
+    });
+
+    canvas.addEventListener("mouseup", () => {
+        isDragging = false;
+        isDraggingSuit = false;
+        canvas.style.cursor = 'grab';
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+        isDragging = false;
+        isDraggingSuit = false;
+        canvas.style.cursor = 'grab';
+    });
+
+    // Image zoom controls (center-based scaling using baseScale)
+    zoomSlider.addEventListener('input', function () {
+        const oldScale = imgPos.scale;
+        const sliderPercent = parseInt(this.value, 10) / 100; // 0.5 to 3.0
+        const newScale = imgPos.baseScale * sliderPercent; // Scale relative to fitted size
+        
+        // Calculate center-based scaling
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const scaleRatio = newScale / oldScale;
+        
+        imgPos.x = centerX - (centerX - imgPos.x) * scaleRatio;
+        imgPos.y = centerY - (centerY - imgPos.y) * scaleRatio;
+        imgPos.scale = newScale;
+        
+        drawPreview();
+    });
+
+    zoomOutBtn.addEventListener('click', () => {
+        zoomSlider.value = Math.max(parseInt(zoomSlider.value, 10) - 10, 10);
+        zoomSlider.dispatchEvent(new Event('input'));
+    });
+
+    zoomInBtn.addEventListener('click', () => {
+        zoomSlider.value = Math.min(parseInt(zoomSlider.value, 10) + 10, 300);
+        zoomSlider.dispatchEvent(new Event('input'));
+    });
+
+    // Suit overlay handling
+    function setSuitInteractivity(enabled) {
+        suitOptions.forEach(option => {
+            option.style.pointerEvents = enabled ? 'auto' : 'none';
+            option.style.opacity = enabled ? '1' : '0.5';
+            if (!enabled) option.classList.remove('border-2', 'border-blue-500');
+        });
+        suitSizerWrapper.style.display = enabled ? 'block' : 'none';
+
+        if (!enabled) {
+            clearSuitOverlay();
+        }
+    }
+
+    // Suit selection
+    suitOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            if (!suitCheckbox.checked) return;
+            
+            suitOptions.forEach(o => {
+                o.style.border = '1px solid #d1d5db';
+            });
+            option.style.border = '2px solid #3b82f6';
+            
+            selectedSuit = option.getAttribute('data-suit');
+            loadSuitOverlay(selectedSuit);
+        });
+    });
+
+    // Suit zoom controls (center-based scaling)
+    suitZoomSlider.addEventListener('input', function () {
+        const oldScale = overlayScale;
+        const newScale = parseInt(this.value, 10) / 100;
+        
+        // Calculate center-based scaling for suit
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const scaleRatio = newScale / oldScale;
+        
+        overlayPos.x = centerX - (centerX - overlayPos.x) * scaleRatio;
+        overlayPos.y = centerY - (centerY - overlayPos.y) * scaleRatio;
+        overlayScale = newScale;
+        
+        drawPreview();
+    });
+
+    suitZoomOut.addEventListener('click', () => {
+        suitZoomSlider.value = Math.max(parseInt(suitZoomSlider.value, 10) - 10, 50);
+        suitZoomSlider.dispatchEvent(new Event('input'));
+    });
+
+    suitZoomIn.addEventListener('click', () => {
+        suitZoomSlider.value = Math.min(parseInt(suitZoomSlider.value, 10) + 10, 200);
+        suitZoomSlider.dispatchEvent(new Event('input'));
+    });
+
+    // Suit checkbox handler
+    suitCheckbox.addEventListener('change', () => {
+        setSuitInteractivity(suitCheckbox.checked);
+        drawPreview(); // Redraw to show/hide overlay
+    });
+
+    // Background removal
+    autoBgCheckbox.addEventListener('change', function () {
+        if (this.checked && img) {
+            runBackgroundRemoval();
+        }
+    });
+
+    
+
+    async function runBackgroundRemoval() {
+        try {
+            autoBgCheckbox.disabled = true;
+            setAutoBgLabelText('Removing background...');
+
+            // Convert original image data to blob (not the scaled canvas content)
+            const response = await fetch(originalImageData);
+            const originalBlob = await response.blob();
+            
+            const formData = new FormData();
+            formData.append('file', originalBlob, 'photo.png');
+
+            // Call background removal API (Hugging Face Space)
+            const apiResponse = await fetch('https://resumego-bg-remove-resumego.hf.space/remove-background/', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!apiResponse.ok) throw new Error('Failed to remove background');
+
+            const processedBlob = await apiResponse.blob();
+            const processedUrl = URL.createObjectURL(processedBlob);
+            
+            // Update both the display image and original data
+            originalImageData = processedUrl;
+            loadMainImage(processedUrl);
+
+            autoBgCheckbox.checked = true;
+            autoBgCheckbox.disabled = true;
+            setAutoBgLabelText('Background removed');
+
+        } catch (err) {
+            console.error(err);
+            alert('Background removal failed. Please try again.');
+            autoBgCheckbox.checked = false;
+            autoBgCheckbox.disabled = false;
+            setAutoBgLabelText('Automatic background removal');
+        }
+    }
+
+    // Download functionality
+    downloadImageBtn.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL('image/png');
+        link.download = "resume-photo.png";
+        link.click();
+    });
+
+  
+    // Initialize
+    setSuitInteractivity(false);
+    canvas.style.cursor = 'grab';
+});
+
 
         // AI Enhancement functionality
         let currentTextarea = null;

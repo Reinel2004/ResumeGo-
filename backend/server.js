@@ -13,8 +13,8 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Import routes
 const authRoutes = require("./routes/auth.routes");
@@ -22,7 +22,10 @@ const userRoutes = require("./routes/user.routes");
 const resumeRoutes = require("./routes/resume.routes");
 
 // Use routes
-app.use(fileUpload());
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 }, // 50MB limit
+    abortOnLimit: true
+}));
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/resume", resumeRoutes);
