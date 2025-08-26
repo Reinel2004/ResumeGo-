@@ -3541,7 +3541,7 @@
                         <div class="w-1/3 pr-6 border-r border-gray-300 pl-4 bg-gray-50">
                             <div class="flex justify-center">
                                 <div class="border-[10px] border-white rounded-full w-40 h-40 overflow-hidden">
-                                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+                                    <img src="${window.profileImage || profileImage}" alt="Profile" class="w-full h-full object-cover" />
                                 </div>
                             </div>
 
@@ -3550,13 +3550,13 @@
                                 <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2">CONTACT</h2>
                                 <ul class="mt-2 text-sm space-y-2 text-black">
                                     <li class="flex items-center gap-2">
-                                    <span>📞</span> 123-456-7890
+                                    <span>📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}
                                     </li>
                                     <li class="flex items-center gap-2">
-                                    <span>✉️</span> CharlesTorres@gmail.com
+                                    <span>✉️</span> ${document.getElementById('email')?.value || 'email@example.com'}
                                     </li>
                                     <li class="flex items-center gap-2">
-                                    <span>📍</span> 123 Anywhere St., Any City, ST 12345
+                                    <span>📍</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}
                                     </li>
                                 </ul>
                             </div>
@@ -3587,19 +3587,15 @@
                             <!-- Header -->
                             <div class="text-center mb-6">
                                 <div class="bg-gray-700 text-white font-bold py-4 text-2xl leading-tight">
-                                    Charles Andrew Torres
-                                    <div class="text-sm font-normal">BUSINESS ADMINISTRATION</div>
+                                    ${document.getElementById('name')?.value || 'Your Name'}
+                                    <div class="text-sm font-normal">${document.getElementById('title')?.value || 'Job Title'}</div>
                                 </div>
                             </div>
 
                             <!-- Profile Summary -->
                             <div class="text-sm text-black mb-6">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                                    pharetra in lorem at laoreet. Donec hendrerit libero eget est
-                                    tempor, quis tempus arcu elementum. In elementum elit at dui
-                                    tristique feugiat. Mauris convallis, mi at mattis malesuada, neque
-                                    nulla volutpat dolor.
+                                    ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique feugiat. Mauris convallis, mi at mattis malesuada, neque nulla volutpat dolor.'}
                                 </p>
                             </div>
 
@@ -3607,20 +3603,10 @@
                             <div class="mb-6">
                                 <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2 mb-2">EXPERIENCE</h2>
                                 <div class="mb-4">
-                                    <p class="font-bold text-sm">Job position here</p>
-                                    <p class="text-sm text-gray-600 font-semibold">Company Name | Jan 2022 – Present</p>
-                                    <ul class="text-sm text-black list-disc ml-5">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                    </ul>
+                                    ${generateExperiencePreview()}
                                 </div>
                             <div>
-                                <p class="font-bold text-sm">Job position here</p>
-                                <p class="text-sm text-gray-600 font-semibold">Company Name | Jan 2022 – Present</p>
-                                <ul class="text-sm text-black list-disc ml-5">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                </ul>
+                              
                             </div>
                         </div>
 
@@ -3628,12 +3614,10 @@
                         <div>
                             <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2 mb-2">EDUCATION</h2>
                             <div class="text-sm text-black mb-2">
-                                <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
-                                <p class="text-gray-600">Dominican College of Tarlac</p>
+                                ${generateEducationPreview()}
                             </div>
                             <div class="text-sm text-black">
-                                <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                                <p class="text-gray-600">Cristo Rey High School – Senior Department</p>
+                                
                             </div>
                         </div>
                     </div>
@@ -3648,12 +3632,12 @@
                        <!-- Header -->
                     <div class="bg-gradient-to-r from-blue-900 to-blue-600 flex items-center px-8 py-6 ">
                         <!-- Profile Image -->
-                        <img src="../../../assets/img/charles.png" alt="Profile" 
+                        <img src="${window.profileImage || profileImage}" alt="Profile" 
                             class="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md">
                         <!-- Name and Title -->
                         <div class="ml-6 text-white">
-                            <h1 class="text-3xl font-extrabold">Charles Andrew Torres</h1>
-                            <p class="text-lg font-medium tracking-wide">BUSINESS ADMINISTRATION</p>
+                            <h1 class="text-3xl font-extrabold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-lg font-medium tracking-wide">${document.getElementById('title')?.value || 'Job Title'}</p>
                         </div>
                     </div>
 
@@ -3664,9 +3648,9 @@
                             <div>
                                 <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT</h2>
                                 <hr class="border-t border-gray-400 mb-3">
-                                <p class="text-sm flex items-center"><span class="mr-2">📞</span> +123-456-7890</p>
-                                <p class="text-sm flex items-center"><span class="mr-2">✉️</span> CharlesTorres@gmail.com</p>
-                                <p class="text-sm flex items-center"><span class="mr-2">📍</span>123 Anywhere St., Any City</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">✉️</span> ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                <p class="text-sm flex items-center"><span class="mr-2">📍</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
                             </div>
 
                             <!-- Education -->
@@ -3676,16 +3660,12 @@
 
                                 <!-- School 1 -->
                                 <div class="mb-4">
-                                    <p class="text-sm font-semibold">2022 - 2026</p>
-                                    <p class="text-base font-bold">DOMINICAN COLLEGE OF TARLAC</p>
-                                    <p class="text-sm">B.S Business Administration</p>
+                                    ${generateEducationPreview()}
                                 </div>
 
                                 <!-- School 2 -->
                                 <div class="mb-4">
-                                    <p class="text-sm font-semibold">2018 - 2020</p>
-                                    <p class="text-base font-bold">Sample University</p>
-                                    <p class="text-sm">Associate Degree in Business</p>
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
 
@@ -3694,14 +3674,8 @@
                             <div>
                                 <h2 class="text-lg font-bold tracking-wide mb-2">SKILLS</h2>
                                 <hr class="border-t border-gray-400 mb-3">
-                                <ul class="list-disc list-inside text-sm space-y-1">
-                                    <li>Project Management</li>
-                                    <li>Public Relations</li>
-                                    <li>Teamwork</li>
-                                    <li>Time Management</li>
-                                    <li>Leadership</li>
-                                    <li>Effective Communication</li>
-                                    <li>Critical Thinking</li>
+                                <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -3713,10 +3687,7 @@
                             <div>
                                 <h2 class="text-xl font-bold text-blue-900 mb-2">PROFILE</h2>
                                 <hr class="border-t border-blue-900 mb-3">
-                                <p class="text-sm leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                    Ut enim ad minim veniam quis nostrud exercitation.
-                                </p>
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.'}
                             </div>
 
                             <!-- Work Experience -->
@@ -3727,36 +3698,7 @@
                                 <div class="space-y-6">
 
                                     <!-- Job 1 -->
-                                    <div class="relative pl-8">
-                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
-                                        <span class="absolute left-[-7px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
-                                        <div class="flex justify-between items-center ml-4">
-                                            <p class="text-base font-semibold">Job Position One</p>
-                                            <p class="text-sm text-gray-600">2018 - 2019</p>
-                                        </div>
-                                        <p class="text-sm text-gray-700 ml-4">Company Name</p>
-                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
-                                            <li>Developed and executed marketing strategies.</li>
-                                            <li>Led a high-performing team to meet goals.</li>
-                                            <li>Ensured brand consistency across channels.</li>
-                                        </ul>
-                                    </div>
-                                    <!-- Job 2 -->
-                                    <div class="relative pl-8">
-                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
-                                        <span class="absolute left-[-6px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span>
-                                        <div class="flex justify-between items-center ml-4">
-                                            <p class="text-base font-semibold">Job Position Two</p>
-                                            <p class="text-sm text-gray-600">2020 - 2022</p>
-                                        </div>
-                                        <p class="text-sm text-gray-700 ml-4">Another Company</p>
-                                        <ul class="list-disc list-inside text-sm mt-2 ml-4 space-y-1">
-                                            <li>Coordinated finance and budget reports.</li>
-                                            <li>Improved workflow efficiency by 20%.</li>
-                                            <li>Trained new team members and interns.</li>
-                                        </ul>
-                                    </div>
-
+                                    ${generateExperiencePreview()}
                                 </div>
                             </div>
 
@@ -3783,35 +3725,32 @@
                     <div class="w-1/3 bg-gray-800 text-white p-8 space-y-8">
                         <!-- Profile Image -->
                         <div class="flex justify-center">
-                            <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 object-cover rounded-lg shadow-md" />
+                            <img src="${window.profileImage || profileImage}" alt="Profile" class="w-40 h-40 object-cover rounded-lg shadow-md" />
                         </div>
 
                         <!-- Title -->
                         <div class="text-center">
                             <hr class="border-t border-gray-500 mb-3">
-                            <h2 class="text-lg font-bold tracking-wide">BUSINESS ADMINISTRATION</h2>
+                            <h2 class="text-lg font-bold tracking-wide">${document.getElementById('title')?.value || 'Job Title'}</h2>
                             <hr class="border-t border-gray-500 mt-3">
                             <p class="text-sm mt-2 text-gray-300">
-                                Dedicated and results-driven professional passionate about organizational growth and leadership.
+                                ${document.getElementById('summary')?.value || 'Dedicated and results-driven professional passionate about organizational growth and leadership.'}
                             </p>
                         </div>
 
                         <!-- Contact -->
                         <div>
                             <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">CONTACT</h3>
-                            <p class="flex items-center gap-2 text-sm"><span>📞</span> +123-456-7890</p>
-                            <p class="flex items-center gap-2 text-sm"><span>📧</span> CharlesTorres@gmail.com</p>
-                            <p class="flex items-center gap-2 text-sm"><span>📍</span> 123 Anywhere St, Any City</p>
+                            <p class="flex items-center gap-2 text-sm"><span>📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p class="flex items-center gap-2 text-sm"><span>📧</span> ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p class="flex items-center gap-2 text-sm"><span>📍</span> ${document.getElementById('address')?.value || '123 Anywhere St, Any City'}</p>
                         </div>
 
                         <!-- Skills -->
                         <div>
                             <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">SKILLS</h3>
-                            <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-                                <li>Process Improvement</li>
-                                <li>Financial Support</li>
-                                <li>Negotiation</li>
-                                <li>Leadership</li>
+                            <ul class="list-disc list-inside text-sm text-gray-300 space-y-1" id="skills-preview">
+                               
                             </ul>
                         </div>
 
@@ -3827,7 +3766,7 @@
                     <div class="w-2/3 bg-white p-10 space-y-8">
                         <!-- Header -->
                         <div class="text-center">
-                            <h1 class="text-3xl font-bold text-gray-800 tracking-wide">Charles Andrew Torres</h1>
+                            <h1 class="text-3xl font-bold text-gray-800 tracking-wide">${document.getElementById('name')?.value || 'Your Name'}</h1>
                         </div>
                         <!-- Education -->
                         <div>
@@ -3835,16 +3774,10 @@
                             <hr class="border-t border-gray-400 mb-4">
 
                             <div class="mb-4">
-                                <p class="text-sm font-semibold">2022 - 2026</p>
-                                <p class="text-sm font-bold">Dominican College of Tarlac</p>
-                                <p class="text-sm text-gray-600">B.S Business Administration</p>
+                                ${generateEducationPreview()}
                             </div>
                             
-                            <div>
-                                <p class="text-sm font-semibold">2020 - 2022</p>
-                                <p class="text-sm font-bold">Cristo Rey High School</p>
-                                <p class="text-sm text-gray-600">Senior High Department</p>
-                            </div>
+                       
                         </div>
 
                         <!-- Experience -->
@@ -3855,43 +3788,9 @@
                             <!-- Job 1 -->
                             <div class="mb-6">
                                 <div class="flex justify-between items-center">
-                                    <p class="text-base font-semibold">Job Position One</p>
-                                    <p class="text-sm text-gray-600">2018 - 2019</p>
+                                    ${generateExperiencePreview()}
                                 </div>
-                                <p class="text-sm text-gray-700">Company Name</p>
-                                <ul class="list-disc list-inside text-sm mt-2 space-y-1 text-gray-600">
-                                    <li>Developed and executed marketing strategies.</li>
-                                    <li>Led a high-performing team to meet goals.</li>
-                                    <li>Ensured brand consistency across channels.</li>
-                                </ul>
-                            </div>
-
-                            <!-- Job 2 -->
-                            <div class="mb-6">
-                                <div class="flex justify-between items-center">
-                                    <p class="text-base font-semibold">Job Position Two</p>
-                                    <p class="text-sm text-gray-600">2020 - 2022</p>
-                                </div>
-                                <p class="text-sm text-gray-700">Another Company</p>
-                                <ul class="list-disc list-inside text-sm mt-2 space-y-1 text-gray-600">
-                                    <li>Coordinated finance and budget reports.</li>
-                                    <li>Improved workflow efficiency by 20%.</li>
-                                    <li>Trained new team members and interns.</li>
-                                </ul>
-                            </div>
-
-                            <!-- Job 3 -->
-                            <div class="mb-6">
-                                <div class="flex justify-between items-center">
-                                    <p class="text-base font-semibold">Job Position Three</p>
-                                    <p class="text-sm text-gray-600">2020 - 2022</p>
-                                </div>
-                                <p class="text-sm text-gray-700">Another Company</p>
-                                <ul class="list-disc list-inside text-sm mt-2 space-y-1 text-gray-600">
-                                    <li>Coordinated finance and budget reports.</li>
-                                    <li>Improved workflow efficiency by 20%.</li>
-                                    <li>Trained new team members and interns.</li>
-                                </ul>
+                               
                             </div>
                         </div>
                     </div>
@@ -3907,15 +3806,13 @@
                         <!-- Left Column -->
                         <div class="col-span-1 bg-[#20B2AA] text-white p-6 flex flex-col items-center">
                             <!-- Profile Image -->
-                            <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 h-32 object-cover rounded-lg border-4 border-white mb-6">
+                            <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-32 h-32 object-cover rounded-lg border-4 border-white mb-6">
                             <!-- Profile -->
                             <div class="text-center mb-8">
                                 <h2 class="text-lg font-bold tracking-wide">PROFILE</h2>
                                 <hr class="border-t border-white/60 my-2">
                                 <p class="text-sm leading-relaxed">
-                                    Business administration student.  
-                                    I consider myself a responsible and orderly person.  
-                                    I am looking forward to my first work experience.
+                                    ${document.getElementById('summary')?.value || 'Business administration student. I consider myself a responsible and orderly person. I am looking forward to my first work experience.'}
                                 </p>
                             </div>
 
@@ -3924,13 +3821,13 @@
                                 <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT ME</h2>
                                 <hr class="border-t border-white/60 mb-3">
                                 <p class="flex items-center text-sm mb-2">
-                                    <span class="mr-2">📞</span>123-456-7890
+                                    <span class="mr-2">📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}
                                 </p>
                                 <p class="flex items-center text-sm mb-2">
-                                    <span class="mr-2">✉️</span>CharlesTorres@gmail.com
+                                    <span class="mr-2">✉️</span> ${document.getElementById('email')?.value || 'email@example.com'}
                                 </p>
                                 <p class="flex items-center text-sm">
-                                    <span class="mr-2">📍</span> 123 Anywhere St., Any City, ST 12345
+                                    <span class="mr-2">📍</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City'}
                                 </p>
                             </div>
                         </div>
@@ -3939,8 +3836,8 @@
                         <div class="col-span-2 bg-gray-50 p-8">
                             <!-- Header -->
                             <div class="text-center mb-8">
-                                <h1 class="text-2xl font-bold text-gray-800 tracking-wide">Charles Andrew Torres</h1>
-                                <p class="text-lg italic text-gray-600">Business Administration</p>
+                                <h1 class="text-2xl font-bold text-gray-800 tracking-wide">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                                <p class="text-lg italic text-gray-600">${document.getElementById('title')?.value || 'Job Title'}</p>
                                 <hr class="border-t-2 border-[#20B2AA] mt-4">
                             </div>
 
@@ -3949,15 +3846,9 @@
                                 <h2 class="text-xl font-bold text-gray-800 mb-2">EDUCATION</h2>
                                 <hr class="border-t border-[#20B2AA] mb-3">
                                 <div class="mb-4">
-                                    <p class="font-semibold text-sm">B.S Business Administration</p>
-                                    <p class="text-sm italic">Business Administration career, in progress.</p>
-                                    <p class="text-sm text-gray-600">Dominican College of Tarlac — 2022–2026</p>
+                                    ${generateEducationPreview()}
                                 </div>
-                                <div>
-                                    <p class="font-semibold text-sm">Cristo Rey High School</p>
-                                    <p class="text-sm italic">Senior Department</p>
-                                    <p class="text-sm text-gray-600">2020–2022</p>
-                                </div>
+                               
                             </div>
 
                             <!-- Languages -->
@@ -3966,11 +3857,9 @@
                                 <hr class="border-t border-[#20B2AA] mb-3">
                                 <ul class="list-none text-sm space-y-1">
                                     <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    English
+                                    ${document.getElementById('language')?.value || 'English'}
                                     </li>
-                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    Filipino
-                                    </li>
+                                   
                                 </ul>
                             </div>
 
@@ -3978,19 +3867,11 @@
                             <div class="mb-6">
                                 <h2 class="text-xl font-bold text-gray-800 mb-2">SKILLS</h2>
                                 <hr class="border-t border-[#20B2AA] mb-3">
-                                <ul class="list-none text-sm space-y-1">
+                                <ul class="list-none text-sm space-y-1" id="skills-preview">
                                     <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    Process Improvement
+                                   
                                     </li>
-                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    Financial Support
-                                    </li>
-                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    Negotiation
-                                    </li>
-                                    <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    Leadership
-                                    </li>
+                                   
                                 </ul>
                             </div>
 
@@ -3999,8 +3880,7 @@
                                 <h2 class="text-xl font-bold text-gray-800 mb-2">WORK EXPERIENCE</h2>
                                 <hr class="border-t border-[#20B2AA] mb-3">
                                 <div>
-                                    <p class="font-semibold text-sm">Job Position Here</p>
-                                    <p class="text-sm text-gray-600">Company Name — 2018–2019</p>
+                                    ${generateExperiencePreview()}
                                 </div>
                             </div>
                         </div>
@@ -4015,13 +3895,13 @@
                     preview.innerHTML = `
                      <!-- Header -->
                     <div class="bg-gray-200 p-6 flex items-center space-x-6">
-                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 h-32 object-cover border border-black" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-32 h-32 object-cover border border-black" />
                         <div  class="text-sm text-gray-700">
-                            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                            <p class="text-lg text-gray-700">Business Administration</p>
-                            <p>123 Main Street, Cityville</p>
-                            <p>CharlesTorres@gmail.com</p>
-                            <p>+63 912 345 6789</p>
+                            <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-lg text-gray-700">${document.getElementById('title')?.value || 'Job Title'}</p>
+                            <p>${document.getElementById('address')?.value || '123 Main Street, Cityville'}</p>
+                            <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p>${document.getElementById('phone')?.value || '+63 912 345 6789'}</p>
                         </div>
                     </div>
 
@@ -4033,7 +3913,7 @@
                             <div>
                                 <h2 class="text-lg font-semibold">Profile</h2>
                                 <p class="text-sm text-gray-700 mt-1">
-                                    Results-driven Mechanical Engineer with over 5 years of experience in designing and optimizing mechanical systems across automotive and industrial applications.
+                                    ${document.getElementById('summary')?.value || 'Results-driven Mechanical Engineer with over 5 years of experience in designing and optimizing mechanical systems across automotive and industrial applications.'}
                                 </p>
                             </div>
 
@@ -4041,7 +3921,7 @@
 
                             <div>
                                 <h2 class="text-lg font-semibold">Skills</h2>
-                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1" id="skills-preview">
                                     <li>CAD Design</li>
                                     <li>Thermodynamics</li>
                                     <li>Project Management</li>
@@ -4072,13 +3952,9 @@
                                 <div>
                                     <h2 class="text-xl font-bold">Education</h2> 
                                     <div class="mt-2">
-                                    <p class="text-sm font-semibold text-gray-800">Bachelor of Science in Mechanical Engineering</p>
-                                    <p class="text-sm text-gray-600">University of the Philippines, 2014 - 2018</p>
+                                    ${generateEducationPreview()}
                                 </div>
-                                <div class="mt-4">
-                                    <p class="text-sm font-semibold text-gray-800">Senior High School – STEM Strand</p>
-                                    <p class="text-sm text-gray-600">City Science High School, 2012 - 2014</p>
-                                </div>
+                               
                             </div>
                         <hr class="border-gray-300" />
 
@@ -4087,23 +3963,7 @@
                             <h2 class="text-xl font-bold">Work Experience</h2>
 
                             <div class="mt-2">
-                                <p class="font-semibold text-gray-800">Mechanical Engineer – XYZ Corp</p>
-                                <p class="text-sm italic text-gray-600">Jan 2020 – Present</p>
-                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
-                                    <li>Led product design for industrial machines.</li>
-                                    <li>Improved thermal systems by 25% efficiency.</li>
-                                    <li>Managed a cross-functional team of 8 engineers.</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-4">
-                                <p class="font-semibold text-gray-800">Junior Engineer – ABC Industries</p>
-                                <p class="text-sm italic text-gray-600">Jul 2018 – Dec 2019</p>
-                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
-                                    <li>Drafted and reviewed technical blueprints.</li>
-                                    <li>Tested HVAC systems and reported analysis.</li>
-                                    <li>Assisted senior engineers in fabrication tasks.</li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
                     </div>
@@ -4121,15 +3981,15 @@
                     
                         <!-- Profile -->
                         <div class="flex flex-col items-center text-center">
-                            <img src="../../../assets/img/charles.png" class="border-2 border-black w-32 h-32 object-cover" alt="Profile image">
-                            <h1 class="text-2xl font-semibold mt-4">Charles Andrew Torres</h1>
+                            <img src="${window.profileImage || profileImage}" class="border-2 border-black w-32 h-32 object-cover" alt="Profile image">
+                            <h1 class="text-2xl font-semibold mt-4">${document.getElementById('name')?.value || 'Your Name'}</h1>
                             <p class="text-gray-500">Business Administration</p>
                             <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold mt-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/></svg>
                             MY PROFILE
                             </h2>
                             <p class="mt-2 text-sm text-gray-700">
-                            My name is John Doe, I am a business owner age, I worked with several well-known fashion brands. Several famous artists have used my work.
+                                ${document.getElementById('summary')?.value || 'My name is John Doe, I am a business owner age, I worked with several well-known fashion brands. Several famous artists have used my work.'}
                             </p>
                         </div>
 
@@ -4142,18 +4002,7 @@
 
                             <div class="mt-4 space-y-4">
                                 <div class="bg-gray-100 p-4 rounded-xl w-full">
-                                    <p class="font-semibold">2022–2026</p>
-                                    <p class="text-sm">B.S Business Administration - Dominican College of Tarlac</p>
-                                </div>
-
-                                <div class="bg-gray-100 p-4 rounded-xl w-full">
-                                    <p class="font-semibold">2020–2022</p>
-                                    <p class="text-sm">HUMSS - Humanities, Social and Sciences - Cristo Rey High School</p>
-                                </div>
-
-                                <div class="bg-gray-100 p-4 rounded-xl w-full">
-                                    <p class="font-semibold">2020–2022</p>
-                                    <p class="text-sm">HUMSS - Humanities, Social and Sciences - Cristo Rey High School</p>
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
                         </div>
@@ -4168,16 +4017,8 @@
                         <div class="mt-4 space-y-4">
                             <!-- Job 1 -->
                             <div class="bg-gray-100 p-4 rounded-xl w-full">
-                                <p class="font-semibold">2018–2019</p>
-                                <p class="text-sm">Job Position Here</p>
-                                <p class="text-sm italic text-gray-500">Company Name</p>
-                            </div>
-                            <!-- Job 2 -->
-                            <div class="bg-gray-100 p-4 rounded-xl w-full">
-                                <p class="font-semibold">2020–2022</p>
-                                <p class="text-sm">Job Position Here</p>
-                                <p class="text-sm italic text-gray-500">Company Name</p>
-                            </div>
+                                ${generateExperiencePreview()}
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -4191,7 +4032,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v6l4 2"/></svg>
                                 SKILLS
                             </h2>
-                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-700" id="skills-preview">
                                 <li>Creative</li>
                                 <li>Communication</li>
                                 <li>Project Management</li>
@@ -4204,9 +4045,9 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 8l10 6 10-6"/></svg>
                                 CONTACT
                             </h2>
-                            <p class="text-sm">+123-456-7890</p>
-                            <p class="text-sm">CharlesTorres@gmail.com</p>
-                            <p class="text-sm">123 Anywhere Street., Any City</p>
+                            <p class="text-sm">${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p class="text-sm">${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p class="text-sm">${document.getElementById('address')?.value || '123 Anywhere Street., Any City'}</p>
                         </div>
                     </div>
                 </div>
@@ -4220,10 +4061,10 @@
                     preview.innerHTML = `
                      <!-- Header -->
                     <div class="flex justify-center items-center gap-6 px-6 py-6 border-b border-gray-300">
-                         <img src="../../../assets/img/charles.png" class="w-13 h-13  object-cover" alt="Profile" />
+                         <img src="${window.profileImage || profileImage}" class="w-40 h-40  object-cover" alt="Profile" />
                         <div class="text-center">
-                            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                            <p class="text-sm text-gray-600">Business Administration</p>
+                            <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-sm text-gray-600">${document.getElementById('title')?.value || 'Job Title'}</p>
                         </div>
                     </div>
 
@@ -4239,7 +4080,7 @@
                             <div>
                                 <h2 class="text-sm font-bold uppercase mb-1">About Me</h2>
                                 <p class="text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.'}
                                 </p>
                             </div>
 
@@ -4248,14 +4089,7 @@
                                 <h2 class="text-sm font-bold uppercase mb-1">Education</h2>
                                 <div class="text-sm space-y-2">
                                     <div>
-                                        <p class="font-semibold">2022 – 2026</p>
-                                        <p>Dominican College of Tarlac</p>
-                                        <p class="italic">B.S Business Administration</p>
-                                        </div>
-                                        <div>
-                                        <p class="font-semibold">2020 – 2022</p>
-                                        <p>Cristo Rey High School</p>
-                                        <p class="italic">Senior Department</p>
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
                             </div>
@@ -4263,7 +4097,7 @@
                             <!-- Skills -->
                             <div>
                                 <h2 class="text-sm font-bold uppercase mb-1">Skill</h2>
-                                <ul class="list-disc list-inside text-sm space-y-1">
+                                <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                                     <li>Process Improvement</li>
                                     <li>Financial Support</li>
                                     <li>Negotiation</li>
@@ -4283,33 +4117,7 @@
                             <div class="text-sm text-gray-700 space-y-4">
                                 <!-- Job 1 -->
                                 <div>
-                                    <p class="font-bold">Job Position One</p>
-                                    <p class="italic text-gray-500">Company Name</p>
-                                    <p class="text-gray-600">2018 – 2019</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                        <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Job 2 -->
-                                <div>
-                                    <p class="font-bold">Job Position Two</p>
-                                    <p class="italic text-gray-500">Company Name</p>
-                                    <p class="text-gray-600">2019 – 2020</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>Praesent suscipit turpis quis sapien tempus, ac ultricies turpis luctus.</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Job 3 -->
-                                <div>
-                                    <p class="font-bold">Job Position Three</p>
-                                    <p class="italic text-gray-500">Company Name</p>
-                                    <p class="text-gray-600">2020 – 2021</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>Aliquam erat volutpat. Sed et mauris non nisi euismod fermentum.</li>
-                                    </ul>
+                                  ${generateExperiencePreview()}
                                 </div>
                             </div>
                         </div>
@@ -4321,9 +4129,9 @@
                                 Contact
                             </h2>
                             <div class="text-sm text-gray-700 space-y-1">
-                                <p>📞 123-456-7890</p>
-                                <p>✉️ CharlesTorres@gmail.com</p>
-                                <p>📍 123 Anywhere St., Any City, ST 12345</p>
+                                <p>📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                <p>✉️ ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                <p>📍 ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
                             </div>
                         </div>
                     </div>
@@ -4338,10 +4146,10 @@
                     preview.innerHTML = `
                     <!-- Header -->
                     <div class="flex items-center bg-black text-white p-6">
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-full object-cover mr-6" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile" class="w-32 h-32 rounded-full object-cover mr-6" />
                         <div>
-                            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                            <p class="text-sm">Business Administration</p>
+                            <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-sm">${document.getElementById('title')?.value || 'Job Title'}</p>
                         </div>
                     </div>
                 
@@ -4350,9 +4158,7 @@
                         <div class="bg-gray-200 p-4">
                             <h2 class="text-lg font-bold uppercase mb-2">About Me</h2>
                             <p class="text-sm leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
                             </p>
                         </div>
                     </div>
@@ -4367,7 +4173,7 @@
                             <!-- Skill -->
                             <div class="bg-gray-200 p-4">
                                 <h2 class="text-lg font-bold uppercase mb-2">Skill</h2>
-                                <ul class="list-disc list-inside text-sm space-y-1">
+                                <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                                     <li>Process Improvement</li>
                                     <li>Financial Support</li>
                                     <li>Negotiation</li>
@@ -4380,14 +4186,7 @@
                                 <h2 class="text-lg font-bold uppercase mb-2">Education</h2>
                                 <div class="text-sm space-y-4">
                                     <div>
-                                        <p class="font-semibold">2022 – 2026</p>
-                                        <p>Dominican College of Tarlac</p>
-                                        <p class="italic">B.S Business Administration</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">2020 – 2022</p>
-                                        <p>Cristo Rey High School</p>
-                                        <p class="italic">Senior Department</p>
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
                             </div>
@@ -4404,39 +4203,12 @@
                 
                         <!-- Right Column -->
                         <div class="w-1/2 p-4 space-y-6">
-                    
-                    
                             <!-- Experience -->
                             <div class="bg-gray-200 p-4">
                                 <h2 class="text-lg font-bold uppercase mb-2">Experience</h2>
                                 <div class="space-y-4 text-sm">
                                     <div>
-                                        <p class="font-bold">Job Position Here</p>
-                                        <p class="italic text-sm">Company Name</p>
-                                        <p class="text-gray-600">2018 – 2019</p>
-                                        <ul class="list-disc list-inside mt-1">
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                            <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold">Job Position Here</p>
-                                        <p class="italic text-sm">Company Name</p>
-                                        <p class="text-gray-600">2018 – 2019</p>
-                                        <ul class="list-disc list-inside mt-1">
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                            <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                        </ul>
-                                    </div>
-                    
-                                    <div>
-                                        <p class="font-bold">Job Position Here</p>
-                                        <p class="italic text-sm">Company Name</p>
-                                        <p class="text-gray-600">2018 – 2019</p>
-                                        <ul class="list-disc list-inside mt-1">
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                            <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                        </ul>
+                                        ${generateExperiencePreview()}
                                     </div>
                                 </div>
                             </div>
@@ -4453,16 +4225,15 @@
                     preview.innerHTML = `
                     <!-- Header Section -->
                     <div class="bg-[#0a2149] text-white text-center py-8 px-4">
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 mx-auto rounded-full border-4 border-white mb-4">
-                        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                        <p class="text-lg">Business Administration</p>
+                        <img src="${window.profileImage || profileImage}" alt="Profile" class="w-40 h-40 mx-auto rounded-full border-4 border-white mb-4">
+                        <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-lg">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
 
                     <!-- Summary -->
                     <div class="text-[#0a2149] px-6 py-4">
                         <p class="text-sm text-center text-black">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est
-                            tempor, quis tempus arcu elementum.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
 
@@ -4475,16 +4246,16 @@
                             <div>
                                 <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Contact</h2>
                                 <ul class="mt-2 space-y-1 text-black text-sm">
-                                    <li>123-456-7890</li>
-                                    <li>CharlesTorres@gmail.com</li>
-                                    <li>123 Anywhere St., Any City, ST 12345</li>
+                                    <li>${document.getElementById('phone')?.value || '+123-456-7890'}</li>
+                                    <li>${document.getElementById('email')?.value || 'email@example.com'}</li>
+                                    <li>${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</li>
                                 </ul>
                             </div>
 
                             <!-- Skills -->
                             <div>
                                 <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Skill</h2>
-                                <ul class="mt-2 list-disc list-inside text-black text-sm">
+                                <ul class="mt-2 list-disc list-inside text-black text-sm" id="skills-preview">
                                     <li>Process Improvement</li>
                                     <li>Financial Support</li>
                                     <li>Negotiation</li>
@@ -4508,21 +4279,7 @@
                         <div>
                             <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Education</h2>
                             <div class="text-black mt-2 text-sm space-y-2">
-
-                                <div>
-                                    <p class="font-bold">B.S Business Administration</p>
-                                    <p>2018–2022</p>
-                                </div>
-
-                                <div>
-                                    <p class="font-bold">Dominican College of Tarlac</p>
-                                    <p>2018–2022</p>
-                                </div>
-                                
-                                <div>
-                                    <p class="font-bold">Dominican College of Tarlac</p>
-                                    <p>2018–2022</p>
-                                </div>
+                                ${generateEducationPreview()}
                             </div>
                         </div>
 
@@ -4530,33 +4287,9 @@
                         <div>
                             <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Experience</h2>
                             <div class="text-black mt-2 text-sm space-y-2 ">
-
-                                <div>
-                                    <p class="font-bold">Job position here</p>
-                                    <p class="uppercase tracking-wide pl-3">Company Name</p>
-                                    <p class="pl-3">2018 – 2019</p>
-                                    <ul class="list-disc list-inside mt-1 pl-3">
-                                        <li>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
-                                        Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <p class="font-bold">Job position here</p>
-                                    <p class="uppercase tracking-wide pl-3">Company Name</p>
-                                    <p class="pl-3">2018 – 2019</p>
-                                    <ul class="list-disc list-inside mt-1 pl-3">
-                                        <li>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
-                                        Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
-                                        </li>
-                                    </ul>
-                                </div>
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
-
                     </div>
                 </div>
                     `;
@@ -4571,11 +4304,11 @@
                     <div class="bg-[#5c4431] text-white p-6 flex flex-col space-y-6">
                         <!-- Profile Image, Name & Title Centered -->
                         <div class="flex flex-col items-center text-center space-y-2">
-                            <img src="../../../assets/img/charles.png" alt="Profile Image" class="w-34 h-34 object-cover border-4 border-white" />
+                            <img src="${window.profileImage || profileImage}" alt="Profile Image" class="w-40 h-40 object-cover border-4 border-white" />
 
                             <div>
-                                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
-                                <p class="text-sm mt-1 tracking-wide uppercase">Business Administration</p>
+                                <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                                <p class="text-sm mt-1 tracking-wide uppercase">${document.getElementById('title')?.value || 'Job Title'}</p>
                             </div>
                         </div>
                         <br>
@@ -4584,16 +4317,16 @@
                         <div class="text-sm">
                             <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Profile Info</h2>
                             <p class="text-white leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
                         </div>
 
                         <!-- Contact Info -->
                         <div class="text-sm">
                             <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Contact</h2>
-                            <p class="mb-1">123-456-7890</p>
-                            <p class="mb-1">CharlesTorres@gmail.com</p>
-                            <p>123 Anywhere St., Any City</p>
+                            <p class="mb-1">${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p class="mb-1">${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
                         </div>
                     </div>
 
@@ -4606,13 +4339,7 @@
                             <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Education History</h2>
                             
                             <div class="mb-4">
-                                <p class="font-bold">Dominican College of Tarlac <span class="float-right font-normal">2022 - 2026</span></p>
-                                <p class="text-sm">Bachelor Science in Information Technology</p>
-                            </div>
-
-                            <div>
-                                <p class="font-bold">Cristo Rey High School - Senior Department <span class="float-right font-normal">2020 - 2022</span></p>
-                                <p class="text-sm">HUMSS - Humanities Social and Sciences</p>
+                                ${generateEducationPreview()}
                             </div>
                         </div>
 
@@ -4620,23 +4347,17 @@
                         <div>
                             <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Work Experience</h2>
                             <div>
-                                <p class="font-bold">Job position here</p>
-                                <p class="uppercase text-sm tracking-wide">Company Name</p>
-                                <p class="text-sm mb-2">2018 – 2019</p>
-                                <ul class="list-disc list-inside text-sm text-gray-800">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.</li>
-                                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
 
                         <!-- Skills -->
                         <div>
                             <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Skills</h2>
-                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-800">
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-800" id="skills-preview">
                                 <li>Process Improvement</li>
                                 <li>Financial Support</li>
-                                <li>Negotiation</li>
+                                <li>Negotiation</li> 
                                 <li>Leadership</li>
                             </ul>
                         </div>
@@ -4661,11 +4382,11 @@
                     <!-- Header: Name, Title, and Photo -->
                     <div class="flex items-center justify-between px-10 pt-10 mb-8">
                         <div>
-                            <h1 class="text-3xl font-semibold text-blue-500">Charles Andrew Torres</h1>
-                            <p class="text-lg text-gray-800">Civil Engineering</p>
+                            <h1 class="text-3xl font-semibold text-blue-500">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-lg text-gray-800">${document.getElementById('title')?.value || 'Job Title'}</p>
                         </div>
                         <div>
-                            <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
+                            <img src="${window.profileImage || profileImage}" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
                         </div>
                     </div>
 
@@ -4674,26 +4395,15 @@
                         <!-- Left Column -->
                         <div class="w-1/2 pr-4">
                             <div class="space-y-2 text-sm text-gray-700 mb-8">
-                                <p>📧 CharlesTorres@gmail.com</p>
-                                <p>📍 123 Anywhere St., Any City</p>
-                                <p>📞 +123-456-7890</p>
+                                <p>📧 ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                <p>📍 ${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
+                                <p>📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
                             </div>
 
                             <div class="mb-8">
                                 <h2 class="font-bold text-lg mb-2">STUDIES</h2>
                                 <div class="mb-4">
-                                    <p class="text-blue-600 font-medium">
-                                    B.S Information Technology 
-                                    <span class="float-right text-gray-500">2018</span>
-                                    </p>
-                                    <p class="text-sm text-gray-700">Dominican College of Tarlac - College Department</p>
-                                </div>
-                                <div>
-                                    <p class="text-blue-600 font-medium">
-                                    HUMSS - Humanities Social and Sciences 
-                                    <span class="float-right text-gray-500">2014</span>
-                                    </p>
-                                    <p class="text-sm text-gray-700">Cristo Rey High School - Senior Department</p>
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
 
@@ -4709,21 +4419,18 @@
                             <div class="mb-8">
                                 <h2 class="font-bold text-lg mb-2">PROFILE</h2>
                                 <p class="text-sm text-gray-700">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                    ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                                 </p>
                             </div>
 
                             <div class="mb-8">
                                 <h2 class="font-bold text-lg mb-2">EXPERIENCE</h2>
-                                <p class="text-blue-600 font-medium">Job position here</p>
-                                <p class="text-sm text-gray-700">
-                                    Knowledge of engineering principles and programming languages to build software products.
-                                </p>
+                                ${generateExperiencePreview()}
                             </div>
 
                             <div>
                                 <h2 class="font-bold text-lg mb-2">SKILLS</h2>
-                                <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1">
+                                <ul class="list-disc pl-5 text-sm text-gray-800 space-y-1" id="skills-preview">
                                     <li>Communication</li>
                                     <li>Creativity</li>
                                     <li>Leadership</li>
@@ -4744,14 +4451,14 @@
                         <div class="flex items-center gap-6">
                             <!-- Image -->
                             <div class="w-32 h-32 flex-shrink-0">
-                                <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover rounded-full border-[6px] border-[#2A7F8E]" />
+                                <img src="${window.profileImage || profileImage}" alt="Profile" class="w-full h-full object-cover rounded-full border-[6px] border-[#2A7F8E]" />
                             </div>
 
                             <!-- Name & Title -->
                             <div class="flex flex-col justify-center">
-                                <h1 class="text-3xl font-bold text-[#2A7F8E]">Charles Andrew Torres</h1>
+                                <h1 class="text-3xl font-bold text-[#2A7F8E]">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <hr class="border-t-4 border-[#2A7F8E] w-140 my-2" />
-                                <p class="text-lg font-semibold text-[#2A7F8E]">Civil Engineering</p>
+                                <p class="text-lg font-semibold text-[#2A7F8E]">${document.getElementById('title')?.value || 'Job Title'}</p>
                             </div>
                         </div>
                         <br />
@@ -4767,9 +4474,9 @@
                                     <h2 class="text-xl font-semibold text-[#2A7F8E]">Contact</h2>
                                     <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
                                     <div class="text-sm space-y-1 pl-2">
-                                        <p>📧 CharlesTorres@gmail.com</p>
-                                        <p>📍 123 Anywhere St., Any City</p>
-                                        <p>📞 +123-456-7890</p>
+                                        <p>📧 ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                        <p>📍 ${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</p>
+                                        <p>📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
                                     </div>
                                 </div>
 
@@ -4778,16 +4485,7 @@
                                     <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Education</h2>
                                     <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
                                     <div class="space-y-4 text-sm pl-2">
-                                        <div>
-                                            <p class="text-[#2A7F8E] font-bold">2026</p>
-                                            <p class="font-semibold">Dominican College of Tarlac</p>
-                                            <p>B.S Information Technology</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-[#2A7F8E] font-bold">2022</p>
-                                            <p class="font-semibold">Cristo Rey High School - Senior Dept.</p>
-                                            <p>HUMSS - Humanities Social and Sciences</p>
-                                        </div>
+                                        ${generateEducationPreview()}
                                     </div>
                                 </div>
 
@@ -4795,7 +4493,7 @@
                                 <div>
                                     <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Skills</h2>
                                     <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
-                                    <ul class="list-disc pl-5 text-sm space-y-1">
+                                    <ul class="list-disc pl-5 text-sm space-y-1" id="skills-preview">
                                         <li>Communication</li>
                                         <li>Creativity</li>
                                         <li>Leadership</li>
@@ -4812,7 +4510,7 @@
                                     <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Profile</h2>
                                     <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
                                     <p class="text-sm text-gray-800 pl-2">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rutrum maximus mauris sed sodales.
+                                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rutrum maximus mauris sed sodales.'}
                                     </p>
                                 </div>
 
@@ -4820,12 +4518,7 @@
                                 <div>
                                     <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Experience</h2>
                                     <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
-                                    <p class="font-semibold text-sm">Job position here</p>
-                                    <p class="text-sm"><strong>Company Name | Jan 2019 - Jan 2022</strong></p>
-                                    <ul class="list-disc pl-6 text-sm text-gray-800 mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                        <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                    </ul>
+                                    ${generateExperiencePreview()}
                                 </div>
 
                                 <!-- Language -->
@@ -4852,23 +4545,23 @@
                 <div class="bg-[#1C6F6A] text-white p-6 space-y-8">
                     <!-- Profile Image -->
                     <div class="flex justify-center">
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 object-cover rounded shadow-lg border-4 border-white" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile" class="w-40 h-40 object-cover rounded shadow-lg border-4 border-white" />
                     </div>
 
                     <!-- Contact -->
                     <div>
                         <h2 class="text-xl font-bold uppercase mb-2">Contact</h2>
                         <div class="text-sm space-y-2">
-                        <p>+123-456-7890</p>
-                        <p>CharlesTorres@gmail.com</p>
-                        <p>123 Anywhere St., Any City, ST 12345</p>
+                        <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                        <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                        <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
                         </div>
                     </div>
 
                     <!-- Skills -->
                     <div>
                         <h2 class="text-xl font-bold uppercase mb-2">Skills</h2>
-                        <ul class="list-disc list-inside text-sm space-y-1">
+                        <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                         <li>Communication</li>
                         <li>Creativity</li>
                         <li>Leadership</li>
@@ -4894,8 +4587,8 @@
                     <br>
                     <div class="text-center">
                         <br>
-                        <h1 class="text-3xl font-bold text-[#1C6F6A]">Charles Andrew Torres</h1>
-                        <p class="text-lg font-semibold text-[#1C6F6A] tracking-widest">Civil Engineer</p>
+                        <h1 class="text-3xl font-bold text-[#1C6F6A]">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-lg font-semibold text-[#1C6F6A] tracking-widest">${document.getElementById('title')?.value || 'Job Title'}</p>
                         <br>
                     </div>
 
@@ -4903,8 +4596,7 @@
                     <div>
                         <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">About Me</h2>
                         <p class="text-sm text-gray-700">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. 
-                        Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
 
@@ -4912,14 +4604,9 @@
                     <div>
                         <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">Education</h2>
                         <div class="text-sm space-y-3">
-                        <div>
-                            <p class="font-semibold">B.S Information Technology | 2022 - 2026</p>
-                            <p>Dominican College of Tarlac</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                            <p>Cristo Rey High School – Senior Department</p>
-                        </div>
+                            <div>
+                                ${generateEducationPreview()}
+                            </div>
                         </div>
                     </div>
 
@@ -4928,20 +4615,7 @@
                         <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">Experience</h2>
                         <div class="text-sm space-y-3">
                             <div>
-                                <p class="font-semibold">Job position here</p>
-                                <p><strong>Company Name | Jan 2019 - Jan 2022</strong></p>
-                                <ul class="list-disc list-inside pl-2 mt-1 text-gray-700">
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="font-semibold">Job position here</p>
-                                <p><strong>Company Name | Jan 2019 - Jan 2022</strong></p>
-                                <ul class="list-disc list-inside pl-2 mt-1 text-gray-700">
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
                     </div>
@@ -4959,7 +4633,7 @@
                 
                     <!-- Profile Image -->
                     <div class="w-full flex justify-center">
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 h-40 object-cover rounded-xl border-4 border-white" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile" class="w-40 h-40 object-cover rounded-xl border-4 border-white" />
                     </div>
 
                     <!-- Contact -->
@@ -4969,9 +4643,9 @@
                     
                     <div class="text-sm space-y-2 text-black" >
                         <ul class="text-sm list-disc list-inside space-y-1 text-left w-full px-4">
-                            <li>+123-456-7890</li>
-                            <li>CharlesTorres@gmail.com</li>
-                            <li>123 Anywhere St., Any City</li>
+                            <li>${document.getElementById('phone')?.value || '+123-456-7890'}</li>
+                            <li>${document.getElementById('email')?.value || 'email@example.com'}</li>
+                            <li>${document.getElementById('address')?.value || '123 Anywhere St., Any City'}</li>
                         </ul>
                     </div>
 
@@ -4979,7 +4653,7 @@
                     <div class="w-full bg-white text-black px-4 py-2 font-bold text-center rounded-full">
                         SKILLS
                     </div>
-                    <ul class="text-black text-sm list-disc list-inside space-y-1 text-left w-full px-4">
+                    <ul class="text-black text-sm list-disc list-inside space-y-1 text-left w-full px-4" id="skills-preview">
                         <li>Communication</li>
                         <li>Creativity</li>
                         <li>Leadership</li>
@@ -5002,15 +4676,14 @@
                     <br>
                     <!-- Name & Title -->
                     <div>
-                        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                        <p class="text-xl font-semibold text-gray-700 tracking-wide">Civil Engineer</p>
+                        <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-xl font-semibold text-gray-700 tracking-wide">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
 
                     <!-- About Me -->
                     <div>
                         <p class="text-sm text-gray-800 leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec
-                        hendrerit libero eget est tempor, quis tempus arcu elementum.
+                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
 
@@ -5019,13 +4692,7 @@
                         <div class="bg-[#7c9d7c] text-white font-bold text-center px-6 py-2 w-max mb-4 rounded-full">EDUCATION</div>
                         <div class="space-y-3 text-sm">
                         <div>
-                            <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
-                            <p>Dominican College of Tarlac</p>
-                        </div>
-                        <div>
-                            <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                            <p>Cristo Rey High School – Senior Department</p>
-                        </div>
+                            ${generateEducationPreview()}
                         </div>
                     </div>
 
@@ -5034,12 +4701,7 @@
                         <div class="bg-[#7c9d7c] text-white font-bold text-center px-6 py-2 w-max mb-4 rounded-full">EXPERIENCE</div>
                         <div class="space-y-4 text-sm">
                             <div>
-                                <p class="font-bold">Job position here</p>
-                                <p class="font-semibold">Company Name | Jan 2022 - Present</p>
-                                <p class="text-gray-800 mt-1">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec
-                                hendrerit libero eget est tempor, quis tempus arcu elementum.
-                                </p>
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
                     </div>
@@ -5056,21 +4718,21 @@
                 <div class="bg-[#2b608a] px-8 py-6 flex items-center text-white">
                     <div class="w-1/3"></div>
                     <div class="w-1/2 flex flex-col items-center justify-center text-center">
-                        <h1 class="text-4xl font-bold uppercase">Charles Andrew Torres</h1>
-                        <p class="text-sm">Civil Engineering</p>
+                        <h1 class="text-4xl font-bold uppercase">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-sm">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
                     <div class="w-1/3 flex justify-center">
                         <div class="w-32 h-32 rounded-full border-4 border-white overflow-hidden">
-                            <img src="../../../assets/img/charles.png" class="w-full h-full object-cover" />
+                            <img src="${window.profileImage || profileImage}" class="w-full h-full object-cover" />
                         </div>
                     </div>
                 </div>
 
                 <!-- CONTACT STRIP -->
                 <div class="bg-[#142a4e] text-white text-sm flex flex-wrap justify-center gap-6 px-4 py-3">
-                <div class="flex items-center gap-2"><span>📞</span> +123-456-7890</div>
-                <div class="flex items-center gap-2"><span>✉️</span> CharlesTorres@gmail.com</div>
-                <div class="flex items-center gap-2"><span>📍</span> 123 Anywhere St., Any City, ST 12345</div>
+                <div class="flex items-center gap-2"><span>📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</div>
+                <div class="flex items-center gap-2"><span>✉️</span> ${document.getElementById('email')?.value || 'email@example.com'}</div>
+                <div class="flex items-center gap-2"><span>📍</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</div>
                 </div>
 
                 <!-- MAIN CONTENT -->
@@ -5081,7 +4743,7 @@
                         <div>
                             <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">ABOUT ME</div>
                             <p class="text-sm leading-relaxed">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
                         </div>
 
@@ -5090,19 +4752,9 @@
                             <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">EXPERIENCE</div>
                             <div class="space-y-4 text-sm">
                                 <div>
-                                    <p class="font-bold">Job position here</p>
-                                    <p><span class="font-semibold">Company Name</span> | Jan 2019 - Jan 2022</p>
-                                    <ul class="list-disc pl-5 mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    </ul>
+                                    ${generateExperiencePreview()}
                                 </div>
-                                <div>
-                                    <p class="font-bold">Job position here</p>
-                                    <p><span class="font-semibold">Company Name</span> | Jan 2019 - Jan 2022</p>
-                                    <ul class="list-disc pl-5 mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    </ul>
-                                </div>
+                               
                             </div>
                         </div>
 
@@ -5111,12 +4763,7 @@
                             <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">EDUCATION</div>
                             <div class="text-sm space-y-2">
                                 <div>
-                                <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
-                                <p>Dominican College of Tarlac</p>
-                                </div>
-                                <div>
-                                <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                                <p>Cristo Rey High School – Senior Department</p>
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
                         </div>
@@ -5127,7 +4774,7 @@
                         <!-- SKILLS -->
                         <div>
                             <div class="bg-[#2b608a] text-white font-bold rounded-full px-6 py-2 w-max mb-2">SKILLS</div>
-                            <ul class="list-disc pl-6 text-sm space-y-1">
+                            <ul class="list-disc pl-6 text-sm space-y-1" id="skills-preview">
                                 <li>Communication</li>
                                 <li>Creativity</li>
                                 <li>Leadership</li>
@@ -5158,13 +4805,13 @@
                  <!-- Header -->
                 <div class="relative bg-black text-white p-8 flex items-center">
                     <!-- Profile Image -->
-                    <div class="w-34 h-34 rounded-full overflow-hidden border-4 border-gray-400">
-                        <img src="../../../assets/img/charles.png" alt="Profile photo" class="w-full h-full object-cover" />
+                    <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-400">
+                        <img src="${window.profileImage || profileImage}" alt="Profile photo" class="w-full h-full object-cover" />
                     </div>
                     <!-- Name and Title -->
                     <div class="ml-6">
-                        <h1 class="text-4xl font-bold">Charles Andrew Torres</h1>
-                        <p class="text-lg tracking-wide">Civil Engineer</p>
+                        <h1 class="text-4xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-lg tracking-wide">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
                 </div>
 
@@ -5175,31 +4822,24 @@
                         <!-- Education -->
                         <h2 class="text-lg font-bold border-b-2 border-black mb-4">EDUCATION</h2>
                         <div class="mb-6">
-                            <p class="font-semibold">B.S Information Technology | 2022 - 2026</p>
-                            <p class="text-sm">Dominican College of Tarlac</p>
-                        </div>
-                        <div class="mb-6">
-                            <p class="font-semibold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                            <p class="text-sm">Cristo Rey High School Senior Department</p>
+                            ${generateEducationPreview()}
                         </div>
 
                         <!-- Contact -->
                         <h2 class="text-lg font-bold border-b-2 border-black mb-4">CONTACT</h2>
-                        <p class="flex items-center mb-2"><span class="mr-2">📞</span> +123-456-7890</p>
-                        <p class="flex items-center mb-2"><span class="mr-2">✉️</span> CharlesTorres@gmail.com</p>
-                        <p class="flex items-center"><span class="mr-2">📍</span> 123 Anywhere St., Any City, ST 12345</p>
+                        <p class="flex items-center mb-2"><span class="mr-2">📞</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                        <p class="flex items-center mb-2"><span class="mr-2">✉️</span> ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                        <p class="flex items-center"><span class="mr-2">📍</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
 
                         <!-- Skills -->
                         <h2 class="text-lg font-bold border-b-2 border-black mt-6 mb-4">SKILLS</h2>
-                        <div class="mb-4">
-                            <p>Financial Accounting</p>     
-                        </div>
-                        <div class="mb-4">
-                            <p>Financial Planning</p> 
-                        </div>
-                        <div>
-                            <p>Public Speaking</p>
-                        </div>
+                        <ul class="list-disc list-inside text-sm" id="skills-preview">
+                            <li>Communication</li>
+                            <li>Creativity</li>
+                            <li>Leadership</li>
+                            <li>Teamwork</li>
+                            <li>Problem Solving</li>
+                        </ul>
                     </div>
 
                     <!-- Right Column -->
@@ -5213,16 +4853,7 @@
                         <!-- Experience -->
                         <h2 class="text-lg font-bold border-b-2 border-black mb-4">EXPERIENCE</h2>
                         <div class="mb-6">
-                            <p class="font-bold">Job Position Here <span class="text-sm font-normal">2019 - 2022</span></p>
-                            <p class="italic text-sm">Company Name | Location</p>
-                            <p class="text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit libero eget est
-                                tempor.</p>
-                        </div>
-                        <div>
-                            <p class="font-bold">Job Position Here <span class="text-sm font-normal">2019 - 2022</span></p>
-                            <p class="italic text-sm">Company Name | Location</p>
-                            <p class="text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit libero eget est
-                                tempor.</p>
+                            ${generateExperiencePreview()}
                         </div>
 
                         <!-- Language -->
@@ -5247,9 +4878,9 @@
                     <div class="pt-6">
                         <div class="border-b-4 border-black mt-6 mx-10"></div>
                     <br>
-                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-28 h-28 mx-auto rounded-full border border-black" />
-                    <h1 class="text-3xl font-bold mt-4">Charles Andrew Torres</h1>
-                    <p class="text-lg font-light tracking-wide">CIVIL ENGINEER</p>
+                    <img src="${window.profileImage || profileImage}" alt="Profile" class="w-28 h-28 mx-auto rounded-full border border-black" />
+                    <h1 class="text-3xl font-bold mt-4">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                    <p class="text-lg font-light tracking-wide">${document.getElementById('title')?.value || 'Job Title'}</p>
                         <div class="border-b-4 border-black mt-6 mx-10"></div>
                     </div>
                 </div>
@@ -5262,8 +4893,7 @@
                         <div>
                             <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">About Me</h2>
                             <p class="text-sm leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
-                            Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
                         </div>
 
@@ -5271,17 +4901,17 @@
                         <div>
                             <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">Contact</h2>
                             <ul class="text-sm space-y-1">
-                                <li class="flex items-center gap-2">📧 Email address here</li>
-                                <li class="flex items-center gap-2">📞 123-456-7890</li>
-                                <li class="flex items-center gap-2">📍 Your address here</li>
-                                <li class="flex items-center gap-2">🌐 Your website here</li>
+                                <li class="flex items-center gap-2">📧 ${document.getElementById('email')?.value || 'email@example.com'}</li>
+                                <li class="flex items-center gap-2">📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</li>
+                                <li class="flex items-center gap-2">📍 ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</li>
+                                <li class="flex items-center gap-2">🌐 ${document.getElementById('website')?.value || 'www.reallygreatsite.com'}</li>
                             </ul>
                         </div>
 
                         <!-- Skills -->
                         <div>
                             <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">Skills</h2>
-                            <ul class="list-disc list-inside text-sm space-y-1">
+                            <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                                 <li>Communication</li>
                                 <li>Creativity</li>
                                 <li>Leadership</li>
@@ -5307,33 +4937,10 @@
                         <div>
                             <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">Experience</h2>
                             <div class="text-sm space-y-4">
-                            <!-- Job 1 -->
                                 <div>
-                                    <p class="font-bold">2008 - 2012 · Job Position / Company</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
-                                        </li>
-                                    </ul>
+                                    ${generateExperiencePreview()}
                                 </div>
-                                <!-- Job 2 -->
-                                <div>
-                                    <p class="font-bold">2013 - 2016 · Another Role / Another Company</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>
-                                        Vivamus at dui euismod, tincidunt justo nec, vulputate massa. Proin eget dolor vitae justo tempus blandit.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Job 3 -->
-                                <div>
-                                    <p class="font-bold">2017 - 2020 · Final Position / Final Company</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>
-                                        Fusce dapibus metus non velit pulvinar, in vulputate urna ultricies. Integer eget sapien in ex rhoncus luctus.
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                         </div>
 
@@ -5343,19 +4950,9 @@
                             <div class="text-sm space-y-4">
                                 <!-- School 1 -->
                                 <div>
-                                    <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
-                                    <p>Dominican College of Tarlac</p>
+                                    ${generateEducationPreview()}
                                 </div>
-                                <!-- School 2 -->
-                                <div>
-                                    <p class="font-bold">HUMSS · Humanities Social and Sciences | 2020 - 2022</p>
-                                    <p>Cristo Rey High School · Senior Department</p>
-                                </div>
-                                <!-- School 3 -->
-                                <div>
-                                    <p class="font-bold">Junior High School | 2016 - 2020</p>
-                                    <p>Sample Secondary School</p>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -5374,13 +4971,13 @@
                 <!-- Sidebar -->
                 <div class="w-1/3 bg-purple-100 p-6 flex flex-col items-center">
                     <div class="relative w-34 h-34 mb-4">
-                        <img src="../../../assets/img/charles.png" alt="Profile" class=" w-full h-full object-cover border-2 border-white shadow-md" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile" class=" w-full h-full object-cover border-2 border-white shadow-md" />
                     </div>
 
                     <!-- Skills -->
                     <div class="w-full mt-6">
                         <h2 class="text-purple-500 text-lg font-semibold mb-2">Skills</h2>
-                        <ul class="list-disc list-inside text-sm space-y-1">
+                        <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                             <li>Communication</li>
                             <li>Creativity</li>
                             <li>Leadership</li>
@@ -5393,11 +4990,11 @@
                     <div class="w-full mt-8">
                         <h2 class="text-purple-500 text-lg font-semibold mb-2">Contact</h2>
                         <p class="text-xs font-bold mt-2 uppercase">Address</p>
-                        <p class="text-sm">123 Anywhere St., Any City, ST 12345</p>
+                        <p class="text-sm">${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
                         <p class="text-xs font-bold mt-2 uppercase">Email</p>
-                        <p class="text-sm">CharlesTorres@gmail.com</p>
+                        <p class="text-sm">${document.getElementById('email')?.value || 'email@example.com'}</p>
                         <p class="text-xs font-bold mt-2 uppercase">Website</p>
-                        <p class="text-sm">www.reallygreatsite.com</p>
+                        <p class="text-sm">${document.getElementById('website')?.value || 'www.reallygreatsite.com'}</p>
                     </div>
                 </div>
 
@@ -5406,8 +5003,8 @@
                     <!-- Name & Title -->
                     <div class="text-right">
                         <br>
-                        <h1 class="text-3xl font-bold text-purple-600">Charles Andrew Torres</h1>
-                        <p class="uppercase tracking-wider text-sm font-semibold text-gray-700">Civil Engineer</p>
+                        <h1 class="text-3xl font-bold text-purple-600">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="uppercase tracking-wider text-sm font-semibold text-gray-700">${document.getElementById('title')?.value || 'Job Title'}</p>
                         <br>
                     </div>
 
@@ -5417,8 +5014,7 @@
                     <div class="mb-6">
                         <h2 class="text-purple-500 text-lg font-semibold mb-2">Profile</h2>
                         <p class="text-sm text-gray-800">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.
-                            Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
 
@@ -5428,19 +5024,9 @@
                         <div class="space-y-4 text-sm">
                             <!-- School 1 -->
                             <div>
-                                <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
-                                <p>Dominican College of Tarlac</p>
+                                ${generateEducationPreview()}
                             </div>
-                            <!-- School 2 -->
-                            <div>
-                                <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                                <p>Cristo Rey High School – Senior Department</p>
-                            </div>
-                            <!-- School 3 (example) -->
-                            <div>
-                                <p class="font-bold">Junior High | 2016 - 2020</p>
-                                <p>Example National High School</p>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -5448,36 +5034,12 @@
                     <div>
                         <h2 class="text-purple-500 text-lg font-semibold mb-2">Work Experience</h2>
                         <div class="space-y-6 text-sm">
-                            <!-- Job 1 -->
                             <div>
-                                <p class="font-bold text-gray-800">Civil Site Engineer</p>
-                                <p class="font-semibold text-gray-700">ABC Construction | Jan 2023 - Present</p>
-                                <ul class="list-disc list-inside mt-1 text-gray-700">
-                                    <li>
-                                    Supervised on-site construction activities, ensured project timelines were met, and coordinated with subcontractors.
-                                    </li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
-                            <!-- Job 2 -->
-                            <div>
-                                <p class="font-bold text-gray-800">Intern</p>
-                                <p class="font-semibold text-gray-700">XYZ Builders | Jun 2022 - Dec 2022</p>
-                                <ul class="list-disc list-inside mt-1 text-gray-700">
-                                    <li>
-                                    Assisted in drafting structural plans and observed field operations to gain practical experience in civil engineering.
-                                    </li>
-                                </ul>
+                            
                             </div>
-                            <!-- Job 3 (example) -->
-                            <div>
-                                <p class="font-bold text-gray-800">Freelance Drafter</p>
-                                <p class="font-semibold text-gray-700">Self-employed | 2021 - 2022</p>
-                                <ul class="list-disc list-inside mt-1 text-gray-700">
-                                    <li>
-                                    Created residential floor plans for clients using AutoCAD and SketchUp.
-                                    </li>
-                                </ul>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -5496,11 +5058,11 @@
                 <!-- Header -->
                 <div class="flex bg-blue-900 text-white p-6">
                     <div class="w-2/3">
-                        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                        <p class="text-lg">Civil Engineer</p>
+                        <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-lg">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
                     <div class="w-1/3">
-                        <img src="../../../assets/img/charles.png" alt="Profile" class="w-28 h-28 object-cover  mx-auto" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile" class="w-28 h-28 object-cover  mx-auto" />
                     </div>
                 </div>
 
@@ -5508,15 +5070,15 @@
                 <div class="flex items-center justify-between bg-blue-200 text-blue-900 px-6 py-4 text-sm">
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21 8V7l-3 2-2-1-1 2 3 2v-1l3-2z"></path></svg>
-                        <span>CharlesTorres@gmail.com</span>
+                        <span>${document.getElementById('email')?.value || 'email@example.com'}</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27 11.72 11.72 0 003.69.59 1 1 0 011 1v3.61a1 1 0 01-.76.97A17.09 17.09 0 013 5a1 1 0 01.97-.76H7.58a1 1 0 011 1 11.72 11.72 0 00.59 3.69 1 1 0 01-.27 1.11l-2.28 2.28z"></path></svg>
-                        <span>+123 456 7890</span>
+                        <span>${document.getElementById('phone')?.value || '+123-456-7890'}</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z"></path></svg>
-                        <span>123 Anywhere St.</span>
+                        <span>${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</span>
                     </div>
                 </div>
 
@@ -5527,7 +5089,7 @@
                         <!-- About Me -->
                         <div>
                             <h2 class="text-blue-900 text-lg font-semibold mb-2">ABOUT ME</h2>
-                            <p class="text-sm text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</p>
+                            <p class="text-sm text-gray-800">${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}</p>
                         </div>
 
                         <!-- Experience -->
@@ -5535,18 +5097,7 @@
                             <h2 class="text-blue-900 text-lg font-semibold mb-2">EXPERIENCE</h2>
                             <div class="space-y-4">
                                 <div>
-                                    <p class="font-bold">Job position here</p>
-                                    <p class="text-sm font-semibold">Company Name | Jan 2022–Present</p>
-                                    <ul class="list-disc list-inside text-sm text-gray-700">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <p class="font-bold">Job position here</p>
-                                    <p class="text-sm font-semibold">Company Name | Jan 2022–Present</p>
-                                    <ul class="list-disc list-inside text-sm text-gray-700">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    </ul>
+                                    ${generateExperiencePreview()}
                                 </div>
                             </div>
                         </div>
@@ -5559,12 +5110,7 @@
                             <h2 class="text-blue-900 text-lg font-semibold mb-2">EDUCATION</h2>
                             <div class="space-y-3">
                                 <div>
-                                    <p class="font-bold">B.S Information Technology | 2022 - 2026</p>
-                                    <p class="text-sm">Dominican College of Tarlac</p>
-                                </div>
-                                <div>
-                                    <p class="font-bold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                                    <p class="text-sm">Cristo Rey High School – Senior Department</p>
+                                    ${generateEducationPreview()}
                                 </div>
                             </div>
                         </div>
@@ -5572,7 +5118,7 @@
                         <!-- Skills -->
                         <div>
                             <h2 class="text-blue-900 text-lg font-semibold mb-2">SKILLS</h2>
-                            <ul class="list-disc list-inside text-sm text-gray-800">
+                            <ul class="list-disc list-inside text-sm text-gray-800" id="skills-preview">
                                 <li>Communication</li>
                                 <li>Creativity</li>
                                 <li>Leadership</li>
@@ -5602,9 +5148,9 @@
                 preview.innerHTML = `
                 <!-- Header with Image, Name, Title -->
                 <div class="flex flex-col items-center border border-black py-4 mb-6">
-                    <img src="/../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-full object-cover border-2 border-black mb-3">
-                    <h1 class="text-2xl font-bold text-blue-900">Charles Andrew Torres</h1>
-                    <p class="text-sm text-gray-700">Civil Engineer</p>
+                    <img src="${window.profileImage || profileImage}" alt="Profile" class="w-32 h-32 rounded-full object-cover border-2 border-black mb-3">
+                    <h1 class="text-2xl font-bold text-blue-900">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                    <p class="text-sm text-gray-700">${document.getElementById('title')?.value || 'Job Title'}</p>
                 </div>
 
                 <!-- Grid Layout: Sidebar and Main Content -->
@@ -5618,15 +5164,15 @@
                         <!-- Contact -->
                         <div>
                             <h2 class="text-white bg-blue-800 px-2 py-1 text-xs font-bold tracking-widest mb-2">CONTACT</h2>
-                            <p>📞 +123-456-7890</p>
-                            <p>📍 1123 Anywhere St., Any City</p>
-                            <p>📧 CharlesTorres@gmail.com</p>
+                            <p>📞 ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p>📍 ${document.getElementById('address')?.value || '1123 Anywhere St., Any City'}</p>
+                            <p>📧 ${document.getElementById('email')?.value || 'email@example.com'}</p>
                         </div>
                         <br>
                         <!-- Skills -->
                         <div>
                             <h2 class="text-white bg-blue-800 px-2 py-1 text-xs font-bold tracking-widest mb-2">SKILLS</h2>
-                            <ul class="list-disc list-inside space-y-1">
+                            <ul class="list-disc list-inside space-y-1" id="skills-preview">
                                 <li>Time Management</li>
                                 <li>Communication</li>
                                 <li>Leadership</li>
@@ -5650,7 +5196,7 @@
                         <!-- Profile Summary -->
                         <div>
                             <p class="text-sm text-gray-700 leading-relaxed">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
                         </div>
 
@@ -5659,13 +5205,9 @@
                             <h2 class="bg-gray-200 text-center text-sm font-bold tracking-wider py-1">EDUCATION</h2>
                             <div class="mt-2 space-y-2 text-sm text-gray-800">
                                 <div>
-                                    <p class="font-semibold">B.S Information Technology | 2022 - 2026</p>
-                                    <p>Dominican College of Tarlac</p>
+                                    ${generateEducationPreview()}
                                 </div>
-                                <div>
-                                    <p class="font-semibold">HUMSS - Humanities Social and Sciences | 2020 - 2022</p>
-                                    <p>Cristo Rey High School – Senior Department</p>
-                                </div>
+                                
                             </div>
                         </div>
                         <br>
@@ -5675,38 +5217,7 @@
 
                             <div class="mt-2 space-y-4 text-sm text-gray-800">
                                 <div>
-                                    <p class="font-semibold">Job position here</p>
-                                    <p class="italic text-gray-600">Company Name | Jan 2022 – Present</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                        <li>Nullam pharetra in lorem at laoreet.</li>
-                                        <li>Donec hendrerit libero eget est tempor.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="mt-2 space-y-4 text-sm text-gray-800">
-                                <div>
-                                    <p class="font-semibold">Job position here</p>
-                                    <p class="italic text-gray-600">Company Name | Jan 2022 – Present</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                        <li>Nullam pharetra in lorem at laoreet.</li>
-                                        <li>Donec hendrerit libero eget est tempor.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-
-                            <div class="mt-2 space-y-4 text-sm text-gray-800">
-                                <div>
-                                    <p class="font-semibold">Job position here</p>
-                                    <p class="italic text-gray-600">Company Name | Jan 2022 – Present</p>
-                                    <ul class="list-disc list-inside mt-1">
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                        <li>Nullam pharetra in lorem at laoreet.</li>
-                                        <li>Donec hendrerit libero eget est tempor.</li>
-                                    </ul>
+                                    ${generateExperiencePreview()}
                                 </div>
                             </div>
                         </div>
@@ -5723,10 +5234,10 @@
                 preview.innerHTML = `
                 <!-- 🔹 Profile Section (Top) -->
                 <div class="flex items-center gap-4">
-                    <img src="../../../assets/img/charles.png" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
+                    <img src="${window.profileImage || profileImage}" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
                     <div>
-                        <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
-                        <p class="text-gray-600">Civil Engineering</p>
+                        <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-gray-600">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
                 </div>
 
@@ -5741,7 +5252,7 @@
                                 <span>🧾</span> Profile
                             </h2>
                             <p class="text-sm leading-relaxed">
-                                Experienced Amazon Associate with five years’ tenure in a shipping yard setting, maintaining an average picking/packing speed of 98%. Holds a zero error% score in adhering to packing specs and 97% error-free ratio on packing records. Completed a certificate in Warehouse Sanitation and has a valid commercial driver’s license.
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
                         </div>
                         <!-- Employment History -->
@@ -5751,30 +5262,7 @@
                             </h2>
                             <!-- Job 1 -->
                             <div class="mb-4">
-                                <h3 class="font-bold">Amazon Warehouse Associate at Amazon, Miami Gardens</h3>
-                                <p class="text-sm italic">January 2021 — July 2022</p>
-                                <p class="text-sm mt-1">
-                                Performed all warehouse laborer duties such as packing, picking, counting, record keeping, and maintaining a clean area.
-                                </p>
-                                <ul class="list-disc ml-6 mt-2 text-sm">
-                                    <li>Consistently maintained picking/packing speeds in the 98th percentile.</li>
-                                    <li>Picked all orders with 100% accuracy despite high speeds.</li>
-                                    <li>Maintained a clean work area, meeting 97.5% of inspection requirements.</li>
-                                </ul>
-                            </div>
-
-                            <!-- Job 2 -->
-                            <div>
-                                <h3 class="font-bold">Laboratory Inventory Assistant at Dunrea Laboratories, Orlando</h3>
-                                <p class="text-sm italic">January 2019 — December 2020</p>
-                                <p class="text-sm mt-1">
-                                Full-time lab assistant in a small, regional laboratory tasked with participating in Kaizen Events, Gemba walks, and 5S to remove barriers and improve productivity.
-                                </p>
-                                <ul class="list-disc ml-6 mt-2 text-sm">
-                                    <li>Filled the warehouse helper job description, including packing, shipping, inventory management, and cleaning equipment.</li>
-                                    <li>Saved 12% on UPS orders by staying on top of special deals.</li>
-                                    <li>Cut down storage waste by 23% by switching to a Kanban system.</li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
                         </div>
 
@@ -5784,11 +5272,7 @@
                                 <span>🎓</span> Education
                             </h2>
                             <p class="text-sm">
-                                <strong>Associates Degree in Logistics and Supply Chain Fundamentals,</strong><br>
-                                Atlanta Technical College, Atlanta<br>
-                                <em>January 2021 — July 2022</em><br>
-                                <strong>Majors:</strong> Warehousing Operations, Logistics and Distribution Practices<br>
-                                <strong>Minors:</strong> Inventory Systems, Supply Chain Principles
+                                ${generateEducationPreview()}
                             </p>
                         </div>
 
@@ -5797,11 +5281,6 @@
                             <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
                                 <span>📚</span> Courses
                             </h2>
-                            <p class="text-sm">
-                                Online Graduate Certificate in Warehousing & Supply Chain Management,<br>
-                                Southern New Hampshire University (SNHU), NH.<br>
-                                <em>July 2022 — July 2022</em>
-                            </p>
                         </div>
                     </div>
 
@@ -5810,19 +5289,19 @@
                     <!-- Details -->
                     <div>
                         <h3 class="text-lg font-semibold">Details</h3>
-                        <p class="text-sm">1515 Pacific Ave<br>Los Angeles, CA 90291<br>United States</p>
-                        <p class="text-sm mt-2">3868683442<br><a href="#" class="text-blue-500">email@email.com</a></p>
-                        <p class="text-sm mt-2">Place of birth: San Antonio</p>
-                        <p class="text-sm">Driving license: Full</p>
+                        <p class="text-sm">${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                        <p class="text-sm mt-2">${document.getElementById('phone')?.value || '+123-456-7890'}<br><a href="#" class="text-blue-500">${document.getElementById('email')?.value || 'email@example.com'}</a></p>
+                        <p class="text-sm mt-2">Place of birth: ${document.getElementById('placeOfBirth')?.value || 'San Antonio'}</p>
+                        <p class="text-sm">Driving license: ${document.getElementById('drivingLicense')?.value || 'Full'}</p>
                     </div>
 
                     <!-- Skills -->
                     <div>
                         <h3 class="text-lg font-semibold">Skills</h3>
-                        <ul class="text-sm space-y-1">
+                        <ul class="text-sm space-y-1" id="skills-preview">
                             <li class="flex justify-between"><span>Cleaning Equipment</span></li>
                             <li class="flex justify-between"><span>Mathematics</span></li>
-                            <li class="flex justify-between"><span>Deep Sanitation Practices</span></li>
+                            <li class="flex justify-between"><span>Deep Sanitation Practices</span></li>w()}
                         </ul>
                     </div>
 
@@ -5855,14 +5334,14 @@
                     <!-- Header: Image + Name/Contact -->
                     <div class="flex">
                         <div class="w-24 h-24 shrink-0">
-                            <img src="../../../assets/img/charles.png" alt="Profile" class="w-full h-full object-cover" />
+                            <img src="${window.profileImage || profileImage}" alt="Profile" class="w-full h-full object-cover" />
                         </div>
                         <div class="ml-6 flex flex-col justify-center">
-                            <h1 class="text-4xl font-bold text-blue-600">Charles Andrew Torres</h1>
-                            <h1 class="text-1xl font-bold text-blue-600">Project Assistant</h1>
+                            <h1 class="text-4xl font-bold text-blue-600">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <h1 class="text-1xl font-bold text-blue-600">${document.getElementById('title')?.value || 'Job Title'}</h1>
                             <div class="mt-1 text-sm text-gray-700">
-                                <p>1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
-                                <p>email@email.com &middot; 3860863442</p>
+                                <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                                <p>${document.getElementById('email')?.value || 'email@example.com'} &middot; ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
                             </div>
                         </div>
                     </div>
@@ -5871,10 +5350,7 @@
                     <div>
                         <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Profile</h2>
                         <p class="text-sm leading-relaxed">
-                            Expert project assistant with more than nine years of experience with diverse types of projects.
-                            Highly prepared with solid attention to detail and the capability to monitor and maintain schedules
-                            meticulously. Inspired, driven, and able to work individually or in groups. Willing to travel and work
-                            long hours.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
             
@@ -5884,42 +5360,19 @@
                 
                         <!-- Job 1 -->
                         <div class="mb-6">
-                            <h3 class="font-semibold">Project Assistant, Malaski</h3>
-                            <p class="text-sm italic text-gray-600">May 2021 — Present, Seattle</p>
-                            <p class="text-sm italic mt-1">Functioned on a team of 3 Project Assistants in a fast-paced construction firm. Controlled all project assistance for $2.6 million in development annually.</p>
-                            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                <li>Wrote up reports, Excel spreadsheets, and PowerPoint decks for 180+ meetings of cross-functional team members.</li>
-                                <li>Utilized conflict resolution skills to sort out all arguments between clients, employees, and vendors.</li>
-                                <li>Frequently educated 130+ employees in the right understanding of all project plans.</li>
-                                <li>Ran budget for four projects, each valued at over $190,000.</li>
-                            </ul>
+                            ${generateExperiencePreview()}
                         </div>
                 
-                        <!-- Job 2 -->
-                        <div>
-                            <h3 class="font-semibold">Project Assistant, Rippled Rock Resources</h3>
-                            <p class="text-sm italic text-gray-600">Jan 2018 — Jan 2021, Minato</p>
-                            <p class="text-sm italic mt-1">Controlled all Project Assistant obligations for 13 excavation and water-line installation construction projects annually, each valued at $82,000.</p>
-                            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                <li>Cut rework and failure backlog by 30% via attentive inspection and retraining.</li>
-                                <li>Supervised budgets up to $42,000 and assisted in completing projects ahead of schedule.</li>
-                                <li>Discussed design implementation strategies, focusing on sustainability.</li>
-                                <li>Supervised equipment and supplies for labor crews.</li>
-                            </ul>
-                        </div>
+                     
                     </div>
             
                     <!-- Education -->
                     <div>
                         <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-4">Education</h2>
                         <div class="mb-4">
-                            <h3 class="font-semibold">Certified Associate in Project Management (CAPM), Project Management Institute (PMI)</h3>
-                            <p class="text-sm text-gray-600">May 2021 — May 2021, Texas University</p>
+                            ${generateEducationPreview()}
                         </div>
-                        <div>
-                            <h3 class="font-semibold">Newtown Square University, Bachelor’s Degree in Industrial Engineering</h3>
-                            <p class="text-sm text-gray-600">May 2019 — May 2021, Philipsburg</p>
-                        </div>
+                        
                     </div>
                 </div>
             
@@ -5935,7 +5388,7 @@
                     <!-- Skills -->
                     <div>
                         <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Skills</h2>
-                        <ul class="list-disc list-inside space-y-1">
+                        <ul class="list-disc list-inside space-y-1" id="skills-preview">
                             <li>Microsoft PowerPoint</li>
                             <li>Data Analysis</li>
                             <li>Scheduling</li>
@@ -5975,13 +5428,13 @@
                 <div class="flex  w-full h-52">
                     <!-- Left: Large Profile Image -->
                     <div class="flex items-center justify-center w-1/3 ">
-                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="h-full w-auto object-cover">
+                        <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="h-full w-auto object-cover">
                     </div>
                 
                     <!-- Right: Name and Title -->
                     <div class="flex flex-col justify-center w-2/3 px-6">
-                        <h1 class="text-5xl font-bold text-black">Charles Andrew Torres</h1>
-                        <p class="text-xl text-black">Event Coordinator</p>
+                        <h1 class="text-5xl font-bold text-black">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-xl text-black">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
                 </div>
             
@@ -5990,10 +5443,10 @@
                     <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-3 uppercase">Details</div>
                         <div class="grid grid-cols-2 gap-4 text-sm">
                             <div>
-                                <p>1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
-                                <p class="text-blue-700">email@email.com</p>
-                                <p>3868683442</p>
-                                <p class="mt-2"><span class="font-semibold">Place of birth</span><br>San Antonio</p>
+                                <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                                <p class="text-blue-700">${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                                <p class="mt-2"><span class="font-semibold">Place of birth</span><br>${document.getElementById('placeOfBirth')?.value || 'San Antonio'}</p>
                             </div>
                         </div>
                     </div>
@@ -6002,7 +5455,7 @@
                     <div class="px-8 pt-4 pb-6">
                         <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-2 uppercase">Profile</div>
                         <p class="italic text-sm leading-relaxed">
-                            Practical Event Coordinator with 5+ years experience in organizing large-scale events from design through to fruitful execution. Skilled at motivating large revenue gains and substantial expense savings through efficient budget management and vendor negotiation. Influential in meeting tight deadlines and directing high-quality events.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
                 
@@ -6011,37 +5464,34 @@
                         <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-3 uppercase">Employment History</div>
                     
                         <div class="mb-4">
-                            <p class="font-semibold">Event Coordinator, Bright Event Rentals, Florida</p>
-                            <p class="text-xs text-gray-600 uppercase">January 2016 — June 2021</p>
-                            <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-                                <li>Recommended efficient layouts for events and coordinated all staff management, internal/external communication functions, event logistics, and the event life cycle.</li>
-                                <li>Managed and coordinated 160+ events per year, accomplishing punctual and under-budget execution with 98%+ client satisfaction.</li>
-                                <li>Communicated with clients, vendors, staff, and city officials to keep customer loyalty and successfully organized events at the internal and external levels.</li>
-                                <li>Collaborated with the fire department to obtain all suitable building and fire protection permits.</li>
-                            </ul>
+                            ${generateExperiencePreview()}
                         </div>
                 
-                        <div>
-                            <p class="font-semibold">Event Coordinator, Classic Party Rentals, Biloxi</p>
-                            <p class="text-xs text-gray-600 uppercase">June 2021 — June 2021</p>
-                            <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-                                <li>Designed invitations and promotional materials, organized floor plans and booked proposals and all logistics functions.</li>
-                                <li>Increased income by over 57% by sourcing possible vendors and obtaining cost-efficient contracts.</li>
-                                <li>Organized and directed all transportation, registration, and hotel accommodations, ensuring the smooth execution of every event activity.</li>
-                            </ul>
-                        </div>
+
                     </div>
                 
                     <!-- Education -->
                     <div class="px-8 pt-4 pb-10">
                         <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-3 uppercase">Education</div>
-                        <p class="font-semibold text-sm">A in Hotel & Event Management, University of New York, Brooklyn</p>
-                        <p class="text-xs text-gray-600 uppercase mb-2">January 2020 — June 2021</p>
-                        <ul class="list-disc list-inside text-sm space-y-1">
-                            <li>Public Relations</li>
-                            <li>Invoicing and Finance</li>
-                            <li>Sales and Marketing</li>
-                        </ul>
+                        <div class="mb-4">
+                            ${generateEducationPreview()}
+                        </div>
+                        
+                    </div>
+
+                     <!-- Skills -->
+                    <div class="px-8 pt-4 pb-10">
+                        <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-3 uppercase">Skills</div>
+                        <div class="mb-4">
+                            <ul class="list-disc list-inside space-y-1" id="skills-preview">
+                                <li>Microsoft PowerPoint</li>
+                                <li>Data Analysis</li>
+                                <li>Scheduling</li>
+                                <li>Crystal Reports</li>
+                                <li>Agile Project Management</li>
+                            </ul>
+                        </div>
+                        
                     </div>
                 </div>
                 `;
@@ -6055,19 +5505,19 @@
                 <!-- Header -->
                 <div class="flex items-start">
                     <!-- Image on the far left -->
-                    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 object-cover rounded-md mr-6" />
+                    <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-32 object-cover rounded-md mr-6" />
 
                     <!-- Right side: Name/Title + Email/Phone + Line + Address -->
                     <div class="flex-1">
                         <!-- Top row: Name + Title and Email + Phone -->
                         <div class="flex justify-between items-start">
                             <div>
-                                <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
-                                <p class="text-sm font-medium">Bar Manager</p>
+                                <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                                <p class="text-sm font-medium">${document.getElementById('title')?.value || 'Job Title'}</p>
                             </div>
                             <div class="text-sm text-right space-y-1">
-                                <p>email@email.com</p>
-                                <p>3868683442</p>
+                                <p>${document.getElementById('email')?.value || 'email@example.com'}</p>
+                                <p>${document.getElementById('phone')?.value || '+123-456-7890'}</p>
                             </div>
                         </div>
 
@@ -6085,16 +5535,14 @@
                 <!-- Summary -->
                 <div>
                     <p class="italic text-[15px] leading-relaxed">
-                    Proficient Bar Manager with over eight years in the foodservice industry in a management capacity.
-                    I hold an Associate Degree in Hotel and Restaurant Administration and have worked in the restaurant’s
-                    main responsibility areas.
+                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                     </p>
                 </div>
 
                 <!-- Skills -->
                 <div>
                     <h2 class="text-md font-semibold mb-2">Skills</h2>
-                    <ul class="list-disc pl-5 text-sm flex flex-wrap gap-x-8 gap-y-1">
+                    <ul class="list-disc pl-5 text-sm flex flex-wrap gap-x-8 gap-y-1" id="skills-preview">
                         <li>Beverage & Food Purchasing</li>
                         <li>Bar Operations</li>
                         <li>Health & Safety Compliance</li>
@@ -6107,51 +5555,7 @@
                 <div class="space-y-6">
                     <h2 class="text-md font-semibold">Employment History</h2>
 
-                    <!-- Job 1 -->
-                    <div class="flex gap-8">
-                        <!-- Left 30% -->
-                        <div class="w-1/3 text-sm font-semibold">
-                            <p class="mb-1">Bar Manager</p>
-                            <p class="text-xs font-normal">St Tropez Seafood Restaurant, Orange County</p>
-                            <p class="text-xs font-normal">May 2020 — March 2021</p>
-                        </div>
-
-                        <!-- Right 70% -->
-                        <div class="w-2/3 text-sm space-y-1">
-                            <p class="italic mb-1">
-                            Liable for building a friendly and professional bar service team and guaranteed well-trained staff and always supported.
-                            </p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li>Handled recruiting, developing, and managing employee relations and evaluations.</li>
-                                <li>Changed bar menu based on seasons, vendors, and holidays.</li>
-                                <li>Monitored bar traffic data for informed decision-making and prep.</li>
-                                <li>Ensured cooking equipment stayed well-maintained and operational.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Job 2 -->
-                    <div class="flex gap-8">
-                        <!-- Left 30% -->
-                        <div class="w-1/3 text-sm font-semibold">
-                            <p class="mb-1">Bar Manager</p>
-                            <p class="text-xs font-normal">Gladstone Food Emporium, Miami</p>
-                            <p class="text-xs font-normal">Jan 2012 — Feb 2020</p>
-                        </div>
-
-                        <!-- Right 70% -->
-                        <div class="w-2/3 text-sm space-y-1">
-                            <p class="italic mb-1">
-                            Accountable for promoting and managing bar hygiene and safety policies, ensuring the 370sqm bar area stays clean and neat.
-                            </p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li>Designed and monitored systems that ensured restaurant excellence.</li>
-                                <li>Maintained compliance with health and local standards.</li>
-                                <li>Delivered consistent, professional service to guests.</li>
-                                <li>Managed bar inventory, ordering, and stocking.</li>
-                            </ul>
-                        </div>
-                    </div>
+                    ${generateExperiencePreview()}
                 </div>
                 `;
                 previewContainer.appendChild(preview);
@@ -6165,14 +5569,14 @@
                 <div class="flex items-center justify-between mb-10">
                     <div class="flex items-center space-x-6">
                         <!-- Image -->
-                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-24 h-24 object-cover rounded-md" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-24 h-24 object-cover rounded-md" />
             
                         <!-- Name and Contact -->
                         <div>
-                            <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
-                            <p class="text-md font-medium mb-2">Technical Assistant</p>
-                            <p class="text-sm">3056478349</p>
-                            <p class="text-sm">email@email.com</p>
+                            <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                            <p class="text-md font-medium mb-2">${document.getElementById('title')?.value || 'Job Title'}</p>
+                            <p class="text-sm">${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p class="text-sm">${document.getElementById('email')?.value || 'email@example.com'}</p>
                         </div>
                     </div>
                 </div>
@@ -6183,10 +5587,7 @@
                     <div class="flex">
                     <!-- Right: Summary -->
                         <p class="italic text-sm leading-relaxed">
-                        Devoted and detail-oriented Technical Assistant with 3+ years of experience in aircraft management
-                        and four years more with industrial processes. FAA-APT certified and received FAA-AMT award.
-                        Saved $45K in fuel expenses. Looking to use aircraft maintenance abilities by working at General
-                        Aviation Services as the new head maintenance Technical Assistant.
+                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
             
@@ -6194,7 +5595,7 @@
                     <div class="grid grid-cols-2 gap-6 text-sm">
                         <div>
                             <h2 class="font-semibold mb-2">Skills</h2>
-                            <ul class="list-disc list-inside space-y-1">
+                            <ul class="list-disc list-inside space-y-1" id="skills-preview">
                                 <li>Maintenance Equipment and Tools</li>
                                 <li>Computers and Electronics</li>
                                 <li>Ground Service Equipment Maintenance</li>
@@ -6217,30 +5618,9 @@
                 
                         <!-- Job 1 -->
                         <div class="mb-6">
-                            <p class="font-semibold">Technical Assistant at Algorax, Knoxville</p>
-                            <p class="text-sm">January 2019 — June 2021</p>
-                            <p class="italic text-sm mt-1">
-                            Experienced in interpreting United States Trade and Development Agency (USTDA) contract scope...
-                            </p>
-                            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                <li>Formed Excel and Visio tools for engineering setting.</li>
-                                <li>Revised and translated U.S. patent applications.</li>
-                                <li>Collaborated with attorneys and translators on technical specs.</li>
-                                <li>Helped web designers on new company website.</li>
-                            </ul>
+                            ${generateExperiencePreview()}
                         </div>
                 
-                        <!-- Job 2 -->
-                        <div>
-                            <p class="font-semibold">Technical Assistant at Nissan, Casilda</p>
-                            <p class="text-sm">January 2018 — December 2018</p>
-                            <p class="italic text-sm mt-1">
-                            Accountable for organizing international travel for the site visit to Bangkok...
-                            </p>
-                            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                <li>Collaborated with staff and assorted companies for operational support.</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 `;
@@ -6254,10 +5634,10 @@
                 <!-- Header -->
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-3xl font-bold">Ellen. C Harret</h1>
-                        <p class="text-lg font-semibold">Hospitality Server</p>
+                        <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-lg font-semibold">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
-                    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
+                    <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
                 </div>
 
                 <hr />
@@ -6267,8 +5647,7 @@
                     <h2 class="font-semibold mb-1">Summary</h2>
                     <div class="pl-4 text-sm space-y-1">
                         <p>
-                        Personable and professional Restaurant Server with 7 years of experience in fast casual,
-                        and fine dining settings.
+                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                         <p>
                         Extensive knowledge of wine and food pairings with a specialization in French cuisine.
@@ -6281,11 +5660,7 @@
                     <h2 class="font-semibold mb-1">Education</h2>
                     <div class="pl-4 text-sm space-y-1">
                         <p>
-                        Honors B.Sc. in Electrical Engineering, University of Waterloo, 2008
-                        </p>
-                        <p>
-                        Partially completed M.S. in Automation Engineering Process Control, University of
-                        Waterloo (currently in process)
+                        ${generateEducationPreview()}
                         </p>
                     </div>
                 </div>
@@ -6293,7 +5668,7 @@
                 <!-- Skills -->
                 <div>
                     <h2 class="font-semibold mb-1">Skills</h2>
-                    <ul class="list-disc list-inside text-sm pl-4 space-y-1">
+                    <ul class="list-disc list-inside text-sm pl-4 space-y-1" id="skills-preview"> 
                         <li>
                         Background in Electrical Circuits and Programming Concepts.
                         </li>
@@ -6319,30 +5694,13 @@
                     <!-- Job 1 -->
                     <div class="pl-4 space-y-1">
                         <div class="flex justify-between font-medium">
-                        <p>Chez Pierre<br />French Restaurant</p>
-                        <p>Jan 2012 – Present</p>
-                        </div>
-                        <p class="italic font-semibold">Head Server</p>
-                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-                        <li>Greeting guests in a prompt and courteous manner.</li>
-                        <li>
-                            Taking orders from patrons, often memorizing the orders if there were 5 patrons or less.
-                        </li>
-                        </ul>
+                        ${generateExperiencePreview()}
                     </div>
                     <br>
                     <!-- Additional job? Just copy this format -->
                     
                     <div class="pl-4 space-y-1">
-                        <div class="flex justify-between font-medium">
-                        <p>Company Name<br />Location</p>
-                        <p>Dates</p>
-                        </div>
-                        <p class="italic font-semibold">Job Title</p>
-                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-                        <li>Responsibility 1</li>
-                        <li>Responsibility 2</li>
-                        </ul>
+                     
                     </div>
                 </div>
                 `;
@@ -6355,25 +5713,25 @@
                 preview.innerHTML = `
                 <!-- Header -->
                 <div class="flex items-start gap-6">
-                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 object-cover rounded-md" />
+                    <img src="${window.profileImage || profileImage}" alt="Profile" class="w-32 object-cover rounded-md" />
                 
                     <div class="flex-1 space-y-1">
                         <!-- Name on full-width line -->
                         <div class="relative">
                         <hr class="border-t-4 border-[#0BA29C]" />
-                        <span class="absolute left-0 -top-3 bg-white pr-3 text-xl font-bold text-[#0BA29C]">Charlotte Johnson</span>
+                        <span class="absolute left-0 -top-3 bg-white pr-3 text-xl font-bold text-[#0BA29C]">${document.getElementById('name')?.value || 'Your Name'}</span>
                         </div>
                         <br>
-                        <p class="font-semibold text-sm">Senior IT Project Manager</p>
-                        <p class="text-sm"><span class="font-bold">Phone:</span> 555-578-6001</p>
-                        <p class="text-sm"><span class="font-bold">Address:</span> 1257 Ocean Lane, LA County, CA-91202</p>
-                        <p class="text-sm"><span class="font-bold">Email:</span> charlotte@email.com</p>
+                        <p class="font-semibold text-sm">${document.getElementById('title')?.value || 'Job Title'}</p>
+                        <p class="text-sm"><span class="font-bold">Phone:</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                        <p class="text-sm"><span class="font-bold">Address:</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                        <p class="text-sm"><span class="font-bold">Email:</span> ${document.getElementById('email')?.value || 'email@example.com'}</p>
                     </div>
                 </div>
 
 
                 <p class="text-sm">
-                11.5 years of experience in business liaison and technological areas improvement to achieve timely project completion. Meet project deliverables by combining user requirements with business prerequisites and budgetary allowance.
+                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                 </p>
 
                 <!-- Experience -->
@@ -6388,28 +5746,10 @@
 
                     <!-- Job 1 -->
                     <div class="mb-4">
-                        <p class="font-bold text-sm">Techni Lite Ltd.</p>
-                        <p class="text-sm">Project Manager, Technology Integration Group</p>
-                        <p class="text-sm mb-1">2008 to Present</p>
-                        <ul class="list-disc list-inside text-sm space-y-1">
-                            <li>Promoted to project manager position to plan, schedule and implement all stages of hardware and software implementations.</li>
-                            <li>Enabled business improvements by analyzing the core business and developing IT systems.</li>
-                            <li>Improved data processing efficiency by 35%, saving $1.26M annually.</li>
-                            <li>Defined goals, scopes, and translated needs into requirements and action plans.</li>
-                            <li>Enhanced decision-making by implementing cost-benefit analysis and risk assessments.</li>
-                        </ul>
+                        ${generateExperiencePreview()}
                     </div>
 
-                    <!-- Job 2 -->
-                    <div>
-                        <p class="font-bold text-sm">Edusoft Inc.</p>
-                        <p class="text-sm">Assistant Project Administrator</p>
-                        <p class="text-sm mb-1">2004 to 2008</p>
-                        <ul class="list-disc list-inside text-sm space-y-1">
-                            <li>Built up a strong technical background in a multi-platform environment.</li>
-                            <li>Surged network uptime to 98.9%, drove a milestone network upgrade, and bolstered systems' security and reliability.</li>
-                        </ul>
-                    </div>
+                    
                 </div>
 
                 <!-- Education -->
@@ -6422,11 +5762,7 @@
                     </div>
 
                     <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>MBA (GPA: 3.79/4.0), Arizona State University, 2004</li>
-                        <li>BS in CS (GPA: 3.82/4.0), Arizona University, 2000</li>
-                        <li>AS in Accounting, Texas University, 1997</li>
-                        <li>Project Management Professional (PMI-Certified), 2009</li>
-                        <li>Six Sigma Black Belt, 2010</li>
+                        ${generateEducationPreview()}
                     </ul>
                 </div>
             `;
@@ -6441,17 +5777,17 @@
                 <div class="flex justify-between items-start gap-6">
                     <!-- Name and Contact Info -->
                     <div class="space-y-1">
-                        <h1 class="text-2xl font-bold">Thomas Beasley</h1>
-                        <p class="text-sm font-medium">Senior Graphic Design Specialist</p>
+                        <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-sm font-medium">${document.getElementById('title')?.value || 'Job Title'}</p>
                         <div class="text-sm space-y-1 mt-2">
-                            <p><span class="font-bold">Phone:</span> 917-570-1144</p>
-                            <p><span class="font-bold">Email:</span> thomas@email.com</p>
-                            <p><span class="font-bold">Address:</span> 123 Anywhere Street</p>
-                            <p><span class="font-bold">LinkedIn:</span> linkedin.com/thomas</p>
+                            <p><span class="font-bold">Phone:</span> ${document.getElementById('phone')?.value || '+123-456-7890'}</p>
+                            <p><span class="font-bold">Email:</span> ${document.getElementById('email')?.value || 'email@example.com'}</p>
+                            <p><span class="font-bold">Address:</span> ${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                            <p><span class="font-bold">LinkedIn:</span> ${document.getElementById('linkedin')?.value || 'linkedin.com/yourname'}</p>
                         </div>
                     </div>
                 <!-- Profile Image -->
-                    <img src="../../../assets/img/charles.png" alt="Profile" class="w-40 rounded-full object-cover" />
+                    <img src="${window.profileImage || profileImage}" alt="Profile" class="w-40 rounded-full object-cover" />
                 </div>
 
                 <!-- Main Grid Layout -->
@@ -6465,32 +5801,10 @@
 
                             <!-- Job 1 -->
                             <div class="mb-4">
-                                <p class="font-bold text-sm">Graphic Designer, Mighty Agency <span class="float-right font-normal">2020 – Present</span></p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mt-1">
-                                    <li>Created graphics and layouts for client marketing campaigns.</li>
-                                    <li>Managed a team of junior designers to streamline workflow.</li>
-                                    <li>Collaborated with stakeholders to meet branding objectives.</li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
 
-                            <!-- Job 2 -->
-                            <div class="mb-4">
-                                <p class="font-bold text-sm">Full Artist, DesignHut <span class="float-right font-normal">2017 – 2020</span></p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mt-1">
-                                    <li>Designed print and digital ads for regional campaigns.</li>
-                                    <li>Coordinated directly with clients for design direction.</li>
-                                    <li>Improved project delivery by 15% through new design workflows.</li>
-                                </ul>
-                            </div>
-
-                            <!-- Job 3 -->
-                            <div>
-                                <p class="font-bold text-sm">Junior Designer, VisualLab Studio <span class="float-right font-normal">2015 – 2017</span></p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mt-1">
-                                    <li>Supported senior designers with concept mockups.</li>
-                                    <li>Managed design assets and organized digital libraries.</li>
-                                </ul>
-                            </div>
+                          
                         </div>
                     </div>
 
@@ -6500,7 +5814,7 @@
                         <div>
                             <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Profile</h2>
                             <p class="text-sm">
-                                Creative and driven Project Specialist with over 8 years of experience designing for web, print, and brand identity. Proven ability to collaborate across departments and translate client ideas into high-impact visuals.
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
                         </div>
 
@@ -6508,27 +5822,18 @@
                         <div>
                             <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Education</h2>
                             <ul class="list-disc list-inside text-sm space-y-1">
-                                <li>B.A. in Graphic Design, NY School of Art – 2015</li>
+                                ${generateEducationPreview()}
                             </ul>
                         </div>
 
                         <!-- Key Skills -->
                         <div>
                             <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Key Skills</h2>
-                            <ul class="list-disc list-inside text-sm space-y-1">
+                            <ul class="list-disc list-inside text-sm space-y-1" id="skills-preview">
                                 <li>Adobe Creative Suite</li>
                                 <li>UX/UI Design</li>
                                 <li>Typography</li>
                                 <li>Brand Identity</li>
-                            </ul>
-                        </div>
-
-                        <!-- Additional Skills -->
-                        <div>
-                            <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Additional Skills</h2>
-                            <ul class="list-disc list-inside text-sm space-y-1">
-                                <li>Team Leadership</li>
-                                <li>Client Communication</li>
                             </ul>
                         </div>
                     </div>
@@ -6544,9 +5849,9 @@
                 <!-- Header -->
                 <div class="text-center">
                     <hr>
-                    <h1 class="text-xl font-bold">Charles Andrew Torres</h1>
-                    <p>5032 Westridge Dr. Valrico, FL 33596</p>
-                    <p>• 000-5451-45 • example@resumeviking.com</p>
+                    <h1 class="text-xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                    <p>${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                    <p>• ${document.getElementById('phone')?.value || '+123-456-7890'} • ${document.getElementById('email')?.value || 'email@example.com'}</p>
                     <hr>
                 </div>
 
@@ -6555,22 +5860,21 @@
                     <!-- Title and Image -->
                     <div class="space-y-4">
                         <h2 class="font-semibold text-center">Human Resources Manager</h2>
-                        <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-32 object-cover rounded-md mx-auto" />
+                        <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-32 object-cover rounded-md mx-auto" />
                     </div>
 
                     <!-- Objective and Skills -->
                     <div>
                         <h2 class="font-semibold">OBJECTIVE</h2>
                         <p class="text-sm">
-                        My primary goal is to secure a challenging position in which I can utilize my acquired
-                        skills within the field of tools manufacturing.
+                        ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
 
                         <h2 class="font-semibold mt-3">SKILLS</h2>
-                        <ul class="list-disc list-inside text-sm">
+                        <ul class="list-disc list-inside text-sm" id="skills-preview">
                             <li>Proficient in CNC machining</li>
                             <li>OSHA Trained</li>
-                            <li>Can work Lathes Machines</li>
+                            <li>Can work Lathes Machines</li> 
                         </ul>
                     </div>
                 </div>
@@ -6583,28 +5887,7 @@
 
                     <!-- Job 1 -->
                     <div class="mb-6">
-                        <p><span class="font-semibold">Keyer Tools</span>, <em>Human Resources Manager</em><br />Erlanger, KY</p>
-                        <p class="text-sm mb-2">Oct 2021 – Aug 2024</p>
-                        <ul class="list-disc list-inside space-y-1 text-sm">
-                            <li>Maintain inventory of assorted products and order management.</li>
-                            <li>Operate a CNC machine to machine parts for turbine engines in Abram Tanks and Airplanes.</li>
-                            <li>Load parts in CNC machine with precision. Unload and measure the part for accuracy.</li>
-                            <li>Load and unload dry freight and materials and maintain the warehouse workflow.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Job 2 -->
-                    <div>
-                        <p><span class="font-semibold">ProTools</span>, <em>Human Resources Manager</em><br />Brooklyn, NY</p>
-                        <p class="text-sm mb-2">Jan 2019 – Sep 2021</p>
-                        <ul class="list-disc list-inside space-y-1 text-sm">
-                            <li>Performed manual lathe, mill, grinder, and band saw operation</li>
-                            <li>Block squaring</li>
-                            <li>Minor G code/M code editing</li>
-                            <li>Operate CNC Haas VM6 (3 axes) machinery</li>
-                            <li>Responsible for in-process QC inspection, machine and shop maintenance</li>
-                            <li>Utilize all methods necessary to make fixtures including hand-drawn, and computer-aided models</li>
-                        </ul>
+                        ${generateExperiencePreview()}
                     </div>
                 </div>
 
@@ -6649,10 +5932,10 @@
                 <!-- Header -->
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-                        <p class="text-lg font-semibold">Hospitality Server</p>
+                        <h1 class="text-3xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-lg font-semibold">${document.getElementById('title')?.value || 'Job Title'}</p>
                     </div>
-                    <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
+                    <img src="${window.profileImage || profileImage}" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
                 </div>
 
                 <hr />
@@ -6662,11 +5945,7 @@
                     <h2 class="font-semibold mb-1">Summary</h2>
                     <div class="pl-4 text-sm space-y-1">
                         <p>
-                            Personable and professional Restaurant Server with 7 years of experience in fast casual,
-                            and fine dining settings.
-                        </p>
-                        <p>
-                            Extensive knowledge of wine and food pairings with a specialization in French cuisine.
+                            ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                         </p>
                     </div>
                 </div>
@@ -6676,19 +5955,16 @@
                     <h2 class="font-semibold mb-1">Education</h2>
                     <div class="pl-4 text-sm space-y-1">
                         <p>
-                            Honors B.Sc. in Electrical Engineering, University of Waterloo, 2008
+                            ${generateEducationPreview()}
                         </p>
-                        <p>
-                            Partially completed M.S. in Automation Engineering Process Control, University of
-                            Waterloo (currently in process)
-                        </p>
+                        
                     </div>
                 </div>
 
                 <!-- Skills -->
                 <div>
                     <h2 class="font-semibold mb-1">Skills</h2>
-                    <ul class="list-disc list-inside text-sm pl-4 space-y-1">
+                    <ul class="list-disc list-inside text-sm pl-4 space-y-1" id="skills-preview">
                         <li>
                             Background in Electrical Circuits and Programming Concepts.
                         </li>
@@ -6713,32 +5989,10 @@
                     <br>
                     <!-- Job 1 -->
                     <div class="pl-4 space-y-1">
-                        <div class="flex justify-between font-medium">
-                            <p>Chez Pierre<br />French Restaurant</p>
-                            <p>Jan 2012 – Present</p>
-                        </div>
-                        <p class="italic font-semibold">Head Server</p>
-                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-                            <li>Greeting guests in a prompt and courteous manner.</li>
-                            <li>
-                            Taking orders from patrons, often memorizing the orders if there were 5 patrons or less.
-                            </li>
-                        </ul>
+                        ${generateExperiencePreview()}
                     </div>
                     <br>
-                    <!-- Additional job? Just copy this format -->
                     
-                    <div class="pl-4 space-y-1">
-                        <div class="flex justify-between font-medium">
-                            <p>Company Name<br />Location</p>
-                            <p>Dates</p>
-                        </div>
-                        <p class="italic font-semibold">Job Title</p>
-                        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-                            <li>Responsibility 1</li>
-                            <li>Responsibility 2</li>
-                        </ul>
-                    </div>
                 </div>
                 `;
                 previewContainer.appendChild(preview);
