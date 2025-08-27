@@ -78,6 +78,30 @@
         margin: 8px 0;
     }
 
+    /* Language and Hobby sections styling */
+    .language-item, .hobby-item {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .remove-language-btn, .remove-hobby-btn {
+        transition: all 0.2s ease;
+    }
+
+    .remove-language-btn:hover, .remove-hobby-btn:hover {
+        background-color: #dc2626 !important;
+        transform: scale(1.05);
+    }
+
+    .add-language-btn, .add-hobby-btn {
+        transition: all 0.2s ease;
+    }
+
+    .add-language-btn:hover, .add-hobby-btn:hover {
+        background-color: #1d4ed8 !important;
+        transform: scale(1.02);
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
         .nav-links {
@@ -1616,6 +1640,52 @@
                 <button class="add-experience-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Experience</button>
             </div>
 
+               <!-- Languages -->
+               <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="languages-section" style="display: none;">
+                <h2 class="section-header">Languages</h2>
+                <div id="languages-container">
+                    <div class="language-item">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="language-1">Language</label>
+                                <input type="text" class="language-input" id="language-1" placeholder="e.g., English">
+                            </div>
+                            <div class="input-group">
+                                <label for="proficiency-1">Proficiency Level</label>
+                                <select class="proficiency-select" id="proficiency-1">
+                                    <option value="Basic">Basic</option>
+                                    <option value="Conversational">Conversational</option>
+                                    <option value="Fluent">Fluent</option>
+                                    <option value="Native">Native</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="remove-language-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+                    </div>
+                </div>
+                <button class="add-language-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Language</button>
+            </div>
+
+            <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="hobbies-section" style="display: none;">
+                <h2 class="section-header">Hobbies & Interests</h2>
+                <div id="hobbies-container">
+                    <div class="hobby-item">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="hobby-1">Hobby/Interest</label>
+                                <input type="text" class="hobby-input" id="hobby-1" placeholder="e.g., Reading, Traveling, Photography">
+                            </div>
+                            <div class="input-group">
+                                <label for="hobby-description-1">Description (Optional)</label>
+                                <input type="text" class="hobby-description-input" id="hobby-description-1" placeholder="Brief description or context">
+                            </div>
+                        </div>
+                        <button class="remove-hobby-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+                    </div>
+                </div>
+                <button class="add-hobby-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Hobby</button>
+            </div>
+
             <!-- Projects -->
             <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="projects-section">
                 <h2 class="section-header">Projects</h2>
@@ -1640,6 +1710,11 @@
                 <button class="add-project-btn" style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Another Project</button>
                     </div>
             </div>
+
+         
+
+            <!-- Hobbies -->
+           
 
             <div class="right-panel" id="resume-preview">
                 <!-- Resume preview will be generated here -->
@@ -1759,6 +1834,68 @@
                             container.appendChild(projectItem);
                         });
                     }
+
+                    // Fill languages
+                    if (Array.isArray(resume.content.languages)) {
+                        const container = document.getElementById('languages-container');
+                        if (container) {
+                            container.innerHTML = '';
+                            resume.content.languages.forEach((lang, index) => {
+                                const languageItem = document.createElement('div');
+                                languageItem.className = 'language-item';
+                                languageItem.innerHTML = `
+                                    <div class="form-grid">
+                                        <div class="input-group">
+                                            <label>Language</label>
+                                            <input type="text" class="language-input" placeholder="e.g., English" value="${lang.language || ''}">
+                                        </div>
+                                        <div class="input-group">
+                                            <label>Proficiency Level</label>
+                                            <select class="proficiency-select">
+                                                <option value="Basic" ${lang.proficiency === 'Basic' ? 'selected' : ''}>Basic</option>
+                                                <option value="Conversational" ${lang.proficiency === 'Conversational' ? 'selected' : ''}>Conversational</option>
+                                                <option value="Fluent" ${lang.proficiency === 'Fluent' ? 'selected' : ''}>Fluent</option>
+                                                <option value="Native" ${lang.proficiency === 'Native' ? 'selected' : ''}>Native</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="remove-language-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+                                `;
+                                // Add remove functionality
+                                languageItem.querySelector('.remove-language-btn').addEventListener('click', () => languageItem.remove());
+                                container.appendChild(languageItem);
+                            });
+                        }
+                    }
+
+                    // Fill hobbies
+                    if (Array.isArray(resume.content.hobbies)) {
+                        const container = document.getElementById('hobbies-container');
+                        if (container) {
+                            container.innerHTML = '';
+                            resume.content.hobbies.forEach((hobby, index) => {
+                                const hobbyItem = document.createElement('div');
+                                hobbyItem.className = 'hobby-item';
+                                hobbyItem.innerHTML = `
+                                    <div class="form-grid">
+                                        <div class="input-group">
+                                            <label>Hobby/Interest</label>
+                                            <input type="text" class="hobby-input" placeholder="e.g., Reading, Traveling, Photography" value="${hobby.hobby || ''}">
+                                        </div>
+                                        <div class="input-group">
+                                            <label>Description (Optional)</label>
+                                            <input type="text" class="hobby-description-input" placeholder="Brief description or context" value="${hobby.description || ''}">
+                                        </div>
+                                    </div>
+                                    <button class="remove-hobby-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+                                `;
+                                // Add remove functionality
+                                hobbyItem.querySelector('.remove-hobby-btn').addEventListener('click', () => hobbyItem.remove());
+                                container.appendChild(hobbyItem);
+                            });
+                        }
+                    }
+
                     // Fill template selection if applicable
                     // (Assume you have a way to set the template visually)
                     // Fill profile image if available
@@ -1802,6 +1939,30 @@
             });
             return skills;
         }
+
+        function getLanguages() {
+            const languages = [];
+            document.querySelectorAll('.language-item').forEach((item, i) => {
+                const language = item.querySelector('.language-input')?.value;
+                const proficiency = item.querySelector('.proficiency-select')?.value;
+                if (language && language.trim()) {
+                    languages.push({ language: language.trim(), proficiency: proficiency || 'Fluent' });
+                }
+            });
+            return languages;
+        }
+
+        function getHobbies() {
+            const hobbies = [];
+            document.querySelectorAll('.hobby-item').forEach((item, i) => {
+                const hobby = item.querySelector('.hobby-input')?.value;
+                const description = item.querySelector('.hobby-description-input')?.value;
+                if (hobby && hobby.trim()) {
+                    hobbies.push({ hobby: hobby.trim(), description: description || '' });
+                }
+            });
+            return hobbies;
+        }
         function getExperience() {
             return Array.from(document.querySelectorAll('.experience-item')).map(item => ({
                 company: item.querySelector('input[placeholder="Company Name"]')?.value,
@@ -1830,6 +1991,8 @@
             skills: getSkills(),
             experience: getExperience(),
             projects: getProjects(),
+            languages: getLanguages(),
+            hobbies: getHobbies(),
             profileImage: window.profileImage || null
         };
         const resumeId = urlParams.get('resumeId');
@@ -1872,6 +2035,7 @@
         // Get template ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         let templateId = urlParams.get('template') || 'default';
+      
 
         // Add dynamic form handling specific to this template
         addDynamicFormHandlers(templateId, {
@@ -2100,9 +2264,8 @@
                         <!-- Language -->
                         <div>
                             <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Language</h2>
-                            <ul class="list-disc list-inside text-sm space-y-1 pl-2">
-                                <li>English</li>
-                                <li>Spanish</li>
+                            <ul class="list-disc list-inside text-sm space-y-1 pl-2" id="languages-preview">
+                                
                             </ul>
                         </div>
                     </div>
@@ -2152,7 +2315,7 @@
                             <div>
                                 <h2 class="text-blue-700 font-bold text-lg mb-2">Languages</h2>
                                 <hr class="border-t-2 border-blue-700 mb-2" />
-                                <ul class="list-disc list-inside space-y-1">
+                                <ul class="list-disc list-inside space-y-1" id="languages-preview">
                                     <li>English</li>
                                     <li>Spanish</li>
                                 </ul>
@@ -2226,8 +2389,9 @@
                         <div>
                             <h2 class="text-lg font-bold mb-2">Languages</h2>
                             <hr class="border-t-2 border-slate-500 mb-2" />
-                            <p class="text-gray-300">English</p>
-                            <p class="text-gray-300">Spanish</p>
+                            <ul class="list-disc list-inside space-y-1 text-gray-200" id="languages-preview">
+                               
+                            </ul>
                         </div>
                     </div>
 
@@ -2315,7 +2479,7 @@
                                 <!-- Languages -->
                                 <div class="w-full">
                                     <h3 class="font-bold text-gray-700 mb-3">LANGUAGES</h3>
-                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                    <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
                                         <li>Filipino</li>
                                         <li>English</li>
                                     </ul>
@@ -2392,7 +2556,7 @@
                             <!-- Language -->
                             <div>
                             <h3 class="text-white font-bold border-b border-white pb-1 mb-3">LANGUAGE</h3>
-                            <ul class="list-disc list-inside text-white text-sm space-y-1">
+                            <ul class="list-disc list-inside text-white text-sm space-y-1" id="languages-preview">
                                 <li>Filipino</li>
                                 <li>English</li>
                             </ul>
@@ -2466,9 +2630,9 @@
                         <!-- Language -->
                         <div class="mb-5">
                             <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">LANGUAGE</h2>
-                            <ul class="space-y-1.5">
-                            <li>• Filipino</li>
-                            <li>• English</li>
+                            <ul class="space-y-1.5" id="languages-preview">
+                                <li>Filipino</li>
+                                <li>English</li>
                             </ul>
                         </div>
 
@@ -2591,9 +2755,9 @@
                                 <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">
                                 LANGUAGES
                                 </div>
-                                <ul class="flex gap-10 text-sm text-gray-800 list-disc ml-5">
-                                <li>English</li>
-                                <li>Tagalog</li>
+                                <ul class="flex gap-10 text-sm text-gray-800 list-disc ml-5" id="languages-preview">
+                                    <li>English</li>
+                                    <li>Tagalog</li>
                                 </ul>
                             </div>
                             </div>
@@ -2641,7 +2805,7 @@
                             <!-- Language -->
                             <div>
                             <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">LANGUAGE</div>
-                            <ul class="list-disc list-inside text-sm space-y-1">
+                            <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
                                 <li>Filipino</li>
                                 <li>English</li>
                             </ul>
@@ -2704,8 +2868,10 @@
 
                         <div>
                             <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Language</h2>
-                            <p>English</p>
-                            <p>Filipino</p>
+                            <ul class="list-disc list-inside" id="languages-preview">
+                                <li>English</li>
+                                <li>Tagalog</li>
+                            </ul>
                         </div>
                         </div>
 
@@ -2730,9 +2896,9 @@
                         <div>
                             <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Skills</h2>
                             <ul class="list-disc list-inside" id="skills-preview">
-                            <li>Web Development</li>
-                            <li>Database Management</li>
-                            <li>Problem Solving</li>
+                                <li>Web Development</li>
+                                <li>Database Management</li>
+                                <li>Problem Solving</li>
                             </ul>
                         </div>
                         </div>
@@ -2939,7 +3105,7 @@
                                 <!-- Languages -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-2">Language</h2>
-                                    <ul class="text-sm space-y-1">
+                                    <ul class="text-sm space-y-1" id="languages-preview">
                                         <li>Filipino</li>
                                         <li>English</li>
                                     </ul>
@@ -3018,7 +3184,7 @@
                                 <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Languages</div>
                                 <hr class="flex-grow border-t border-gray-400" />
                             </div>
-                            <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
+                            <ul class="text-sm list-disc list-inside space-y-1 text-gray-800" id="languages-preview">
                                 <li>English</li>
                                 <li>Filipino</li>
                             </ul>
@@ -3102,7 +3268,7 @@
                                 <!-- Languages -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-4">LANGUAGES</h2>
-                                    <ul class="list-disc list-inside text-sm pl-6">
+                                    <ul class="list-disc list-inside text-sm pl-6" id="languages-preview">
                                         <li>English</li>
                                         <li>Tagalog</li>
                                     </ul>
@@ -3190,7 +3356,7 @@
                         <!-- Language -->
                         <div>
                             <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Language:</div>
-                            <ul class="list-disc list-inside text-sm space-y-1">
+                            <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
                                 <li>English</li>
                                 <li>Filipino</li>
                             </ul>
@@ -3522,7 +3688,7 @@
                                 <!-- Language -->
                                 <div>
                                     <h2 class="text-lg font-bold mb-4">LANGUAGE</h2>
-                                    <ul class="list-disc list-inside text-sm space-y-1">
+                                    <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
                                         <li>Filipino</li>
                                         <li>English</li>
                                     </ul>
@@ -3575,7 +3741,7 @@
                             <!-- Language -->
                             <div class="mt-6">
                                 <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2">LANGUAGE</h2>
-                                <ul class="mt-2 text-sm text-black space-y-1">
+                                <ul class="mt-2 text-sm text-black space-y-1" id="languages-preview">
                                     <li>English</li>
                                     <li>Filipino</li>
                                 </ul>
@@ -3706,8 +3872,10 @@
                                 <div>
                                 <h2 class="text-xl font-bold text-blue-900 mb-2">LANGUAGE</h2>
                                 <hr class="border-t border-blue-900 mb-3">
-                                <p class="text-sm font-semibold">ENGLISH</p>
-                                <p class="text-sm font-semibold">FILIPINO</p>
+                                <ul class="text-sm font-semibold" id="languages-preview">
+                                    <li>ENGLISH</li>
+                                    <li>FILIPINO</li>
+                                </ul>
                             </div>
 
                         </div>
@@ -3757,8 +3925,10 @@
                         <!-- Language -->
                         <div>
                             <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">LANGUAGE</h3>
-                            <p class="text-sm">English</p>
-                            <p class="text-sm">Filipino</p>
+                            <ul class="text-sm" id="languages-preview">
+                                <li>English</li>
+                                <li>Filipino</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -3855,9 +4025,9 @@
                             <div class="mb-6">
                                 <h2 class="text-xl font-bold text-gray-800 mb-2">LANGUAGE</h2>
                                 <hr class="border-t border-[#20B2AA] mb-3">
-                                <ul class="list-none text-sm space-y-1">
+                                <ul class="list-none text-sm space-y-1" id="languages-preview">
                                     <li class="relative pl-5 before:content-['•'] before:absolute before:left-0 before:text-[#20B2AA]">
-                                    ${document.getElementById('language')?.value || 'English'}
+                                   
                                     </li>
                                    
                                 </ul>
@@ -3930,18 +4100,15 @@
                             <hr class="border-gray-300" />
                             <div>
                                 <h2 class="text-lg font-semibold">Languages</h2>
-                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
-                                    <li>English</li>
-                                    <li>Filipino</li>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1" id="languages-preview">
+                                   
                                 </ul>
                             </div>
                             <hr class="border-gray-300" />
                             <div>
                                 <h2 class="text-lg font-semibold">Hobbies</h2>
-                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
-                                    <li>Chess</li>
-                                    <li>Cycling</li>
-                                    <li>Photography</li>
+                                <ul class="list-disc list-inside text-sm text-gray-700 mt-1" id="hobbies-preview">
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -4194,9 +4361,8 @@
                             <!-- Language -->
                             <div class="bg-gray-200 p-4">
                                 <h2 class="text-lg font-bold uppercase mb-2">Language</h2>
-                                <ul class="text-sm space-y-1">
-                                    <li>ENGLISH</li>
-                                    <li>FILIPINO</li>
+                                <ul class="text-sm space-y-1" id="languages-preview">
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -4266,9 +4432,8 @@
                             <!-- Language -->
                             <div>
                                 <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Language</h2>
-                                <ul class="mt-2 text-black text-sm">
-                                    <li>English</li>
-                                    <li>Filipino</li>
+                                <ul class="mt-2 text-black text-sm" id="languages-preview">
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -4365,9 +4530,8 @@
                         <!-- Language -->
                         <div>
                             <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Language</h2>
-                            <ul class="list-disc list-inside text-sm text-gray-800">
-                                <li>English</li>
-                                <li>Filipino</li>
+                            <ul class="list-disc list-inside text-sm text-gray-800" id="languages-preview">
+                               
                             </ul>
                         </div>
                     </div>
@@ -4409,8 +4573,9 @@
 
                             <div>
                                 <h2 class="font-bold text-lg mb-2">LANGUAGES</h2>
-                                <p>English</p>
-                                <p>Filipino</p>
+                                <ul class="list-disc list-inside text-sm text-gray-800" id="languages-preview">
+                               
+                                </ul>
                             </div>
                         </div>
 
@@ -4525,9 +4690,8 @@
                                 <div>
                                     <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Language</h2>
                                     <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
-                                    <ul class="list-disc pl-5 text-sm space-y-1">
-                                        <li>English</li>
-                                        <li>Filipino</li>
+                                    <ul class="list-disc pl-5 text-sm space-y-1" id="languages-preview">
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -4573,10 +4737,8 @@
                     <!-- Language -->
                     <div>
                         <h2 class="text-xl font-bold uppercase mb-2">Language</h2>
-                        <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>English</li>
-                        <li>Filipino</li>
-                        <li>Spanish</li>
+                        <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
+                       
                         </ul>
                     </div>
                 </div>
@@ -4664,10 +4826,8 @@
                     <div class="w-full bg-white text-black px-4 py-2 font-bold text-center rounded-full">
                         LANGUAGE
                     </div>
-                    <ul class="text-sm list-disc list-inside space-y-1 text-left w-full px-4 text-black">
-                        <li>English</li>
-                        <li>Filipino</li>
-                        <li>Spanish</li>
+                    <ul class="text-sm list-disc list-inside space-y-1 text-left w-full px-4 text-black" id="languages-preview">
+                       
                     </ul>
                 </div>
 
@@ -4786,10 +4946,8 @@
                         <!-- LANGUAGES -->
                         <div>
                             <div class="bg-[#2b608a] text-white font-bold rounded-full px-6 py-2 w-max mb-2">LANGUAGE</div>
-                            <ul class="list-disc pl-6 text-sm space-y-1">
-                                <li>ENGLISH</li>
-                                <li>FILIPINO</li>
-                                <li>SPANISH</li>
+                            <ul class="list-disc pl-6 text-sm space-y-1" id="languages-preview">
+                               
                             </ul>
                         </div>
                     </div>
@@ -4924,8 +5082,9 @@
                         <div>
                             <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">Languages</h2>
                             <div class="text-sm space-y-1">
-                                <p>ENGLISH</p>
-                                <p>FILIPINO</p>
+                                <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
+                                   
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -5130,10 +5289,8 @@
                         <!-- Language -->
                         <div>
                             <h2 class="text-blue-900 text-lg font-semibold mb-2">LANGUAGE</h2>
-                            <ul class="text-sm text-gray-800 space-y-1">
-                                <li>ENGLISH</li>
-                                <li>FILIPINO</li>
-                                <li>SPANISH</li>
+                            <ul class="text-sm text-gray-800 space-y-1" id="languages-preview">
+                               
                             </ul>
                         </div>
                     </div>
@@ -5184,9 +5341,8 @@
                         <!-- Language -->
                         <div>
                             <h2 class="text-white bg-blue-800 px-2 py-1 text-xs font-bold tracking-widest mb-2">LANGUAGE</h2>
-                            <ul class="list-disc list-inside">
-                                <li>English</li>
-                                <li>Filipino</li>
+                            <ul class="list-disc list-inside" id="languages-preview">
+                               
                             </ul>
                         </div>
                     </div>
@@ -5308,15 +5464,16 @@
                     <!-- Hobbies -->
                     <div>
                         <h3 class="text-lg font-semibold">Hobbies</h3>
-                        <p class="text-sm">Action Cricket, Rugby, Athletics</p>
+                        <ul class="text-sm space-y-1" id="hobbies-preview">
+                           
+                        </ul>
                     </div>
 
                     <!-- Languages -->
                     <div>
                         <h3 class="text-lg font-semibold">Languages</h3>
-                        <ul class="text-sm space-y-1">
-                            <li class="flex justify-between"><span>English</span></li>
-                            <li class="flex justify-between"><span>Spanish</span></li>
+                        <ul class="text-sm space-y-1" id="languages-preview">
+                          
                         </ul>
                     </div>
                 </div>
@@ -5400,7 +5557,7 @@
                     <!-- Hobbies -->
                     <div>
                         <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Hobbies</h2>
-                        <ul class="list-disc list-inside space-y-1">
+                        <ul class="list-disc list-inside space-y-1" id="hobbies-preview">
                             <li>Hockey</li>
                             <li>Tennis</li>
                             <li>Basketball</li>
@@ -5410,7 +5567,7 @@
                     <!-- Languages -->
                     <div>
                         <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Languages</h2>
-                        <ul class="list-disc list-inside space-y-1">
+                        <ul class="list-disc list-inside space-y-1" id="languages-preview">
                             <li>English</li>
                             <li>French</li>
                         </ul>
@@ -5605,9 +5762,8 @@
                         </div>
                         <div>
                             <h2 class="font-semibold mb-2">Languages</h2>
-                                <ul class="list-disc list-inside space-y-1">
-                                <li>English</li>
-                                <li>Spanish</li>
+                                <ul class="list-disc list-inside space-y-1" id="languages-preview">
+                               
                             </ul>
                         </div>
                     </div>
@@ -5910,16 +6066,14 @@
                     </div>
                 </div>
 
-                <!-- References -->
+                <!-- Languages -->
                 <div>
                     <hr class="mb-2" />
-                    <h2 class="font-semibold uppercase mb-2">References</h2>
+                    <h2 class="font-semibold uppercase mb-2">Languages</h2>
                     <hr class="mb-4" />
-                    <p class="text-sm">
-                        <span class="font-semibold">Keyer Tools, Joe Smith</span><br />
-                        Plant Manager<br />
-                        Tel: 888-999-0000
-                    </p>
+                    <ul class="list-disc list-inside text-sm space-y-1" id="languages-preview">
+                       
+                    </ul>
                 </div>
                 `;
                 previewContainer.appendChild(preview);
@@ -6001,128 +6155,96 @@
                 const preview = document.createElement('div');
                 preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] w-full bg-white shadow-lg p-8 space-y-6';
                 preview.innerHTML = `
-                    <div class="max-w-[210mm] mx-auto bg-white shadow-lg p-8 space-y-6">
-    
-                        <!-- 🔹 Profile Section (Top) -->
-                        <div class="flex items-center gap-4">
-                        <img src="${window.profileImage || profileImage || ''}" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
+                <!-- 🔹 Profile Section (Top) -->
+                <div class="flex items-center gap-4">
+                    <img src="${window.profileImage || profileImage}" alt="Profile"  class="w-20 h-20 object-cover border border-black bg-white">
+                    <div>
+                        <h1 class="text-2xl font-bold">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                        <p class="text-gray-600">${document.getElementById('title')?.value || 'Job Title'}</p>
+                    </div>
+                </div>
+
+                <!-- 🔹 Two Column Layout -->
+                <div class="flex gap-6">
+                
+                    <!-- Left Column -->
+                    <div class="md:w-2/3 space-y-6">
+                        <!-- Profile -->
                         <div>
-                            <h1 class="text-2xl font-bold">${(document.getElementById('name')?.value || 'Jason Miller')}</h1>
-                            <p class="text-gray-600">${(document.getElementById('title')?.value || 'Amazon Associate')}</p>
-                        </div>
-                        </div>
-
-                        <!-- 🔹 Two Column Layout -->
-                        <div class="flex gap-6">
-                        
-                        <!-- Left Column -->
-                        <div class="md:w-2/3 space-y-6">
-
-                            <!-- Profile -->
-                            <div>
                             <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
                                 <span>🧾</span> Profile
                             </h2>
                             <p class="text-sm leading-relaxed">
-                                ${document.getElementById('summary')?.value || ''}
+                                ${document.getElementById('summary')?.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
                             </p>
-                            </div>
-
-                            <!-- Employment History -->
-                            <div>
+                        </div>
+                        <!-- Employment History -->
+                        <div>
                             <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
                                 <span>💼</span> Employment History
                             </h2>
-
                             <!-- Job 1 -->
                             <div class="mb-4">
-                                <h3 class="font-bold">${document.getElementById('job-1-company')?.value || 'Amazon Warehouse Associate at Amazon, Miami Gardens'}</h3>
-                                <p class="text-sm italic">${document.getElementById('job-1-start-date')?.value || 'January 2021'} — ${document.getElementById('job-1-end-date')?.value || 'July 2022'}</p>
-                                <p class="text-sm mt-1">
-                                ${document.getElementById('job-1-description')?.value || 'Performed all warehouse laborer duties such as packing, picking, counting, record keeping, and maintaining a clean area.'}
-                                </p>
-                                <ul class="list-disc ml-6 mt-2 text-sm">
-                                <li>${document.getElementById('job-1-achievement-1')?.value || 'Consistently maintained picking/packing speeds in the 98th percentile.'}</li>
-                                <li>${document.getElementById('job-1-achievement-2')?.value || 'Picked all orders with 100% accuracy despite high speeds.'}</li>
-                                <li>${document.getElementById('job-1-achievement-3')?.value || 'Maintained a clean work area, meeting 97.5% of inspection requirements.'}</li>
-                                </ul>
+                                ${generateExperiencePreview()}
                             </div>
+                        </div>
 
-                            <!-- Job 2 -->
-                            <div>
-                                <h3 class="font-bold">${document.getElementById('job-2-company')?.value || 'Laboratory Inventory Assistant at Dunrea Laboratories, Orlando'}</h3>
-                                <p class="text-sm italic">${document.getElementById('job-2-start-date')?.value || 'January 2019'} — ${document.getElementById('job-2-end-date')?.value || 'December 2020'}</p>
-                                <p class="text-sm mt-1">
-                                ${document.getElementById('job-2-description')?.value || 'Full-time lab assistant in a small, regional laboratory tasked with participating in Kaizen Events, Gemba walks, and 5S to remove barriers and improve productivity.'}
-                                </p>
-                                <ul class="list-disc ml-6 mt-2 text-sm">
-                                <li>${document.getElementById('job-2-achievement-1')?.value || 'Filled the warehouse helper job description, including packing, shipping, inventory management, and cleaning equipment.'}</li>
-                                <li>${document.getElementById('job-2-achievement-2')?.value || 'Saved 12% on UPS orders by staying on top of special deals.'}</li>
-                                <li>${document.getElementById('job-2-achievement-3')?.value || 'Cut down storage waste by 23% by switching to a Kanban system.'}</li>
-                                </ul>
-                            </div>
-                            </div>
+                        <!-- Education -->
+                        <div>
+                            <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
+                                <span>🎓</span> Education
+                            </h2>
+                            <p class="text-sm">
+                                ${generateEducationPreview()}
+                            </p>
+                        </div>
 
-                            <!-- Education -->
-                            <div>
-                                <div id="education-preview-list">
-                                    ${generateEducationPreview()}
-                                </div>
-                            </div>
-
-                            <!-- Courses -->
-                            <div>
+                        <!-- Courses -->
+                        <div>
                             <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
                                 <span>📚</span> Courses
                             </h2>
-                            <p class="text-sm">
-                                ${document.getElementById('course-1-name')?.value || 'Online Graduate Certificate in Warehousing & Supply Chain Management,'}<br>
-                                ${document.getElementById('course-1-school')?.value || 'Southern New Hampshire University (SNHU), NH.'}<br>
-                                <em>${document.getElementById('course-1-start-date')?.value || 'July 2022'} — ${document.getElementById('course-1-end-date')?.value || 'July 2022'}</em>
-                            </p>
-                            </div>
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="w-1/3 space-y-6">
-
-                            <!-- Details -->
-                            <div>
-                            <h3 class="text-lg font-semibold">Details</h3>
-                            <p class="text-sm">${document.getElementById('address')?.value || '1515 Pacific Ave<br>Los Angeles, CA 90291<br>United States'}</p>
-                            <p class="text-sm mt-2">${document.getElementById('phone')?.value || '09123456789'}<br><a href="#" class="text-blue-500">${document.getElementById('email')?.value || 'email@email.com'}</a></p>
-                            <p class="text-sm mt-2">Place of birth: ${document.getElementById('place-of-birth')?.value || 'San Antonio'}</p>
-                            <p class="text-sm">Driving license: ${document.getElementById('driving-license')?.value || 'Full'}</p>
-                            </div>
-
-                            <!-- Skills -->
-                            <div>
-                            <h3 class="text-lg font-semibold">Skills</h3>
-                            <ul class="text-sm space-y-1">
-                                <li class="flex justify-between"><span>${document.getElementById('skill-1')?.value || 'Cleaning Equipment'}</span></li>
-                                <li class="flex justify-between"><span>${document.getElementById('skill-2')?.value || 'Mathematics'}</span></li>
-                                <li class="flex justify-between"><span>${document.getElementById('skill-3')?.value || 'Deep Sanitation Practices'}</span></li>
-                            </ul>
-                            </div>
-
-                            <!-- Hobbies -->
-                            <div>
-                            <h3 class="text-lg font-semibold">Hobbies</h3>
-                            <p class="text-sm">Action Cricket, Rugby, Athletics</p>
-                            </div>
-
-                            <!-- Languages -->
-                            <div>
-                            <h3 class="text-lg font-semibold">Languages</h3>
-                            <ul class="text-sm space-y-1">
-                                <li class="flex justify-between"><span>English</span></li>
-                                <li class="flex justify-between"><span>Spanish</span></li>
-                            </ul>
-                            </div>
-
-                        </div>
                         </div>
                     </div>
+
+                <!-- Right Column -->
+                <div class="w-1/3 space-y-6">
+                    <!-- Details -->
+                    <div>
+                        <h3 class="text-lg font-semibold">Details</h3>
+                        <p class="text-sm">${document.getElementById('address')?.value || '123 Anywhere St., Any City, ST 12345'}</p>
+                        <p class="text-sm mt-2">${document.getElementById('phone')?.value || '+123-456-7890'}<br><a href="#" class="text-blue-500">${document.getElementById('email')?.value || 'email@example.com'}</a></p>
+                        <p class="text-sm mt-2">Place of birth: ${document.getElementById('placeOfBirth')?.value || 'San Antonio'}</p>
+                        <p class="text-sm">Driving license: ${document.getElementById('drivingLicense')?.value || 'Full'}</p>
+                    </div>
+
+                    <!-- Skills -->
+                    <div>
+                        <h3 class="text-lg font-semibold">Skills</h3>
+                        <ul class="text-sm space-y-1" id="skills-preview">
+                            <li class="flex justify-between"><span>Cleaning Equipment</span></li>
+                            <li class="flex justify-between"><span>Mathematics</span></li>
+                            <li class="flex justify-between"><span>Deep Sanitation Practices</span></li>w()}
+                        </ul>
+                    </div>
+
+                    <!-- Hobbies -->
+                    <div>
+                        <h3 class="text-lg font-semibold">Hobbies</h3>
+                        <ul class="text-sm space-y-1" id="hobbies-preview">
+                           
+                        </ul>
+                    </div>
+
+                    <!-- Languages -->
+                    <div>
+                        <h3 class="text-lg font-semibold">Languages</h3>
+                        <ul class="text-sm space-y-1" id="languages-preview">
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
                 `;
                 previewContainer.appendChild(preview);
             }
@@ -6383,6 +6505,22 @@
                     debouncedUpdatePreview();
                 });
             });
+
+            // Language inputs
+            const languageInputs = document.querySelectorAll('.language-input, .proficiency-select');
+            languageInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    debouncedUpdatePreview();
+                });
+            });
+
+            // Hobby inputs
+            const hobbyInputs = document.querySelectorAll('.hobby-input, .hobby-description-input');
+            hobbyInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    debouncedUpdatePreview();
+                });
+            });
         }
 
         // Initialize event listeners
@@ -6433,6 +6571,155 @@
                     addBtn.click();
                 }
             });
+        });
+
+        // Add Language Functionality
+        const addLanguageBtn = document.querySelector('.add-language-btn');
+        const languagesContainer = document.getElementById('languages-container');
+
+        function addLanguage() {
+            const languageCount = languagesContainer.querySelectorAll('.language-item').length + 1;
+            const languageItem = document.createElement('div');
+            languageItem.className = 'language-item';
+            languageItem.innerHTML = `
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="language-${languageCount}">Language</label>
+                        <input type="text" class="language-input" id="language-${languageCount}" placeholder="e.g., English">
+                    </div>
+                    <div class="input-group">
+                        <label for="proficiency-${languageCount}">Proficiency Level</label>
+                        <select class="proficiency-select" id="proficiency-${languageCount}">
+                            <option value="Basic">Basic</option>
+                            <option value="Conversational">Conversational</option>
+                            <option value="Fluent">Fluent</option>
+                            <option value="Native">Native</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="remove-language-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+            `;
+
+            languagesContainer.appendChild(languageItem);
+
+            // Add remove functionality
+            const removeBtn = languageItem.querySelector('.remove-language-btn');
+            removeBtn.addEventListener('click', () => {
+                languageItem.remove();
+                // Ensure at least one language item remains
+                if (languagesContainer.querySelectorAll('.language-item').length === 0) {
+                    addLanguage(); // Add a new empty one
+                }
+                debouncedUpdatePreview();
+            });
+
+            // Add event listeners to new inputs
+            const newInputs = languageItem.querySelectorAll('input, select');
+            newInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    debouncedUpdatePreview();
+                });
+            });
+        }
+
+        addLanguageBtn?.addEventListener('click', addLanguage);
+
+        // Add Hobby Functionality
+        const addHobbyBtn = document.querySelector('.add-hobby-btn');
+        const hobbiesContainer = document.getElementById('hobbies-container');
+
+        function addHobby() {
+            const hobbyCount = hobbiesContainer.querySelectorAll('.hobby-item').length + 1;
+            const hobbyItem = document.createElement('div');
+            hobbyItem.className = 'hobby-item';
+            hobbyItem.innerHTML = `
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="hobby-${hobbyCount}">Hobby/Interest</label>
+                        <input type="text" class="hobby-input" id="hobby-${hobbyCount}" placeholder="e.g., Reading, Traveling, Photography">
+                    </div>
+                    <div class="input-group">
+                        <label for="hobby-description-${hobbyCount}">Description (Optional)</label>
+                        <input type="text" class="hobby-description-input" id="hobby-description-${hobbyCount}" placeholder="Brief description or context">
+                    </div>
+                </div>
+                <button class="remove-hobby-btn" style="margin-top: 1rem; padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+            `;
+
+            hobbiesContainer.appendChild(hobbyItem);
+
+            // Add remove functionality
+            const removeBtn = hobbyItem.querySelector('.remove-hobby-btn');
+            removeBtn.addEventListener('click', () => {
+                hobbyItem.remove();
+                // Ensure at least one hobby item remains
+                if (hobbiesContainer.querySelectorAll('.hobby-item').length === 0) {
+                    addHobby(); // Add a new empty one
+                }
+                debouncedUpdatePreview();
+            });
+
+            // Add event listeners to new inputs
+            const newInputs = hobbyItem.querySelectorAll('input');
+            newInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    debouncedUpdatePreview();
+                });
+            });
+        }
+
+        addHobbyBtn?.addEventListener('click', addHobby);
+
+        // Add event listeners for initial remove buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add remove functionality to initial language item
+            const initialLanguageRemoveBtn = document.querySelector('#languages-section .remove-language-btn');
+            if (initialLanguageRemoveBtn) {
+                initialLanguageRemoveBtn.addEventListener('click', function() {
+                    const languageItem = this.closest('.language-item');
+                    if (languageItem) {
+                        languageItem.remove();
+                        // Ensure at least one language item remains
+                        if (languagesContainer.querySelectorAll('.language-item').length === 0) {
+                            addLanguage(); // Add a new empty one
+                        }
+                        debouncedUpdatePreview();
+                    }
+                });
+            }
+
+            // Add remove functionality to initial hobby item
+            const initialHobbyRemoveBtn = document.querySelector('#hobbies-section .remove-hobby-btn');
+            if (initialHobbyRemoveBtn) {
+                initialHobbyRemoveBtn.addEventListener('click', function() {
+                    const hobbyItem = this.closest('.hobby-item');
+                    if (hobbyItem) {
+                        hobbyItem.remove();
+                        // Ensure at least one hobby item remains
+                        if (hobbiesContainer.querySelectorAll('.hobby-item').length === 0) {
+                            addHobby(); // Add a new empty one
+                        }
+                        debouncedUpdatePreview();
+                    }
+                });
+            }
+
+       
+            // Force update form for category to ensure sections are shown
+            setTimeout(() => {
+                if (typeof updateFormForCategory === 'function') {
+                    updateFormForCategory();
+                }
+                
+                // Manually show language and hobby sections for generic templates
+                if (templateId && templateId.startsWith('generic-')) {
+                    const languagesSection = document.getElementById('languages-section');
+                    const hobbiesSection = document.getElementById('hobbies-section');
+                    if (languagesSection) languagesSection.style.display = '';
+                    if (hobbiesSection) hobbiesSection.style.display = '';
+                   
+                }
+            }, 100);
         });
 
         // Add event listeners
@@ -6494,6 +6781,9 @@
             clearTimeout(previewUpdateTimer);
             previewUpdateTimer = setTimeout(() => {
                 updatePreview();
+                // Update language and hobby previews
+                updateLanguagesInPreview();
+                updateHobbiesInPreview();
             }, 300); // Wait 300ms after last input change
         }
 
@@ -7217,12 +7507,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const cat2 = document.getElementById('skill-cat-2');
             const cat3 = document.getElementById('skill-cat-3');
             const projectsSection = document.getElementById('projects-section');
+            const languagesSection = document.getElementById('languages-section');
+            const hobbiesSection = document.getElementById('hobbies-section');
 
             if (!skillsSection || !skillsTitle || !cat1 || !cat2 || !cat3) return;
 
             // Reset defaults
             skillsSection.style.display = '';
             projectsSection && (projectsSection.style.display = '');
+            languagesSection && (languagesSection.style.display = 'none');
+            hobbiesSection && (hobbiesSection.style.display = 'none');
             cat1.style.display = '';
             cat2.style.display = '';
             cat3.style.display = '';
@@ -7235,6 +7529,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'IT':
                     // Keep all three skill categories and projects visible
                     projectsSection && (projectsSection.style.display = '');
+                    // Show languages and hobbies for IT templates
+                    languagesSection && (languagesSection.style.display = '');
+                    hobbiesSection && (hobbiesSection.style.display = '');
                     break;
                 case 'Business Administrator':
                     skillsTitle.textContent = 'Business Skills';
@@ -7243,6 +7540,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     cat3.querySelector('h4').textContent = 'Accounting/Finance Tools';
                     // Hide projects section for business-oriented templates
                     projectsSection && (projectsSection.style.display = 'none');
+                    // Show languages and hobbies for business templates
+                    languagesSection && (languagesSection.style.display = '');
+                    hobbiesSection && (hobbiesSection.style.display = '');
                     break;
                 case 'Accountancy':
                     skillsTitle.textContent = 'Accountancy Skills';
@@ -7251,6 +7551,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     cat3.querySelector('h4').textContent = 'Compliance & Reporting';
                     // Projects often not used; hide
                     projectsSection && (projectsSection.style.display = 'none');
+                    // Show languages for accountancy (international business)
+                    languagesSection && (languagesSection.style.display = '');
+                    // Hide hobbies for professional templates
+                    hobbiesSection && (hobbiesSection.style.display = 'none');
                     break;
                 case 'Civil Engineering':
                     skillsTitle.textContent = 'Engineering Skills';
@@ -7259,6 +7563,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     cat3.querySelector('h4').textContent = 'Construction/Project Skills';
                     // Keep projects visible (for portfolio projects)
                     projectsSection && (projectsSection.style.display = '');
+                    // Show languages for international projects
+                    languagesSection && (languagesSection.style.display = '');
+                    // Hide hobbies for professional templates
+                    hobbiesSection && (hobbiesSection.style.display = 'none');
                     break;
                 default: // Generic
                     skillsTitle.textContent = 'Skills';
@@ -7266,11 +7574,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     cat2.querySelector('h4').textContent = 'Tools & Methods';
                     cat3.querySelector('h4').textContent = 'Other Skills';
                     projectsSection && (projectsSection.style.display = 'none');
+                    // Show both languages and hobbies for generic templates
+                    languagesSection && (languagesSection.style.display = '');
+                    hobbiesSection && (hobbiesSection.style.display = '');
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            try { updateFormForCategory(); } catch (e) { console.error(e); }
+            try { 
+                updateFormForCategory(); 
+                // Also update when template changes
+                if (templateId) {
+                    updateFormForCategory();
+                }
+            } catch (e) { console.error(e); }
         });
 
         async function askAI(promptText) {
@@ -7581,11 +7898,88 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
-            // Update languages in the preview
-            const languageLists = document.querySelectorAll('[data-field="languages-list"]');
+            // Update languages in the preview - target multiple possible selectors
+            const languageLists = document.querySelectorAll('[data-field="languages-list"], #languages-preview, .languages-preview, [id*="languages"], [class*="languages"]');
             languageLists.forEach(list => {
-                list.innerHTML = languages.map(lang => `<li>${lang.language} - ${lang.proficiency}</li>`).join('');
+                if (list.tagName === 'UL') {
+                    // If it's a ul element, update the innerHTML directly
+                    list.innerHTML = languages.map(lang => `<li class="flex justify-between"><span>${lang.language} - ${lang.proficiency}</span></li>`).join('');
+                } else {
+                    // If it's a container div, look for ul inside it
+                    const ulElement = list.querySelector('ul');
+                    if (ulElement) {
+                        ulElement.innerHTML = languages.map(lang => `<li class="flex justify-between"><span>${lang.language} - ${lang.proficiency}</span></li>`).join('');
+                    }
+                }
             });
+
+            // Also update any language sections in the preview with more specific targeting
+            const previewLanguageSections = document.querySelectorAll('.language-preview, [id*="language"], [class*="language"]');
+            previewLanguageSections.forEach(section => {
+                const languageContent = section.querySelector('ul, .language-list, [data-field="languages"]');
+                if (languageContent) {
+                    languageContent.innerHTML = languages.map(lang => `<li class="flex justify-between"><span>${lang.language} - ${lang.proficiency}</span></li>`).join('');
+                }
+            });
+
+        }
+
+        function updateHobbiesInPreview() {
+            const hobbyInputs = document.querySelectorAll('.hobby-input');
+            const hobbyDescriptionInputs = document.querySelectorAll('.hobby-description-input');
+            const hobbies = [];
+            
+            for (let i = 0; i < hobbyInputs.length; i++) {
+                const hobby = hobbyInputs[i].value.trim();
+                const description = hobbyDescriptionInputs[i] ? hobbyDescriptionInputs[i].value.trim() : '';
+                if (hobby !== '') {
+                    hobbies.push({ hobby, description });
+                }
+            }
+            
+            // Update hobbies in the preview - target multiple possible selectors
+            const hobbyLists = document.querySelectorAll('[data-field="hobbies-list"], #hobbies-preview, .hobbies-preview, [id*="hobbies"], [class*="hobbies"]');
+            hobbyLists.forEach(list => {
+                if (list.tagName === 'UL') {
+                    // If it's a ul element, update the innerHTML directly
+                    list.innerHTML = hobbies.map(hobby => {
+                        if (hobby.description) {
+                            return `<li class="flex justify-between"><span>${hobby.hobby} - ${hobby.description}</span></li>`;
+                        } else {
+                            return `<li class="flex justify-between"><span>${hobby.hobby}</span></li>`;
+                        }
+                    }).join('');
+                } else {
+                    // If it's a container div, look for ul inside it
+                    const ulElement = list.querySelector('ul');
+                    if (ulElement) {
+                        ulElement.innerHTML = hobbies.map(hobby => {
+                            if (hobby.description) {
+                                return `<li class="flex justify-between"><span>${hobby.hobby} - ${hobby.description}</span></li>`;
+                            } else {
+                                return `<li class="flex justify-between"><span>${hobby.hobby}</span></li>`;
+                            }
+                        }).join('');
+                    }
+                }
+            });
+
+            // Also update any hobby sections in the preview with more specific targeting
+            const previewHobbySections = document.querySelectorAll('.hobby-preview, [id*="hobby"], [class*="hobby"]');
+            previewHobbySections.forEach(section => {
+                const hobbyContent = section.querySelector('ul, .hobby-list, [data-field="hobbies"]');
+                if (hobbyContent) {
+                    hobbyContent.innerHTML = hobbies.map(hobby => {
+                        if (hobby.description) {
+                            return `<li class="flex justify-between"><span>${hobby.hobby} - ${hobby.description}</span></li>`;
+                        } else {
+                            return `<li class="flex justify-between"><span>${hobby.hobby}</span></li>`;
+                        }
+                    }).join('');
+                }
+            });
+
+       
         }
 
         function addLanguageInput() {
