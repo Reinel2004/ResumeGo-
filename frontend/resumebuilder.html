@@ -391,7 +391,7 @@
     }
 
     .skill-category h4 {
-        color: var(--primary-color);
+        color: inherit;
         margin-bottom: 0.5rem;
     }
 
@@ -524,7 +524,7 @@
     }
 
     .skill-category h4 {
-        color: #1e40af;
+        color: inherit;
         margin-bottom: 0.5rem;
     }
 
@@ -541,7 +541,7 @@
 
     .skill-list li::before {
         content: "•";
-        color: #2563eb;
+        color: inherit;
     }
 
     .experience-item {
@@ -1927,6 +1927,8 @@
             alert('You must be logged in to save your resume.');
             return;
         }
+
+        updatePreview();
         const title = document.getElementById('title').value || 'Untitled Resume';
         const template = templateId;
         // Gather all content (inputs, skills, experience, projects, etc.)
@@ -2280,7 +2282,7 @@
                     <div class="bg-slate-800 text-white px-8 py-6 flex items-center gap-6">
                         <!-- Profile Image -->
                         <div>
-                            <img src="${profileImage || '...'}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
+                            <img src="${window.profileImage || profileImage || ''}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
                         </div>
                         <!-- Name and Title -->
                         <div>
@@ -2828,7 +2830,7 @@
                             <!-- Skills -->
                             <div>
                             <div class="font-bold mb-4 text-base">SKILLS</div>
-                            <ul class="list-disc list-inside space-y-2 text-sm">
+                            <ul class="list-disc list-inside space-y-2 text-sm" id="skills-preview">
                                 <li>Proficient in coding languages</li>
                                 <li>Strong logical approach to problem-solving</li>
                                 <li>High attention to detail</li>
@@ -2869,8 +2871,7 @@
                         <div>
                             <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Language</h2>
                             <ul class="list-disc list-inside" id="languages-preview">
-                                <li>English</li>
-                                <li>Tagalog</li>
+                              
                             </ul>
                         </div>
                         </div>
@@ -7530,8 +7531,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Keep all three skill categories and projects visible
                     projectsSection && (projectsSection.style.display = '');
                     // Show languages and hobbies for IT templates
-                    languagesSection && (languagesSection.style.display = '');
-                    hobbiesSection && (hobbiesSection.style.display = '');
+                    if(templateId === 'it-1'){
+                        // it-1 template: hide languages and hobbies
+                        languagesSection && (languagesSection.style.display = 'none');
+                        hobbiesSection && (hobbiesSection.style.display = 'none');
+                    } else {
+                        // Other IT templates: show languages and hobbies
+                        languagesSection && (languagesSection.style.display = '');
+                        hobbiesSection && (hobbiesSection.style.display = '');
+                    }
+                    hobbiesSection && (hobbiesSection.style.display = 'none');
                     break;
                 case 'Business Administrator':
                     skillsTitle.textContent = 'Business Skills';
