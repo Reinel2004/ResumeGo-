@@ -86,6 +86,11 @@
             background: var(--secondary-color);
         }
 
+        .btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
         .message {
             padding: 10px;
             margin-bottom: 20px;
@@ -181,6 +186,191 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: auto;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .terms-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .terms-link {
+            color: var(--primary-color);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .terms-link:hover {
+            text-decoration: none;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #4b5563;
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            border-top: 1px solid #e2e8f0;
+            background-color: #f9fafb;
+        }
+
+        .modal-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            color: #6b7280;
+        }
+
+        .modal-btn-secondary:hover {
+            color: #1f2937;
+        }
+
+        .modal-btn-primary {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 24px;
+        }
+
+        .modal-btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .terms-content {
+            line-height: 1.6;
+        }
+
+        .terms-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            margin-top: 24px;
+            color: #1f2937;
+        }
+
+        .terms-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .terms-content p {
+            margin-bottom: 16px;
+            color: #374151;
+        }
+
+        .terms-content ul {
+            margin-bottom: 16px;
+            padding-left: 20px;
+        }
+
+        .terms-content li {
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 100%;
+                margin: 10px;
+            }
+
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+                padding: 16px;
+            }
+
+            .modal-title {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -228,7 +418,14 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
 
-            <button type="submit" class="btn">Register</button>
+            <div class="terms-checkbox">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                <div class="terms-text">
+                    I agree to the <span class="terms-link" onclick="openTermsModal()">Terms of Service</span> and Privacy Policy
+                </div>
+            </div>
+
+            <button type="submit" class="btn" id="registerBtn">Register</button>
 
             <div class="login-link">
                 Already have an account? <a href="login.html">Login here</a>
@@ -236,6 +433,86 @@
         </form>
     </div>
 
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h3 class="modal-title">Terms of Service</h3>
+                <button onclick="closeTermsModal()" class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="terms-content">
+                    <h4>1. Acceptance of Terms</h4>
+                    <p>By accessing and using ResumeGo!, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                    
+                    <h4>2. Use License</h4>
+                    <p>Permission is granted to temporarily use ResumeGo! for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                    <ul>
+                        <li>modify or copy the materials</li>
+                        <li>use the materials for any commercial purpose or for any public display</li>
+                        <li>attempt to decompile or reverse engineer any software contained on ResumeGo!'s website</li>
+                        <li>remove any copyright or other proprietary notations from the materials</li>
+                    </ul>
+                    
+                    <h4>3. Account Registration</h4>
+                    <p>To access certain features of our service, you must register for an account. You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate, current, and complete.</p>
+                    
+                    <h4>4. User Content</h4>
+                    <p>You retain ownership of any content you submit, post, or display on or through the service. By submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, copy, reproduce, process, adapt, modify, publish, transmit, display and distribute such content.</p>
+                    
+                    <h4>5. Privacy Policy</h4>
+                    <p>Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your information when you use our service.</p>
+                    
+                    <h4>6. Service Availability</h4>
+                    <p>We strive to keep ResumeGo! available at all times, but we cannot guarantee uninterrupted service. We may suspend or discontinue the service at any time without notice.</p>
+                    
+                    <h4>7. Prohibited Uses</h4>
+                    <p>You may not use our service:</p>
+                    <ul>
+                        <li>For any unlawful purpose or to solicit others to unlawful acts</li>
+                        <li>To violate any international, federal, provincial, or state regulations, rules, laws, or local ordinances</li>
+                        <li>To infringe upon or violate our intellectual property rights or the intellectual property rights of others</li>
+                        <li>To harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate</li>
+                        <li>To submit false or misleading information</li>
+                    </ul>
+                    
+                    <h4>8. Disclaimer</h4>
+                    <p>The information on this website is provided on an 'as is' basis. To the fullest extent permitted by law, we exclude all representations, warranties, and conditions relating to our website and the use of this website.</p>
+                    
+                    <h4>9. Limitations</h4>
+                    <p>In no event shall ResumeGo! or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use ResumeGo!, even if ResumeGo! or an authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+                    
+                    <h4>10. Revisions and Errata</h4>
+                    <p>The materials appearing on ResumeGo! could include technical, typographical, or photographic errors. We do not warrant that any of the materials on its website are accurate, complete, or current.</p>
+                    
+                    <h4>11. Governing Law</h4>
+                    <p>These terms and conditions are governed by and construed in accordance with the laws of the Philippines and you irrevocably submit to the exclusive jurisdiction of the courts in that state or location.</p>
+                    
+                    <h4>12. Changes to Terms</h4>
+                    <p>We reserve the right to revise these terms of service at any time without notice. By using this website, you agree to be bound by the then-current version of these terms of service.</p>
+                    
+                    <p class="last-updated">Last updated: September 1, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button onclick="closeTermsModal()" class="modal-btn modal-btn-secondary">
+                    Close
+                </button>
+                <div>
+                    <button onclick="agreeToTerms()" class="modal-btn modal-btn-primary">
+                        I Agree
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -255,6 +532,45 @@
         
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', initializeEmailJS);
+
+        // Terms Modal Functions
+        function openTermsModal() {
+            const modal = document.getElementById('termsModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTermsModal() {
+            const modal = document.getElementById('termsModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function agreeToTerms() {
+            const checkbox = document.getElementById('agreeTerms');
+            checkbox.checked = true;
+            closeTermsModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('termsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTermsModal();
+            }
+        });
+
+        // Update register button state based on checkbox
+        document.getElementById('agreeTerms').addEventListener('change', function() {
+            const registerBtn = document.getElementById('registerBtn');
+            registerBtn.disabled = !this.checked;
+        });
+
+        // Initialize button state
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerBtn = document.getElementById('registerBtn');
+            const agreeTerms = document.getElementById('agreeTerms');
+            registerBtn.disabled = !agreeTerms.checked;
+        });
     </script>
     
     <script type="module" src="js/api.js"></script>
