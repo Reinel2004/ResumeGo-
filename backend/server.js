@@ -101,10 +101,19 @@ app.get("/api/config/status", (req, res) => {
 });
 
 
+// Serve frontend files
 const frontendPath = path.join(__dirname, "../frontend");
 app.use(express.static(frontendPath));
 
+// Serve assets from root directory
+const assetsPath = path.join(__dirname, "../assets");
+app.use("/assets", express.static(assetsPath));
 
+// Serve uploads directory
+const uploadsPath = path.join(__dirname, "../uploads");
+app.use("/uploads", express.static(uploadsPath));
+
+// Catch-all handler: send back React's index.html file for any non-API routes
 app.get("*", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
 });

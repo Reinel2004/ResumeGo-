@@ -7,4 +7,9 @@ router.post("/signup", authController.signup);
 router.post("/signin", authController.signin);
 router.post("/check-email", authController.checkEmail);
 
+// Password reset routes
+router.post("/forgot-password", authController.forgotPassword);
+router.post("/reset-password", authController.resetPassword);
+router.get("/validate-reset-token/:token", authController.validateResetToken);
+
 module.exports = router; 
