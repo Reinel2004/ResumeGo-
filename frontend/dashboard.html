@@ -250,77 +250,77 @@
             const { atsAPI } = await import('./js/api.js');
             const noResumesMsg = document.getElementById('noResumesMsg');
 
-            async function fetchResumes() {
-                const res = await fetch('http://localhost:3000/api/resume', {
+        async function fetchResumes() {
+            const res = await fetch('http://localhost:3000/api/resume', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            if (!res.ok) return [];
+            return await res.json();
+        }
+
+        function renderResumes(resumes) {
+            resumeCardsContainer.innerHTML = '';
+            if (!resumes.length) {
+                noResumesMsg.classList.remove('hidden');
+                return;
+            }
+            noResumesMsg.classList.add('hidden');
+            resumes.forEach(resume => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 flex flex-col';
+                card.innerHTML = `
+                  <div class="flex items-center gap-4 p-6 border-b border-gray-100">
+                    <div class="flex-shrink-0 bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center text-blue-600 text-2xl font-bold">
+                      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M7 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.828a2 2 0 0 0-.586-1.414l-3.828-3.828A2 2 0 0 0 14.172 2H7zm5 1.414L18.586 8H15a1 1 0 0 1-1-1V4.414z" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-lg font-semibold text-gray-900 mb-1 truncate">${resume.title}</h3>
+                      <p class="text-xs text-gray-500">Last edited: ${new Date(resume.updatedAt).toLocaleString()}</p>
+                      <div class="flex items-center gap-2 mt-2">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col justify-between p-6">
+                    <div class="mb-4">
+                      <span class="inline-block bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">${resume.template || 'Template'}</span>
+                    </div>
+                    <div class="flex gap-2 mt-auto">
+                      <button class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors font-semibold edit-btn" data-id="${resume.id}">Edit</button>
+                      <button class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors font-semibold download-btn" data-id="${resume.id}">Download</button>
+                      <button class="flex-1 px-4 py-2 border border-red-300 text-red-600 rounded-md hover:bg-red-50 transition-colors font-semibold delete-btn" data-id="${resume.id}">Delete</button>
+                    </div>
+                  </div>
+                `;
+                resumeCardsContainer.appendChild(card);
+            });
+        }
+
+        async function handleEdit(id) {
+            // Redirect to editor with resume id
+            window.location.href = `resumebuilder.html?resumeId=${id}`;
+        }
+
+        async function handleDownload(id) {
+            try {
+                // Show loading state
+                const downloadBtn = document.querySelector(`.download-btn[data-id="${id}"]`);
+                const originalText = downloadBtn.textContent;
+                downloadBtn.textContent = 'Generating...';
+                downloadBtn.disabled = true;
+
+                // Fetch resume content
+                const res = await fetch(`http://localhost:3000/api/resume/${id}`, {
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
-                if (!res.ok) return [];
-                return await res.json();
-            }
-
-            function renderResumes(resumes) {
-                resumeCardsContainer.innerHTML = '';
-                if (!resumes.length) {
-                    noResumesMsg.classList.remove('hidden');
-                    return;
-                }
-                noResumesMsg.classList.add('hidden');
-                resumes.forEach(resume => {
-                    const card = document.createElement('div');
-                    card.className = 'bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 flex flex-col';
-                    card.innerHTML = `
-                      <div class="flex items-center gap-4 p-6 border-b border-gray-100">
-                        <div class="flex-shrink-0 bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center text-blue-600 text-2xl font-bold">
-                          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M7 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.828a2 2 0 0 0-.586-1.414l-3.828-3.828A2 2 0 0 0 14.172 2H7zm5 1.414L18.586 8H15a1 1 0 0 1-1-1V4.414z" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </div>
-                        <div class="flex-1">
-                          <h3 class="text-lg font-semibold text-gray-900 mb-1 truncate">${resume.title}</h3>
-                          <p class="text-xs text-gray-500">Last edited: ${new Date(resume.updatedAt).toLocaleString()}</p>
-                          <div class="flex items-center gap-2 mt-2">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="flex-1 flex flex-col justify-between p-6">
-                        <div class="mb-4">
-                          <span class="inline-block bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">${resume.template || 'Template'}</span>
-                        </div>
-                        <div class="flex gap-2 mt-auto">
-                          <button class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors font-semibold edit-btn" data-id="${resume.id}">Edit</button>
-                          <button class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors font-semibold download-btn" data-id="${resume.id}">Download</button>
-                          <button class="flex-1 px-4 py-2 border border-red-300 text-red-600 rounded-md hover:bg-red-50 transition-colors font-semibold delete-btn" data-id="${resume.id}">Delete</button>
-                        </div>
-                      </div>
-                    `;
-                    resumeCardsContainer.appendChild(card);
-                });
-            }
-
-            async function handleEdit(id) {
-                // Redirect to editor with resume id
-                window.location.href = `resumebuilder.html?resumeId=${id}`;
-            }
-
-            async function handleDownload(id) {
-                try {
-                    // Show loading state
-                    const downloadBtn = document.querySelector(`.download-btn[data-id="${id}"]`);
-                    const originalText = downloadBtn.textContent;
-                    downloadBtn.textContent = 'Generating...';
-                    downloadBtn.disabled = true;
-
-                    // Fetch resume content
-                    const res = await fetch(`http://localhost:3000/api/resume/${id}`, {
-                        headers: { 'Authorization': 'Bearer ' + token }
-                    });
-                    
-                    if (!res.ok) throw new Error('Failed to fetch resume');
-                    
-                    const resume = await res.json();
-                    const content = resume.content || {};
-                    const template = resume.template || 'default';
-                    const pdfContainer = document.getElementById('pdfPreviewContainer');
+                
+                if (!res.ok) throw new Error('Failed to fetch resume');
+                
+                const resume = await res.json();
+                const content = resume.content || {};
+                const template = resume.template || 'default';
+                const pdfContainer = document.getElementById('pdfPreviewContainer');
 
                     // Helper functions
                     function renderEducation(education) {
@@ -380,942 +380,957 @@
                         ).join('');
                     }
 
-                    
+                    function renderProjects(projects) {
+                        if (!Array.isArray(projects) || !projects.length) {
+                            return '<div class="mb-6"><p class="font-semibold">Project Name</p><p class="text-sm mb-2">Project Description</p><p class="text-sm">Technologies: HTML, CSS, JavaScript</p></div>';
+                        }
+                        return projects.map(item => `
+                            <div class="mb-6">
+                                <p class="font-semibold">${item.title || 'Project Name'}</p>
+                                <p class="text-sm mb-2">${item.description || 'Project Description'}</p>
+                                ${item.tech ? `<p class="text-sm">Technologies: ${item.tech}</p>` : ''}
+                            </div>
+                        `).join('');
+                    }
 
-                    // Render HTML for the selected template
-                    let html = '';
-                    
-                        if (template === 'it-1') {
-                          html = `
-                          <div class="pdf-container w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
-                              <div class="flex items-center p-6 bg-[#582b2a] text-white w-full m-0 flex-shrink-0">
-                                  <div class="mr-8">
-                                      <img src="${content.profileImage}" alt="Profile Picture" class="w-[110px] h-[110px] rounded-full border-4 border-white object-cover bg-white">
+                // Render HTML for the selected template
+                let html = '';
+                
+                    if (template === 'it-1') {
+                      html = `
+                      <div class="pdf-container w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                          <div class="flex items-center p-6 bg-[#582b2a] text-white w-full m-0 flex-shrink-0">
+                              <div class="mr-8">
+                                  <img src="${content.profileImage}" alt="Profile Picture" class="w-[110px] h-[110px] rounded-full border-4 border-white object-cover bg-white">
+                              </div>
+                              <div class="ml-12 flex-1">
+                                  <h1 class="text-3xl font-bold m-0">${content.name || 'Your Name'}</h1>
+                                  <p class="text-sm m-0 mt-2">${content.title || 'Professional Title'}</p>
+                              </div>
+                          </div>
+                          <div class="flex bg-[#fdfaf8] w-full flex-1 m-0">
+                              <div class="w-[35%] p-8 border-r border-gray-300 text-black box-border">
+                                  <div class="mb-8">
+                                      <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Contact</h2>
+                                      <p class="text-xs mb-2"><strong>Phone</strong><br>${content.phone || '+123-456-7890'}</p>
+                                      <p class="text-xs mb-2"><strong>Email</strong><br>${content.email || 'anymail@gmail.com'}</p>
+                                      <p class="text-xs"><strong>Address</strong><br>${content.address || '1234 Anywhere St., Any City'}</p>
                                   </div>
-                                  <div class="ml-12 flex-1">
-                                      <h1 class="text-3xl font-bold m-0">${content.name || 'Your Name'}</h1>
-                                      <p class="text-sm m-0 mt-2">${content.title || 'Professional Title'}</p>
+                                  <div class="mb-8">
+                                      <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Education</h2>
+                                      ${renderEducation(content.education)}
+                                  </div>
+                                  <div>
+                                      <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Skills</h2>
+                                      <ul class="list-disc pl-4 text-xs">${renderSkills(content.skills)}</ul>
                                   </div>
                               </div>
-                              <div class="flex bg-[#fdfaf8] w-full flex-1 m-0">
-                                  <div class="w-[35%] p-8 border-r border-gray-300 text-black box-border">
-                                      <div class="mb-8">
-                                          <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Contact</h2>
-                                          <p class="text-xs mb-2"><strong>Phone</strong><br>${content.phone || '+123-456-7890'}</p>
-                                          <p class="text-xs mb-2"><strong>Email</strong><br>${content.email || 'anymail@gmail.com'}</p>
-                                          <p class="text-xs"><strong>Address</strong><br>${content.address || '1234 Anywhere St., Any City'}</p>
-                                      </div>
-                                      <div class="mb-8">
-                                          <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Education</h2>
-                                          ${renderEducation(content.education)}
-                                      </div>
-                                      <div>
-                                          <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Skills</h2>
-                                          <ul class="list-disc pl-4 text-xs">${renderSkills(content.skills)}</ul>
-                                      </div>
-                                  </div>
-                                  <div class="w-[65%] p-8 text-black box-border">
-                                      <section class="mb-8">
-                                          <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">About</h2>
-                                          <p class="text-xs leading-relaxed">${content.summary || 'With more than 5 years of experience in web development...'}</p>
-                                      </section>
-                                      <section>
-                                          <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">Experience</h2>
-                                          ${renderExperience(content.experience)}
-                                      </section>
-                                  </div>
+                              <div class="w-[65%] p-8 text-black box-border">
+                                  <section class="mb-8">
+                                      <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">About</h2>
+                                      <p class="text-xs leading-relaxed">${content.summary || 'With more than 5 years of experience in web development...'}</p>
+                                  </section>
+                                  <section>
+                                      <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">Experience</h2>
+                                      ${renderExperience(content.experience)}
+                                  </section>
+                                  <section>
+                                      <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">Projects</h2>
+                                      ${renderProjects(content.projects)}
+                                  </section>
                               </div>
-                          </div>`;
-                        } 
-                        else if (template === 'it-2') {
-                          html = `
-                          <div class="pdf-container grid grid-cols-[1fr_2fr] w-[210mm] h-[297mm] m-0 p-0 overflow-hidden grid-rows-1">
+                          </div>
+                      </div>`;
+                    } 
+                    else if (template === 'it-2') {
+                      html = `
+                      <div class="pdf-container grid grid-cols-[1fr_2fr] w-[210mm] h-[297mm] m-0 p-0 overflow-hidden grid-rows-1">
+                        <div class="bg-gray-100 p-8 text-xs">
+                            <div class="text-center mb-8">
+                                <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-gray-700 object-cover" />
+                            </div>
+                            <div class="mb-8">
+                                <h2 class="text-base font-bold mb-2">Contact</h2>
+                                <hr class="border border-gray-700 mb-2">
+                                <p>📞 ${content.phone || '123-456-7890'}</p>
+                                <p>✉️ ${content.email || 'example@email.com'}</p>
+                                <p>📍 ${content.address || '123 Main Street, City'}</p>
+                            </div>
+                            <div class="mb-8">
+                                <h2 class="text-base font-bold mb-2">About</h2>
+                                <hr class="border border-gray-700 mb-2">
+                                <p>${content.summary || 'Passionate and detail-oriented IT professional...'}</p>
+                            </div>
+                            <div>
+                                <h2 class="text-base font-bold mb-2">Skills</h2>
+                                <hr class="border border-gray-700 mb-2">
+                                <ul class="list-disc pl-4">${renderSkills(content.skills)}</ul>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 text-white p-8">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold m-0">${content.name || 'John Roe'}</h1>
+                                <p class="text-lg m-0 mt-2">${content.title || 'IT Professional'}</p>
+                            </div>
+                            <div class="mb-8">
+                                <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Work Experience</h2>
+                                <div class="border-l-2 border-white pl-4">${renderExperience(content.experience)}</div>
+                            </div>
+                            <div class="mb-8">
+                                <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Education</h2>
+                                <div class="border-l-2 border-white pl-4">${renderEducation(content.education)}</div>
+                            </div>
+                            <div>
+                                <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Language</h2>
+                                <ul class="list-disc pl-8 text-xs">
+                                    ${generateLanguagesList(content.languages)}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>`;
+                    } 
+                    else if (template === 'it-3') {
+                      html = `
+                      <div class="pdf-container w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                          <div class="bg-slate-800 text-white p-8 flex items-center gap-8 flex-shrink-0">
+                              <div>
+                                  <img src="${content.profileImage}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
+                              </div>
+                              <div>
+                                  <h1 class="text-3xl font-bold m-0 leading-tight">${content.name || 'John Roe'}</h1>
+                                  <p class="text-blue-200 text-lg m-0 mt-2">${content.title || 'IT Graduate'}</p>
+                              </div>
+                          </div>
+                          <div class="grid grid-cols-[3fr_7fr] flex-1">
                             <div class="bg-gray-100 p-8 text-xs">
-                                <div class="text-center mb-8">
-                                    <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-gray-700 object-cover" />
-                                </div>
                                 <div class="mb-8">
-                                    <h2 class="text-base font-bold mb-2">Contact</h2>
-                                    <hr class="border border-gray-700 mb-2">
+                                    <h2 class="text-blue-700 font-bold text-base mb-2">Contact</h2>
+                                    <hr class="border border-blue-700 mb-2" />
                                     <p>📞 ${content.phone || '123-456-7890'}</p>
-                                    <p>✉️ ${content.email || 'example@email.com'}</p>
-                                    <p>📍 ${content.address || '123 Main Street, City'}</p>
+                                    <p>✉️ ${content.email || 'john@email.com'}</p>
+                                    <p>📍 ${content.address || '123 Main St, City'}</p>
                                 </div>
                                 <div class="mb-8">
-                                    <h2 class="text-base font-bold mb-2">About</h2>
-                                    <hr class="border border-gray-700 mb-2">
-                                    <p>${content.summary || 'Passionate and detail-oriented IT professional...'}</p>
-                                </div>
-                                <div>
-                                    <h2 class="text-base font-bold mb-2">Skills</h2>
-                                    <hr class="border border-gray-700 mb-2">
+                                    <h2 class="text-blue-700 font-bold text-base mb-2">Skills</h2>
+                                    <hr class="border border-blue-700 mb-2" />
                                     <ul class="list-disc pl-4">${renderSkills(content.skills)}</ul>
                                 </div>
+                                <div>
+                                    <h2 class="text-blue-700 font-bold text-base mb-2">Languages</h2>
+                                    <hr class="border border-blue-700 mb-2" />
+                                    <ul class="list-disc pl-4"><li>English</li><li>Spanish</li></ul>
+                                </div>
                             </div>
-                            <div class="bg-gray-700 text-white p-8">
+                            <div class="p-8">
                                 <div class="mb-8">
-                                    <h1 class="text-3xl font-bold m-0">${content.name || 'John Roe'}</h1>
-                                    <p class="text-lg m-0 mt-2">${content.title || 'IT Professional'}</p>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">About Me</h2>
+                                    <hr class="border border-blue-700 mb-2" />
+                                    <p class="text-xs">${content.summary || 'Motivated IT graduate with a passion for software development...'}</p>
                                 </div>
                                 <div class="mb-8">
-                                    <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Work Experience</h2>
-                                    <div class="border-l-2 border-white pl-4">${renderExperience(content.experience)}</div>
-                                </div>
-                                <div class="mb-8">
-                                    <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Education</h2>
-                                    <div class="border-l-2 border-white pl-4">${renderEducation(content.education)}</div>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Work Experience</h2>
+                                    <hr class="border border-blue-700 mb-4" />
+                                    ${renderExperience(content.experience)}
                                 </div>
                                 <div>
-                                    <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Language</h2>
-                                    <ul class="list-disc pl-8 text-xs">
-                                        ${generateLanguagesList(content.languages)}
-                                    </ul>
+                                    <h2 class="text-blue-700 font-bold text-lg mb-2">Education</h2>
+                                    <hr class="border border-blue-700 mb-4" />
+                                    ${renderEducation(content.education)}
                                 </div>
                             </div>
-                        </div>`;
-                        } 
-                        else if (template === 'it-3') {
-                          html = `
-                          <div class="pdf-container w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
-                              <div class="bg-slate-800 text-white p-8 flex items-center gap-8 flex-shrink-0">
-                                  <div>
-                                      <img src="${content.profileImage}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
-                                  </div>
-                                  <div>
-                                      <h1 class="text-3xl font-bold m-0 leading-tight">${content.name || 'John Roe'}</h1>
-                                      <p class="text-blue-200 text-lg m-0 mt-2">${content.title || 'IT Graduate'}</p>
-                                  </div>
+                        </div>
+                    </div>`;
+                    } 
+                    else if (template === 'it-4') {
+                      html = `
+                      <div class="pdf-container font-sans text-black bg-white shadow-md grid grid-cols-3 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <!-- Header -->
+                          <div class="col-span-1 bg-slate-700 text-white p-6 space-y-6 text-sm shadow-lg">
+                              <!-- Image -->
+                              <div class="flex justify-center">
+                                  <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
                               </div>
-                              <div class="grid grid-cols-[3fr_7fr] flex-1">
-                                <div class="bg-gray-100 p-8 text-xs">
-                                    <div class="mb-8">
-                                        <h2 class="text-blue-700 font-bold text-base mb-2">Contact</h2>
-                                        <hr class="border border-blue-700 mb-2" />
-                                        <p>📞 ${content.phone || '123-456-7890'}</p>
-                                        <p>✉️ ${content.email || 'john@email.com'}</p>
-                                        <p>📍 ${content.address || '123 Main St, City'}</p>
-                                    </div>
-                                    <div class="mb-8">
-                                        <h2 class="text-blue-700 font-bold text-base mb-2">Skills</h2>
-                                        <hr class="border border-blue-700 mb-2" />
-                                        <ul class="list-disc pl-4">${renderSkills(content.skills)}</ul>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-blue-700 font-bold text-base mb-2">Languages</h2>
-                                        <hr class="border border-blue-700 mb-2" />
-                                        <ul class="list-disc pl-4"><li>English</li><li>Spanish</li></ul>
-                                    </div>
-                                </div>
-                                <div class="p-8">
-                                    <div class="mb-8">
-                                        <h2 class="text-blue-700 font-bold text-lg mb-2">About Me</h2>
-                                        <hr class="border border-blue-700 mb-2" />
-                                        <p class="text-xs">${content.summary || 'Motivated IT graduate with a passion for software development...'}</p>
-                                    </div>
-                                    <div class="mb-8">
-                                        <h2 class="text-blue-700 font-bold text-lg mb-2">Work Experience</h2>
-                                        <hr class="border border-blue-700 mb-4" />
-                                        ${renderExperience(content.experience)}
-                                    </div>
-                                    <div>
-                                        <h2 class="text-blue-700 font-bold text-lg mb-2">Education</h2>
-                                        <hr class="border border-blue-700 mb-4" />
-                                        ${renderEducation(content.education)}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                        } 
-                        else if (template === 'it-4') {
-                          html = `
-                          <div class="pdf-container font-sans text-black bg-white shadow-md grid grid-cols-3 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+
+                              <!-- Contact -->
+                              <div>
+                                  <h2 class="text-lg font-bold mb-2">Contact</h2>
+                                  <hr class="border-t-2 border-slate-500 mb-2" />
+                                  <p class="text-gray-300">📞 ${content.phone || '123-456-7890'}</p>
+                                  <p class="text-gray-300">✉️ ${content.email || 'example@email.com'}</p>
+                                  <p class="text-gray-300">📍 ${content.address || '123 Main Street, City'}</p>
+                              </div>
+
+                              <!-- Skills -->
+                              <div>
+                                  <h2 class="text-lg font-bold mb-2">Skills</h2>
+                                  <hr class="border-t-2 border-slate-500 mb-2" />
+                                  <ul class="list-disc list-inside space-y-1 text-gray-200">${renderSkills(content.skills)}</ul>
+                              </div>
+
+                              <!-- Languages -->
+                              <div>
+                                  <h2 class="text-lg font-bold mb-2">Languages</h2>
+                                  <hr class="border-t-2 border-slate-500 mb-2" />
+                                  <ul class="list-disc list-inside space-y-1 text-gray-200">
+                                        ${generateLanguagesList(content.languages)}
+                                  </ul>
+                              </div>
+                          </div>
+
+                          <!-- Right Column -->
+                          <div class="col-span-2 bg-white p-8 space-y-8">
                               <!-- Header -->
-                              <div class="col-span-1 bg-slate-700 text-white p-6 space-y-6 text-sm shadow-lg">
-                                  <!-- Image -->
-                                  <div class="flex justify-center">
-                                      <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-md object-cover border-4 border-slate-500" />
-                                  </div>
+                              <div class="text-center">
+                                  <br>
+                                  <h1 class="text-3xl font-bold text-slate-800">${content.name || 'Your Name'}</h1>
+                                  <p class="text-lg text-gray-600">${content.title || 'IT Graduate'}</p>
+                              </div>
+
+                              <!-- About Section -->
+                              <div class="bg-slate-700 text-white p-6 shadow-lg">
+                                  <h2 class="text-xl font-bold mb-2">About Me</h2>
+                                  <p>${content.summary || 'Dedicated IT graduate with a passion for software development and systems analysis. Strong foundation in full-stack development and eager to contribute to innovative tech teams.'}</p>
+                              </div>
+
+                              <!-- Work Experience -->
+                              <div class="bg-slate-700 text-white p-6 shadow-lg">
+                                  <h2 class="text-xl font-bold mb-2">Work Experience</h2>
+                                  <div class="mt-4 space-y-4">${renderExperience(content.experience)}</div>
+                              </div>
+
+                              <!-- Education -->
+                              <div class="bg-slate-700 text-white p-6 shadow-lg">
+                                  <h2 class="text-xl font-bold mb-2">Education</h2>
+                                  <div class="mt-4 space-y-4">${renderEducation(content.education)}</div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'it-5') {
+                      html = `
+                      <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                          <!-- Red Bar -->
+                          <div class="bg-red-700 h-6 w-full flex-shrink-0"></div>
+
+                          <!-- Content: Two Columns -->
+                          <div class="grid grid-cols-3 gap-0 flex-1">
+                              <!-- Left Column (Gray Background) -->
+                              <div class="col-span-1 bg-gray-100 p-6 flex flex-col items-center space-y-8">
+                                  <!-- Profile Image -->
+                                  <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-full border-4 border-red-700 object-cover">
 
                                   <!-- Contact -->
+                                  <div class="w-full">
+                                      <h3 class="font-bold text-gray-700 mb-3">CONTACT</h3>
+                                      <p class="flex items-center gap-2 text-sm"><span>📞</span> ${content.phone || '+123-456-7890'}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>✉️</span> ${content.email || 'email@example.com'}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>📍</span> ${content.address || '123 Anywhere St., Any City'}</p>
+                                  </div>
+
+                                  <!-- Education -->
+                                  <div class="w-full">
+                                      <h3 class="font-bold text-gray-700 mb-3">EDUCATION</h3>
+                                      <div>${renderEducation(content.education)}</div>
+                                  </div>
+
+                                  <!-- Skills -->
+                                  <div class="w-full">
+                                      <h3 class="font-bold text-gray-700 mb-3">SKILLS</h3>
+                                      <ul class="list-disc list-inside text-sm space-y-1">${renderSkills(content.skills)}</ul>
+                                  </div>
+
+                                  <!-- Languages -->
+                                  <div class="w-full">
+                                      <h3 class="font-bold text-gray-700 mb-3">LANGUAGES</h3>
+                                      <ul class="list-disc list-inside text-sm space-y-1">
+                                            ${generateLanguagesList(content.languages)}
+                                      </ul>
+                                  </div>
+                              </div>
+
+                              <!-- Right Column -->
+                              <div class="col-span-2 p-8 space-y-8">
+                                  <!-- Name -->
+                                  <div class="border-b border-gray-300 pb-4">
+                                      <br>
+                                      <h2 class="text-4xl font-bold tracking-wide">${content.name || 'Your Name'}</h2>
+                                      <br>
+                                  </div>
+
+                                  <!-- About -->
                                   <div>
-                                      <h2 class="text-lg font-bold mb-2">Contact</h2>
-                                      <hr class="border-t-2 border-slate-500 mb-2" />
-                                      <p class="text-gray-300">📞 ${content.phone || '123-456-7890'}</p>
-                                      <p class="text-gray-300">✉️ ${content.email || 'example@email.com'}</p>
-                                      <p class="text-gray-300">📍 ${content.address || '123 Main Street, City'}</p>
+                                      <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">ABOUT</h3>
+                                      <p class="text-sm leading-relaxed text-gray-600">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}</p>
+                                  </div>
+
+                                  <!-- Experience -->
+                                  <div>
+                                      <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">EXPERIENCE</h3>
+                                      <div>${renderExperience(content.experience)}</div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Red Bar -->
+                          <div class="bg-red-700 h-6 w-full flex-shrink-0"></div>
+                      </div>`;
+                    }
+                    else if (template === 'it-6') {
+                      html = `
+                      <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                          <!-- Main Grid -->
+                          <div class="grid grid-cols-3 flex-1">
+                              <!-- Left Sidebar -->
+                              <div class="col-span-1 bg-red-400 p-6 flex flex-col space-y-8">
+                                  <!-- Profile Image -->
+                                  <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border-2 border-black mx-auto">
+
+                                  <!-- About -->
+                                  <div>
+                                      <h3 class="text-white font-bold border-b border-white pb-1 mb-3">ABOUT</h3>
+                                      <p class="text-sm text-white">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}</p>
+                                  </div>
+
+                                  <!-- Skills -->
+                                  <div>
+                                      <h3 class="text-white font-bold border-b border-white pb-1 mb-3">SKILLS</h3>
+                                      <ul class="list-disc list-inside text-white text-sm space-y-1">${renderSkills(content.skills)}</ul>
+                                  </div>
+
+                                  <!-- Language -->
+                                  <div>
+                                      <h3 class="text-white font-bold border-b border-white pb-1 mb-3">LANGUAGE</h3>
+                                      <ul class="list-disc list-inside text-white text-sm space-y-1">
+                                            ${generateLanguagesList(content.languages)}
+                                      </ul>
+                                  </div>
+                              </div>
+
+                              <!-- Right Content -->
+                              <div class="col-span-2 flex flex-col">
+                                  <!-- Header -->
+                                  <div class="bg-gray-50 p-8">
+                                      <br>
+                                      <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
+                                      <h2 class="text-lg text-gray-500 tracking-wide">${content.title || 'IT PROJECT MANAGER'}</h2>
+                                  </div>
+
+                                  <!-- Main Content -->
+                                  <div class="p-8 space-y-10 flex-1">
+                                      <!-- Work Experience -->
+                                      <div>
+                                          <h3 class="text-gray-700 font-bold text-lg border-b border-gray-300 pb-1 mb-4">WORK EXPERIENCE</h3>
+                                          <div>${renderExperience(content.experience)}</div>
+                                      </div>
+
+                                      <!-- Education -->
+                                      <div>
+                                          <h3 class="text-gray-700 font-bold text-lg border-b border-gray-300 pb-1 mb-4">EDUCATION</h3>
+                                          <div>${renderEducation(content.education)}</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Footer Contact (outside grid) -->
+                          <div class="bg-gray-100 p-6 flex justify-around text-sm text-gray-700 flex-shrink-0">
+                              <p>${content.phone || '+123-456-7890'}</p>
+                              <p>${content.email || 'email@example.com'}</p>
+                              <p>${content.address || '123 Anywhere St., Any City'}</p>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'it-7') {
+                      html = `
+                      <div class="pdf-container font-sans text-black bg-white shadow-md flex text-[0.9rem] leading-relaxed w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <!-- Left Red Bar (5%) -->
+                          <div class="w-[0%] border-r-2 border-black"></div>
+
+                          <!-- Middle Gray Column (30%) -->
+                          <div class="w-[30%] bg-gray-200 border-r-2 border-black p-5">
+                              <!-- Profile Image -->
+                              <div class="flex justify-center mb-5">
+                                  <img src="${content.profileImage}" alt="Profile Photo" class="w-28 h-28 rounded-full border-4 border-white">
+                              </div>
+
+                              <!-- Skills -->
+                              <div class="mb-5">
+                                  <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">SKILLS</h2>
+                                  <ul class="space-y-1.5">${renderSkills(content.skills)}</ul>
+                              </div>
+
+                              <!-- Language -->
+                              <div class="mb-5">
+                                  <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">LANGUAGE</h2>
+                                  <ul class="space-y-1.5">
+                                        ${generateLanguagesList(content.languages)}
+                                  </ul>
+                              </div>
+
+                              <!-- Education -->
+                              <div>
+                                  <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">EDUCATION</h2>
+                                  <div>${renderEducation(content.education)}</div>
+                              </div>
+                          </div>
+
+                          <!-- Right Main Column (65%) -->
+                          <div class="w-[65%] p-7">
+                              <!-- Header -->
+                              <br>
+                              <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
+                              <p class="text-base text-gray-800 mb-4 pl-12">${content.title || 'IT Professional'}</p>
+                              <br>
+                              <!-- Contact -->
+                              <div class="mb-6 space-y-1 pl-12">
+                                  <p>${content.phone || '+123-456-7890'}</p>
+                                  <p>${content.email || 'email@example.com'}</p>
+                                  <p>${content.address || '123 Anywhere St., Any City'}</p>
+                              </div>
+                              <hr>
+                              <br>
+                              <!-- About -->
+                              <div class="mb-7">
+                                  <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">ABOUT</h2>
+                                  <p>${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed lorem nec nulla feugiat aliquet.'}</p>
+                              </div>
+
+                              <!-- Experience -->
+                              <div>
+                                  <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">EXPERIENCE</h2>
+                                  <div>${renderExperience(content.experience)}</div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'it-8') {
+                      html = `
+                      <div class="pdf-container font-sans text-black shadow-md flex overflow-hidden flex-col w-[210mm] h-[297mm] m-0 p-0">
+                          <!-- Header -->
+                          <div class="flex justify-between bg-gray-100 px-10 py-6 items-center">
+                              <div>
+                                  <h1 class="text-4xl font-bold leading-none">${content.name || 'Your Name'}</h1>
+                                  <div class="mt-4 text-sm text-gray-600">
+                                      <p>${content.phone || '+123-456-7890'}</p>
+                                      <p>${content.email || 'email@example.com'}</p>
+                                      <p>${content.address || '123 Anywhere St., Any City'}</p>
+                                  </div>
+                              </div>
+                              <div>
+                                  <img src="${content.profileImage}" alt="Profile" class="w-36 h-36 rounded-full border-4 border-black object-cover" />
+                              </div>
+                          </div>
+
+                          <!-- Professional Title -->
+                          <div class="bg-black text-white font-bold text-center py-2 text-lg tracking-widest">
+                              ${content.title || 'IT PROFESSIONAL'}
+                          </div>
+
+                          <!-- Main Content -->
+                          <div class="flex flex-1">
+                              <!-- Left Column -->
+                              <div class="w-[60%] bg-gray-100 px-10 py-6">
+                                  <!-- Experiences -->
+                                  <div class="mb-6">
+                                      <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">EXPERIENCES</div>
+                                      <div>${renderExperience(content.experience)}</div>
+                                  </div>
+
+                                  <!-- Education -->
+                                  <div>
+                                      <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">EDUCATION</div>
+                                      <div>${renderEducation(content.education)}</div>
+                                  </div>
+                              </div>
+
+                              <!-- Right Column -->
+                              <div class="w-[40%] bg-white px-10 py-6">
+                                  <!-- Summary -->
+                                  <p class="text-sm text-gray-700 mb-6">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
+
+                                  <!-- Skills -->
+                                  <div class="mb-6">
+                                      <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">SKILLS</div>
+                                      <ul class="list-disc list-inside text-sm space-y-2">${renderSkills(content.skills)}</ul>
+                                  </div>
+
+                                  <!-- Languages -->
+                                  <div>
+                                      <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">LANGUAGES</div>
+                                      <ul class="flex gap-10 text-sm text-gray-800 list-disc ml-5">
+                                            ${generateLanguagesList(content.languages)}
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'it-9') {
+                      html = `
+                      <div class="pdf-container font-sans text-black shadow-md flex overflow-hidden flex-col w-[210mm] h-[297mm] m-0 p-0">
+                          <!-- Header -->
+                          <div class="flex items-center px-10 pt-6">
+                              <img src="${content.profileImage}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
+                              <div class="relative -ml-8 w-full">
+                                  <div class="bg-slate-700 text-white pl-16 py-4 clip-path-diagonal">
+                                      <h1 class="text-4xl font-serif font-bold">${content.name || 'Your Name'}</h1>
+                                      <p class="text-sm font-semibold tracking-wide">${content.title || 'IT PROFESSIONAL'}</p>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Body -->
+                          <div class="flex divide-x divide-black mt-6 flex-1">
+                              <!-- Left Sidebar -->
+                              <div class="w-[40%] bg-gray-200 px-6 py-8 space-y-8">
+                                  <!-- About -->
+                                  <div>
+                                      <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">ABOUT</div>
+                                      <p class="text-sm">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
+                                  </div>
+
+                                  <!-- Education -->
+                                  <div>
+                                      <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">EDUCATION</div>
+                                      <div>${renderEducation(content.education)}</div>
+                                  </div>
+
+                                  <!-- Language -->
+                                  <div>
+                                      <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">LANGUAGE</div>
+                                      <ul class="list-disc list-inside text-sm space-y-1">
+                                            ${generateLanguagesList(content.languages)}
+                                      </ul>
+                                  </div>
+                              </div>
+
+                              <!-- Right Content -->
+                              <div class="w-[60%] px-6 py-8 space-y-8">
+                                  <!-- Experience -->
+                                  <div>
+                                      <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-4 w-fit">EXPERIENCE</div>
+                                      <div>${renderExperience(content.experience)}</div>
+                                      <hr class="border-gray-400">
+                                  </div>
+
+                                  <!-- Skills -->
+                                  <div>
+                                      <div class="font-bold mb-4 text-base">SKILLS</div>
+                                      <ul class="list-disc list-inside space-y-2 text-sm">
+                                          <li>Proficient in coding languages</li>
+                                          <li>Strong logical approach to problem-solving</li>
+                                          <li>High attention to detail</li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'it-10') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <!-- Left Column -->
+                          <div class="w-1/2 p-8 bg-white border-r-2 border-gray-300">
+                              <div class="mb-8">
+                                  <h1 class="text-3xl font-bold text-[#000] mb-1">${content.name || 'Your Name'}</h1>
+                                  <p class="text-gray-500 text-lg mb-6">${content.title || 'IT Professional'}</p>
+                              </div>
+
+                              <div class="mb-8">
+                                  <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Work Experience</h2>
+                                  <div>${renderExperience(content.experience)}</div>
+                              </div>
+
+                              <div class="mb-8">
+                                  <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Education</h2>
+                                  <div>${renderEducation(content.education)}</div>
+                              </div>
+
+                              <div>
+                                  <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Language</h2>
+                                  <ul class="list-disc list-inside">
+                                      ${generateLanguagesList(content.languages)}
+                                  </ul>
+                              </div>
+                          </div>
+
+                          <!-- Right Column -->
+                          <div class="w-1/2 p-8 bg-[#f3dcdc]">
+                              <div class="flex justify-center mb-8">
+                                  <img src="${content.profileImage}" alt="Profile Picture" class="w-[130px] h-[130px] object-cover rounded-full border-[4px] border-[#582b2a]">
+                              </div>
+
+                              <div class="mb-8">
+                                  <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Contact</h2>
+                                  <p class="mb-1">Phone: ${content.phone || '+123-456-7890'}</p>
+                                  <p class="mb-1">Email: ${content.email || 'email@example.com'}</p>
+                                  <p>Location: ${content.address || 'Your City'}</p>
+                              </div>
+
+                              <div class="mb-8">
+                                  <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">About</h2>
+                                  <p>${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec quam vitae libero.'}</p>
+                              </div>
+
+                              <div>
+                                  <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Skills</h2>
+                                  <ul class="list-disc list-inside">${renderSkills(content.skills)}</ul>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    // Accountant Templates
+                    else if (template === 'accountant-1') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <!-- Left Sidebar -->
+                          <div class="w-[200px] bg-[#8E735B] text-white flex flex-col items-center py-8 px-4 space-y-8">
+                              <!-- Profile Image -->
+                              <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-hidden">
+                                  <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
+                              </div>
+
+                              <!-- Skills -->
+                              <div class="text-center">
+                                  <h2 class="text-white text-lg font-bold mb-2 tracking-wide">SKILLS</h2>
+                                  <ul class="text-sm space-y-1 list-disc list-inside">${renderSkills(content.skills)}</ul>
+                              </div>
+
+                              <!-- Contact Info -->
+                              <div class="text-center">
+                                  <h2 class="text-white text-lg font-bold mb-2 tracking-wide">CONTACT</h2>
+                                  <div class="space-y-4 text-sm">
+                                      <p>📞 ${content.phone || '+123-456-7890'}</p>
+                                      <p>✉️ ${content.email || 'email@example.com'}</p>
+                                      <p>📍 ${content.address || '123 Anywhere St., Any City'}</p>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Right Content -->
+                          <div class="flex-1 bg-white p-10">
+                              <!-- Header Name -->
+                              <div class="relative mb-10">
+                                  <div class="bg-[#8E735B] h-28 flex items-center pl-4">
+                                      <h1 class="text-2xl tracking-wide text-white">
+                                          <span class="block font-bold justify-center">${content.name || 'Your Name'}</span>
+                                      </h1>     
+                                  </div>
+                              </div>
+
+                              <!-- Education -->
+                              <div class="mb-8">
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="w-3 h-3 bg-[#8E735B]"></div>
+                                      <h2 class="uppercase text-sm font-semibold tracking-wide">Education</h2>
+                                  </div>
+                                  <div class="border-t border-[#F7F2EA] pt-4 text-sm">${renderEducation(content.education)}</div>
+                              </div>
+
+                              <!-- About -->
+                              <div class="mb-8">
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="w-3 h-3 bg-[#8E735B]"></div>
+                                      <h2 class="uppercase text-sm font-semibold tracking-wide">About</h2>
+                                  </div>
+                                  <div class="border-t border-[#F7F2EA] pt-4 text-sm">
+                                      <p>${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                                  </div>
+                              </div>
+
+                              <!-- Experience -->
+                              <div>
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="w-3 h-3 bg-[#8E735B]"></div>
+                                      <h2 class="uppercase text-sm font-semibold tracking-wide">Experience</h2>
+                                  </div>
+                                  <div class="border-t border-[#F7F2EA] pt-4 text-sm">${renderExperience(content.experience)}</div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'accountant-2') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden grid grid-cols-3 gap-8">
+                          <!-- Left Column -->
+                          <div class="col-span-1 space-y-8">
+                              <!-- Profile Photo -->
+                              <div class="flex justify-center">
+                                  <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border-4 border-gray-700" />
+                              </div>
+
+                              <!-- Contact -->
+                              <div>
+                                  <h2 class="text-lg font-bold flex items-center gap-2">
+                                      <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                      Contact
+                                  </h2>
+                                  <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+                                      <p>${content.phone || '+123-456-7890'}</p>
+                                      <p>${content.email || 'email@example.com'}</p>
+                                      <p>${content.address || '123 Anywhere St., Any City'}</p>
+                                  </div>
+                              </div>
+
+                              <!-- Education -->
+                              <div>
+                                  <h2 class="text-lg font-bold flex items-center gap-2">
+                                      <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                      Education
+                                  </h2>
+                                  <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">${renderEducation(content.education)}</div>
+                              </div>
+
+                              <!-- Skills -->
+                              <div>
+                                  <h2 class="text-lg font-bold flex items-center gap-2">
+                                      <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                      Skills
+                                  </h2>
+                                  <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+                                      <ul class="list-disc list-inside">${renderSkills(content.skills)}</ul>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- Right Column -->
+                          <div class="col-span-2 space-y-6">
+                              <!-- Header -->
+                              <br>
+                              <div class="text-left">
+                                  <h1 class="text-4xl font-bold leading-none">${content.name || 'Your Name'}</h1>
+                                  <p class="text-sm text-gray-600">Accountant</p>
+                              </div>
+                              <br>
+                              <!-- About -->
+                              <div class="bg-blue-100 p-6 rounded shadow">
+                                  <h2 class="text-lg font-bold border-b border-gray-400 mb-2">ABOUT</h2>
+                                  <p class="text-sm text-gray-800">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                              </div>
+
+                              <!-- Experience -->
+                              <div class="bg-blue-100 p-6 rounded shadow">
+                                  <h2 class="text-lg font-bold border-b border-gray-400 mb-4">EXPERIENCE</h2>
+                                  <div>${renderExperience(content.experience)}</div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'accountant-3') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <!-- Header -->
+                          <div class="grid grid-cols-3 gap-6 p-8 items-center bg-gray-800 text-white font-sans">
+                              <!-- Left: Image -->
+                              <div class="flex justify-center">
+                                  <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border-4 border-bg-blue-100 shadow-md" />
+                              </div>
+
+                              <!-- Right: Name, Title, About -->
+                              <div class="col-span-2">
+                                  <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
+                                  <p class="text-lg text-gray-300 mb-2">Accountant</p>
+                                  <p class="text-sm text-gray-200">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                              </div>
+                          </div>
+
+                          <!-- Main Content -->
+                          <div class="grid grid-cols-3 gap-8 px-8 pb-8">
+                              <!-- Left Column -->
+                              <div class="col-span-1 space-y-8 bg-blue-100 text-black p-6 rounded font-sans">
+                                  <!-- Education -->
+                                  <div>
+                                      <h2 class="text-lg font-bold mb-2">Education</h2>
+                                      <div>${renderEducation(content.education)}</div>
+                                  </div>
+
+                                  <!-- Languages -->
+                                  <div>
+                                      <h2 class="text-lg font-bold mb-2">Language</h2>
+                                      <ul class="text-sm space-y-1">${generateLanguagesList(content.languages)}</ul>
                                   </div>
 
                                   <!-- Skills -->
                                   <div>
                                       <h2 class="text-lg font-bold mb-2">Skills</h2>
-                                      <hr class="border-t-2 border-slate-500 mb-2" />
-                                      <ul class="list-disc list-inside space-y-1 text-gray-200">${renderSkills(content.skills)}</ul>
-                                  </div>
-
-                                  <!-- Languages -->
-                                  <div>
-                                      <h2 class="text-lg font-bold mb-2">Languages</h2>
-                                      <hr class="border-t-2 border-slate-500 mb-2" />
-                                      <ul class="list-disc list-inside space-y-1 text-gray-200">
-                                            ${generateLanguagesList(content.languages)}
-                                      </ul>
-                                  </div>
-                              </div>
-
-                              <!-- Right Column -->
-                              <div class="col-span-2 bg-white p-8 space-y-8">
-                                  <!-- Header -->
-                                  <div class="text-center">
-                                      <br>
-                                      <h1 class="text-3xl font-bold text-slate-800">${content.name || 'Your Name'}</h1>
-                                      <p class="text-lg text-gray-600">${content.title || 'IT Graduate'}</p>
-                                  </div>
-
-                                  <!-- About Section -->
-                                  <div class="bg-slate-700 text-white p-6 shadow-lg">
-                                      <h2 class="text-xl font-bold mb-2">About Me</h2>
-                                      <p>${content.summary || 'Dedicated IT graduate with a passion for software development and systems analysis. Strong foundation in full-stack development and eager to contribute to innovative tech teams.'}</p>
-                                  </div>
-
-                                  <!-- Work Experience -->
-                                  <div class="bg-slate-700 text-white p-6 shadow-lg">
-                                      <h2 class="text-xl font-bold mb-2">Work Experience</h2>
-                                      <div class="mt-4 space-y-4">${renderExperience(content.experience)}</div>
-                                  </div>
-
-                                  <!-- Education -->
-                                  <div class="bg-slate-700 text-white p-6 shadow-lg">
-                                      <h2 class="text-xl font-bold mb-2">Education</h2>
-                                      <div class="mt-4 space-y-4">${renderEducation(content.education)}</div>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'it-5') {
-                          html = `
-                          <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
-                              <!-- Red Bar -->
-                              <div class="bg-red-700 h-6 w-full flex-shrink-0"></div>
-
-                              <!-- Content: Two Columns -->
-                              <div class="grid grid-cols-3 gap-0 flex-1">
-                                  <!-- Left Column (Gray Background) -->
-                                  <div class="col-span-1 bg-gray-100 p-6 flex flex-col items-center space-y-8">
-                                      <!-- Profile Image -->
-                                      <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-full border-4 border-red-700 object-cover">
-
-                                      <!-- Contact -->
-                                      <div class="w-full">
-                                          <h3 class="font-bold text-gray-700 mb-3">CONTACT</h3>
-                                          <p class="flex items-center gap-2 text-sm"><span>📞</span> ${content.phone || '+123-456-7890'}</p>
-                                          <p class="flex items-center gap-2 text-sm"><span>✉️</span> ${content.email || 'email@example.com'}</p>
-                                          <p class="flex items-center gap-2 text-sm"><span>📍</span> ${content.address || '123 Anywhere St., Any City'}</p>
-                                      </div>
-
-                                      <!-- Education -->
-                                      <div class="w-full">
-                                          <h3 class="font-bold text-gray-700 mb-3">EDUCATION</h3>
-                                          <div>${renderEducation(content.education)}</div>
-                                      </div>
-
-                                      <!-- Skills -->
-                                      <div class="w-full">
-                                          <h3 class="font-bold text-gray-700 mb-3">SKILLS</h3>
-                                          <ul class="list-disc list-inside text-sm space-y-1">${renderSkills(content.skills)}</ul>
-                                      </div>
-
-                                      <!-- Languages -->
-                                      <div class="w-full">
-                                          <h3 class="font-bold text-gray-700 mb-3">LANGUAGES</h3>
-                                          <ul class="list-disc list-inside text-sm space-y-1">
-                                                ${generateLanguagesList(content.languages)}
-                                          </ul>
-                                      </div>
-                                  </div>
-
-                                  <!-- Right Column -->
-                                  <div class="col-span-2 p-8 space-y-8">
-                                      <!-- Name -->
-                                      <div class="border-b border-gray-300 pb-4">
-                                          <br>
-                                          <h2 class="text-4xl font-bold tracking-wide">${content.name || 'Your Name'}</h2>
-                                          <br>
-                                      </div>
-
-                                      <!-- About -->
-                                      <div>
-                                          <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">ABOUT</h3>
-                                          <p class="text-sm leading-relaxed text-gray-600">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}</p>
-                                      </div>
-
-                                      <!-- Experience -->
-                                      <div>
-                                          <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">EXPERIENCE</h3>
-                                          <div>${renderExperience(content.experience)}</div>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <!-- Red Bar -->
-                              <div class="bg-red-700 h-6 w-full flex-shrink-0"></div>
-                          </div>`;
-                        }
-                        else if (template === 'it-6') {
-                          html = `
-                          <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
-                              <!-- Main Grid -->
-                              <div class="grid grid-cols-3 flex-1">
-                                  <!-- Left Sidebar -->
-                                  <div class="col-span-1 bg-red-400 p-6 flex flex-col space-y-8">
-                                      <!-- Profile Image -->
-                                      <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border-2 border-black mx-auto">
-
-                                      <!-- About -->
-                                      <div>
-                                          <h3 class="text-white font-bold border-b border-white pb-1 mb-3">ABOUT</h3>
-                                          <p class="text-sm text-white">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}</p>
-                                      </div>
-
-                                      <!-- Skills -->
-                                      <div>
-                                          <h3 class="text-white font-bold border-b border-white pb-1 mb-3">SKILLS</h3>
-                                          <ul class="list-disc list-inside text-white text-sm space-y-1">${renderSkills(content.skills)}</ul>
-                                      </div>
-
-                                      <!-- Language -->
-                                      <div>
-                                          <h3 class="text-white font-bold border-b border-white pb-1 mb-3">LANGUAGE</h3>
-                                          <ul class="list-disc list-inside text-white text-sm space-y-1">
-                                                ${generateLanguagesList(content.languages)}
-                                          </ul>
-                                      </div>
-                                  </div>
-
-                                  <!-- Right Content -->
-                                  <div class="col-span-2 flex flex-col">
-                                      <!-- Header -->
-                                      <div class="bg-gray-50 p-8">
-                                          <br>
-                                          <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
-                                          <h2 class="text-lg text-gray-500 tracking-wide">${content.title || 'IT PROJECT MANAGER'}</h2>
-                                      </div>
-
-                                      <!-- Main Content -->
-                                      <div class="p-8 space-y-10 flex-1">
-                                          <!-- Work Experience -->
-                                          <div>
-                                              <h3 class="text-gray-700 font-bold text-lg border-b border-gray-300 pb-1 mb-4">WORK EXPERIENCE</h3>
-                                              <div>${renderExperience(content.experience)}</div>
-                                          </div>
-
-                                          <!-- Education -->
-                                          <div>
-                                              <h3 class="text-gray-700 font-bold text-lg border-b border-gray-300 pb-1 mb-4">EDUCATION</h3>
-                                              <div>${renderEducation(content.education)}</div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <!-- Footer Contact (outside grid) -->
-                              <div class="bg-gray-100 p-6 flex justify-around text-sm text-gray-700 flex-shrink-0">
-                                  <p>${content.phone || '+123-456-7890'}</p>
-                                  <p>${content.email || 'email@example.com'}</p>
-                                  <p>${content.address || '123 Anywhere St., Any City'}</p>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'it-7') {
-                          html = `
-                          <div class="pdf-container font-sans text-black bg-white shadow-md flex text-[0.9rem] leading-relaxed w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
-                              <!-- Left Red Bar (5%) -->
-                              <div class="w-[0%] border-r-2 border-black"></div>
-
-                              <!-- Middle Gray Column (30%) -->
-                              <div class="w-[30%] bg-gray-200 border-r-2 border-black p-5">
-                                  <!-- Profile Image -->
-                                  <div class="flex justify-center mb-5">
-                                      <img src="${content.profileImage}" alt="Profile Photo" class="w-28 h-28 rounded-full border-4 border-white">
-                                  </div>
-
-                                  <!-- Skills -->
-                                  <div class="mb-5">
-                                      <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">SKILLS</h2>
-                                      <ul class="space-y-1.5">${renderSkills(content.skills)}</ul>
-                                  </div>
-
-                                  <!-- Language -->
-                                  <div class="mb-5">
-                                      <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">LANGUAGE</h2>
-                                      <ul class="space-y-1.5">
-                                            ${generateLanguagesList(content.languages)}
-                                      </ul>
-                                  </div>
-
-                                  <!-- Education -->
-                                  <div>
-                                      <h2 class="text-l font-bold text-center border border-black rounded-full py-1.5 mb-3">EDUCATION</h2>
-                                      <div>${renderEducation(content.education)}</div>
-                                  </div>
-                              </div>
-
-                              <!-- Right Main Column (65%) -->
-                              <div class="w-[65%] p-7">
-                                  <!-- Header -->
-                                  <br>
-                                  <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
-                                  <p class="text-base text-gray-800 mb-4 pl-12">${content.title || 'IT Professional'}</p>
-                                  <br>
-                                  <!-- Contact -->
-                                  <div class="mb-6 space-y-1 pl-12">
-                                      <p>${content.phone || '+123-456-7890'}</p>
-                                      <p>${content.email || 'email@example.com'}</p>
-                                      <p>${content.address || '123 Anywhere St., Any City'}</p>
-                                  </div>
-                                  <hr>
-                                  <br>
-                                  <!-- About -->
-                                  <div class="mb-7">
-                                      <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">ABOUT</h2>
-                                      <p>${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed lorem nec nulla feugiat aliquet.'}</p>
-                                  </div>
-
-                                  <!-- Experience -->
-                                  <div>
-                                      <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">EXPERIENCE</h2>
-                                      <div>${renderExperience(content.experience)}</div>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'it-8') {
-                          html = `
-                          <div class="pdf-container font-sans text-black shadow-md flex overflow-hidden flex-col w-[210mm] h-[297mm] m-0 p-0">
-                              <!-- Header -->
-                              <div class="flex justify-between bg-gray-100 px-10 py-6 items-center">
-                                  <div>
-                                      <h1 class="text-4xl font-bold leading-none">${content.name || 'Your Name'}</h1>
-                                      <div class="mt-4 text-sm text-gray-600">
-                                          <p>${content.phone || '+123-456-7890'}</p>
-                                          <p>${content.email || 'email@example.com'}</p>
-                                          <p>${content.address || '123 Anywhere St., Any City'}</p>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <img src="${content.profileImage}" alt="Profile" class="w-36 h-36 rounded-full border-4 border-black object-cover" />
-                                  </div>
-                              </div>
-
-                              <!-- Professional Title -->
-                              <div class="bg-black text-white font-bold text-center py-2 text-lg tracking-widest">
-                                  ${content.title || 'IT PROFESSIONAL'}
-                              </div>
-
-                              <!-- Main Content -->
-                              <div class="flex flex-1">
-                                  <!-- Left Column -->
-                                  <div class="w-[60%] bg-gray-100 px-10 py-6">
-                                      <!-- Experiences -->
-                                      <div class="mb-6">
-                                          <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">EXPERIENCES</div>
-                                          <div>${renderExperience(content.experience)}</div>
-                                      </div>
-
-                                      <!-- Education -->
-                                      <div>
-                                          <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">EDUCATION</div>
-                                          <div>${renderEducation(content.education)}</div>
-                                      </div>
-                                  </div>
-
-                                  <!-- Right Column -->
-                                  <div class="w-[40%] bg-white px-10 py-6">
-                                      <!-- Summary -->
-                                      <p class="text-sm text-gray-700 mb-6">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
-
-                                      <!-- Skills -->
-                                      <div class="mb-6">
-                                          <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">SKILLS</div>
-                                          <ul class="list-disc list-inside text-sm space-y-2">${renderSkills(content.skills)}</ul>
-                                      </div>
-
-                                      <!-- Languages -->
-                                      <div>
-                                          <div class="inline-block border border-black rounded-full px-4 py-1 font-bold mb-4">LANGUAGES</div>
-                                          <ul class="flex gap-10 text-sm text-gray-800 list-disc ml-5">
-                                                ${generateLanguagesList(content.languages)}
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'it-9') {
-                          html = `
-                          <div class="pdf-container font-sans text-black shadow-md flex overflow-hidden flex-col w-[210mm] h-[297mm] m-0 p-0">
-                              <!-- Header -->
-                              <div class="flex items-center px-10 pt-6">
-                                  <img src="${content.profileImage}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
-                                  <div class="relative -ml-8 w-full">
-                                      <div class="bg-slate-700 text-white pl-16 py-4 clip-path-diagonal">
-                                          <h1 class="text-4xl font-serif font-bold">${content.name || 'Your Name'}</h1>
-                                          <p class="text-sm font-semibold tracking-wide">${content.title || 'IT PROFESSIONAL'}</p>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <!-- Body -->
-                              <div class="flex divide-x divide-black mt-6 flex-1">
-                                  <!-- Left Sidebar -->
-                                  <div class="w-[40%] bg-gray-200 px-6 py-8 space-y-8">
-                                      <!-- About -->
-                                      <div>
-                                          <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">ABOUT</div>
-                                          <p class="text-sm">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
-                                      </div>
-
-                                      <!-- Education -->
-                                      <div>
-                                          <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">EDUCATION</div>
-                                          <div>${renderEducation(content.education)}</div>
-                                      </div>
-
-                                      <!-- Language -->
-                                      <div>
-                                          <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">LANGUAGE</div>
-                                          <ul class="list-disc list-inside text-sm space-y-1">
-                                                ${generateLanguagesList(content.languages)}
-                                          </ul>
-                                      </div>
-                                  </div>
-
-                                  <!-- Right Content -->
-                                  <div class="w-[60%] px-6 py-8 space-y-8">
-                                      <!-- Experience -->
-                                      <div>
-                                          <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-4 w-fit">EXPERIENCE</div>
-                                          <div>${renderExperience(content.experience)}</div>
-                                          <hr class="border-gray-400">
-                                      </div>
-
-                                      <!-- Skills -->
-                                      <div>
-                                          <div class="font-bold mb-4 text-base">SKILLS</div>
-                                          <ul class="list-disc list-inside space-y-2 text-sm">
-                                              <li>Proficient in coding languages</li>
-                                              <li>Strong logical approach to problem-solving</li>
-                                              <li>High attention to detail</li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'it-10') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
-                              <!-- Left Column -->
-                              <div class="w-1/2 p-8 bg-white border-r-2 border-gray-300">
-                                  <div class="mb-8">
-                                      <h1 class="text-3xl font-bold text-[#000] mb-1">${content.name || 'Your Name'}</h1>
-                                      <p class="text-gray-500 text-lg mb-6">${content.title || 'IT Professional'}</p>
-                                  </div>
-
-                                  <div class="mb-8">
-                                      <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Work Experience</h2>
-                                      <div>${renderExperience(content.experience)}</div>
-                                  </div>
-
-                                  <div class="mb-8">
-                                      <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Education</h2>
-                                      <div>${renderEducation(content.education)}</div>
-                                  </div>
-
-                                  <div>
-                                      <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Language</h2>
-                                      <ul class="list-disc list-inside">
-                                          ${generateLanguagesList(content.languages)}
-                                      </ul>
-                                  </div>
-                              </div>
-
-                              <!-- Right Column -->
-                              <div class="w-1/2 p-8 bg-[#f3dcdc]">
-                                  <div class="flex justify-center mb-8">
-                                      <img src="${content.profileImage}" alt="Profile Picture" class="w-[130px] h-[130px] object-cover rounded-full border-[4px] border-[#582b2a]">
-                                  </div>
-
-                                  <div class="mb-8">
-                                      <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Contact</h2>
-                                      <p class="mb-1">Phone: ${content.phone || '+123-456-7890'}</p>
-                                      <p class="mb-1">Email: ${content.email || 'email@example.com'}</p>
-                                      <p>Location: ${content.address || 'Your City'}</p>
-                                  </div>
-
-                                  <div class="mb-8">
-                                      <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">About</h2>
-                                      <p>${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec quam vitae libero.'}</p>
-                                  </div>
-
-                                  <div>
-                                      <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Skills</h2>
-                                      <ul class="list-disc list-inside">${renderSkills(content.skills)}</ul>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        // Accountant Templates
-                        else if (template === 'accountant-1') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
-                              <!-- Left Sidebar -->
-                              <div class="w-[200px] bg-[#8E735B] text-white flex flex-col items-center py-8 px-4 space-y-8">
-                                  <!-- Profile Image -->
-                                  <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-hidden">
-                                      <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
-                                  </div>
-
-                                  <!-- Skills -->
-                                  <div class="text-center">
-                                      <h2 class="text-white text-lg font-bold mb-2 tracking-wide">SKILLS</h2>
-                                      <ul class="text-sm space-y-1 list-disc list-inside">${renderSkills(content.skills)}</ul>
-                                  </div>
-
-                                  <!-- Contact Info -->
-                                  <div class="text-center">
-                                      <h2 class="text-white text-lg font-bold mb-2 tracking-wide">CONTACT</h2>
-                                      <div class="space-y-4 text-sm">
-                                          <p>📞 ${content.phone || '+123-456-7890'}</p>
-                                          <p>✉️ ${content.email || 'email@example.com'}</p>
-                                          <p>📍 ${content.address || '123 Anywhere St., Any City'}</p>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <!-- Right Content -->
-                              <div class="flex-1 bg-white p-10">
-                                  <!-- Header Name -->
-                                  <div class="relative mb-10">
-                                      <div class="bg-[#8E735B] h-28 flex items-center pl-4">
-                                          <h1 class="text-2xl tracking-wide text-white">
-                                              <span class="block font-bold justify-center">${content.name || 'Your Name'}</span>
-                                          </h1>     
-                                      </div>
-                                  </div>
-
-                                  <!-- Education -->
-                                  <div class="mb-8">
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="w-3 h-3 bg-[#8E735B]"></div>
-                                          <h2 class="uppercase text-sm font-semibold tracking-wide">Education</h2>
-                                      </div>
-                                      <div class="border-t border-[#F7F2EA] pt-4 text-sm">${renderEducation(content.education)}</div>
-                                  </div>
-
-                                  <!-- About -->
-                                  <div class="mb-8">
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="w-3 h-3 bg-[#8E735B]"></div>
-                                          <h2 class="uppercase text-sm font-semibold tracking-wide">About</h2>
-                                      </div>
-                                      <div class="border-t border-[#F7F2EA] pt-4 text-sm">
-                                          <p>${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
-                                      </div>
-                                  </div>
-
-                                  <!-- Experience -->
-                                  <div>
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="w-3 h-3 bg-[#8E735B]"></div>
-                                          <h2 class="uppercase text-sm font-semibold tracking-wide">Experience</h2>
-                                      </div>
-                                      <div class="border-t border-[#F7F2EA] pt-4 text-sm">${renderExperience(content.experience)}</div>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'accountant-2') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden grid grid-cols-3 gap-8">
-                              <!-- Left Column -->
-                              <div class="col-span-1 space-y-8">
-                                  <!-- Profile Photo -->
-                                  <div class="flex justify-center">
-                                      <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border-4 border-gray-700" />
-                                  </div>
-
-                                  <!-- Contact -->
-                                  <div>
-                                      <h2 class="text-lg font-bold flex items-center gap-2">
-                                          <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
-                                          Contact
-                                      </h2>
-                                      <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
-                                          <p>${content.phone || '+123-456-7890'}</p>
-                                          <p>${content.email || 'email@example.com'}</p>
-                                          <p>${content.address || '123 Anywhere St., Any City'}</p>
-                                      </div>
-                                  </div>
-
-                                  <!-- Education -->
-                                  <div>
-                                      <h2 class="text-lg font-bold flex items-center gap-2">
-                                          <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
-                                          Education
-                                      </h2>
-                                      <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">${renderEducation(content.education)}</div>
-                                  </div>
-
-                                  <!-- Skills -->
-                                  <div>
-                                      <h2 class="text-lg font-bold flex items-center gap-2">
-                                          <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
-                                          Skills
-                                      </h2>
-                                      <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
-                                          <ul class="list-disc list-inside">${renderSkills(content.skills)}</ul>
-                                      </div>
+                                      <ul class="text-sm space-y-1">${renderSkills(content.skills)}</ul>
                                   </div>
                               </div>
 
                               <!-- Right Column -->
                               <div class="col-span-2 space-y-6">
-                                  <!-- Header -->
                                   <br>
-                                  <div class="text-left">
-                                      <h1 class="text-4xl font-bold leading-none">${content.name || 'Your Name'}</h1>
-                                      <p class="text-sm text-gray-600">Accountant</p>
-                                  </div>
-                                  <br>
-                                  <!-- About -->
-                                  <div class="bg-blue-100 p-6 rounded shadow">
-                                      <h2 class="text-lg font-bold border-b border-gray-400 mb-2">ABOUT</h2>
-                                      <p class="text-sm text-gray-800">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
-                                  </div>
-
-                                  <!-- Experience -->
-                                  <div class="bg-blue-100 p-6 rounded shadow">
-                                      <h2 class="text-lg font-bold border-b border-gray-400 mb-4">EXPERIENCE</h2>
+                                  <div>
+                                      <h2 class="text-lg font-bold border-b border-gray-400 mb-4">Experience</h2>
                                       <div>${renderExperience(content.experience)}</div>
                                   </div>
                               </div>
-                          </div>`;
-                        }
-                        else if (template === 'accountant-3') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
-                              <!-- Header -->
-                              <div class="grid grid-cols-3 gap-6 p-8 items-center bg-gray-800 text-white font-sans">
-                                  <!-- Left: Image -->
-                                  <div class="flex justify-center">
-                                      <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border-4 border-bg-blue-100 shadow-md" />
-                                  </div>
-
-                                  <!-- Right: Name, Title, About -->
-                                  <div class="col-span-2">
-                                      <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
-                                      <p class="text-lg text-gray-300 mb-2">Accountant</p>
-                                      <p class="text-sm text-gray-200">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
-                                  </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'accountant-4') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex">
+                          <!-- Left Column (50%) -->
+                          <div class="w-1/2 p-6 space-y-6">
+                              <!-- Black Rounded Image Container -->
+                              <div class="bg-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md flex justify-end">
+                                  <img src="${content.profileImage}" alt="Profile" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-md" />
                               </div>
 
-                              <!-- Main Content -->
-                              <div class="grid grid-cols-3 gap-8 px-8 pb-8">
-                                  <!-- Left Column -->
-                                  <div class="col-span-1 space-y-8 bg-blue-100 text-black p-6 rounded font-sans">
-                                      <!-- Education -->
-                                      <div>
-                                          <h2 class="text-lg font-bold mb-2">Education</h2>
-                                          <div>${renderEducation(content.education)}</div>
-                                      </div>
-
-                                      <!-- Languages -->
-                                      <div>
-                                          <h2 class="text-lg font-bold mb-2">Language</h2>
-                                          <ul class="text-sm space-y-1">${generateLanguagesList(content.languages)}</ul>
-                                      </div>
-
-                                      <!-- Skills -->
-                                      <div>
-                                          <h2 class="text-lg font-bold mb-2">Skills</h2>
-                                          <ul class="text-sm space-y-1">${renderSkills(content.skills)}</ul>
-                                      </div>
-                                  </div>
-
-                                  <!-- Right Column -->
-                                  <div class="col-span-2 space-y-6">
-                                      <br>
-                                      <div>
-                                          <h2 class="text-lg font-bold border-b border-gray-400 mb-4">Experience</h2>
-                                          <div>${renderExperience(content.experience)}</div>
-                                      </div>
-                                  </div>
+                              <!-- Name and Title -->
+                              <div class="text-center mt-4">
+                                  <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
+                                  <p class="text-sm text-gray-700">Accountant</p>
                               </div>
-                          </div>`;
-                        }
-                        else if (template === 'accountant-4') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex">
-                              <!-- Left Column (50%) -->
-                              <div class="w-1/2 p-6 space-y-6">
-                                  <!-- Black Rounded Image Container -->
-                                  <div class="bg-black p-6 rounded-tr-[100px] rounded-br-[100px] shadow-md flex justify-end">
-                                      <img src="${content.profileImage}" alt="Profile" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-md" />
-                                  </div>
 
-                                  <!-- Name and Title -->
-                                  <div class="text-center mt-4">
-                                      <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                      <p class="text-sm text-gray-700">Accountant</p>
+                              <!-- About -->
+                              <div class="px-6">
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">About</div>
+                                      <hr class="flex-grow border-t border-gray-400" />
                                   </div>
+                                  <p class="text-sm text-gray-800">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                              </div>
 
-                                  <!-- About -->
-                                  <div class="px-6">
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">About</div>
-                                          <hr class="flex-grow border-t border-gray-400" />
-                                      </div>
-                                      <p class="text-sm text-gray-800">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                              <!-- Skills -->
+                              <div class="px-6">
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Skills</div>
+                                      <hr class="flex-grow border-t border-gray-400" />
                                   </div>
+                                  <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">${renderSkills(content.skills)}</ul>
+                              </div>
 
-                                  <!-- Skills -->
-                                  <div class="px-6">
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Skills</div>
-                                          <hr class="flex-grow border-t border-gray-400" />
-                                      </div>
-                                      <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">${renderSkills(content.skills)}</ul>
+                              <!-- Languages -->
+                              <div class="px-6">
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Languages</div>
+                                      <hr class="flex-grow border-t border-gray-400" />
+                                  </div>
+                                  <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">${generateLanguagesList(content.languages)}</ul>
+                              </div>
+                          </div>
+
+                          <!-- Right Column (50%) -->
+                          <div class="w-1/2 p-8 space-y-6">
+                              <!-- Experience -->
+                              <br><br>
+                              <div>
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Experience</div>
+                                      <hr class="flex-grow border-t border-gray-400" />
+                                  </div>
+                                  <div class="space-y-4">${renderExperience(content.experience)}</div>
+                              </div>
+
+                              <!-- Education -->
+                              <div>
+                                  <div class="flex items-center gap-2 mb-2">
+                                      <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Education</div>
+                                      <hr class="flex-grow border-t border-gray-400" />
+                                  </div>
+                                  <div class="space-y-4">${renderEducation(content.education)}</div>
+                              </div>
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'accountant-5') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <!-- Header Section -->
+                          <div class="bg-white flex flex-col items-center py-6 space-y-4 border-b border-black">
+                              <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-black">
+                                  <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
+                              </div>
+                              <h1 class="text-2xl font-bold uppercase text-black">${content.name || 'Your Name'}</h1>
+                          </div>
+
+                          <!-- Job Title Bar -->
+                          <div class="bg-black text-white text-center py-2 font-semibold uppercase text-sm">Accountant</div>
+                          
+                          <!-- Main Content: Two Columns -->
+                          <div class="grid grid-cols-2">
+                              <!-- Left Column -->
+                              <div class="col-span-1 bg-white p-6 border-r border-black">
+                                  <h2 class="text-lg font-bold mb-4">EXPERIENCES</h2>
+                                  <div class="space-y-4 text-sm pl-6">${renderExperience(content.experience)}</div>
+                              </div>
+
+                              <!-- Right Column -->
+                              <div class="col-span-1.5 bg-white p-6 space-y-6">
+                                  <!-- Education -->
+                                  <div>
+                                      <h2 class="text-lg font-bold mb-4">EDUCATION</h2>
+                                      <div>${renderEducation(content.education)}</div>
                                   </div>
 
                                   <!-- Languages -->
-                                  <div class="px-6">
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Languages</div>
-                                          <hr class="flex-grow border-t border-gray-400" />
-                                      </div>
-                                      <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">${generateLanguagesList(content.languages)}</ul>
+                                  <div>
+                                      <h2 class="text-lg font-bold mb-4">LANGUAGES</h2>
+                                      <ul class="list-disc list-inside text-sm pl-6">${generateLanguagesList(content.languages)}</ul>
+                                  </div>
+
+                                  <!-- Skills -->
+                                  <div>
+                                      <h2 class="text-lg font-bold mb-4">SKILLS</h2>
+                                      <ul class="text-sm space-y-2 pl-6">${renderSkills(content.skills)}</ul>
                                   </div>
                               </div>
-
-                              <!-- Right Column (50%) -->
-                              <div class="w-1/2 p-8 space-y-6">
-                                  <!-- Experience -->
+                          </div>
+                      </div>`;
+                    }
+                    else if (template === 'accountant-6') {
+                      html = `
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full font-sans text-black shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                          <!-- Header -->
+                          <div class="flex w-full">
+                              <div class="w-1/2 bg-blue-100 px-10 pt-10">
                                   <br><br>
+                                  <h2 class="text-3xl font-semibold text-gray-800">${content.name || 'Your Name'}</h2>
+                                  <hr />
+                                  <p class="uppercase tracking-widest mt-1 pt-2 w-fit">${content.title || 'Accountant'}</p>
+                              </div>
+                              <div class="w-1/2 bg-gray-800 flex items-center justify-center p-10">
+                                  <img src="${content.profileImage}" class="rounded-full w-40 h-40 border-4 border-white object-cover shadow-lg" alt="Profile" />
+                              </div>
+                          </div>
+
+                          <!-- Main Body -->
+                          <div class="flex w-full h-full">
+                              <!-- Left Column -->
+                              <div class="w-1/2 bg-blue-100 px-10 py-8 space-y-6">
+                                  <!-- About Me -->
                                   <div>
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Experience</div>
-                                          <hr class="flex-grow border-t border-gray-400" />
-                                      </div>
-                                      <div class="space-y-4">${renderExperience(content.experience)}</div>
+                                      <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">About Me:</div>
+                                      <p class="text-sm text-gray-800">${content.summary || 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, quam.'}</p>
+                                  </div>
+
+                                  <!-- Contact -->
+                                  <div>
+                                      <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Contact:</div>
+                                      <ul class="text-sm space-y-1">
+                                          <li>${content.phone || '+123-456-7890'}</li>
+                                          <li>${content.email || 'email@example.com'}</li>
+                                          <li>${content.address || '123 Anywhere St., Any City'}</li>
+                                      </ul>
                                   </div>
 
                                   <!-- Education -->
                                   <div>
-                                      <div class="flex items-center gap-2 mb-2">
-                                          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Education</div>
-                                          <hr class="flex-grow border-t border-gray-400" />
-                                      </div>
-                                      <div class="space-y-4">${renderEducation(content.education)}</div>
-                                  </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'accountant-5') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
-                              <!-- Header Section -->
-                              <div class="bg-white flex flex-col items-center py-6 space-y-4 border-b border-black">
-                                  <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-black">
-                                      <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
-                                  </div>
-                                  <h1 class="text-2xl font-bold uppercase text-black">${content.name || 'Your Name'}</h1>
-                              </div>
-
-                              <!-- Job Title Bar -->
-                              <div class="bg-black text-white text-center py-2 font-semibold uppercase text-sm">Accountant</div>
-                              
-                              <!-- Main Content: Two Columns -->
-                              <div class="grid grid-cols-2">
-                                  <!-- Left Column -->
-                                  <div class="col-span-1 bg-white p-6 border-r border-black">
-                                      <h2 class="text-lg font-bold mb-4">EXPERIENCES</h2>
-                                      <div class="space-y-4 text-sm pl-6">${renderExperience(content.experience)}</div>
+                                      <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Education:</div>
+                                      <div>${renderEducation(content.education)}</div>
                                   </div>
 
-                                  <!-- Right Column -->
-                                  <div class="col-span-1.5 bg-white p-6 space-y-6">
-                                      <!-- Education -->
-                                      <div>
-                                          <h2 class="text-lg font-bold mb-4">EDUCATION</h2>
-                                          <div>${renderEducation(content.education)}</div>
-                                      </div>
-
-                                      <!-- Languages -->
-                                      <div>
-                                          <h2 class="text-lg font-bold mb-4">LANGUAGES</h2>
-                                          <ul class="list-disc list-inside text-sm pl-6">${generateLanguagesList(content.languages)}</ul>
-                                      </div>
-
-                                      <!-- Skills -->
-                                      <div>
-                                          <h2 class="text-lg font-bold mb-4">SKILLS</h2>
-                                          <ul class="text-sm space-y-2 pl-6">${renderSkills(content.skills)}</ul>
-                                      </div>
+                                  <!-- Skills -->
+                                  <div>
+                                      <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Skills:</div>
+                                      <ul class="list-disc list-inside text-sm space-y-1">${renderSkills(content.skills)}</ul>
                                   </div>
-                              </div>
-                          </div>`;
-                        }
-                        else if (template === 'accountant-6') {
-                          html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full font-sans text-black shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
-                              <!-- Header -->
-                              <div class="flex w-full">
-                                  <div class="w-1/2 bg-blue-100 px-10 pt-10">
-                                      <br><br>
-                                      <h2 class="text-3xl font-semibold text-gray-800">${content.name || 'Your Name'}</h2>
-                                      <hr />
-                                      <p class="uppercase tracking-widest mt-1 pt-2 w-fit">${content.title || 'Accountant'}</p>
-                                  </div>
-                                  <div class="w-1/2 bg-gray-800 flex items-center justify-center p-10">
-                                      <img src="${content.profileImage}" class="rounded-full w-40 h-40 border-4 border-white object-cover shadow-lg" alt="Profile" />
-                                  </div>
-                              </div>
 
-                              <!-- Main Body -->
-                              <div class="flex w-full h-full">
-                                  <!-- Left Column -->
-                                  <div class="w-1/2 bg-blue-100 px-10 py-8 space-y-6">
-                                      <!-- About Me -->
-                                      <div>
-                                          <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">About Me:</div>
-                                          <p class="text-sm text-gray-800">${content.summary || 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, quam.'}</p>
-                                      </div>
-
-                                      <!-- Contact -->
-                                      <div>
-                                          <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Contact:</div>
-                                          <ul class="text-sm space-y-1">
-                                              <li>${content.phone || '+123-456-7890'}</li>
-                                              <li>${content.email || 'email@example.com'}</li>
-                                              <li>${content.address || '123 Anywhere St., Any City'}</li>
-                                          </ul>
-                                      </div>
-
-                                      <!-- Education -->
-                                      <div>
-                                          <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Education:</div>
-                                          <div>${renderEducation(content.education)}</div>
-                                      </div>
-
-                                      <!-- Skills -->
-                                      <div>
-                                          <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Skills:</div>
-                                          <ul class="list-disc list-inside text-sm space-y-1">${renderSkills(content.skills)}</ul>
-                                      </div>
-
-                                      <!-- Language -->
-                                      <div>
-                                          <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Language:</div>
+                                  <!-- Language -->
+                                  <div>
+                                      <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Language:</div>
                                           <ul class="list-disc list-inside text-sm space-y-1">${generateLanguagesList(content.languages)}</ul>
                                       </div>
                                   </div>
