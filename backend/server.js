@@ -3,6 +3,7 @@ const express = require("express");
 const fileUpload = require('express-fileupload');
 const removebgRoutes = require('./routes/removebg.routes.js');
 const atsRoutes = require('./routes/ats.routes.js');
+const feedbackRoutes = require('./routes/feedback.routes.js');
 const cors = require("cors");
 const path = require("path"); // ✅ Added for serving frontend
 const db = require("./models");
@@ -31,6 +32,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use('/api/removebg', removebgRoutes);
 app.use('/api/ats', atsRoutes);
+app.use('/api/feedback', feedbackRoutes);
 app.use('/api', grammarRoutes);
 
 // AI Assistant Proxy Route
