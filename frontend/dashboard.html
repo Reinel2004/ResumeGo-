@@ -32,6 +32,7 @@
         .pdf-container {
             width: 210mm;
             min-height: 297mm;
+            max-height: 297mm;
             background: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.4;
@@ -43,6 +44,13 @@
             overflow: hidden;
         }
         
+        @media print {
+            .pdf-container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+        }
+        
         .pdf-container * {
             box-sizing: border-box;
         }
@@ -51,6 +59,18 @@
             max-width: 100%;
             height: auto;
             object-fit: cover;
+        }
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 0px 0 20px;
+        }
+
+            
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
         }
     </style>
 </head>
@@ -101,6 +121,10 @@
                 </div>
             </div>
         </nav>
+
+        
+
+        
             <script>
             // Responsive nav toggle for Flowbite-style nav
             const menuBtn = document.querySelector('[data-collapse-toggle="navbar-default"]');
@@ -3922,6 +3946,26 @@
                     pdfContainer.innerHTML = html;
                     pdfContainer.style.display = 'block';
                     pdfContainer.style.position = 'fixed';
+                    
+                    // Add margins based on template type using switch case
+                    switch (resume.template) {
+                        case 'generic-1':
+                        case 'generic-2':
+                        case 'generic-3':
+                        case 'generic-4':
+                        case 'generic-5':
+                        case 'generic-6':
+                        case 'generic-7':
+                        case 'generic-8':
+                        case 'generic-9':
+                        case 'generic-10':
+                            pdfContainer.style.padding = '5mm';
+                            break;
+                        default:
+                            // No padding for other templates
+                            pdfContainer.style.padding = '0';
+                            break;
+                    }
                     pdfContainer.style.top = '0';
                     pdfContainer.style.left = '556px';
                     pdfContainer.style.width = '210mm';
@@ -3961,14 +4005,14 @@
 
                     // Configure PDF options
                     const opt = {
-                        margin: [0, 0, 0, 0], // Remove all margins
+                        margin: [0, 0, 0, 0], 
                         filename: `${resume.title || 'Resume'}.pdf`,
                         image: { 
                             type: 'jpeg', 
                             quality: 0.95 
                         },
                         html2canvas: { 
-                            scale: 2,
+                            scale: 1,
                             useCORS: true,
                             letterRendering: true,
                             logging: false,
@@ -3980,8 +4024,6 @@
                             scrollY: 0,
                             removeContainer: true,
                             foreignObjectRendering: false,
-                            scale: 2,
-                            useCORS: true,
                             allowTaint: true,
                             backgroundColor: '#ffffff'
                         },
@@ -4105,5 +4147,10 @@
         });
     </script>
     <div id="pdfPreviewContainer" style="display:none; position: absolute; left: -9999px; top: -9999px;"></div>
+    <footer>
+        <div class="footer-bottom">
+            <p>© 2025 ResumeGO. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

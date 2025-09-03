@@ -122,26 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return false;
             }
 
-            // Step 2: Verify email account exists
-            try {
-                                        const verifyResponse = await emailjs.send(
-                            'service_pmhrkn5', // TODO: Get from backend config
-                            'template_whdyqef', // TODO: Get from backend config
-                    {
-                        to_email: email,
-                        verification_code: '123456' // Dummy code for verification
-                    }
-                );
-                
-                // If email sends successfully, account exists
-                showEmailAvailable();
-                return true;
-            } catch (emailError) {
-                console.log('Email verification failed (account might not exist):', emailError);
-                // Show warning but still allow registration
-                showEmailWarning('Email account verification failed. Please ensure the email address is correct.');
-                return true; // Still allow registration
-            }
+            // Step 2: Skip email verification for now (optional feature)
+            // Email verification via sending test emails is unreliable and can cause false negatives
+            // The email format validation above is sufficient for registration
+            console.log('Email format is valid and not already registered');
+            showEmailAvailable();
+            return true;
             
         } catch (error) {
             console.error('Email validation error:', error);

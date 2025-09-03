@@ -214,6 +214,55 @@ exports.resetPassword = async (req, res) => {
     }
 };
 
+exports.updateUser = async (req, res) => {
+    try {
+        const { fullName, email } = req.body;
+        const userId = req.userId; // From JWT middleware
+        
+        if (!userId) {
+            return res.status(401).send({ message: "Not authenticated" });
+        }
+
+        // Check if email is being changed and if it's already taken
+        if (email) {
+            const existingUser = await User.findOne({
+                where: { 
+                    email: email,
+                    id: { [db.Sequelize.Op.ne]: userId } // Exclude current user
+                }
+            });
+
+            if (existingUser) {
+                return res.status(400).send({ 
+                    message: "Email is already registered by another user" 
+                });
+            }
+        }
+
+        // Update user data
+        const updateData = {};
+        if (fullName) updateData.fullName = fullName;
+        if (email) updateData.email = email;
+
+        await User.update(updateData, {
+            where: { id: userId }
+        });
+
+        // Get updated user data
+        const updatedUser = await User.findByPk(userId, {
+            attributes: ['id', 'username', 'email', 'fullName', 'createdAt', 'updatedAt']
+        });
+
+        res.status(200).send({
+            message: "User updated successfully",
+            user: updatedUser
+        });
+    } catch (err) {
+        console.error('Error updating user:', err);
+        res.status(500).send({ message: "Internal server error" });
+    }
+};
+
 exports.validateResetToken = async (req, res) => {
     try {
         const { token } = req.params;

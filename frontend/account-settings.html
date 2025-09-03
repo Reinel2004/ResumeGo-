@@ -526,11 +526,12 @@
     <script src="js/auth.js"></script>
     <script type="text/javascript">
         // Initialize EmailJS with public key from backend
+        let emailjsConfig = null;
         async function initializeEmailJS() {
             try {
                 const response = await fetch('http://localhost:3000/api/config/emailjs');
-                const config = await response.json();
-                emailjs.init(config.publicKey);
+                emailjsConfig = await response.json();
+                emailjs.init(emailjsConfig.publicKey);
                 console.log('EmailJS initialized successfully');
             } catch (error) {
                 console.error('Failed to initialize EmailJS:', error);
@@ -625,7 +626,27 @@
                 // Combine names
                 const fullName = [firstName, middleName, lastName].filter(name => name.trim()).join(' ');
                 
-                // Store individual name fields in localStorage
+                // Update user data on the server
+                const updateResponse = await fetch('http://localhost:3000/api/user/update', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        fullName: fullName,
+                        email: email
+                    })
+                });
+
+                if (!updateResponse.ok) {
+                    const errorData = await updateResponse.json();
+                    throw new Error(errorData.message || 'Failed to update account');
+                }
+
+                const updatedUser = await updateResponse.json();
+                
+                // Update localStorage with server response
                 const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
                 currentUser.firstName = firstName;
                 currentUser.middleName = middleName;
@@ -638,10 +659,13 @@
                 document.getElementById('userName').textContent = fullName;
                 document.getElementById('userAvatar').textContent = firstName[0];
                 
+                // Update original email for future validations
+                originalEmail = email;
+                
                 alert('Account information updated successfully!');
             } catch (error) {
                 console.error('Error updating account:', error);
-                alert('Failed to update account information. Please try again.');
+                alert('Failed to update account information: ' + error.message);
             }
         }
 
@@ -698,25 +722,22 @@
                     return false;
                 }
 
-                // Step 2: Verify email account exists (only if email changed)
+                // Step 2: Additional validation (only if email changed)
                 if (email !== originalEmail) {
-                    try {
-                        const verifyResponse = await emailjs.send(
-                            'service_pmhrkn5', // TODO: Get from backend config
-                            'template_whdyqef', // TODO: Get from backend config
-                            {
-                                to_email: email,
-                                verification_code: '123456'
-                            }
-                        );
-                        
+                    // For now, we'll just validate the email format and availability
+                    // Email account verification can be unreliable, so we'll trust the user
+                    // and let them verify their email when they receive notifications
+                    
+                    // Check if it's a common email provider (basic validation)
+                    const commonProviders = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com'];
+                    const emailDomain = email.split('@')[1]?.toLowerCase();
+                    
+                    if (emailDomain && !commonProviders.includes(emailDomain)) {
+                        showEmailWarning('Please ensure this email address is correct and active.');
+                    } else {
                         showEmailAvailable();
-                        return true;
-                    } catch (emailError) {
-                        console.log('Email verification failed:', emailError);
-                        showEmailWarning('Email account verification failed. Please ensure the email address is correct.');
-                        return true; // Still allow update
                     }
+                    return true;
                 } else {
                     // Email hasn't changed, no need to verify
                     showEmailAvailable();

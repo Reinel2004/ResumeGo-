@@ -506,7 +506,7 @@
     }
 
     .skill-category {
-        background: #f8fafc;
+        
         padding: 1rem;
         border-radius: 6px;
     }
@@ -1157,6 +1157,20 @@
             min-height: 44px;
         }
     }
+
+    footer {
+        background: #1e293b;
+        color: white;
+        padding: 0px 0 20px;
+    }
+
+        
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #334155;
+    }
+    
 </style>
 
 </head>
@@ -2176,7 +2190,7 @@
             } else if(templateId === 'it-2'){
                 // IT Template 2 Preview (matches static it-template-2.html)
                 const preview = document.createElement('div');
-                preview.className = 'max-w-[210mm] w-full font-sans text-black bg-white shadow-md grid grid-cols-3';
+                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto w-full font-sans text-black bg-white shadow-md grid grid-cols-3';
                 preview.innerHTML = `
                     <!-- Left Column -->
                     <div class="col-span-1 bg-gray-100 p-6 space-y-6 text-sm">
