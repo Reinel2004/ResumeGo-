@@ -69,14 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('Registration response:', response);
 
-            if (response.message === 'User registered successfully!') {
-                // Show success message
-                showSuccess('Registration successful! Redirecting to login...');
+            if (response.message && response.message.includes('User registered successfully')) {
+                // Show success message with email verification info
+                const message = response.emailSent 
+                    ? 'Registration successful! Please check your email to verify your account before logging in.'
+                    : 'Registration successful! However, there was an issue sending the verification email. Please contact support.';
                 
-                // Redirect to login page after 2 seconds
+                showSuccess(message);
+                
+                // Redirect to login page after 5 seconds to give user time to read the message
                 setTimeout(() => {
                     window.location.href = 'login.html';
-                }, 2000);
+                }, 5000);
             } else {
                 showError(response.message || 'Registration failed');
             }

@@ -5,107 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/output.css" rel="stylesheet">
     <title>Generic Template No 6</title>
+
+<style>
+  .resume-container {
+    width: 210mm;
+    max-width: 210mm;
+    min-width: 210mm;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-container {
+      transform: scale(0.8);
+      transform-origin: top center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resume-container {
+      transform: scale(0.6);
+      transform-origin: top center;
+    }
+  }
+</style>
+
+
 </head>
-<body class="bg-white flex justify-center py-10">
-  <div class="max-w-[210mm] w-full text-black font-sans space-y-8 bg-white p-8 shadow-md">
-
+<body class="bg-white justify-center py-10">
+  <div class="resume-container bg-white p-8 shadow-md">
+    
     <!-- Header -->
-    <div class="flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold">Ellen. C Harret</h1>
-        <p class="text-lg font-semibold">Hospitality Server</p>
-      </div>
-      <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
-    </div>
-
-    <hr />
-
-    <!-- Summary -->
-    <div>
-      <h2 class="font-semibold mb-1">Summary</h2>
-      <div class="pl-4 text-sm space-y-1">
-        <p>
-          Personable and professional Restaurant Server with 7 years of experience in fast casual,
-          and fine dining settings.
-        </p>
-        <p>
-          Extensive knowledge of wine and food pairings with a specialization in French cuisine.
-        </p>
-      </div>
-    </div>
-
-    <!-- Education -->
-    <div>
-      <h2 class="font-semibold mb-1">Education</h2>
-      <div class="pl-4 text-sm space-y-1">
-        <p>
-          Honors B.Sc. in Electrical Engineering, University of Waterloo, 2008
-        </p>
-        <p>
-          Partially completed M.S. in Automation Engineering Process Control, University of
-          Waterloo (currently in process)
-        </p>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <div>
-      <h2 class="font-semibold mb-1">Skills</h2>
-      <ul class="list-disc list-inside text-sm pl-4 space-y-1">
-        <li>
-          Background in Electrical Circuits and Programming Concepts.
-        </li>
-        <li>
-          Experience with Allen Bradley RSLogix, WonderWare, VB, C#, MatLab, GE Proficy iFix, MS SQL Server, Oracle PL/SQL, HTML, ASP.NET, OPC, Excel VBA
-        </li>
-        <li>
-          Integration of legacy systems and support for level 1, 2, and 3 data collection.
-        </li>
-        <li>
-          Development of custom vision software and control systems for EAF.
-        </li>
-        <li>
-          Strong skills in data analysis, simulation, control design, and optimization.
-        </li>
-      </ul>
-    </div>
-
-    <!-- Work Experience -->
-    <div>
-      <h2 class="font-semibold uppercase mb-1">Work Experience</h2>
-        <br>
-      <!-- Job 1 -->
-      <div class="pl-4 space-y-1">
-        <div class="flex justify-between font-medium">
-          <p>Chez Pierre<br />French Restaurant</p>
-          <p>Jan 2012 – Present</p>
+    <div class="grid grid-cols-[30%_70%] gap-6 mb-6 text-black p-6 rounded border border-black">
+        
+        <!-- Left: Image -->
+        <div class="flex justify-center items-center">
+            <img src="../../../assets/img/charles.png" alt="Profile Photo" class="w-40 h-40 object-cover border-2 border-black">
         </div>
-        <p class="italic font-semibold">Head Server</p>
-        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-          <li>Greeting guests in a prompt and courteous manner.</li>
-          <li>
-            Taking orders from patrons, often memorizing the orders if there were 5 patrons or less.
-          </li>
-        </ul>
-      </div>
-      <br>
-      <!-- Additional job? Just copy this format -->
-      
-      <div class="pl-4 space-y-1">
-        <div class="flex justify-between font-medium">
-          <p>Company Name<br />Location</p>
-          <p>Dates</p>
+
+        <!-- Right: Name and Contact Info -->
+        <div class="space-y-2 text-left">
+            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+            <p class="text-xl">Sales Engineer</p>
+
+            <div class="mt-4 space-y-1">
+            <p class="text-sm">1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
+            </div>
+            <div class="space-y-1">
+            <p class="text-sm">3868683442</p>
+            </div>
+            <div class="space-y-1">
+            <p class="text-sm">CharlesTorres@gmail.com</p>
+            </div>
         </div>
-        <p class="italic font-semibold">Job Title</p>
-        <ul class="list-disc list-inside text-sm mt-1 space-y-1">
-          <li>Responsibility 1</li>
-          <li>Responsibility 2</li>
-        </ul>
-      </div>
-      
 
     </div>
 
+
+    <!-- Body: 2 Column Layout (30% / 70%) -->
+    <div class="grid grid-cols-[30%_70%] gap-6">
+      
+      <!-- Left Column -->
+    <div class="space-y-4">
+
+
+    <div>
+        <h2 class="text-lg font-semibold text-gray-800">Languages</h2>
+        <ul class="list-disc list-inside text-sm text-gray-700">
+        <li>English</li>
+        <li>Dutch</li>
+        </ul>
+    </div>
+
+  <div>
+    <h2 class="text-lg font-semibold text-gray-800">Hobbies</h2>
+    <ul class="list-disc list-inside text-sm text-gray-700">
+      <li>Piano</li>
+      <li>Debate</li>
+      <li>Triathlon</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="text-lg font-semibold text-gray-800">Skills</h2>
+    <ul class="list-disc list-inside text-sm text-gray-700">
+      <li>Technical Sales</li>
+      <li>Client Relationship</li>
+      <li>Contract Negotiation</li>
+      <li>Territory Management</li>
+    </ul>
+  </div>
+</div>
+
+
+      <!-- Right Column -->
+      <div class="space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-1">Profile</h2>
+          <p class="text-sm text-gray-800 leading-relaxed">
+            Deadline-focused Sales Engineer with six years experience in technical sales, contributing to the 30% growth of income for regional technology solutions provider over five states, producing and assisting long-term contracts with Fortune 500 clients, and growing Territory sixfold up to $350M.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-2">Employment History</h2>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-800">Sales Engineer, Engen Oil, Jacksonville</p>
+            <p class="text-sm text-gray-600 italic">May 2022 — May 2022</p>
+            <ul class="list-disc list-inside text-sm text-gray-800 mt-1 space-y-1">
+              <li>Initiated Lubrication Fundamentals classes for employees and customers.</li>
+              <li>Designed and applied a highly effective industrial filtration program.</li>
+              <li>Designed and applied for numerous lubrication programs.</li>
+              <li>Functioned as a consultant on Best-in-Class Lubrication programs.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Sales Engineer, Quest Medical, Los Angeles</p>
+            <p class="text-sm text-gray-600 italic">January 2019 — April 2021</p>
+            <ul class="list-disc list-inside text-sm text-gray-800 mt-1 space-y-1">
+              <li>Designed and presented tailored technical solutions to automotive dealers.</li>
+              <li>Supervised logistics and proof of concept pilots worth up to $800,000.</li>
+              <li>Exceeded yearly quota by 145%, providing 97.5% satisfaction support.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-1">Education</h2>
+          <p class="text-sm text-gray-800 font-semibold">Masters in Industrial Engineering, Harvard University, Miami</p>
+          <p class="text-sm text-gray-600">January 2019 — May 2022</p>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

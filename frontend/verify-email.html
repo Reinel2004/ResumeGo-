@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification - ResumeGo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
+        <!-- Loading State -->
+        <div id="loading" class="hidden">
+            <div class="w-16 h-16 mx-auto mb-6 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin"></div>
+            <p class="text-gray-600 text-lg">Verifying your email...</p>
+        </div>
+        
+        <!-- Success State -->
+        <div id="success" class="hidden">
+            <div class="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Email Verified Successfully!</h2>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+                Your email has been verified successfully. You can now log in to your ResumeGo account and start building your professional resume.
+            </p>
+            <div class="space-y-3">
+                <a href="login.html" class="block w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    Login to ResumeGo
+                </a>
+                <a href="index.html" class="block w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+                    Back to Home
+                </a>
+            </div>
+        </div>
+        
+        <!-- Error State -->
+        <div id="error" class="hidden">
+            <div class="w-20 h-20 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center">
+                <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Verification Failed</h2>
+            <p class="text-gray-600 mb-8 leading-relaxed" id="error-message">
+                There was an error verifying your email address.
+            </p>
+            <div class="space-y-3 mb-8">
+                <a href="register.html" class="block w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    Register Again
+                </a>
+                <a href="index.html" class="block w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+                    Back to Home
+                </a>
+            </div>
+            
+            <!-- Resend Section -->
+            <div class="border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Need a new verification email?</h3>
+                <p class="text-gray-600 mb-4">Enter your email address to receive a new verification link.</p>
+                <form id="resend-form" class="space-y-4">
+                    <input 
+                        type="email" 
+                        id="resend-email" 
+                        placeholder="Enter your email address" 
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    >
+                    <button 
+                        type="submit" 
+                        class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Resend Verification Email
+                    </button>
+                </form>
+                <div id="resend-message" class="mt-4 text-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the verification process
+        function initVerification() {
+            // Get token from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            
+            // Show loading state
+            showLoading();
+            
+            if (!token) {
+                showError('No verification token provided.');
+                return;
+            }
+            
+            // Verify email
+            verifyEmail(token);
+        }
+        
+        async function verifyEmail(token) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/auth/verify-email/${token}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSuccess(data.message);
+                } else {
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error verifying email:', error);
+                showError('Network error. Please check your connection and try again.');
+            }
+        }
+        
+        function showLoading() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('success').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+        }
+        
+        function showSuccess(message) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+            document.getElementById('error').classList.add('hidden');
+        }
+        
+        function showError(message) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('success').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+            document.getElementById('error-message').textContent = message;
+        }
+        
+        // Handle resend verification email
+        document.getElementById('resend-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('resend-email').value;
+            const messageDiv = document.getElementById('resend-message');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            messageDiv.textContent = '';
+            messageDiv.className = 'mt-4 text-sm';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/resend-verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    messageDiv.textContent = data.message;
+                    messageDiv.className = 'mt-4 text-sm text-green-600';
+                } else {
+                    messageDiv.textContent = data.message;
+                    messageDiv.className = 'mt-4 text-sm text-red-600';
+                }
+            } catch (error) {
+                console.error('Error resending verification email:', error);
+                messageDiv.textContent = 'Network error. Please try again.';
+                messageDiv.className = 'mt-4 text-sm text-red-600';
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Resend Verification Email';
+            }
+        });
+        
+        // Start the verification process when the page loads
+        document.addEventListener('DOMContentLoaded', initVerification);
+    </script>
+</body>
+</html>

@@ -1,37 +1,30 @@
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("user", {
+    const EmailVerification = sequelize.define("emailVerification", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        username: {
+        userId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+            }
+        },
+        token: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
-        email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
-            }
-        },
-        password: {
-            type: Sequelize.STRING,
+        expiresAt: {
+            type: Sequelize.DATE,
             allowNull: false
         },
-        fullName: {
-            type: Sequelize.STRING
-        },
-        isEmailVerified: {
+        used: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
-        },
-        emailVerifiedAt: {
-            type: Sequelize.DATE,
-            allowNull: true
         },
         createdAt: {
             type: Sequelize.DATE,
@@ -43,5 +36,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return User;
-}; 
+    return EmailVerification;
+};
