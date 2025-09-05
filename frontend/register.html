@@ -550,6 +550,10 @@
         function agreeToTerms() {
             const checkbox = document.getElementById('agreeTerms');
             checkbox.checked = true;
+            
+            // Trigger the change event to update the register button state
+            checkbox.dispatchEvent(new Event('change'));
+            
             closeTermsModal();
         }
 
