@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0, minimum-scale=0.3">
     <title>Resume Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="icon" href="../assets/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -142,8 +144,8 @@
     .preview-toggle {
         display: none;
         position: fixed;
-        bottom: 20px;
-        left: 50%;
+        bottom: 19px;
+        left: 60%;
         transform: translateX(-50%);
         background: var(--primary-color);
         color: white;
@@ -214,9 +216,9 @@
             font-size: 16px; 
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            /* Ensure proper touch target size and prevent interference */
+           
             pointer-events: auto;
-            /* Prevent any accidental interactions */
+           
             isolation: isolate;
         }
     }
@@ -1224,7 +1226,7 @@
     </header>
 
     <main class="main-container">
-        <button id="saveResumeBtn" class="fixed bottom-8 right-8 bg-primary text-white px-5 py-2 rounded shadow-md text-sm font-semibold hover:bg-secondary transition-all z-50">Save</button>
+        <button id="saveResumeBtn" class="fixed bottom-5 right-8 bg-primary text-white px-5 py-2 rounded shadow-md text-sm font-semibold hover:bg-secondary transition-all z-50">Save</button>
     <div class="left-panel">
             <!-- Profile Picture Upload -->
             <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="personal-section">
@@ -1615,7 +1617,7 @@
             </div>
     </main>
 
-    <button class="preview-toggle" id="previewToggle">Preview Resume</button>
+    <button class="preview-toggle" id="previewToggle"><i class="fa-regular fa-eye"></i></button>
 
     <script src="js/auth.js"></script>
     <script type="module">
@@ -1981,13 +1983,14 @@
         // Preview functionality
         const previewToggle = document.getElementById('previewToggle');
         const rightPanel = document.querySelector('.right-panel');
-        let isPreviewActive = true; // Start with preview active
+        let isPreviewActive = false; 
 
         function togglePreview() {
+          
             isPreviewActive = !isPreviewActive;
             rightPanel.classList.toggle('active');
             previewToggle.classList.toggle('active');
-            previewToggle.textContent = isPreviewActive ? 'Hide Preview' : 'Preview Resume';
+            previewToggle.innerHTML = isPreviewActive ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
             
             if (isPreviewActive) {
                 updatePreview();
@@ -7532,6 +7535,7 @@
             togglePreview();
         });
 
+
        
         // Auto-resize textareas
         function autoResizeTextarea(textarea) {
@@ -7572,8 +7576,12 @@
 
         // Debounced preview update to prevent excessive calls
         let previewUpdateTimer;
-        function debouncedUpdatePreview() {
-            if (!isPreviewActive) return;
+        function debouncedUpdatePreview(source = 'unknown') {
+            if (!isPreviewActive) {
+             
+                return;
+            }
+            
             clearTimeout(previewUpdateTimer);
             previewUpdateTimer = setTimeout(() => {
                 updatePreview();
