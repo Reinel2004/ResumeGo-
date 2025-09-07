@@ -109,7 +109,8 @@
         
         async function verifyEmail(token) {
             try {
-                const response = await fetch(`http://localhost:3000/api/auth/verify-email/${token}`, {
+                const apiUrl = window.apiConfig ? window.apiConfig.getFullURL(`/auth/verify-email/${token}`) : `http://localhost:3000/api/auth/verify-email/${token}`;
+                const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -163,7 +164,8 @@
             messageDiv.className = 'mt-4 text-sm';
             
             try {
-                const response = await fetch('http://localhost:3000/api/auth/resend-verification', {
+                const apiUrl = window.apiConfig ? window.apiConfig.getFullURL('/auth/resend-verification') : 'http://localhost:3000/api/auth/resend-verification';
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -194,5 +196,6 @@
         // Start the verification process when the page loads
         document.addEventListener('DOMContentLoaded', initVerification);
     </script>
+    <script src="js/config.js"></script>
 </body>
 </html>

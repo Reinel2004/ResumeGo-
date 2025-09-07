@@ -84,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = prompt('Please enter your email address to resend the verification email:');
             if (!email) return;
 
-            const response = await fetch('http://localhost:3000/api/auth/resend-verification', {
+            // Get the correct API URL
+            const apiUrl = window.apiConfig ? window.apiConfig.getFullURL('/auth/resend-verification') : 'http://localhost:3000/api/auth/resend-verification';
+            
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

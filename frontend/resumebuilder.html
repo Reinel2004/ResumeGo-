@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0, minimum-scale=0.3">
     <title>Resume Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="../assets/img/logo.png" type="image/x-icon">
@@ -1429,7 +1429,7 @@
                     <div class="education-item">
                         <div class="form-grid">
                             <div class="input-group">
-                                <label for="education-degree">Degree</label>
+                                <label for="education-degree">Degree/Strand</label>
                                 <input type="text" id="education-degree" placeholder="e.g., Bachelor of Information Technology">
                             </div>
                             <div class="input-group">
@@ -2042,6 +2042,240 @@
                         </div>
                     `;
                     }
+                    else if(templateId === 'accountant-1'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${school}</span>
+                                <span class="text-sm mb-1 font-light">${year}</span>
+                            </div>
+                            <p class="text-sm mb-1">${degree}</p>
+                            ${gpa ? `<p class="text-sm mb-1">GPA: ${gpa}</p>` : ''}
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-3'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree}</strong><br>${school} <br> ${year}${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-5'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong><br>${school} | ${year}${gpa ? `<br>GPA: ${gpa}` : ''}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-1'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree}</strong> | ${year}${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            <p class="text-sm font-light">${school}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-3'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${year}</strong> <br> ${school}${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            <p class="text-sm font-light">${degree}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-4'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree}</strong> <br> ${description}${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            <p class="text-sm font-light">${school} - ${year}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-5'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree}</strong> <br> ${school} - ${year} ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }   
+                    else if(templateId === 'business-6'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${year}</strong> <br> ${degree} - ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-7'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${year}</strong> <br> ${school} <br> ${degree} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-8'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${year}</strong> <br> ${school} <br> ${degree} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }    
+                    else if(templateId === 'business-10'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${school}</span>
+                                <span class="text-sm mb-1 font-light">${year}</span>
+                            </div>
+                            <p class="text-sm mb-1">${degree}</p>
+                            ${gpa ? `<p class="text-sm mb-1">GPA: ${gpa}</p>` : ''}
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'civil-1'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold text-blue-600 font-medium">${degree}</span>
+                                <span class="text-sm mb-1">${year}</span>
+                            </div>
+                            <p class="text-sm mb-1">${school}</p>
+                            ${gpa ? `<p class="text-sm mb-1">GPA: ${gpa}</p>` : ''}
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'civil-2'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong class="text-[#2A7F8E]">${year}</strong> <br> ${school} <br> ${degree} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'civil-3'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'civil-4'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }  
+                    else if(templateId === 'civil-5'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }  
+                    else if(templateId === 'civil-6'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    } 
+                    else if(templateId === 'civil-7'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }    
+                    else if(templateId === 'civil-8'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'civil-9'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'civil-10'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <p class="text-sm"><strong>${degree} | ${year}</strong> <br> ${school} <br> ${gpa ? `<br>GPA: ${gpa}` : ''}</p>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }        
+                    else if(templateId === 'generic-1'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong><br>${school}<br>${year}${gpa ? `<br>GPA: ${gpa}` : ''}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    } 
+                    else if(templateId === 'generic-2'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong><br>${year} ${school}${gpa ? `<br>GPA: ${gpa}` : ''}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }  
+                    else if(templateId === 'generic-3'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong><br>${year} ${school}${gpa ? `<br>GPA: ${gpa}` : ''}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }         
+                    else if(templateId === 'generic-6'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong><br>${year} ${school}${gpa ? `<br>GPA: ${gpa}` : ''}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'generic-7'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong> (${gpa ? `GPA: ${gpa}` : ''}), ${school}, ${year}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'generic-8'){
+                        previewHTML += `
+                        <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
+                            <i class="text-sm"><strong>${degree}</strong>,${school} <br> ${year} <br>${gpa ? `<br>GPA: ${gpa}` : ''}</i>
+                            ${description ? `<p class="text-sm mt-1">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
                     else{
                         previewHTML += `
                         <div class="education-preview-item" style="margin-bottom: ${index < educationItems.length - 1 ? '1rem' : '0'};">
@@ -2156,6 +2390,342 @@
                             ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
                         </div>
                     `;
+                    }else if(templateId === 'accountant-1'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${position}</span>
+                                <span class="text-sm mb-1 font-light">${dateRange}</span>
+                            </div>
+                            <p class="text-sm mb-4">${company}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-3'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}</p>
+                            <p class="text-sm mb-1 font-light">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-4'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}</p>
+                            <p class="text-sm mb-1 font-light">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-5'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${company}</span>
+                                <span class="text-sm mb-1 font-light">${dateRange}</span>
+                            </div>
+                            <p class="text-sm mb-4">${position}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-6'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}</p>
+                            <p class="text-sm mb-1 font-bold">${company}</p>
+                            <p class="text-sm mb-4">${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-7'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${dateRange}</p>
+                            <p class="text-sm mb-1 font-bold">${position}</p>
+                            <p class="text-sm mb-4">${company}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-8'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}</p>
+                            <p class="text-sm mb-1 font-bold">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'accountant-8'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${company}</p>
+                            <p class="text-sm mb-1 font-bold">${dateRange} | ${position}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-1'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}</p>
+                            <p class="text-sm mb-1 font-bold">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-2'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${position}</span>
+                                <span class="text-sm mb-1 font-light">${dateRange}</span>
+                            </div>
+                            <p class="text-sm mb-4">${company}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-4'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}</p>
+                            <p class="text-sm mb-1 font-light">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'business-5'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position} - ${company}</p>
+                            <i class="text-sm mb-1 font-light">${dateRange}</i>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'business-7'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}<br>${company}</p>
+                            <i class="text-sm mb-1 font-light">${dateRange}</i>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'business-8'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}<br></p>
+                            <i class="text-sm mb-1 font-light">${company}</i><br>
+                            <i class="text-sm mb-1 font-light">${dateRange}</i>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'business-9'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}<br>${company}</p>
+                           
+                            <p class="text-sm mb-1 font-light">${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'business-10'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold">${position}<br>${company}</p>
+                           
+                            <p class="text-sm mb-1 font-light">${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-1'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold text-blue-600 font-medium">${position}<br></p>
+                            <p class="text-sm">${company}</p>
+                            <p class="text-sm mb-1 font-light">${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-2'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-3'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-medium">${position}<br></p>
+                            <p class="text-sm font-bold">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-4'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-medium">${position}<br></p>
+                            <p class="text-sm font-bold">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-5'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-medium">${position}<br></p>
+                            <p class="text-sm font-bold">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-6'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position} <span>${dateRange}</span><br></p>
+                            <i class="text-sm">${company}</i>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-7'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${dateRange} · <span>${position} / ${company}</span><br></p>
+                            <i class="text-sm">${company}</i>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-8'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position} <span>${dateRange}</span><br></p>
+                            <p class="text-sm">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-9'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'civil-10'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} | ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-1'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} - ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-3'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} - ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-4'){
+                        previewHTML += `
+                        <div class="experience-preview-item" 
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            
+                            <!-- Left side -->
+                            <div class="experience-left" style="flex: 1;">
+                                <p class="text-sm font-bold font-medium">${position}<br></p>
+                                <p class="text-sm">${company} - ${dateRange}</p>
+                            </div>
+                            
+                            <!-- Right side -->
+                            ${description ? `
+                            <div class="experience-right" style="flex: 1; text-align: left; padding-left: 1rem;">
+                                <p class="text-sm leading-relaxed">${description}</p>
+                            </div>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-5'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} - ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-6'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company} - ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-8'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${position}</span>
+                                <span class="text-sm mb-1 font-light">${dateRange}</span>
+                            </div>
+                        
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
+                    }
+                    else if(templateId === 'generic-9'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                            <p class="text-sm">${company}  ${dateRange}</p>
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;  
+                    }
+                    else if(templateId === 'generic-10'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${position}</span>
+                                <span class="text-sm mb-1 font-light">${dateRange}</span>
+                            </div>
+                        
+                            ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                        </div>
+                    `;
                     }
                     else{
                         previewHTML += `
@@ -2238,7 +2808,7 @@
             if (templateId === 'it-1') {
                 // IT Template 1 Preview
                 const preview = document.createElement('div');
-                preview.className = 'min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8';
+                preview.className = ' max-w-[210mm] w-[210mm] mx-auto bg-[#fdfaf8] shadow-md pb-8';
                 preview.innerHTML = `
                     <!-- HEADER -->
                     <div class="flex items-center p-6 bg-[#582b2a] text-white">
@@ -3675,9 +4245,18 @@
                             </div>
 
                             <!-- Education Section -->
-                            <div>
-                                ${generateEducationPreview()}
+                             <div class="mb-4">
+                                <br>
+                                <div class="bg-black border-t-4 border-white px-4 py-1">
+                                    <h2 class="text-white font-bold text-lg tracking-wide">Education</h2>
+                                </div>
+                                <div id="education-preview-list">
+                                    ${generateEducationPreview()}
+                                </div>
                             </div>
+
+                          
+                           
 
                             <!-- Skills -->
                             <div class="mb-4">
@@ -3759,24 +4338,11 @@
                                 <!-- Skills -->
                                 <div>
                                     <h2 class="text-xl font-bold border-b-2 border-black mb-4">SKILLS</h2>
-                                    <div class="mb-3" id="skills-preview">
-                                        <p class="text-sm">Accounting Financial</p>
-                                        <div class="w-full bg-gray-300 h-2 rounded">
-                                        <div class="bg-blue-500 h-2 rounded" style="width:90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <p class="text-sm">Teamwork</p>
-                                        <div class="w-full bg-gray-300 h-2 rounded">
-                                        <div class="bg-blue-500 h-2 rounded" style="width:80%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm">Communication</p>
-                                        <div class="w-full bg-gray-300 h-2 rounded">
-                                        <div class="bg-blue-500 h-2 rounded" style="width:77%"></div>
-                                        </div>
-                                    </div>
+                                    <ul class="list-disc list-inside text-sm" id="skills-preview">
+                                        <li>Accounting Financial</li>
+                                        <li>Teamwork</li>
+                                        <li>Communication skills</li>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -3814,7 +4380,7 @@
                                 <img src="${window.profileImage || profileImage}" alt="Profile" class="w-full h-auto object-cover p-4" />
                             </div>
                             <div class="w-3/4 px-8">
-                                <h1 class="text-5xl font-bold tracking-wide">${document.getElementById('name')?.value || 'Your Name'}</h1>
+                                <h1 class="text-3xl font-bold tracking-wide">${document.getElementById('name')?.value || 'Your Name'}</h1>
                                 <p class="uppercase text-lg tracking-wider mt-2">Accountant</p>
                             </div>
                         </div>
@@ -4049,7 +4615,12 @@
                                 <div class="space-y-6">
 
                                     <!-- Job 1 -->
-                                    ${generateExperiencePreview()}
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-0 top-2 bottom-0 border-l-2 border-blue-800"></div>
+                                        <span class="absolute left-[-7px] top-2 w-4 h-4 bg-blue-800 rounded-full"></span> 
+                                            ${generateExperiencePreview()}      
+                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -6558,6 +7129,7 @@
                 <button class="remove-experience-btn">Remove</button>
             `;
 
+
             experienceContainer.appendChild(experienceItem);
 
             // Add auto-resize to new textarea
@@ -6657,7 +7229,7 @@
             educationItem.innerHTML = `
                 <div class="form-grid">
                     <div class="input-group">
-                        <label for="education-degree">Degree</label>
+                        <label for="education-degree">Degree/Strand</label>
                         <input type="text" placeholder="e.g., Bachelor of Information Technology">
                     </div>
                     <div class="input-group">
@@ -7892,7 +8464,8 @@ document.addEventListener('DOMContentLoaded', () => {
         async function askAI(promptText) {
           try {
             const category = getSelectedCategory();
-            const response = await fetch('http://localhost:3000/api/ai-assistant', {
+            const apiUrl = window.apiConfig ? window.apiConfig.getFullURL('/ai-assistant') : 'http://localhost:3000/api/ai-assistant';
+            const response = await fetch(apiUrl, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ promptText, category })
@@ -8608,6 +9181,7 @@ if (typeof addProject === 'function') {
     };
 }
 </script>
+<script src="js/config.js"></script>
 
 </body>
 </html>

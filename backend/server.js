@@ -127,6 +127,11 @@ db.sequelize.sync().then(() => {
 
 // Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+const HOST = process.env.HOST || '0.0.0.0'; // Listen on all network interface
+
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
+    console.log(`Local access: http://localhost:${PORT}`);
+    console.log(`Network access: http://[YOUR_IP]:${PORT}`);
+    console.log(`To find your IP: ipconfig (Windows) or ifconfig (Mac/Linux)`);
 });

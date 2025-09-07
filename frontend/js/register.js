@@ -111,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             // Step 1: Check if email exists in your database
-            const dbResponse = await fetch('http://localhost:3000/api/auth/check-email', {
+            const apiUrl = window.apiConfig ? window.apiConfig.getFullURL('/auth/check-email') : 'http://localhost:3000/api/auth/check-email';
+            const dbResponse = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

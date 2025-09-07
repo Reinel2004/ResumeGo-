@@ -1,5 +1,5 @@
-// Use environment variable or fallback to localhost
-const API_URL = window.API_BASE_URL || 'http://localhost:3000/api';
+// Use the new configuration system
+const API_URL = window.apiConfig ? window.apiConfig.baseURL : 'http://localhost:3000/api';
 
 // Auth API calls
 export const authAPI = {
