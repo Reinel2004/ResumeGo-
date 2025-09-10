@@ -7577,11 +7577,6 @@
         // Debounced preview update to prevent excessive calls
         let previewUpdateTimer;
         function debouncedUpdatePreview(source = 'unknown') {
-            if (!isPreviewActive) {
-             
-                return;
-            }
-            
             clearTimeout(previewUpdateTimer);
             previewUpdateTimer = setTimeout(() => {
                 updatePreview();
