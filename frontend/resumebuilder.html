@@ -1475,32 +1475,7 @@
                     </div>
 
                     <!-- Category 2 -->
-                    <div class="skill-category" id="skill-cat-2">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Frameworks & Libraries</h4>
-                        <div class="flex gap-2 mb-3">
-                            <input type="text" 
-                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors" 
-                                   placeholder="e.g., React, Node.js, Django">
-                            <button class="add-skill-btn px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                                Add
-                            </button>
-                        </div>
-                        <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
-                    </div>
-
-                    <!-- Category 3 -->
-                    <div class="skill-category" id="skill-cat-3">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Tools & Technologies</h4>
-                        <div class="flex gap-2 mb-3">
-                            <input type="text" 
-                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors" 
-                                   placeholder="e.g., Git, Docker, AWS">
-                            <button class="add-skill-btn px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                                Add
-                            </button>
-                        </div>
-                        <div class="skills-list flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-md"></div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -7044,9 +7019,8 @@
                         .map(badge => badge.textContent.replace('×', '').trim());
                     if (skills.length > 0) {
                         const categoryDiv = document.createElement('div');
-                        categoryDiv.className = 'skill-category';
+                        
                         categoryDiv.innerHTML = `
-                            <h4>${list.previousElementSibling.previousElementSibling.textContent}</h4>
                             <ul class="skill-list">
                                 ${skills.map(skill => `<li>${skill}</li>`).join('')}
                             </ul>

@@ -28,11 +28,9 @@
             display: block;
         }
         
-        /* PDF specific styles */
         .pdf-container {
             width: 210mm;
             min-height: 297mm;
-            max-height: 297mm;
             background: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.4;
@@ -41,7 +39,7 @@
             display: block;
             box-sizing: border-box;
             position: relative;
-            overflow: hidden;
+            overflow: visible; /* Allow content to overflow for page breaks */
         }
         
         @media print {
@@ -49,6 +47,42 @@
                 page-break-after: avoid;
                 page-break-inside: avoid;
             }
+        }
+        
+        /* Page break helper classes */
+        .no-break {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+        
+        .page-break-after {
+            page-break-after: always;
+            break-after: page;
+        }
+        
+       
+        .resume-section {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        .resume-header {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        
+       
+        .pdf-container > * {
+            margin-bottom: 0;
+        }
+        
+        .pdf-container > *:last-child {
+            margin-bottom: 0;
         }
         
         .pdf-container * {
@@ -583,8 +617,8 @@
                         }
                         return projects.map(item => `
                             <div class="mb-6">
-                                <p class="font-semibold">${item.title || 'Project Name'}</p>
-                                <p class="text-sm mb-2">${item.description || 'Project Description'}</p>
+                                <p class="font-semibold">${item.title || ''}</p>
+                                <p class="text-sm mb-2">${item.description || ''}</p>
                                 ${item.tech ? `<p class="text-sm">Technologies: ${item.tech}</p>` : ''}
                             </div>
                         `).join('');
@@ -595,7 +629,7 @@
                 
                     if (template === 'it-1') {
                       html = `
-                      <div class="pdf-container w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                      <div class="pdf-container w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex flex-col">
                           <div class="flex items-center p-6 bg-[#582b2a] text-white w-full m-0 flex-shrink-0">
                               <div class="mr-8">
                                   <img src="${content.profileImage}" alt="Profile Picture" class="w-[110px] h-[110px] rounded-full border-4 border-white object-cover bg-white">
@@ -641,7 +675,7 @@
                     } 
                     else if (template === 'it-2') {
                       html = `
-                      <div class="pdf-container grid grid-cols-[1fr_2fr] w-[210mm] h-[297mm] m-0 p-0 overflow-hidden grid-rows-1">
+                      <div class="pdf-container grid grid-cols-[1fr_2fr] w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible grid-rows-1">
                         <div class="bg-gray-100 p-8 text-xs">
                             <div class="text-center mb-8">
                                 <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-md border-4 border-gray-700 object-cover" />
@@ -688,7 +722,7 @@
                     } 
                     else if (template === 'it-3') {
                       html = `
-                      <div class="pdf-container w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                      <div class="pdf-container w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex flex-col">
                           <div class="bg-slate-800 text-white p-8 flex items-center gap-8 flex-shrink-0">
                               <div>
                                   <img src="${content.profileImage}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
@@ -740,7 +774,7 @@
                     } 
                     else if (template === 'it-4') {
                       html = `
-                      <div class="pdf-container font-sans text-black bg-white shadow-md grid grid-cols-3 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                      <div class="pdf-container font-sans text-black bg-white shadow-md grid grid-cols-3 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                           <!-- Header -->
                           <div class="col-span-1 bg-slate-700 text-white p-6 space-y-6 text-sm shadow-lg">
                               <!-- Image -->
@@ -805,7 +839,7 @@
                     }
                     else if (template === 'it-5') {
                       html = `
-                      <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                      <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex flex-col">
                           <!-- Red Bar -->
                           <div class="bg-red-700 h-6 w-full flex-shrink-0"></div>
 
@@ -874,7 +908,7 @@
                     }
                     else if (template === 'it-6') {
                       html = `
-                      <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                      <div class="pdf-container font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex flex-col">
                           <!-- Main Grid -->
                           <div class="grid grid-cols-3 flex-1">
                               <!-- Left Sidebar -->
@@ -939,7 +973,7 @@
                     }
                     else if (template === 'it-7') {
                       html = `
-                      <div class="pdf-container font-sans text-black bg-white shadow-md flex text-[0.9rem] leading-relaxed w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                      <div class="pdf-container font-sans text-black bg-white shadow-md flex text-[0.9rem] leading-relaxed w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                           <!-- Left Red Bar (5%) -->
                           <div class="w-[0%] border-r-2 border-black"></div>
 
@@ -1002,7 +1036,7 @@
                     }
                     else if (template === 'it-8') {
                       html = `
-                      <div class="pdf-container font-sans text-black shadow-md flex overflow-hidden flex-col w-[210mm] h-[297mm] m-0 p-0">
+                      <div class="pdf-container font-sans text-black shadow-md flex overflow-visible flex-col w-[210mm] min-h-[297mm] m-0 p-0">
                           <!-- Header -->
                           <div class="flex justify-between bg-gray-100 px-10 py-6 items-center">
                               <div>
@@ -1064,7 +1098,7 @@
                     }
                     else if (template === 'it-9') {
                       html = `
-                      <div class="pdf-container font-sans text-black shadow-md flex overflow-hidden flex-col w-[210mm] h-[297mm] m-0 p-0">
+                      <div class="pdf-container font-sans text-black shadow-md flex overflow-visible flex-col w-[210mm] min-h-[297mm] m-0 p-0">
                           <!-- Header -->
                           <div class="flex items-center px-10 pt-6">
                               <img src="${content.profileImage}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
@@ -1125,7 +1159,7 @@
                     }
                     else if (template === 'it-10') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                           <!-- Left Column -->
                           <div class="w-1/2 p-8 bg-white border-r-2 border-gray-300">
                               <div class="mb-8">
@@ -1179,11 +1213,11 @@
                     // Accountant Templates
                     else if (template === 'accountant-1') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                           <!-- Left Sidebar -->
                           <div class="w-[200px] bg-[#8E735B] text-white flex flex-col items-center py-8 px-4 space-y-8">
                               <!-- Profile Image -->
-                              <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-hidden">
+                              <div class="w-40 h-40 rounded-full border-[3px] border-[#F7F2EA] overflow-visible">
                                   <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
                               </div>
 
@@ -1248,7 +1282,7 @@
                     }
                     else if (template === 'accountant-2') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden grid grid-cols-3 gap-8">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible grid grid-cols-3 gap-8">
                           <!-- Left Column -->
                           <div class="col-span-1 space-y-8">
                               <!-- Profile Photo -->
@@ -1315,7 +1349,7 @@
                     }
                     else if (template === 'accountant-3') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                           <!-- Header -->
                           <div class="grid grid-cols-3 gap-6 p-8 items-center bg-gray-800 text-white font-sans">
                               <!-- Left: Image -->
@@ -1367,7 +1401,7 @@
                     }
                     else if (template === 'accountant-4') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex">
                           <!-- Left Column (50%) -->
                           <div class="w-1/2 p-6 space-y-6">
                               <!-- Black Rounded Image Container -->
@@ -1434,10 +1468,10 @@
                     }
                     else if (template === 'accountant-5') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                           <!-- Header Section -->
                           <div class="bg-white flex flex-col items-center py-6 space-y-4 border-b border-black">
-                              <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-black">
+                              <div class="w-32 h-32 rounded-full overflow-visible border-4 border-black">
                                   <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
                               </div>
                               <h1 class="text-2xl font-bold uppercase text-black">${content.name || 'Your Name'}</h1>
@@ -1479,7 +1513,7 @@
                     }
                     else if (template === 'accountant-6') {
                       html = `
-                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full font-sans text-black shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex flex-col">
+                      <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full font-sans text-black shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex flex-col">
                           <!-- Header -->
                           <div class="flex w-full">
                               <div class="w-1/2 bg-blue-100 px-10 pt-10">
@@ -1544,7 +1578,7 @@
                         }
                         else if (template === 'accountant-7') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex">
                               <!-- Left Sidebar -->
                               <div class="w-[35%] bg-white flex flex-col items-center py-10 px-6 relative">
                                   <img src="${content.profileImage}" class="w-36 h-36 object-cover border-4 border-black shadow-md mb-8" alt="Profile" />
@@ -1606,7 +1640,7 @@
                         }
                         else if (template === 'accountant-8') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden bg-white">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible bg-white">
                               <!-- Header -->
                               <div class="text-center border-b border-black pb-4">
                                   <img src="${content.profileImage}" class="w-32 h-32 rounded object-cover mx-auto mt-4 border" alt="Profile">
@@ -1666,7 +1700,7 @@
                         }
                         else if (template === 'accountant-9') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-[#e8ecf2] shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-[#e8ecf2] shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header -->
                               <div class="flex items-center border-b-2 border-black">
                                   <div class="w-1/3 p-6">
@@ -1739,7 +1773,7 @@
                         }
                         else if (template === 'accountant-10') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-gray-100 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-gray-100 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header -->
                               <div class="bg-black text-white flex items-center">
                                   <div class="w-1/4">
@@ -1802,11 +1836,11 @@
                         // Business Templates
                         else if (template === 'business-1') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen w-full font-sans shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Left Sidebar -->
                               <div class="w-1/3 pr-6 border-r border-gray-300 pl-4 bg-gray-50">
                                   <div class="flex justify-center">
-                                      <div class="border-[10px] border-white rounded-full w-40 h-40 overflow-hidden">
+                                      <div class="border-[10px] border-white rounded-full w-40 h-40 overflow-visible">
                                           <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
                                       </div>
                                   </div>
@@ -1871,9 +1905,9 @@
                         }
                         else if (template === 'business-2') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-gray-800 bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-gray-800 bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header -->
-                              <div class="bg-gradient-to-r from-blue-900 to-blue-600 flex items-center px-8 py-6">
+                              <div class="bg-blue-800 flex items-center px-8 py-6">
                                   <!-- Profile Image -->
                                   <img src="${content.profileImage}" alt="Profile" class="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md">
                                   <!-- Name and Title -->
@@ -1948,7 +1982,7 @@
                         }
                         else if (template === 'business-3') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden flex">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible flex">
                               <!-- Left Column -->
                               <div class="w-1/3 bg-gray-800 text-white p-8 space-y-8">
                                   <!-- Profile Image -->
@@ -2009,7 +2043,7 @@
                         }
                         else if (template === 'business-4') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <div class="grid grid-cols-3">
                                   <!-- Left Column -->
                                   <div class="col-span-1 bg-[#20B2AA] text-white p-6 flex flex-col items-center">
@@ -2080,7 +2114,7 @@
                         }
                         else if (template === 'business-5') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header -->
                               <div class="bg-gray-200 p-6 flex items-center space-x-6">
                                   <img src="${content.profileImage}" alt="Profile Photo" class="w-32 h-32 object-cover border border-black" />
@@ -2140,7 +2174,7 @@
                         }
                         else if (template === 'business-6') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md p-8 flex gap-6 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md p-8 flex gap-6 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Left Column -->
                               <div class="w-2/3 space-y-6">
                                   <!-- Profile -->
@@ -2212,7 +2246,7 @@
                         }
                         else if (template === 'business-7') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header -->
                               <div class="flex justify-center items-center gap-6 px-6 py-6 border-b border-gray-300">
                                   <img src="${content.profileImage}" class="w-40 h-40 object-cover" alt="Profile" />
@@ -2280,7 +2314,7 @@
                         }
                         else if (template === 'business-8') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header -->
                               <div class="flex items-center bg-black text-white p-6">
                                   <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-full object-cover mr-6" />
@@ -2338,7 +2372,7 @@
                         }
                         else if (template === 'business-9') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-white bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-white bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Header Section -->
                               <div class="bg-[#0a2149] text-white text-center py-8 px-4">
                                   <img src="${content.profileImage}" alt="Profile" class="w-40 h-40 mx-auto rounded-full border-4 border-white mb-4">
@@ -2395,7 +2429,7 @@
                         }
                         else if (template === 'business-10') {
                           html = `
-                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md grid grid-cols-[35%_65%] w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                          <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md grid grid-cols-[35%_65%] w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                               <!-- Left Column -->
                               <div class="bg-[#5c4431] text-white p-6 flex flex-col space-y-6">
                                   <!-- Profile Image, Name & Title Centered -->
@@ -2455,7 +2489,7 @@
                        
                     else if (template === 'civil-1') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header: Name, Title, and Photo -->
                             <div class="flex items-center justify-between px-10 pt-10 mb-8">
                                 <div>
@@ -2518,7 +2552,7 @@
                     }
                     else if (template === 'civil-2') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md p-8 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black bg-white shadow-md p-8 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex items-center gap-6">
                                 <!-- Image -->
@@ -2601,7 +2635,7 @@
                     }
                     else if (template === 'civil-3') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black shadow-md grid grid-cols-[30%_70%] w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black shadow-md grid grid-cols-[30%_70%] w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Left Column -->
                             <div class="bg-[#1C6F6A] text-white p-6 space-y-8">
                                 <!-- Profile Image -->
@@ -2679,7 +2713,7 @@
                     }
                     else if (template === 'civil-4') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md flex overflow-hidden w-[210mm] h-[297mm] m-0 p-0">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md flex overflow-visible w-[210mm] min-h-[297mm] m-0 p-0">
                             <!-- LEFT COLUMN (30%) -->
                             <div class="w-[30%] bg-[#7c9d7c] text-white flex flex-col items-center p-4 space-y-6">
                                 <!-- Profile Image -->
@@ -2757,7 +2791,7 @@
                     }
                     else if (template === 'civil-5') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md bg-[#a8c6df] w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black shadow-md bg-[#a8c6df] w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- HEADER -->
                             <div class="bg-[#2b608a] px-8 py-6 flex items-center text-white">
                                 <div class="w-1/3"></div>
@@ -2766,7 +2800,7 @@
                                     <p class="text-sm">${content.title || 'Job Title'}</p>
                                 </div>
                                 <div class="w-1/3 flex justify-center">
-                                    <div class="w-32 h-32 rounded-full border-4 border-white overflow-hidden">
+                                    <div class="w-32 h-32 rounded-full border-4 border-white overflow-visible">
                                         <img src="${content.profileImage}" class="w-full h-full object-cover" />
                                     </div>
                                 </div>
@@ -2835,11 +2869,11 @@
                     }
                     else if (template === 'civil-6') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans text-black shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="relative bg-black text-white p-8 flex items-center">
                                 <!-- Profile Image -->
-                                <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-400">
+                                <div class="w-40 h-40 rounded-full overflow-visible border-4 border-gray-400">
                                     <img src="${content.profileImage}" alt="Profile photo" class="w-full h-full object-cover" />
                                 </div>
                                 <!-- Name and Title -->
@@ -2897,7 +2931,7 @@
                     }
                     else if (template === 'civil-7') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="text-center pt-0">
                                 <div class="pt-6">
@@ -2982,7 +3016,7 @@
                     }
                     else if (template === 'civil-8') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md flex w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md flex w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Sidebar -->
                             <div class="w-1/3 bg-purple-100 p-6 flex flex-col items-center">
                                 <div class="relative w-34 h-34 mb-4">
@@ -3056,7 +3090,7 @@
                     }
                     else if (template === 'civil-9') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex bg-blue-900 text-white p-6">
                                 <div class="w-2/3">
@@ -3138,7 +3172,7 @@
                     }
                     else if (template === 'civil-10') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans bg-white p-6 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans bg-white p-6 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header with Image, Name, Title -->
                             <div class="flex flex-col items-center border border-black py-4 mb-6">
                                 <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-full object-cover border-2 border-black mb-3">
@@ -3213,7 +3247,7 @@
                     } 
                     else if (template === 'generic-1') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full bg-white shadow-lg p-8 space-y-6 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full bg-white shadow-lg p-8 space-y-6 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- 🔹 Profile Section (Top) -->
                             <div class="flex items-center gap-4">
                                 <img src="${content.profileImage}" alt="Profile" class="w-20 h-20 object-cover border border-black bg-white">
@@ -3305,7 +3339,7 @@
                     }
                     else if (template === 'generic-2') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans mx-auto p-10 grid grid-cols-3 gap-10 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen font-sans mx-auto p-10 grid grid-cols-3 gap-10 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Left Content (2/3) -->
                             <div class="col-span-2 space-y-8">
                                 <!-- Header: Image + Name/Contact -->
@@ -3386,7 +3420,7 @@
                     }
                     else if (template === 'generic-3') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen bg-white shadow p-0 text-gray-900 font-sans w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen bg-white shadow p-0 text-gray-900 font-sans w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex w-full h-52">
                                 <!-- Left: Large Profile Image -->
@@ -3451,7 +3485,7 @@
                     }
                     else if (template === 'generic-4') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex items-start">
                                 <!-- Image on the far left -->
@@ -3506,7 +3540,7 @@
                     }
                     else if (template === 'generic-5') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen mx-auto p-10 flex flex-col shadow-md rounded-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen mx-auto p-10 flex flex-col shadow-md rounded-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header with Image + Contact Info -->
                             <div class="flex items-center justify-between mb-10">
                                 <div class="flex items-center space-x-6">
@@ -3562,7 +3596,7 @@
                     }
                     else if (template === 'generic-6') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex justify-between items-center">
                                 <div>
@@ -3620,7 +3654,7 @@
                     }
                     else if (template === 'generic-7') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex items-start gap-6">
                                 <img src="${content.profileImage}" alt="Profile" class="w-32 object-cover rounded-md" />
@@ -3676,7 +3710,7 @@
                     }
                     else if (template === 'generic-8') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white p-8 shadow-md space-y-6 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen w-full font-sans text-black bg-white p-8 shadow-md space-y-6 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header Row -->
                             <div class="flex justify-between items-start gap-6">
                                 <!-- Name and Contact Info -->
@@ -3739,7 +3773,7 @@
                     }
                     else if (template === 'generic-9') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="text-center">
                                 <hr>
@@ -3815,7 +3849,7 @@
                     }
                     else if (template === 'generic-10') {
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] min-h-screen text-black font-sans space-y-8 bg-white p-8 shadow-md w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- Header -->
                             <div class="flex justify-between items-center">
                                 <div>
@@ -3868,7 +3902,7 @@
                     }
                     else{
                         html = `
-                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full bg-white shadow-lg p-8 space-y-6 w-[210mm] h-[297mm] m-0 p-0 overflow-hidden">
+                        <div class="pdf-container min-w-[210mm] max-w-[210mm] w-[210mm] w-full bg-white shadow-lg p-8 space-y-6 w-[210mm] min-h-[297mm] m-0 p-0 overflow-visible">
                             <!-- 🔹 Profile Section (Top) -->
                             <div class="flex items-center gap-4">
                                 <img src="${content.profileImage}" alt="Profile" class="w-20 h-20 object-cover border border-black bg-white">
@@ -3994,7 +4028,7 @@
                     pdfContainer.style.opacity = '1';
                     pdfContainer.style.backgroundColor = 'white';
                     pdfContainer.style.border = 'none';
-                    pdfContainer.style.overflow = 'hidden';
+                    pdfContainer.style.overflow = 'visible';
                     pdfContainer.style.boxShadow = 'none';
                     pdfContainer.style.transform = 'scale(1)';
                     pdfContainer.style.transformOrigin = 'top left';
@@ -4029,7 +4063,7 @@
 
                     // Configure PDF options
                     const opt = {
-                        margin: [0, 0, 0, 0], 
+                        margin: [2, 2, 2, 2], 
                         filename: `${resume.title || 'Resume'}.pdf`,
                         image: { 
                             type: 'jpeg', 
@@ -4056,40 +4090,46 @@
                             format: 'a4', 
                             orientation: 'portrait',
                             compress: true
+                        },
+                        pagebreak: { 
+                            mode: ['css', 'legacy'], // Enable page breaks
+                            before: '.page-break',
+                            after: '.page-break',
+                            avoid: '.no-break'
                         }
                     };
                     
-                     // Alternative approach using pagebreak option
-                    const optWithPageBreaks = {
-                        margin: [10, 10, 10, 10], // Small margins
-                        filename: `${resume.title || 'Resume'}.pdf`,
-                        image: { 
-                            type: 'jpeg', 
-                            quality: 0.95 
-                        },
-                        html2canvas: {
-                            scale: 2,
-                            useCORS: true,
-                            letterRendering: true,
-                            logging: false,
-                            allowTaint: true,
-                            backgroundColor: '#ffffff',
-                            width: actualWidth,
-                            height: actualHeight
-                        },
-                        jsPDF: { 
-                            unit: 'mm', 
-                            format: 'a4', 
-                            orientation: 'portrait',
-                            compress: true
-                        },
-                        pagebreak: { 
-                            mode: ['avoid-all', 'css', 'legacy'], // Enable page breaks
-                            before: '.page-break-before',
-                            after: '.page-break-after',
-                            avoid: '.no-page-break'
-                        }
-                    };
+                    //  // Alternative approach using pagebreak option
+                    // const optWithPageBreaks = {
+                    //     margin: [10, 10, 10, 10], // Small margins
+                    //     filename: `${resume.title || 'Resume'}.pdf`,
+                    //     image: { 
+                    //         type: 'jpeg', 
+                    //         quality: 0.95 
+                    //     },
+                    //     html2canvas: {
+                    //         scale: 2,
+                    //         useCORS: true,
+                    //         letterRendering: true,
+                    //         logging: false,
+                    //         allowTaint: true,
+                    //         backgroundColor: '#ffffff',
+                    //         width: actualWidth,
+                    //         height: actualHeight
+                    //     },
+                    //     jsPDF: { 
+                    //         unit: 'mm', 
+                    //         format: 'a4', 
+                    //         orientation: 'portrait',
+                    //         compress: true
+                    //     },
+                    //     pagebreak: { 
+                    //         mode: ['avoid-all', 'css', 'legacy'], // Enable page breaks
+                    //         before: '.page-break-before',
+                    //         after: '.page-break-after',
+                    //         avoid: '.no-page-break'
+                    //     }
+                    // };
 
                     // Generate and download PDF
                     try {
