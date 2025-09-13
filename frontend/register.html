@@ -283,7 +283,7 @@
 
         .modal-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 24px;
             border-top: 1px solid #e2e8f0;
@@ -291,9 +291,9 @@
         }
 
         .modal-btn {
-            padding: 8px 16px;
+            padding: 10px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
@@ -301,22 +301,13 @@
         }
 
         .modal-btn-secondary {
-            background: transparent;
+            background: #f3f4f6;
             color: #6b7280;
         }
 
         .modal-btn-secondary:hover {
+            background: #e5e7eb;
             color: #1f2937;
-        }
-
-        .modal-btn-primary {
-            background: var(--primary-color);
-            color: white;
-            padding: 8px 24px;
-        }
-
-        .modal-btn-primary:hover {
-            background: var(--secondary-color);
         }
 
         .terms-content {
@@ -422,7 +413,7 @@
             <div class="terms-checkbox">
                 <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
                 <div class="terms-text">
-                    I agree to the <span class="terms-link" onclick="openTermsModal()">Terms and Service</span> and <span class="terms-link" onclick="openPrivacyModal()">Privacy Policy</span>
+                    I have read and agree to the <span class="terms-link" onclick="openTermsModal()">Terms of Service</span> and <span class="terms-link" onclick="openPrivacyModal()">Privacy Policy</span>
                 </div>
             </div>
 
@@ -434,7 +425,7 @@
         </form>
     </div>
 
-    <!-- Terms and Service Modal -->
+    <!-- Terms of Service Modal -->
     <div id="termsModal" class="modal">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -498,11 +489,6 @@
                 <button onclick="closeTermsModal()" class="modal-btn modal-btn-secondary">
                     Close
                 </button>
-                <div>
-                    <button onclick="agreeToTerms()" class="modal-btn modal-btn-primary">
-                        I Agree
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -580,11 +566,6 @@
                 <button onclick="closePrivacyModal()" class="modal-btn modal-btn-secondary">
                     Close
                 </button>
-                <div>
-                    <button onclick="agreeToPrivacy()" class="modal-btn modal-btn-primary">
-                        I Agree
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -621,16 +602,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        function agreeToTerms() {
-            const checkbox = document.getElementById('agreeTerms');
-            checkbox.checked = true;
-            
-            // Trigger the change event to update the register button state
-            checkbox.dispatchEvent(new Event('change'));
-            
-            closeTermsModal();
-        }
-
         // Privacy Modal Functions
         function openPrivacyModal() {
             const modal = document.getElementById('privacyModal');
@@ -642,16 +613,6 @@
             const modal = document.getElementById('privacyModal');
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
-        }
-
-        function agreeToPrivacy() {
-            const checkbox = document.getElementById('agreeTerms');
-            checkbox.checked = true;
-            
-            // Trigger the change event to update the register button state
-            checkbox.dispatchEvent(new Event('change'));
-            
-            closePrivacyModal();
         }
 
         // Close modals when clicking outside
