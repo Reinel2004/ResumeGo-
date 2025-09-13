@@ -592,8 +592,11 @@
         // Terms Modal Functions
         function openTermsModal() {
             const modal = document.getElementById('termsModal');
+            const modalBody = modal.querySelector('.modal-body');
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+
+            modalBody.scrollTop = 0;
         }
 
         function closeTermsModal() {
@@ -605,8 +608,11 @@
         // Privacy Modal Functions
         function openPrivacyModal() {
             const modal = document.getElementById('privacyModal');
+            const modalBody = modal.querySelector('.modal-body');
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+
+            modalBody.scrollTop = 0;
         }
 
         function closePrivacyModal() {
