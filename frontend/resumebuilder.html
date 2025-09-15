@@ -1189,7 +1189,7 @@
                         <a href="templates.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Templates</a>
                         </li>
                         <li>
-                        <a href="resumebuilder.html" class="block py-2 px-3 text-primary hover:text-primary rounded md:p-0">Create Resume</a>
+                        <a href="resumebuilder.html?template=generic-1" class="block py-2 px-3 text-primary hover:text-primary rounded md:p-0">Create Resume</a>
                         </li>
                         <li>
                         <a href="ats-checker.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">ATS Checker</a>
@@ -1910,10 +1910,12 @@
             if (resumeId) {
                 // Update existing resume
                 await resumeAPI.update(resumeId, { title, template, content }, token);
+                window.isResumeDirty = false;
                 showSuccessModal('Resume updated successfully!');
             } else {
                 // Create new resume
                 await resumeAPI.create({ title, template, content }, token);
+                window.isResumeDirty = false;
                 showSuccessModal('Resume saved successfully!', 'dashboard.html');
             }
         } catch (err) {
@@ -1954,6 +1956,40 @@
             titleElement: `#title-${templateId}`,
             // Add more selectors specific to this template
         });
+
+        
+        window.isResumeDirty = false;
+        function markResumeDirty() { window.isResumeDirty = true; }
+        document.addEventListener('input', function(e) {
+            if (e.target && (e.target.closest('input') || e.target.closest('textarea'))) {
+                markResumeDirty();
+            }
+        }, true);
+        document.addEventListener('change', function(e) {
+            if (e.target && (e.target.closest('select') || e.target.matches('input[type="file"]'))) {
+                markResumeDirty();
+            }
+        }, true);
+        window.addEventListener('beforeunload', function(e) {
+            if (window.isResumeDirty) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+        document.addEventListener('click', function(e) {
+            const link = e.target && e.target.closest && e.target.closest('a[href]');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+            if (window.isResumeDirty) {
+                const confirmLeave = window.confirm('You have unsaved changes. Leave this page and discard them?');
+                if (!confirmLeave) {
+                    e.preventDefault();
+                } else {
+                    window.isResumeDirty = false;
+                }
+            }
+        }, true);
 
         // Preview functionality
         const previewToggle = document.getElementById('previewToggle');
@@ -7646,6 +7682,7 @@
 
         // Success Modal Functions
         function showSuccessModal(message = 'Resume saved successfully!', redirectUrl = null) {
+            window.isResumeDirty = false;
             document.getElementById('successMessage').textContent = message;
             document.getElementById('successModal').style.display = 'block';
             
@@ -7672,6 +7709,7 @@
             
             // Handle redirect if specified
             if (window.successRedirectUrl) {
+                window.isResumeDirty = false;
                 window.location.href = window.successRedirectUrl;
                 window.successRedirectUrl = null;
             }

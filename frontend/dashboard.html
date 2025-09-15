@@ -41,6 +41,28 @@
             position: relative;
             overflow: visible; /* Allow content to overflow for page breaks */
         }
+
+       
+        @media (max-width: 768px) {
+            .pdf-container {
+                transform: scale(1); 
+                transform-origin: top left;
+                width: 210mm !important;  
+                min-height: 297mm !important;
+                overflow: hidden;
+            }
+        }
+
+        /* Tablet view (iPad portrait & landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .pdf-container {
+    width: 95% !important;       /* scale to almost full width */
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    transform: scale(0.95);      /* slight scaling so it fits */
+    transform-origin: top center;
+  }
+}
         
         @media print {
             .pdf-container {
@@ -131,7 +153,7 @@
                         <a href="templates.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Templates</a>
                         </li>
                         <li>
-                        <a href="resumebuilder.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Create Resume</a>
+                        <a href="resumebuilder.html?template=generic-1" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Create Resume</a>
                         </li>
                         <li>
                         <a href="ats-checker.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">ATS Checker</a>
@@ -4018,21 +4040,42 @@
                             pdfContainer.style.padding = '0';
                             break;
                     }
+                    const screenWidth = window.innerWidth;
+                    const isMobile = screenWidth <= 768;
+                    const isTablet = screenWidth > 768 && screenWidth <= 1024;
+
                     pdfContainer.style.top = '0';
-                    pdfContainer.style.left = '556px';
-                    pdfContainer.style.width = '210mm';
-                    pdfContainer.style.minHeight = '297mm';
-                    pdfContainer.style.height = '297mm';
+
+                    if (isMobile) {
+                        pdfContainer.style.left = '0';
+                        pdfContainer.style.width = '100%';
+                        pdfContainer.style.minHeight = 'auto';
+                        pdfContainer.style.height = 'auto';
+                    } else if (isTablet) {
+                        pdfContainer.style.left = '50%';
+                        pdfContainer.style.transform = 'translateX(-50%)'; // center horizontally
+                        pdfContainer.style.width = '95%';
+                        pdfContainer.style.minHeight = 'auto';
+                        pdfContainer.style.height = 'auto';
+                    } else {
+                        pdfContainer.style.left = '50%';
+                        pdfContainer.style.transform = 'translateX(-50%)'; // center horizontally
+                        pdfContainer.style.width = '210mm';
+                        pdfContainer.style.minHeight = '297mm';
+                        pdfContainer.style.height = '297mm';
+                    }
+
+               
                     pdfContainer.style.overflow = 'visible'; 
                     pdfContainer.style.zIndex = '9999';
                     pdfContainer.style.opacity = '1';
                     pdfContainer.style.backgroundColor = 'white';
                     pdfContainer.style.border = 'none';
-                    pdfContainer.style.overflow = 'visible';
                     pdfContainer.style.boxShadow = 'none';
-                    pdfContainer.style.transform = 'scale(1)';
-                    pdfContainer.style.transformOrigin = 'top left';
+                    pdfContainer.style.transformOrigin = 'top center';
                     pdfContainer.style.boxSizing = 'border-box';
+
+
 
                     // Wait for images to load
                     const images = pdfContainer.querySelectorAll('img');
@@ -4099,37 +4142,7 @@
                         }
                     };
                     
-                    //  // Alternative approach using pagebreak option
-                    // const optWithPageBreaks = {
-                    //     margin: [10, 10, 10, 10], // Small margins
-                    //     filename: `${resume.title || 'Resume'}.pdf`,
-                    //     image: { 
-                    //         type: 'jpeg', 
-                    //         quality: 0.95 
-                    //     },
-                    //     html2canvas: {
-                    //         scale: 2,
-                    //         useCORS: true,
-                    //         letterRendering: true,
-                    //         logging: false,
-                    //         allowTaint: true,
-                    //         backgroundColor: '#ffffff',
-                    //         width: actualWidth,
-                    //         height: actualHeight
-                    //     },
-                    //     jsPDF: { 
-                    //         unit: 'mm', 
-                    //         format: 'a4', 
-                    //         orientation: 'portrait',
-                    //         compress: true
-                    //     },
-                    //     pagebreak: { 
-                    //         mode: ['avoid-all', 'css', 'legacy'], // Enable page breaks
-                    //         before: '.page-break-before',
-                    //         after: '.page-break-after',
-                    //         avoid: '.no-page-break'
-                    //     }
-                    // };
+              
 
                     // Generate and download PDF
                     try {
@@ -4207,36 +4220,13 @@
                 });
             }
 
-            async function loadATSScores() {
-                const resumes = await fetchResumes();
-                resumes.forEach(async (resume) => {
-                    try {
-                        const scoreData = await atsAPI.getATSScore(resume.id, token);
-                        const scoreElement = document.getElementById(`ats-score-${resume.id}`);
-                        if (scoreElement) {
-                            const score = Math.round(scoreData.score);
-                            let scoreClass = 'text-gray-600';
-                            if (score >= 80) scoreClass = 'text-green-600';
-                            else if (score >= 60) scoreClass = 'text-yellow-600';
-                            else scoreClass = 'text-red-600';
-                            
-                            scoreElement.innerHTML = `<span class="${scoreClass}">${score}% (${scoreData.grade})</span>`;
-                        }
-                    } catch (error) {
-                        console.error(`Error loading ATS score for resume ${resume.id}:`, error);
-                        const scoreElement = document.getElementById(`ats-score-${resume.id}`);
-                        if (scoreElement) {
-                            scoreElement.innerHTML = '<span class="text-gray-400">N/A</span>';
-                        }
-                    }
-                });
-            }
+            
 
             async function loadResumes() {
                 const resumes = await fetchResumes();
                 renderResumes(resumes);
                 addActionListeners();
-                loadATSScores();
+               
             }
 
             loadResumes();
