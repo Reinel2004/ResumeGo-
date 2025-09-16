@@ -174,6 +174,67 @@
             100% { transform: translateY(-50%) rotate(360deg); }
         }
 
+        /* Password Requirements Styles */
+        .password-requirements {
+            margin-top: 8px;
+            padding: 12px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .password-requirements.show {
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .requirement-item i {
+            font-size: 14px;
+            width: 16px;
+            flex-shrink: 0;
+        }
+
+        .requirement-item.invalid {
+            color: var(--error-color);
+        }
+
+        .requirement-item.invalid i {
+            color: var(--error-color);
+        }
+
+        .requirement-item.valid {
+            color: var(--success-color);
+        }
+
+        .requirement-item.valid i {
+            color: var(--success-color);
+        }
+
+        .requirement-item.valid i:before {
+            content: "\f00c"; /* FontAwesome check icon */
+        }
+
+        .requirement-item.invalid i:before {
+            content: "\f00d"; /* FontAwesome times icon */
+        }
+
         .login-link {
             text-align: center;
             margin-top: 20px;
@@ -403,6 +464,28 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
+                <div class="password-requirements" id="passwordRequirements">
+                    <div class="requirement-item" id="lengthReq">
+                        <i class="fas fa-times"></i>
+                        <span>At least 8 characters</span>
+                    </div>
+                    <div class="requirement-item" id="uppercaseReq">
+                        <i class="fas fa-times"></i>
+                        <span>Contains uppercase letter</span>
+                    </div>
+                    <div class="requirement-item" id="lowercaseReq">
+                        <i class="fas fa-times"></i>
+                        <span>Contains lowercase letter</span>
+                    </div>
+                    <div class="requirement-item" id="numberReq">
+                        <i class="fas fa-times"></i>
+                        <span>Contains number</span>
+                    </div>
+                    <div class="requirement-item" id="specialReq">
+                        <i class="fas fa-times"></i>
+                        <span>Contains special character</span>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -634,6 +717,51 @@
             }
         });
 
+        // Password validation
+        document.getElementById('password').addEventListener('input', function() {
+            validatePassword(this.value);
+        });
+
+        document.getElementById('password').addEventListener('focus', function() {
+            const requirements = document.getElementById('passwordRequirements');
+            requirements.classList.add('show');
+        });
+
+        document.getElementById('password').addEventListener('blur', function() {
+            const requirements = document.getElementById('passwordRequirements');
+            // Keep showing if password is not empty
+            if (!this.value) {
+                requirements.classList.remove('show');
+            }
+        });
+
+        function validatePassword(password) {
+            const requirements = {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /\d/.test(password),
+                special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?]/.test(password)
+            };
+
+            updateRequirement('lengthReq', requirements.length);
+            updateRequirement('uppercaseReq', requirements.uppercase);
+            updateRequirement('lowercaseReq', requirements.lowercase);
+            updateRequirement('numberReq', requirements.number);
+            updateRequirement('specialReq', requirements.special);
+        }
+
+        function updateRequirement(elementId, isValid) {
+            const element = document.getElementById(elementId);
+            if (isValid) {
+                element.classList.remove('invalid');
+                element.classList.add('valid');
+            } else {
+                element.classList.remove('valid');
+                element.classList.add('invalid');
+            }
+        }
+
         // Update register button state based on checkbox
         document.getElementById('agreeTerms').addEventListener('change', function() {
             const registerBtn = document.getElementById('registerBtn');
@@ -645,6 +773,12 @@
             const registerBtn = document.getElementById('registerBtn');
             const agreeTerms = document.getElementById('agreeTerms');
             registerBtn.disabled = !agreeTerms.checked;
+
+            // Initialize all requirements as invalid
+            const requirementIds = ['lengthReq', 'uppercaseReq', 'lowercaseReq', 'numberReq', 'specialReq'];
+            requirementIds.forEach(id => {
+                document.getElementById(id).classList.add('invalid');
+            });
         });
     </script>
     
