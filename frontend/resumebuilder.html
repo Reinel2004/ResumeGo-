@@ -7519,14 +7519,34 @@
                 if (typeof updateFormForCategory === 'function') {
                     updateFormForCategory();
                 }
-                
+                const languagesSection = document.getElementById('languages-section');
+                const hobbiesSection = document.getElementById('hobbies-section');
+                const projectsSection = document.getElementById('projects-section');
                 // Manually show language and hobby sections for generic templates
                 if (templateId && templateId.startsWith('generic-')) {
-                    const languagesSection = document.getElementById('languages-section');
-                    const hobbiesSection = document.getElementById('hobbies-section');
                     if (languagesSection) languagesSection.style.display = '';
                     if (hobbiesSection) hobbiesSection.style.display = '';
-                   
+                    if (projectsSection) projectsSection.style.display = 'none';
+                }else if(templateId && templateId.startsWith('accountant-')){
+                    if (languagesSection) languagesSection.style.display = '';
+                    if (hobbiesSection) hobbiesSection.style.display = 'none';
+                    if (projectsSection) projectsSection.style.display = 'none';
+                }else if(templateId && templateId.startsWith('business-')){
+                    if (languagesSection) languagesSection.style.display = '';
+                    if (hobbiesSection) hobbiesSection.style.display = 'none';
+                    if (projectsSection) projectsSection.style.display = 'none';
+                }else if(templateId && templateId.startsWith('civil-')){
+                    if (languagesSection) languagesSection.style.display = '';
+                    if (hobbiesSection) hobbiesSection.style.display = 'none';
+                    if (projectsSection) projectsSection.style.display = 'none';
+                }else if(templateId && templateId.startsWith('it-')){
+                    if(templateId === 'it-1'){
+                        if (languagesSection) languagesSection.style.display = 'none';
+                    }else{
+                        if (languagesSection) languagesSection.style.display = '';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (projectsSection) projectsSection.style.display = '';
+                    }
                 }
             }, 100);
         });

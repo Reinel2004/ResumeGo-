@@ -535,7 +535,6 @@
                         <div id="userDropdown" class="user-dropdown absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                         <a href="profile.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Profile Settings</a>
                         <div class="border-t border-gray-200 my-1"></div>
-                        <a href="#" id="feedbackLink" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Feedback</a>
                         <a href="#" id="logoutButton" class="block px-4 py-3 text-gray-700 hover:bg-gray-50">Logout</a>
                         </div>
                     </div>
@@ -620,13 +619,6 @@
                             <div class="detail-label">Full Name</div>
                             <div class="detail-value" id="fullNameValue">Zachary dela Cruz</div>
                         </div>
-                        <div class="detail-row">
-                            <div class="detail-label">Profile Photo</div>
-                            <div class="detail-value">
-                                <a href="#" class="action-link">Upload new photo</a>
-                                <a href="#" class="action-link">Take a selfie</a>
-                            </div>
-                        </div>
                     </div>
                     
                     <div class="detail-card">
@@ -639,16 +631,17 @@
                             <div class="detail-label">Email Address</div>
                             <div class="detail-value">
                                 uscremail@email.com
-                                <a href="#" class="action-link">Change</a>
                             </div>
                         </div>
                         <div class="detail-row">
                             <div class="detail-label">Password</div>
                             <div class="detail-value">
                                 <span class="password-mask">••••••••</span>
-                                <a href="#" class="action-link" id="changePasswordLink">Change password</a>
+                               
                             </div>
+                         
                         </div>
+                        <a href="#" class="action-link" id="changePasswordLink">Change password</a>
                     </div>
 
                     <!-- Password Change Modal -->
@@ -698,12 +691,6 @@
         </div>
         
         <div class="account-footer">
-            <div class="footer-links">
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Help Center</a>
-                <a href="#">Contact Us</a>
-            </div>
             <p>© 2025 ResumeGo! All rights reserved.</p>
         </div>
     </div>
@@ -935,19 +922,6 @@
             }
         }
 
-        // Profile photo upload
-        document.getElementById('photoUpload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('profilePhoto').src = e.target.result;
-                    alert('Profile photo updated successfully!');
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
         // Handle logout
         function handleLogout() {
             if (confirm('Are you sure you want to logout?')) {
@@ -1080,7 +1054,6 @@
             if (changePasswordLink) {
                 changePasswordLink.addEventListener('click', function(e) {
                     e.preventDefault();
-                    console.log('Change password link clicked');
                     showModal();
                 });
             }
