@@ -42,8 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (password.length < 6) {
-            showError('Password must be at least 6 characters long');
+        // new code
+        // Enhanced password validation to match frontend guidelines
+        const passwordValidation = validatePasswordStrength(password);
+        if (!passwordValidation.isValid) {
+            showError(passwordValidation.message);
             return;
         }
 
@@ -89,7 +92,31 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(`Registration failed: ${error.message || 'Unknown error'}`);
         }
     });
+/// new code
+    function validatePasswordStrength(password) {
+        const requirements = {
+            length: password.length >= 8,
+            uppercase: /[A-Z]/.test(password),
+            lowercase: /[a-z]/.test(password),
+            number: /\d/.test(password),
+            special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?]/.test(password)
+        };
 
+        const failedRequirements = [];
+        if (!requirements.length) failedRequirements.push('at least 8 characters');
+        if (!requirements.uppercase) failedRequirements.push('an uppercase letter');
+        if (!requirements.lowercase) failedRequirements.push('a lowercase letter');
+        if (!requirements.number) failedRequirements.push('a number');
+        if (!requirements.special) failedRequirements.push('a special character');
+
+        return {
+            isValid: Object.values(requirements).every(req => req === true),
+            message: failedRequirements.length > 0 
+                ? `Password must contain: ${failedRequirements.join(', ')}`
+                : 'Password meets all requirements'
+        };
+    }
+/// new code
     function showError(message) {
         errorMessage.textContent = message;
         errorMessage.className = 'message error-message show';
