@@ -350,18 +350,12 @@
 
         /* Make project items more mobile-friendly */
         .project-item {
-            padding: 1rem;
             margin-bottom: 1rem;
         }
 
-        .project-tech-stack {
-            gap: 0.5rem;
-        }
+      
 
-        .tech-badge {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.875rem;
-        }
+       
     }
 
     /* Small mobile devices */
@@ -436,13 +430,6 @@
         margin-bottom: 2rem;
     }
 
-
-    .project-tech-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-    }
 
  
     /* Template content containers */
@@ -589,8 +576,8 @@
     .tech-stack {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
+        gap: 5px;
+        
     }
 
 
@@ -636,11 +623,6 @@
             gap: 0.5rem;
         }
 
-        .project-item p {
-            font-size: 0.8rem;
-            line-height: 1.4;
-            word-break: break-word;
-        }
 
         /* Ensure textareas don't overflow on mobile */
         .input-group textarea {
@@ -2041,6 +2023,14 @@
             
             if (isPreviewActive) {
                 updatePreview();
+                if (typeof updateLanguagesInPreview === 'function') {
+                    
+                    try {
+                        requestAnimationFrame(() => updateLanguagesInPreview());
+                    } catch (_) {
+                        updateLanguagesInPreview();
+                    }
+                }
             }
         }
 
@@ -3001,7 +2991,7 @@
                         <!-- Language -->
                         <div>
                             <h2 class="bg-white text-slate-700 inline-block px-4 py-1 rounded-full font-bold mb-4">Language</h2>
-                            <ul class="list-disc list-inside text-sm space-y-1 pl-2" id="languages-preview">
+                            <ul class="list-disc list-inside text-sm space-y-1 border-l-2 border-white pl-4" id="languages-preview">
                                 
                             </ul>
                         </div>
@@ -7133,7 +7123,7 @@
                                 ${tech ? `
                                     <div class="tech-stack">
                                         <p>Technologies:</p>
-                                        ${tech.split(',').map(t => `<span class="tech-badge">${t.trim()}</span>`).join('')}
+                                        ${tech.split(',').map(t => `<span class="tech-badge">${t.trim()},</span>`).join('')}
                                     </div>
                                 ` : ''}
                                 <p>${description || 'Project Description'}</p>
