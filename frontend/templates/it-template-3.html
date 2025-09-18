@@ -7,31 +7,23 @@
     <title>IT Template No 3</title>
 
 <style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
+  /* Auto-fit resume width to the screen */
+  div.w-\[210mm\] {
+    width: 210mm;                /* A4 width on desktop */
+    max-width: 100%;             /* never exceed screen width */
   }
 
   @media (max-width: 1024px) {
-    .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
+    div.w-\[210mm\] {
+      width: 100%;               /* shrink to screen width */
+      transform: none;           /* remove manual scaling */
     }
   }
 </style>
 
 </head>
 <body class="bg-white overflow-x-auto">
-  <div class="resume-container font-sans text-black bg-white shadow-md">
+  <div class="font-sans text-black bg-white shadow-md min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto">
 
     <!-- Header -->
     <div class="bg-slate-800 text-white px-8 py-6 flex items-center gap-6">
