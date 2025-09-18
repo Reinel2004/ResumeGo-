@@ -6,31 +6,16 @@
     <link href="../../../src/output.css" rel="stylesheet">
     <title>Generic Template No 10</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
-    .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
-
+    <style>
+      .resume-container {
+        width: 210mm;
+        max-width: 210mm;
+        min-width: 210mm;
+        margin: 0 auto;
+      }
+    </style>
 </head>
-<body class="bg-white justify-center py-10">
+<body class="bg-white justify-center py-10 overflow-x-auto">
   <div class="resume-container text-black font-sans space-y-8 bg-white p-8 shadow-md">
 
     <!-- Header -->
@@ -97,7 +82,8 @@
     <!-- Work Experience -->
     <div>
       <h2 class="font-semibold uppercase mb-1">Work Experience</h2>
-        <br>
+      <br>
+
       <!-- Job 1 -->
       <div class="pl-4 space-y-1">
         <div class="flex justify-between font-medium">
@@ -112,9 +98,9 @@
           </li>
         </ul>
       </div>
+
       <br>
-      <!-- Additional job? Just copy this format -->
-      
+      <!-- Job 2 -->
       <div class="pl-4 space-y-1">
         <div class="flex justify-between font-medium">
           <p>Company Name<br />Location</p>
@@ -126,7 +112,6 @@
           <li>Responsibility 2</li>
         </ul>
       </div>
-      
 
     </div>
 
