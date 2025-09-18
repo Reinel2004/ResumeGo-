@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Accountancy Template No 10</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Accountancy Template No 10</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
+  <style>
+    /* Fixed A4 width */
     .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
+      width: 210mm;
+      max-width: 210mm;
+      min-width: 210mm;
+      margin-left: auto;
+      margin-right: auto;
     }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
+  </style>
 
 </head>
-<body class="bg-white justify-center py-10">
-  <div class="resume-container w-full font-sans text-black bg-gray-100 shadow-md">
+<body class="bg-white font-sans overflow-x-auto py-10">
+  <div class="resume-container w-full text-black bg-gray-100 shadow-md">
 
     <!-- Header -->
     <div class="bg-black text-white flex items-center">
@@ -119,13 +107,12 @@
 
         <!-- Language -->
         <div>
-        <h2 class="text-lg font-bold mb-4">LANGUAGE</h2>
-        <ul class="list-disc list-inside text-sm space-y-1">
+          <h2 class="text-lg font-bold mb-4">LANGUAGE</h2>
+          <ul class="list-disc list-inside text-sm space-y-1">
             <li>Filipino</li>
             <li>English</li>
-        </ul>
+          </ul>
         </div>
-
 
       </div>
     </div>
