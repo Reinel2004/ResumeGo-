@@ -1,152 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>BA Template No 8</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>BA Template No 8</title>
 
-    <style>
-      .resume-container {
-        width: 210mm;
-        max-width: 210mm;
-        min-width: 210mm;
-        margin: 0 auto;
-      }
-    
-      @media (max-width: 1024px) {
-        .resume-container {
-          transform: scale(0.8);
-          transform-origin: top center;
-        }
-      }
-    
-      @media (max-width: 600px) {
-        .resume-container {
-          transform: scale(0.6);
-          transform-origin: top center;
-        }
-      }
-    </style>
-    
-    </head>
-    <body class="bg-white justify-center py-10">
-      <div class="resume-container w-full font-sans text-black bg-white shadow-md">
-    
-        <!-- Header -->
-        <div class="flex items-center bg-black text-white p-6">
-          <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-full object-cover mr-6" />
-          <div>
-            <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
-            <p class="text-sm">Business Administration</p>
-          </div>
-        </div>
-    
-        <!-- About Me -->
-        <div class="p-4">
-        <div class="bg-gray-200 p-4">
-            <h2 class="text-lg font-bold uppercase mb-2">About Me</h2>
-            <p class="text-sm leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-            </p>
-        </div>
-        </div>
-    
-    
-        <!-- Content Columns -->
-        <div class="flex">
-    
-          <!-- Left Column -->
-          <div class="w-1/2 p-4 space-y-6">
-    
-            <!-- Skill -->
-            <div class="bg-gray-200 p-4">
-              <h2 class="text-lg font-bold uppercase mb-2">Skill</h2>
-              <ul class="list-disc list-inside text-sm space-y-1">
-                <li>Process Improvement</li>
-                <li>Financial Support</li>
-                <li>Negotiation</li>
-                <li>Leadership</li>
-              </ul>
-            </div>
-    
-            <!-- Education -->
-            <div class="bg-gray-200 p-4">
-            <h2 class="text-lg font-bold uppercase mb-2">Education</h2>
-            <div class="text-sm space-y-4">
-                <div>
-                <p class="font-semibold">2022 – 2026</p>
-                <p>Dominican College of Tarlac</p>
-                <p class="italic">B.S Business Administration</p>
-                </div>
-                <div>
-                <p class="font-semibold">2020 – 2022</p>
-                <p>Cristo Rey High School</p>
-                <p class="italic">Senior Department</p>
-                </div>
-                <!-- Add more schools as needed -->
-            </div>
-            </div>
-    
-            <!-- Language -->
-            <div class="bg-gray-200 p-4">
-              <h2 class="text-lg font-bold uppercase mb-2">Language</h2>
-              <ul class="text-sm space-y-1">
-                <li>ENGLISH</li>
-                <li>FILIPINO</li>
-              </ul>
-            </div>
-    
-          </div>
-    
-          <!-- Right Column -->
-          <div class="w-1/2 p-4 space-y-6">
-    
-    
-            <!-- Experience -->
-            <div class="bg-gray-200 p-4">
-            <h2 class="text-lg font-bold uppercase mb-2">Experience</h2>
-            <div class="space-y-4 text-sm">
-    
-                <div>
-                <p class="font-bold">Job Position Here</p>
-                <p class="italic text-sm">Company Name</p>
-                <p class="text-gray-600">2018 – 2019</p>
-                <ul class="list-disc list-inside mt-1">
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                </ul>
-                </div>
-    
-                <!-- Add more jobs as needed -->
-    
-                <div>
-                <p class="font-bold">Job Position Here</p>
-                <p class="italic text-sm">Company Name</p>
-                <p class="text-gray-600">2018 – 2019</p>
-                <ul class="list-disc list-inside mt-1">
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                </ul>
-                </div>
-    
-                <div>
-                <p class="font-bold">Job Position Here</p>
-                <p class="italic text-sm">Company Name</p>
-                <p class="text-gray-600">2018 – 2019</p>
-                <ul class="list-disc list-inside mt-1">
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
-                </ul>
-                </div>
-            </div>
-            </div>
-    
-          </div>
-    
-        </div>
+  <style>
+    .resume-container {
+      width: 210mm;
+      max-width: 210mm;
+      min-width: 210mm;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="bg-white justify-center py-10 overflow-x-auto">
+  <div class="resume-container w-full font-sans text-black bg-white shadow-md">
+
+    <!-- Header -->
+    <div class="flex items-center bg-black text-white p-6">
+      <img src="../../../assets/img/charles.png" alt="Profile" class="w-32 h-32 rounded-full object-cover mr-6" />
+      <div>
+        <h1 class="text-3xl font-bold">Charles Andrew Torres</h1>
+        <p class="text-sm">Business Administration</p>
       </div>
+    </div>
+
+    <!-- About Me -->
+    <div class="p-4">
+      <div class="bg-gray-200 p-4">
+        <h2 class="text-lg font-bold uppercase mb-2">About Me</h2>
+        <p class="text-sm leading-relaxed">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </div>
+
+    <!-- Content Columns -->
+    <div class="flex">
+
+      <!-- Left Column -->
+      <div class="w-1/2 p-4 space-y-6">
+
+        <!-- Skill -->
+        <div class="bg-gray-200 p-4">
+          <h2 class="text-lg font-bold uppercase mb-2">Skill</h2>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Process Improvement</li>
+            <li>Financial Support</li>
+            <li>Negotiation</li>
+            <li>Leadership</li>
+          </ul>
+        </div>
+
+        <!-- Education -->
+        <div class="bg-gray-200 p-4">
+          <h2 class="text-lg font-bold uppercase mb-2">Education</h2>
+          <div class="text-sm space-y-4">
+            <div>
+              <p class="font-semibold">2022 – 2026</p>
+              <p>Dominican College of Tarlac</p>
+              <p class="italic">B.S Business Administration</p>
+            </div>
+            <div>
+              <p class="font-semibold">2020 – 2022</p>
+              <p>Cristo Rey High School</p>
+              <p class="italic">Senior Department</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Language -->
+        <div class="bg-gray-200 p-4">
+          <h2 class="text-lg font-bold uppercase mb-2">Language</h2>
+          <ul class="text-sm space-y-1">
+            <li>ENGLISH</li>
+            <li>FILIPINO</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="w-1/2 p-4 space-y-6">
+
+        <!-- Experience -->
+        <div class="bg-gray-200 p-4">
+          <h2 class="text-lg font-bold uppercase mb-2">Experience</h2>
+          <div class="space-y-4 text-sm">
+
+            <div>
+              <p class="font-bold">Job Position Here</p>
+              <p class="italic text-sm">Company Name</p>
+              <p class="text-gray-600">2018 – 2019</p>
+              <ul class="list-disc list-inside mt-1">
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-bold">Job Position Here</p>
+              <p class="italic text-sm">Company Name</p>
+              <p class="text-gray-600">2018 – 2019</p>
+              <ul class="list-disc list-inside mt-1">
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-bold">Job Position Here</p>
+              <p class="italic text-sm">Company Name</p>
+              <p class="text-gray-600">2018 – 2019</p>
+              <ul class="list-disc list-inside mt-1">
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                <li>Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>
