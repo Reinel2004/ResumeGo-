@@ -1,36 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Accountancy Template No 4</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Accountancy Template No 4</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
+  <style>
+    /* Keep fixed A4 width for all devices */
     .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
+      width: 210mm;
+      min-width: 210mm;
+      max-width: 210mm;
+      margin-left: auto;
+      margin-right: auto;
     }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
-
+  </style>
 </head>
-<body class="bg-white justify-center py-10">
+<body class="bg-white font-sans overflow-x-auto py-10">
   <div class="resume-container w-full font-sans text-black bg-white shadow-md flex">
 
     <!-- Left Column (50%) -->
@@ -49,92 +36,87 @@
 
       <!-- About -->
       <div class="px-6">
-      <div class="flex items-center gap-2 mb-2">
-        <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">About</div>
-        <hr class="flex-grow border-t border-gray-400" />
+        <div class="flex items-center gap-2 mb-2">
+          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">About</div>
+          <hr class="flex-grow border-t border-gray-400" />
+        </div>
+        <p class="text-sm text-gray-800">
+          I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
+        </p>
       </div>
-            <p class="text-sm text-gray-800">
-            I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.
-            </p>
-    </div>
 
-    <!-- Skills -->
-    <div class="px-6">
-    <div class="flex items-center gap-2 mb-2">
-        <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Skills</div>
-        <hr class="flex-grow border-t border-gray-400" />
-    </div>
-    <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
-        <li>Financial Accounting</li>
-        <li>Communication</li>
-        <li>Excel Proficiency</li>
-    </ul>
-    </div>
+      <!-- Skills -->
+      <div class="px-6">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Skills</div>
+          <hr class="flex-grow border-t border-gray-400" />
+        </div>
+        <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
+          <li>Financial Accounting</li>
+          <li>Communication</li>
+          <li>Excel Proficiency</li>
+        </ul>
+      </div>
 
-    <!-- Languages -->
-    <div class="px-6">
-    <div class="flex items-center gap-2 mb-2">
-        <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Languages</div>
-        <hr class="flex-grow border-t border-gray-400" />
-    </div>
-    <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
-        <li>English</li>
-        <li>Filipino</li>
-    </ul>
-    </div>
-
+      <!-- Languages -->
+      <div class="px-6">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Languages</div>
+          <hr class="flex-grow border-t border-gray-400" />
+        </div>
+        <ul class="text-sm list-disc list-inside space-y-1 text-gray-800">
+          <li>English</li>
+          <li>Filipino</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Right Column (50%) -->
     <div class="w-1/2 p-8 space-y-6">
 
-    <!-- Experience -->
-     <br><br>
-    <div>
+      <!-- Experience -->
+      <br><br>
+      <div>
         <div class="flex items-center gap-2 mb-2">
-        <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Experience</div>
-        <hr class="flex-grow border-t border-gray-400" />
+          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Experience</div>
+          <hr class="flex-grow border-t border-gray-400" />
         </div>
         <div class="space-y-4">
-
-        <div>
+          <div>
             <p class="text-base font-semibold">Job Position</p>
             <p class="text-sm text-gray-600">Company Name | 2021 - 2022</p>
             <p class="text-base mt-1">Handled daily accounting tasks and managed budget reports for internal and external audits.</p>
-        </div>
-
-        <div>
+          </div>
+          <div>
             <p class="text-base font-semibold">Another Position</p>
             <p class="text-sm text-gray-600">Company Name | 2020 - 2021</p>
             <p class="text-base mt-1">Coordinated with finance team to streamline expense tracking and documentation processes.</p>
-        </div>
-
-        <div>
+          </div>
+          <div>
             <p class="text-base font-semibold">Another Position</p>
             <p class="text-sm text-gray-600">Company Name | 2020 - 2021</p>
             <p class="text-base mt-1">Coordinated with finance team to streamline expense tracking and documentation processes.</p>
+          </div>
         </div>
+      </div>
 
-        </div>
-    </div>
-
-    <!-- Education -->
-    <div>
+      <!-- Education -->
+      <div>
         <div class="flex items-center gap-2 mb-2">
-        <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Education</div>
-        <hr class="flex-grow border-t border-gray-400" />
+          <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">Education</div>
+          <hr class="flex-grow border-t border-gray-400" />
         </div>
         <div class="space-y-4">
-        <div>
+          <div>
             <p class="text-base font-semibold">Dominican College of Tarlac</p>
             <p class="text-base">BS in Information Technology</p>
-        </div>
-        <div>
+          </div>
+          <div>
             <p class="text-base font-semibold">Sample School</p>
             <p class="text-base">Short Course or Certification</p>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
 
     </div>
 

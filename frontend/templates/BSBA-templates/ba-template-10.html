@@ -1,68 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>BA Template No 10</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>BA Template No 10</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
+  <style>
     .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
+      width: 210mm;
+      max-width: 210mm;
+      min-width: 210mm;
+      margin: 0 auto;
     }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
+  </style>
 
 </head>
-<body class="bg-white justify-center py-10">
+<body class="bg-white justify-center py-10 overflow-x-auto">
   <div class="resume-container w-full font-sans text-black bg-white shadow-md grid grid-cols-[35%_65%]">
 
     <!-- Left Column -->
     <div class="bg-[#5c4431] text-white p-6 flex flex-col space-y-6">
-    <!-- Profile Image, Name & Title Centered -->
-    <div class="flex flex-col items-center text-center space-y-2">
-    <img src="../../../assets/img/charles.png" alt="Profile Image" class="w-34 h-34 object-cover border-4 border-white" />
+      <!-- Profile Image, Name & Title Centered -->
+      <div class="flex flex-col items-center text-center space-y-2">
+        <img src="../../../assets/img/charles.png" alt="Profile Image" class="w-34 h-34 object-cover border-4 border-white" />
+        <div>
+          <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
+          <p class="text-sm mt-1 tracking-wide uppercase">Business Administration</p>
+        </div>
+      </div>
+      <br>
 
-    <div>
-        <h1 class="text-2xl font-bold">Charles Andrew Torres</h1>
-        <p class="text-sm mt-1 tracking-wide uppercase">Business Administration</p>
-    </div>
-    </div>
-    <br>
-
-    <!-- Profile Info -->
-    <div class="text-sm">
+      <!-- Profile Info -->
+      <div class="text-sm">
         <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Profile Info</h2>
         <p class="text-white leading-relaxed">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.
         </p>
-    </div>
+      </div>
 
-    <!-- Contact Info -->
-    <div class="text-sm">
+      <!-- Contact Info -->
+      <div class="text-sm">
         <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Contact</h2>
         <p class="mb-1">123-456-7890</p>
         <p class="mb-1">CharlesTorres@gmail.com</p>
         <p>123 Anywhere St., Any City</p>
+      </div>
     </div>
-    </div>
-
 
     <!-- Right Column -->
     <div class="bg-white p-8 space-y-8">
@@ -70,7 +54,6 @@
       <!-- Education -->
       <div>
         <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Education History</h2>
-        
         <div class="mb-4">
           <p class="font-bold">Dominican College of Tarlac <span class="float-right font-normal">2022 - 2026</span></p>
           <p class="text-sm">Bachelor Science in Information Technology</p>
@@ -85,7 +68,6 @@
       <!-- Work Experience -->
       <div>
         <h2 class="text-xl font-semibold text-[#5c4431] uppercase mb-4">Work Experience</h2>
-
         <div>
           <p class="font-bold">Job position here</p>
           <p class="uppercase text-sm tracking-wide">Company Name</p>

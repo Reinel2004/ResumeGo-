@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Accountancy Template No 8</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Accountancy Template No 8</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
+  <style>
+    /* Fixed A4 width */
     .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
+      width: 210mm;
+      max-width: 210mm;
+      min-width: 210mm;
+      margin-left: auto;
+      margin-right: auto;
     }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
+  </style>
 
 </head>
-<body class="bg-white justify-center py-10">
-  <div class="resume-container w-full font-sans text-black shadow-md overflow-hidden bg-white">
+<body class="bg-white font-sans overflow-x-auto py-10">
+  <div class="resume-container w-full text-black shadow-md overflow-hidden bg-white">
     <!-- Header -->
     <div class="text-center border-b border-black pb-4">
       <img src="../../../assets/img/charles.png" class="w-32 h-32 rounded object-cover mx-auto mt-4 border" alt="Profile">
@@ -95,8 +83,6 @@
             <li>Communication skills</li>
           </ul>
         </div>
-
-
       </div>
 
       <!-- Right Column -->
@@ -140,7 +126,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

@@ -6,32 +6,16 @@
     <link href="/src/output.css" rel="stylesheet">
     <title>Generic Template No 6</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
-    .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
-
-
+    <style>
+      .resume-container {
+        width: 210mm;
+        max-width: 210mm;
+        min-width: 210mm;
+        margin: 0 auto;
+      }
+    </style>
 </head>
-<body class="bg-white justify-center py-10">
+<body class="bg-white justify-center py-10 overflow-x-auto">
   <div class="resume-container bg-white p-8 shadow-md">
     
     <!-- Header -->
@@ -48,54 +32,49 @@
             <p class="text-xl">Sales Engineer</p>
 
             <div class="mt-4 space-y-1">
-            <p class="text-sm">1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
+              <p class="text-sm">1515 Pacific Ave, Los Angeles, CA 90291, United States</p>
             </div>
             <div class="space-y-1">
-            <p class="text-sm">3868683442</p>
+              <p class="text-sm">3868683442</p>
             </div>
             <div class="space-y-1">
-            <p class="text-sm">CharlesTorres@gmail.com</p>
+              <p class="text-sm">CharlesTorres@gmail.com</p>
             </div>
         </div>
-
     </div>
-
 
     <!-- Body: 2 Column Layout (30% / 70%) -->
     <div class="grid grid-cols-[30%_70%] gap-6">
       
       <!-- Left Column -->
-    <div class="space-y-4">
+      <div class="space-y-4">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-800">Languages</h2>
+          <ul class="list-disc list-inside text-sm text-gray-700">
+            <li>English</li>
+            <li>Dutch</li>
+          </ul>
+        </div>
 
+        <div>
+          <h2 class="text-lg font-semibold text-gray-800">Hobbies</h2>
+          <ul class="list-disc list-inside text-sm text-gray-700">
+            <li>Piano</li>
+            <li>Debate</li>
+            <li>Triathlon</li>
+          </ul>
+        </div>
 
-    <div>
-        <h2 class="text-lg font-semibold text-gray-800">Languages</h2>
-        <ul class="list-disc list-inside text-sm text-gray-700">
-        <li>English</li>
-        <li>Dutch</li>
-        </ul>
-    </div>
-
-  <div>
-    <h2 class="text-lg font-semibold text-gray-800">Hobbies</h2>
-    <ul class="list-disc list-inside text-sm text-gray-700">
-      <li>Piano</li>
-      <li>Debate</li>
-      <li>Triathlon</li>
-    </ul>
-  </div>
-
-  <div>
-    <h2 class="text-lg font-semibold text-gray-800">Skills</h2>
-    <ul class="list-disc list-inside text-sm text-gray-700">
-      <li>Technical Sales</li>
-      <li>Client Relationship</li>
-      <li>Contract Negotiation</li>
-      <li>Territory Management</li>
-    </ul>
-  </div>
-</div>
-
+        <div>
+          <h2 class="text-lg font-semibold text-gray-800">Skills</h2>
+          <ul class="list-disc list-inside text-sm text-gray-700">
+            <li>Technical Sales</li>
+            <li>Client Relationship</li>
+            <li>Contract Negotiation</li>
+            <li>Territory Management</li>
+          </ul>
+        </div>
+      </div>
 
       <!-- Right Column -->
       <div class="space-y-6">

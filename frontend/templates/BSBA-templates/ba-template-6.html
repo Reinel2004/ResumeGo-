@@ -1,36 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>BA Template No 6</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>BA Template No 6</title>
 
-<style>
-  .resume-container {
-    width: 210mm;
-    max-width: 210mm;
-    min-width: 210mm;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 1024px) {
+  <style>
     .resume-container {
-      transform: scale(0.8);
-      transform-origin: top center;
+      width: 210mm;
+      min-width: 210mm;
+      max-width: 210mm;
+      margin: 0 auto;
     }
-  }
-
-  @media (max-width: 600px) {
-    .resume-container {
-      transform: scale(0.6);
-      transform-origin: top center;
-    }
-  }
-</style>
-    
+  </style>
 </head>
-<body class="bg-white justify-center py-10">
+<body class="bg-white justify-center py-10 overflow-x-auto">
   <div class="resume-container font-sans text-black bg-white shadow-md p-8 flex gap-6">
     
     <!-- Left Column -->
@@ -50,89 +35,83 @@
         </p>
       </div>
 
-        <!-- Education -->
-        <div>
+      <!-- Education -->
+      <div>
         <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/></svg>
-            EDUCATION
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/></svg>
+          EDUCATION
         </h2>
 
         <div class="mt-4 space-y-4">
-            <div class="bg-gray-100 p-4 rounded-xl w-full">
+          <div class="bg-gray-100 p-4 rounded-xl w-full">
             <p class="font-semibold">2022–2026</p>
             <p class="text-sm">B.S Business Administration - Dominican College of Tarlac</p>
-            </div>
+          </div>
 
-            <div class="bg-gray-100 p-4 rounded-xl w-full">
+          <div class="bg-gray-100 p-4 rounded-xl w-full">
             <p class="font-semibold">2020–2022</p>
             <p class="text-sm">HUMSS - Humanities, Social and Sciences - Cristo Rey High School</p>
-            </div>
+          </div>
 
-            <div class="bg-gray-100 p-4 rounded-xl w-full">
+          <div class="bg-gray-100 p-4 rounded-xl w-full">
             <p class="font-semibold">2020–2022</p>
             <p class="text-sm">HUMSS - Humanities, Social and Sciences - Cristo Rey High School</p>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
 
-
-        <!-- Experience -->
-        <div>
+      <!-- Experience -->
+      <div>
         <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
-            EXPERIENCE
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+          EXPERIENCE
         </h2>
         <div class="mt-4 space-y-4">
-            <!-- Job 1 -->
-            <div class="bg-gray-100 p-4 rounded-xl w-full">
+          <!-- Job 1 -->
+          <div class="bg-gray-100 p-4 rounded-xl w-full">
             <p class="font-semibold">2018–2019</p>
             <p class="text-sm">Job Position Here</p>
             <p class="text-sm italic text-gray-500">Company Name</p>
-            </div>
-            <!-- Job 2 -->
-            <div class="bg-gray-100 p-4 rounded-xl w-full">
+          </div>
+          <!-- Job 2 -->
+          <div class="bg-gray-100 p-4 rounded-xl w-full">
             <p class="font-semibold">2020–2022</p>
             <p class="text-sm">Job Position Here</p>
             <p class="text-sm italic text-gray-500">Company Name</p>
-            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="md:w-1/3 mt-8 md:mt-0">
+      <div class="bg-gray-100 rounded-xl p-6 space-y-6 h-full">
+        <!-- Skills -->
+        <div>
+          <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v6l4 2"/></svg>
+            SKILLS
+          </h2>
+          <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+            <li>Creative</li>
+            <li>Communication</li>
+            <li>Project Management</li>
+          </ul>
         </div>
 
-
+        <!-- Contact -->
+        <div class="space-y-2">
+          <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 8l10 6 10-6"/></svg>
+            CONTACT
+          </h2>
+          <p class="text-sm">+123-456-7890</p>
+          <p class="text-sm">CharlesTorres@gmail.com</p>
+          <p class="text-sm">123 Anywhere Street., Any City</p>
+        </div>
+      </div>
     </div>
 
-<!-- Right Column -->
-<div class="md:w-1/3 mt-8 md:mt-0">
-  <div class="bg-gray-100 rounded-xl p-6 space-y-6 h-full">
-
-    <!-- Skills (List Style) -->
-    <div>
-      <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v6l4 2"/></svg>
-        SKILLS
-      </h2>
-      <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
-        <li>Creative</li>
-        <li>Communication</li>
-        <li>Project Management</li>
-      </ul>
-    </div>
-    <br><br>
-    <!-- Contact -->
-    <div class="space-y-2">
-      <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 8l10 6 10-6"/></svg>
-        CONTACT
-      </h2>
-      <p class="text-sm">+123-456-7890</p>
-      <p class="text-sm">CharlesTorres@gmail.com</p>
-      <p class="text-sm">123 Anywhere Street., Any City</p>
-    </div>
-
-  </div>
-</div>
-
-    
   </div>
 </body>
 </html>
