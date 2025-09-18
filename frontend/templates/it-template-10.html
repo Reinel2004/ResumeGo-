@@ -6,35 +6,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>IT Template No 10</title>
 
-  <!-- <style>
-    /* Always keep resume fixed A4 width */
-    .resume-container {
-      width: 210mm;
-      max-width: 210mm;
-      min-width: 210mm;
-      margin: 0 auto;
-    }
+<style>
+  /* Auto-fit resume width to the screen */
+  div.w-\[210mm\] {
+    width: 210mm;                /* A4 width on desktop */
+    max-width: 100%;             /* never exceed screen width */
+  }
 
-    /* Scale down on tablets */
-    @media (max-width: 1024px) {
-      .resume-container {
-        transform: scale(0.8);
-        transform-origin: top center;
-      }
+  @media (max-width: 1024px) {
+    div.w-\[210mm\] {
+      width: 100%;               /* shrink to screen width */
+      transform: none;           /* remove manual scaling */
     }
-
-    /* Scale down more on phones */
-    @media (max-width: 600px) {
-      .resume-container {
-        transform: scale(0.6);
-        transform-origin: top center;
-      }
-    }
-  </style> -->
+  }
+</style> 
 
 </head>
 <body class="bg-[#fdfaf8] font-sans ">
-  <div class="resume-container min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md">
+  <div class="min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto flex min-h-screen bg-[#fdfaf8] shadow-md">
 
     <!-- Left Column -->
     <div class="w-1/2 p-8 bg-white border-r-2 border-gray-300">
