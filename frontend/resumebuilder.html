@@ -44,6 +44,17 @@
         line-height: 1.6;
     }
 
+
+    div.w-\[210mm\] {
+        width: 210mm;               
+    }
+    @media (max-width: 1024px) {
+        div.w-\[210mm\] {
+            transform: scale(0.4);    
+            transform-origin: top left;
+        }
+    }
+
    
 
     .user-dropdown {
@@ -772,6 +783,31 @@
     .ai-enhance-btn.loading {
         background: #666;
         cursor: not-allowed;
+    }
+
+    /* Mobile responsive AI assistant button */
+    @media (max-width: 768px) {
+        .ai-enhance-btn {
+            font-size: 10px;
+            padding: 4px 8px;
+            right: 5px;
+            top: 5px;
+            gap: 3px;
+            white-space: nowrap;
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .ai-enhance-btn {
+            font-size: 9px;
+            padding: 3px 6px;
+            right: 3px;
+            top: 3px;
+            max-width: 100px;
+        }
     }
 
     .ai-enhance-popup {
@@ -8364,7 +8400,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Create popup
                     const popup = document.createElement('div');
-                    popup.className = 'ai-enhance-popup';
+                    popup.className = 'ai-enhance-popup ai-popup';
+                    popup.dataset.textarea = textarea;
                     popup.innerHTML = '<div class="ai-loading">Generating suggestions</div>';
                     container.appendChild(popup);
                 }
@@ -8395,6 +8432,180 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lower.startsWith('generic-') || lower.startsWith('generic')) return 'relevant';
             // Default category
             return 'relevant';
+        }
+
+        function getCurrentSection(textarea) {
+            // Find the closest section container
+            let currentElement = textarea;
+            while (currentElement && currentElement !== document.body) {
+                if (currentElement.id && currentElement.id.includes('-section')) {
+                    const sectionId = currentElement.id;
+                    if (sectionId.includes('education')) return 'education';
+                    if (sectionId.includes('experience') || sectionId.includes('work')) return 'experience';
+                    if (sectionId.includes('skills')) return 'skills';
+                    if (sectionId.includes('projects')) return 'projects';
+                    if (sectionId.includes('summary') || sectionId.includes('objective')) return 'summary';
+                    if (sectionId.includes('certification')) return 'certifications';
+                    if (sectionId.includes('achievement')) return 'achievements';
+                    if (sectionId.includes('language')) return 'languages';
+                    if (sectionId.includes('reference')) return 'references';
+                }
+                // Check if we're in a project item
+                if (currentElement.classList && currentElement.classList.contains('project-item')) {
+                    return 'projects';
+                }
+                currentElement = currentElement.parentElement;
+            }
+            return 'general';
+        }
+
+        function getProjectContext(textarea) {
+            // Find the project item containing this textarea
+            let currentElement = textarea;
+            while (currentElement && currentElement !== document.body) {
+                if (currentElement.classList && currentElement.classList.contains('project-item')) {
+                    const projectInputs = currentElement.querySelectorAll('input');
+                    const projectTitle = projectInputs[0]?.value || '';
+                    const projectTech = projectInputs[1]?.value || '';
+                    
+                    return {
+                        title: projectTitle,
+                        technologies: projectTech,
+                        hasTitle: projectTitle.trim().length > 0,
+                        hasTech: projectTech.trim().length > 0
+                    };
+                }
+                currentElement = currentElement.parentElement;
+            }
+            return { title: '', technologies: '', hasTitle: false, hasTech: false };
+        }
+
+        function getProjectSpecificContext(projectTitle, technologies) {
+            const title = projectTitle.toLowerCase();
+            const tech = technologies.toLowerCase();
+            
+            // Define project type patterns and their specific contexts
+            const projectTypes = {
+                'web': {
+                    keywords: ['web', 'website', 'frontend', 'backend', 'full-stack', 'react', 'vue', 'angular', 'node', 'express'],
+                    context: 'web development project',
+                    examples: ['Developed responsive user interface', 'Implemented RESTful API', 'Optimized page load times', 'Integrated third-party services', 'Implemented user authentication']
+                },
+                'mobile': {
+                    keywords: ['mobile', 'app', 'ios', 'android', 'flutter', 'react native', 'swift', 'kotlin'],
+                    context: 'mobile application development',
+                    examples: ['Built cross-platform mobile app', 'Implemented native features', 'Optimized app performance', 'Integrated push notifications', 'Designed intuitive user interface']
+                },
+                'ai': {
+                    keywords: ['ai', 'machine learning', 'ml', 'neural', 'deep learning', 'tensorflow', 'pytorch', 'nlp', 'computer vision'],
+                    context: 'artificial intelligence project',
+                    examples: ['Trained machine learning model', 'Implemented data preprocessing pipeline', 'Achieved 95% accuracy', 'Deployed model to production', 'Optimized model performance']
+                },
+                'data': {
+                    keywords: ['data', 'analytics', 'visualization', 'database', 'sql', 'python', 'pandas', 'numpy', 'tableau', 'power bi'],
+                    context: 'data analysis project',
+                    examples: ['Analyzed large datasets', 'Created interactive dashboards', 'Built predictive models', 'Automated data processing', 'Generated actionable insights']
+                },
+                'game': {
+                    keywords: ['game', 'gaming', 'unity', 'unreal', 'c#', 'c++', 'opengl', 'directx'],
+                    context: 'game development project',
+                    examples: ['Developed engaging gameplay mechanics', 'Implemented physics engine', 'Created multiplayer functionality', 'Optimized game performance', 'Designed level progression system']
+                },
+                'ecommerce': {
+                    keywords: ['ecommerce', 'e-commerce', 'shop', 'store', 'payment', 'cart', 'checkout', 'stripe', 'paypal'],
+                    context: 'e-commerce platform development',
+                    examples: ['Built secure payment processing', 'Implemented shopping cart functionality', 'Optimized checkout flow', 'Integrated inventory management', 'Enhanced user experience']
+                },
+                'iot': {
+                    keywords: ['iot', 'internet of things', 'sensor', 'arduino', 'raspberry', 'embedded', 'microcontroller'],
+                    context: 'IoT device development',
+                    examples: ['Designed sensor integration', 'Implemented real-time data collection', 'Built cloud connectivity', 'Created monitoring dashboard', 'Optimized power consumption']
+                },
+                'blockchain': {
+                    keywords: ['blockchain', 'crypto', 'bitcoin', 'ethereum', 'smart contract', 'solidity', 'web3'],
+                    context: 'blockchain development project',
+                    examples: ['Developed smart contracts', 'Implemented decentralized features', 'Built secure wallet integration', 'Created token economy', 'Optimized gas efficiency']
+                }
+            };
+            
+          
+            for (const [type, config] of Object.entries(projectTypes)) {
+                const titleMatch = config.keywords.some(keyword => title.includes(keyword));
+                const techMatch = config.keywords.some(keyword => tech.includes(keyword));
+                
+                if (titleMatch || techMatch) {
+                    return {
+                        type: type,
+                        context: config.context,
+                        examples: config.examples,
+                        isSpecific: true
+                    };
+                }
+            }
+            
+            // Default project context
+            return {
+                type: 'general',
+                context: 'software development project',
+                examples: ['Developed innovative solution', 'Implemented core functionality', 'Optimized system performance', 'Collaborated with team members', 'Delivered on time and within budget'],
+                isSpecific: false
+            };
+        }
+
+        function getSectionContext(section) {
+            const contexts = {
+                'education': {
+                    title: 'Education',
+                    description: 'Academic background, degrees, institutions, and academic achievements',
+                    examples: ['Bachelor of Science in Computer Science', 'Master of Business Administration', 'GPA: 3.8/4.0', 'Dean\'s List', 'Relevant coursework']
+                },
+                'experience': {
+                    title: 'Work Experience',
+                    description: 'Professional work history, job responsibilities, and career achievements',
+                    examples: ['Led a team of 5 developers', 'Increased sales by 25%', 'Managed $2M budget', 'Implemented new processes', 'Collaborated with cross-functional teams']
+                },
+                'skills': {
+                    title: 'Technical Skills',
+                    description: 'Technical abilities, programming languages, tools, and competencies',
+                    examples: ['JavaScript, Python, React', 'Project Management', 'Data Analysis', 'Machine Learning', 'Cloud Computing']
+                },
+                'projects': {
+                    title: 'Projects',
+                    description: 'Personal or professional projects, achievements, and technical implementations',
+                    examples: ['Built a web application', 'Developed a mobile app', 'Led a team project', 'Implemented new features', 'Optimized performance']
+                },
+                'summary': {
+                    title: 'Professional Summary',
+                    description: 'Career overview, key strengths, and professional value proposition',
+                    examples: ['Experienced software engineer', 'Passionate about innovation', 'Strong leadership skills', 'Proven track record', 'Results-driven professional']
+                },
+                'certifications': {
+                    title: 'Certifications',
+                    description: 'Professional certifications, licenses, and specialized training',
+                    examples: ['AWS Certified Solutions Architect', 'PMP Certification', 'Google Analytics Certified', 'Microsoft Azure Fundamentals']
+                },
+                'achievements': {
+                    title: 'Achievements',
+                    description: 'Notable accomplishments, awards, and recognitions',
+                    examples: ['Employee of the Year', 'Published research paper', 'Won coding competition', 'Led successful project', 'Received industry award']
+                },
+                'languages': {
+                    title: 'Languages',
+                    description: 'Language proficiencies and communication skills',
+                    examples: ['English (Native)', 'Spanish (Fluent)', 'French (Conversational)', 'Mandarin (Basic)', 'German (Intermediate)']
+                },
+                'references': {
+                    title: 'References',
+                    description: 'Professional references and recommendations',
+                    examples: ['John Smith, Manager at ABC Corp', 'Dr. Jane Doe, Professor', 'Sarah Johnson, Team Lead', 'Available upon request']
+                },
+                'general': {
+                    title: 'Resume Content',
+                    description: 'General resume content and professional information',
+                    examples: ['Professional experience', 'Skills and qualifications', 'Educational background', 'Career achievements']
+                }
+            };
+            return contexts[section] || contexts['general'];
         }
 
         function updateFormForCategory() {
@@ -8496,14 +8707,41 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) { console.error(e); }
         });
 
-        async function askAI(promptText) {
+        async function askAI(promptText, textarea = null) {
           try {
             const category = getSelectedCategory();
+            const section = textarea ? getCurrentSection(textarea) : 'general';
+            const sectionContext = getSectionContext(section);
+            
+            // Get project-specific context if we're in the projects section
+            let projectContext = null;
+            if (section === 'projects' && textarea) {
+              const projectInfo = getProjectContext(textarea);
+              if (projectInfo.hasTitle || projectInfo.hasTech) {
+                projectContext = getProjectSpecificContext(projectInfo.title, projectInfo.technologies);
+              }
+            }
+            
+            // Check if the prompt looks like an incomplete sentence
+            const isIncomplete = promptText.trim().length > 0 && 
+                                !promptText.trim().endsWith('.') && 
+                                !promptText.trim().endsWith('!') && 
+                                !promptText.trim().endsWith('?') &&
+                                !promptText.trim().endsWith(':') &&
+                                !promptText.trim().endsWith(';');
+            
             const apiUrl = window.apiConfig ? window.apiConfig.getFullURL('/ai-assistant') : 'http://localhost:3000/api/ai-assistant';
             const response = await fetch(apiUrl, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ promptText, category })
+              body: JSON.stringify({ 
+                promptText, 
+                category, 
+                section,
+                sectionContext,
+                projectContext,
+                isIncomplete
+              })
             });
 
             if (!response.ok) {
@@ -8545,9 +8783,9 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        async function getAISuggestions(text) {
+        async function getAISuggestions(text, textarea = null) {
           try {
-            const result = await askAI(text);
+            const result = await askAI(text, textarea);
             
             const suggestions = result.split(/\n\n|\n[1-3][).:-]?/).filter(s => s.trim());
             return suggestions.length >= 3 ? suggestions : [result];
@@ -8563,10 +8801,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async function handleAIAssistant(textarea, popup) {
           // Show loading state
-          popup.innerHTML = '<div class="ai-loading">Generating suggestions...</div>';
+          popup.innerHTML = '<div class="ai-loading">Generating suggestions</div>';
 
           try {
-            const suggestionsText = await getAISuggestions(textarea.value);
+            const suggestionsText = await getAISuggestions(textarea.value, textarea);
 
             // If getAISuggestions returns an array, show suggestions
             if (Array.isArray(suggestionsText)) {
@@ -8576,7 +8814,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${text}
                   </div>
                 `).join('')}
-                <button class="regenerate-btn" onclick="regenerateSuggestions('${textarea.value.replace(/'/g, "\\'")}')">
+                <button class="regenerate-btn" onclick="regenerateSuggestions('${textarea.value.replace(/'/g, "\\'")}', this.closest('.ai-popup').dataset.textarea)">
                   🔄 Regenerate
                 </button>
               `;
@@ -8612,17 +8850,17 @@ document.addEventListener('DOMContentLoaded', () => {
           handleAIAssistant(textarea, currentPopup);
         }
 
-        function regenerateSuggestions(text) {
+        function regenerateSuggestions(text, textarea) {
             const regenerateBtn = currentPopup.querySelector('.regenerate-btn');
             regenerateBtn.classList.add('loading');
             regenerateBtn.innerHTML = '�� Regenerating...';
-            getAISuggestions(text).then(suggestions => {
-                currentPopup.innerHTML = `                    ${suggestions.map(text => `
+            getAISuggestions(text, textarea).then(suggestions => {
+                currentPopup.innerHTML = `${suggestions.map(text => `
                         <div class="ai-suggestion" data-suggestion="${encodeURIComponent(text)}">
                             ${text}
                         </div>
                     `).join('')}
-                    <button class="regenerate-btn" onclick="regenerateSuggestions('${text.replace(/'/g, "\\'")}')">
+                    <button class="regenerate-btn" onclick="regenerateSuggestions('${text.replace(/'/g, "\\'")}', this.closest('.ai-popup').dataset.textarea)">
                         🔄 Regenerate
                     </button>
                 `;

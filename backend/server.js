@@ -37,8 +37,41 @@ app.use('/api', grammarRoutes);
 
 // AI Assistant Proxy Route
 app.post('/api/ai-assistant', async (req, res) => {
-    const { promptText, category } = req.body;
-    const systemPrompt = `You are a professional resume writer for the ${category || 'relevant'} field. Provide 3 different versions of the following text for a resume: 1) A professional version with impact, 2) A concise version that's clear and direct, 3) A detailed version with more context.`;
+    const { promptText, category, section, sectionContext, projectContext, isIncomplete } = req.body;
+    
+    // Create section-specific system prompt
+    let systemPrompt = `You are a professional resume writer specializing in the ${category || 'relevant'} field. `;
+    
+    if (section && sectionContext) {
+        systemPrompt += `The user is currently working on the ${sectionContext.title} section of their resume. `;
+        systemPrompt += `This section should focus on: ${sectionContext.description}. `;
+        systemPrompt += `Examples of good content for this section include: ${sectionContext.examples.join(', ')}. `;
+    }
+    
+    // Add project-specific context if available
+    if (projectContext && projectContext.isSpecific) {
+        systemPrompt += `\n\nSPECIFIC PROJECT CONTEXT: The user is working on a ${projectContext.context} titled "${projectContext.type}". `;
+        systemPrompt += `This is a ${projectContext.context} that should focus on project-specific achievements and technical details. `;
+        systemPrompt += `Examples of relevant content for this type of project include: ${projectContext.examples.join(', ')}. `;
+        systemPrompt += `Make sure all suggestions are specific to ${projectContext.context} and highlight technical achievements, problem-solving, and measurable results. `;
+    }
+    
+    if (isIncomplete) {
+        systemPrompt += `\n\nThe user has provided an incomplete sentence or phrase. Please complete it naturally and professionally, providing 2-3 different completion options that would work well in a resume. `;
+        if (projectContext && projectContext.isSpecific) {
+            systemPrompt += `Focus on completing the sentence with project-specific achievements, technical details, and measurable results relevant to ${projectContext.context}. `;
+        } else {
+            systemPrompt += `Make sure the completions are specific, impactful, and relevant to the ${category || 'relevant'} field. `;
+        }
+    } else {
+        systemPrompt += `\n\nPlease provide 3 different versions of the following text for a resume: 1) A professional version with impact, 2) A concise version that's clear and direct, 3) A detailed version with more context. `;
+        if (projectContext && projectContext.isSpecific) {
+            systemPrompt += `Focus on project-specific achievements, technical implementations, and measurable results relevant to ${projectContext.context}. `;
+        }
+    }
+    
+    systemPrompt += `\n\nEnsure all suggestions are professional, specific, and tailored to the ${category || 'relevant'} industry.`;
+    
     try {
         const response = await fetch('https://api.together.xyz/v1/chat/completions', {
             method: 'POST',
