@@ -529,16 +529,13 @@
                       </svg>
                     </div>
                     <div class="flex-1">
-                      <h3 class="text-lg font-semibold text-gray-900 mb-1 truncate">${resume.title}</h3>
+                      <h3 class="text-sm font-semibold text-gray-900 mb-1 truncate">ID: ${resume.template}</h3>
                       <p class="text-xs text-gray-500">Last edited: ${new Date(resume.updatedAt).toLocaleString()}</p>
                       <div class="flex items-center gap-2 mt-2">
                       </div>
                     </div>
                   </div>
                   <div class="flex-1 flex flex-col justify-between p-6">
-                    <div class="mb-4">
-                      <span class="inline-block bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">${resume.template || 'Template'}</span>
-                    </div>
                     <div class="flex gap-2 mt-auto">
                       <button class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors font-semibold edit-btn" data-id="${resume.id}">Edit</button>
                       <button class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors font-semibold download-btn" data-id="${resume.id}">Download</button>
@@ -582,9 +579,9 @@
                         }
                         return education.map(item => `
                             <div class="mb-4">
-                                <p class="font-semibold">${item.degree || 'Degree'}</p>
-                                <p class="text-sm">${item.school || 'School/University'}</p>
-                                <p class="text-sm">${item.year || 'Year'}${item.gpa ? ` | GPA: ${item.gpa}` : ''}</p>
+                                <p class="font-semibold">${item.degree}</p>
+                                <p class="text-sm">${item.school }</p>
+                                <p class="text-sm">${item.year}${item.gpa ? ` | GPA: ${item.gpa}` : ''}</p>
                                 ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
                             </div>
                         `).join('');
@@ -610,7 +607,7 @@
 
                     function renderSkills(skills) {
                         if (!Array.isArray(skills) || !skills.length) {
-                            return '<li>Coding Languages</li><li>Logical Approach</li><li>Problem Solving</li>';
+                            return '';
                         }
                         return skills.map(cat => 
                             (cat.items && Array.isArray(cat.items) ? cat.items : [cat.category || 'Skill'])
@@ -634,8 +631,8 @@
                     }
 
                     function renderProjects(projects) {
-                        if (!Array.isArray(projects) || !projects.length) {
-                            return '<div class="mb-6"><p class="font-semibold">Project Name</p><p class="text-sm mb-2">Project Description</p><p class="text-sm">Technologies: HTML, CSS, JavaScript</p></div>';
+                        if (!Array.isArray(projects) || projects.length === 0) {
+                            return '';
                         }
                         return projects.map(item => `
                             <div class="mb-6">
@@ -657,17 +654,17 @@
                                   <img src="${content.profileImage}" alt="Profile Picture" class="w-[110px] h-[110px] rounded-full border-4 border-white object-cover bg-white">
                               </div>
                               <div class="ml-12 flex-1">
-                                  <h1 class="text-3xl font-bold m-0">${content.name || 'Your Name'}</h1>
-                                  <p class="text-sm m-0 mt-2">${content.title || 'Professional Title'}</p>
+                                  <h1 class="text-3xl font-bold m-0">${content.name}</h1>
+                                  <p class="text-sm m-0 mt-2">${content.title}</p>
                               </div>
                           </div>
                           <div class="flex bg-[#fdfaf8] w-full flex-1 m-0">
                               <div class="w-[35%] p-8 border-r border-gray-300 text-black box-border">
                                   <div class="mb-8">
                                       <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Contact</h2>
-                                      <p class="text-xs mb-2"><strong>Phone</strong><br>${content.phone || '+123-456-7890'}</p>
-                                      <p class="text-xs mb-2"><strong>Email</strong><br>${content.email || 'anymail@gmail.com'}</p>
-                                      <p class="text-xs"><strong>Address</strong><br>${content.address || '1234 Anywhere St., Any City'}</p>
+                                      <p class="text-xs mb-2"><strong>Phone</strong><br>${content.phone}</p>
+                                      <p class="text-xs mb-2"><strong>Email</strong><br>${content.email}</p>
+                                      <p class="text-xs"><strong>Address</strong><br>${content.address}</p>
                                   </div>
                                   <div class="mb-8">
                                       <h2 class="bg-[#9e4644] text-white text-center p-2 rounded mb-4 text-sm">Education</h2>
@@ -681,7 +678,7 @@
                               <div class="w-[65%] p-8 text-black box-border">
                                   <section class="mb-8">
                                       <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">About</h2>
-                                      <p class="text-xs leading-relaxed">${content.summary || 'With more than 5 years of experience in web development...'}</p>
+                                      <p class="text-xs leading-relaxed">${content.summary}</p>
                                   </section>
                                   <section>
                                       <h2 class="text-xl uppercase border-b-2 border-gray-300 pb-2 mb-4">Experience</h2>
@@ -705,14 +702,14 @@
                             <div class="mb-8">
                                 <h2 class="text-base font-bold mb-2">Contact</h2>
                                 <hr class="border border-gray-700 mb-2">
-                                <p>📞 ${content.phone || '123-456-7890'}</p>
-                                <p>✉️ ${content.email || 'example@email.com'}</p>
-                                <p>📍 ${content.address || '123 Main Street, City'}</p>
+                                <p>📞 ${content.phone}</p>
+                                <p>✉️ ${content.email}</p>
+                                <p>📍 ${content.address}</p>
                             </div>
                             <div class="mb-8">
                                 <h2 class="text-base font-bold mb-2">About</h2>
                                 <hr class="border border-gray-700 mb-2">
-                                <p>${content.summary || 'Passionate and detail-oriented IT professional...'}</p>
+                                <p>${content.summary}</p>
                             </div>
                             <div>
                                 <h2 class="text-base font-bold mb-2">Skills</h2>
@@ -722,8 +719,8 @@
                         </div>
                         <div class="bg-gray-700 text-white p-8">
                             <div class="mb-8">
-                                <h1 class="text-3xl font-bold m-0">${content.name || 'John Roe'}</h1>
-                                <p class="text-lg m-0 mt-2">${content.title || 'IT Professional'}</p>
+                                <h1 class="text-3xl font-bold m-0">${content.name}</h1>
+                                <p class="text-lg m-0 mt-2">${content.title}</p>
                             </div>
                             <div class="mb-8">
                                 <h2 class="bg-white text-gray-700 inline-block p-2 px-4 rounded-full font-bold mb-4">Work Experience</h2>
@@ -756,8 +753,8 @@
                                   <img src="${content.profileImage}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-blue-500" />
                               </div>
                               <div>
-                                  <h1 class="text-3xl font-bold m-0 leading-tight">${content.name || 'John Roe'}</h1>
-                                  <p class="text-blue-200 text-lg m-0 mt-2">${content.title || 'IT Graduate'}</p>
+                                  <h1 class="text-3xl font-bold m-0 leading-tight">${content.name}</h1>
+                                  <p class="text-blue-200 text-lg m-0 mt-2">${content.title}</p>
                               </div>
                           </div>
                           <div class="grid grid-cols-[3fr_7fr] flex-1">
@@ -765,9 +762,9 @@
                                 <div class="mb-8">
                                     <h2 class="text-blue-700 font-bold text-base mb-2">Contact</h2>
                                     <hr class="border border-blue-700 mb-2" />
-                                    <p>📞 ${content.phone || '123-456-7890'}</p>
-                                    <p>✉️ ${content.email || 'john@email.com'}</p>
-                                    <p>📍 ${content.address || '123 Main St, City'}</p>
+                                    <p>📞 ${content.phone}</p>
+                                    <p>✉️ ${content.email}</p>
+                                    <p>📍 ${content.address}</p>
                                 </div>
                                 <div class="mb-8">
                                     <h2 class="text-blue-700 font-bold text-base mb-2">Skills</h2>
@@ -786,7 +783,7 @@
                                 <div class="mb-8">
                                     <h2 class="text-blue-700 font-bold text-lg mb-2">About Me</h2>
                                     <hr class="border border-blue-700 mb-2" />
-                                    <p class="text-xs">${content.summary || 'Motivated IT graduate with a passion for software development...'}</p>
+                                    <p class="text-xs">${content.summary}</p>
                                 </div>
                                 <div class="mb-8">
                                     <h2 class="text-blue-700 font-bold text-lg mb-2">Work Experience</h2>
@@ -823,9 +820,9 @@
                               <div>
                                   <h2 class="text-lg font-bold mb-2">Contact</h2>
                                   <hr class="border-t-2 border-slate-500 mb-2" />
-                                  <p class="text-gray-300">📞 ${content.phone || '123-456-7890'}</p>
-                                  <p class="text-gray-300">✉️ ${content.email || 'example@email.com'}</p>
-                                  <p class="text-gray-300">📍 ${content.address || '123 Main Street, City'}</p>
+                                  <p class="text-gray-300">📞 ${content.phone}</p>
+                                  <p class="text-gray-300">✉️ ${content.email}</p>
+                                  <p class="text-gray-300">📍 ${content.address}</p>
                               </div>
 
                               <!-- Skills -->
@@ -850,8 +847,8 @@
                               <!-- Header -->
                               <div class="text-center">
                                   <br>
-                                  <h1 class="text-3xl font-bold text-slate-800">${content.name || 'Your Name'}</h1>
-                                  <p class="text-lg text-gray-600">${content.title || 'IT Graduate'}</p>
+                                  <h1 class="text-3xl font-bold text-slate-800">${content.name}</h1>
+                                  <p class="text-lg text-gray-600">${content.titl}</p>
                               </div>
 
                               <!-- About Section -->
@@ -896,9 +893,9 @@
                                   <!-- Contact -->
                                   <div class="w-full">
                                       <h3 class="font-bold text-gray-700 mb-3">CONTACT</h3>
-                                      <p class="flex items-center gap-2 text-sm"><span>📞</span> ${content.phone || '+123-456-7890'}</p>
-                                      <p class="flex items-center gap-2 text-sm"><span>✉️</span> ${content.email || 'email@example.com'}</p>
-                                      <p class="flex items-center gap-2 text-sm"><span>📍</span> ${content.address || '123 Anywhere St., Any City'}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>📞</span> ${content.phone}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>✉️</span> ${content.email}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>📍</span> ${content.address}</p>
                                   </div>
 
                                   <!-- Education -->
@@ -927,14 +924,14 @@
                                 <!-- Name -->
                                 <div class="border-b border-gray-300 pb-4">
                                     <br>
-                                    <h2 class="text-4xl font-bold tracking-wide">${content.name || 'Your Name'}</h2>
+                                    <h2 class="text-4xl font-bold tracking-wide">${content.name }</h2>
                                     <br>
                                 </div>
 
                                 <!-- About -->
                                 <div>
                                     <h3 class="font-bold text-gray-700 border-b-2 border-gray-400 inline-block pb-1 mb-3">ABOUT</h3>
-                                    <p class="text-sm leading-relaxed text-gray-600">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}</p>
+                                    <p class="text-sm leading-relaxed text-gray-600">${content.summary}</p>
                                 </div>
 
                                 <!-- Experience -->
@@ -970,7 +967,7 @@
                                   <!-- About -->
                                   <div>
                                       <h3 class="text-white font-bold border-b border-white pb-1 mb-3">ABOUT</h3>
-                                      <p class="text-sm text-white">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper at lorem at laoreet.'}</p>
+                                      <p class="text-sm text-white">${content.summary}</p>
                                   </div>
 
                                   <!-- Skills -->
@@ -1000,8 +997,8 @@
                                   <!-- Header -->
                                   <div class="bg-gray-50 p-8">
                                       <br>
-                                      <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
-                                      <h2 class="text-lg text-gray-500 tracking-wide">${content.title || 'IT PROJECT MANAGER'}</h2>
+                                      <h1 class="text-4xl font-bold">${content.name}</h1>
+                                      <h2 class="text-lg text-gray-500 tracking-wide">${content.title}</h2>
                                   </div>
 
                                   <!-- Main Content -->
@@ -1023,9 +1020,9 @@
 
                           <!-- Footer Contact (outside grid) -->
                           <div class="bg-gray-100 p-6 flex justify-around text-sm text-gray-700 flex-shrink-0">
-                              <p>${content.phone || '+123-456-7890'}</p>
-                              <p>${content.email || 'email@example.com'}</p>
-                              <p>${content.address || '123 Anywhere St., Any City'}</p>
+                              <p>${content.phone}</p>
+                              <p>${content.email}</p>
+                              <p>${content.address}</p>
                           </div>
                       </div>`;
                     }
@@ -1067,21 +1064,21 @@
                           <div class="w-[65%] p-7">
                               <!-- Header -->
                               <br>
-                              <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
-                              <p class="text-base text-gray-800 mb-4 pl-12">${content.title || 'IT Professional'}</p>
+                              <h1 class="text-4xl font-bold">${content.name}</h1>
+                              <p class="text-base text-gray-800 mb-4 pl-12">${content.title}</p>
                               <br>
                               <!-- Contact -->
                               <div class="mb-6 space-y-1 pl-12">
-                                  <p>${content.phone || '+123-456-7890'}</p>
-                                  <p>${content.email || 'email@example.com'}</p>
-                                  <p>${content.address || '123 Anywhere St., Any City'}</p>
+                                  <p>${content.phone}</p>
+                                  <p>${content.email}</p>
+                                  <p>${content.address}</p>
                               </div>
                               <hr>
                               <br>
                               <!-- About -->
                               <div class="mb-7">
                                   <h2 class="text-l font-bold border border-black rounded-full py-1.5 px-4 inline-block mb-3">ABOUT</h2>
-                                  <p>${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed lorem nec nulla feugiat aliquet.'}</p>
+                                  <p>${content.summary}</p>
                               </div>
 
                               <!-- Experience -->
@@ -1107,9 +1104,9 @@
                               <div>
                                   <h1 class="text-4xl font-bold leading-none">${content.name || 'Your Name'}</h1>
                                   <div class="mt-4 text-sm text-gray-600">
-                                      <p>${content.phone || '+123-456-7890'}</p>
-                                      <p>${content.email || 'email@example.com'}</p>
-                                      <p>${content.address || '123 Anywhere St., Any City'}</p>
+                                      <p>${content.phone}</p>
+                                      <p>${content.email}</p>
+                                      <p>${content.address}</p>
                                   </div>
                               </div>
                               <div>
@@ -1119,7 +1116,7 @@
 
                           <!-- Professional Title -->
                           <div class="bg-black text-white font-bold text-center py-2 text-lg tracking-widest">
-                              ${content.title || 'IT PROFESSIONAL'}
+                              ${content.title}
                           </div>
 
                           <!-- Main Content -->
@@ -1148,7 +1145,7 @@
                               <!-- Right Column -->
                               <div class="w-[40%] bg-white px-10 py-6">
                                   <!-- Summary -->
-                                  <p class="text-sm text-gray-700 mb-6">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
+                                  <p class="text-sm text-gray-700 mb-6">${content.summary}</p>
 
                                   <!-- Skills -->
                                   <div class="mb-6">
@@ -1175,8 +1172,8 @@
                               <img src="${content.profileImage}" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
                               <div class="relative -ml-8 w-full">
                                   <div class="bg-slate-700 text-white pl-16 py-4 clip-path-diagonal">
-                                      <h1 class="text-4xl font-serif font-bold">${content.name || 'Your Name'}</h1>
-                                      <p class="text-sm font-semibold tracking-wide">${content.title || 'IT PROFESSIONAL'}</p>
+                                      <h1 class="text-4xl font-serif font-bold">${content.name}</h1>
+                                      <p class="text-sm font-semibold tracking-wide">${content.title}</p>
                                   </div>
                               </div>
                           </div>
@@ -1188,7 +1185,7 @@
                                   <!-- About -->
                                   <div>
                                       <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">ABOUT</div>
-                                      <p class="text-sm">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree'}</p>
+                                      <p class="text-sm">${content.summary}</p>
                                   </div>
 
                                   <!-- Education -->
@@ -1227,9 +1224,7 @@
                                   <div>
                                       <div class="font-bold mb-4 text-base">SKILLS</div>
                                       <ul class="list-disc list-inside space-y-2 text-sm">
-                                          <li>Proficient in coding languages</li>
-                                          <li>Strong logical approach to problem-solving</li>
-                                          <li>High attention to detail</li>
+                                          ${renderSkills(content.skills)}
                                       </ul>
                                   </div>
                               </div>
@@ -1242,8 +1237,8 @@
                           <!-- Left Column -->
                           <div class="w-1/2 p-8 bg-white border-r-2 border-gray-300">
                               <div class="mb-8">
-                                  <h1 class="text-3xl font-bold text-[#000] mb-1">${content.name || 'Your Name'}</h1>
-                                  <p class="text-gray-500 text-lg mb-6">${content.title || 'IT Professional'}</p>
+                                  <h1 class="text-3xl font-bold text-[#000] mb-1">${content.name}</h1>
+                                  <p class="text-gray-500 text-lg mb-6">${content.title}</p>
                               </div>
 
                               <div class="mb-8">
@@ -1277,14 +1272,14 @@
 
                               <div class="mb-8">
                                   <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">Contact</h2>
-                                  <p class="mb-1">Phone: ${content.phone || '+123-456-7890'}</p>
-                                  <p class="mb-1">Email: ${content.email || 'email@example.com'}</p>
-                                  <p>Location: ${content.address || 'Your City'}</p>
+                                  <p class="mb-1">Phone: ${content.phone}</p>
+                                  <p class="mb-1">Email: ${content.email}</p>
+                                  <p>Location: ${content.address}</p>
                               </div>
 
                               <div class="mb-8">
                                   <h2 class="text-xl uppercase border-b-2 border-[#582b2a] pb-2 mb-4">About</h2>
-                                  <p>${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec quam vitae libero.'}</p>
+                                  <p>${content.summary}</p>
                               </div>
 
                               <div>
@@ -1315,9 +1310,9 @@
                               <div class="text-center">
                                   <h2 class="text-white text-lg font-bold mb-2 tracking-wide">CONTACT</h2>
                                   <div class="space-y-4 text-sm">
-                                      <p>📞 ${content.phone || '+123-456-7890'}</p>
-                                      <p>✉️ ${content.email || 'email@example.com'}</p>
-                                      <p>📍 ${content.address || '123 Anywhere St., Any City'}</p>
+                                      <p>📞 ${content.phone}</p>
+                                      <p>✉️ ${content.email}</p>
+                                      <p>📍 ${content.address}</p>
                                   </div>
                               </div>
                           </div>
@@ -1328,7 +1323,7 @@
                               <div class="relative mb-10">
                                   <div class="bg-[#8E735B] h-28 flex items-center pl-4">
                                       <h1 class="text-2xl tracking-wide text-white">
-                                          <span class="block font-bold justify-center">${content.name || 'Your Name'}</span>
+                                          <span class="block font-bold justify-center">${content.name}</span>
                                       </h1>     
                                   </div>
                               </div>
@@ -1349,7 +1344,7 @@
                                       <h2 class="uppercase text-sm font-semibold tracking-wide">About</h2>
                                   </div>
                                   <div class="border-t border-[#F7F2EA] pt-4 text-sm">
-                                      <p>${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                                      <p>${content.summary}</p>
                                   </div>
                               </div>
 
@@ -1381,9 +1376,9 @@
                                       Contact
                                   </h2>
                                   <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
-                                      <p>${content.phone || '+123-456-7890'}</p>
-                                      <p>${content.email || 'email@example.com'}</p>
-                                      <p>${content.address || '123 Anywhere St., Any City'}</p>
+                                      <p>${content.phone}</p>
+                                      <p>${content.email}</p>
+                                      <p>${content.address}</p>
                                   </div>
                               </div>
 
@@ -1406,6 +1401,16 @@
                                       <ul class="list-disc list-inside">${renderSkills(content.skills)}</ul>
                                   </div>
                               </div>
+
+                               <div>
+                                  <h2 class="text-lg font-bold flex items-center gap-2">
+                                      <span class="w-3 h-3 bg-gray-700 rounded-full inline-block"></span>
+                                      Languages
+                                  </h2>
+                                  <div class="mt-2 space-y-2 border-l-2 border-gray-600 pl-4 text-sm">
+                                      <ul class="list-disc list-inside">${generateLanguagesList(content.languages)}</ul>
+                                  </div>
+                              </div>
                           </div>
 
                           <!-- Right Column -->
@@ -1413,14 +1418,14 @@
                               <!-- Header -->
                               <br>
                               <div class="text-left">
-                                  <h1 class="text-4xl font-bold leading-none">${content.name || 'Your Name'}</h1>
+                                  <h1 class="text-4xl font-bold leading-none">${content.name}</h1>
                                   <p class="text-sm text-gray-600">Accountant</p>
                               </div>
                               <br>
                               <!-- About -->
                               <div class="bg-blue-100 p-6 rounded shadow">
                                   <h2 class="text-lg font-bold border-b border-gray-400 mb-2">ABOUT</h2>
-                                  <p class="text-sm text-gray-800">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                                  <p class="text-sm text-gray-800">${content.summary}</p>
                               </div>
 
                               <!-- Experience -->
@@ -1443,9 +1448,9 @@
 
                               <!-- Right: Name, Title, About -->
                               <div class="col-span-2">
-                                  <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
+                                  <h1 class="text-4xl font-bold">${content.name}</h1>
                                   <p class="text-lg text-gray-300 mb-2">Accountant</p>
-                                  <p class="text-sm text-gray-200">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                                  <p class="text-sm text-gray-200">${content.summary}</p>
                               </div>
                           </div>
 
@@ -1495,7 +1500,7 @@
 
                               <!-- Name and Title -->
                               <div class="text-center mt-4">
-                                  <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
+                                  <h1 class="text-2xl font-bold">${content.name}</h1>
                                   <p class="text-sm text-gray-700">Accountant</p>
                               </div>
 
@@ -1505,7 +1510,7 @@
                                       <div class="bg-black text-white text-sm px-3 py-1 rounded-full font-semibold">About</div>
                                       <hr class="flex-grow border-t border-gray-400" />
                                   </div>
-                                  <p class="text-sm text-gray-800">${content.summary || 'I am a graduate of a prestigious Accounting School. I quickly adapt to new technologies and apply them to ensure accuracy in calculations.'}</p>
+                                  <p class="text-sm text-gray-800">${content.summary}</p>
                               </div>
 
                               <!-- Skills -->
@@ -1558,7 +1563,7 @@
                               <div class="w-32 h-32 rounded-full overflow-visible border-4 border-black">
                                   <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
                               </div>
-                              <h1 class="text-2xl font-bold uppercase text-black">${content.name || 'Your Name'}</h1>
+                              <h1 class="text-2xl font-bold uppercase text-black">${content.name}</h1>
                           </div>
 
                           <!-- Job Title Bar -->
@@ -1602,9 +1607,9 @@
                           <div class="flex w-full">
                               <div class="w-1/2 bg-blue-100 px-10 pt-10">
                                   <br><br>
-                                  <h2 class="text-3xl font-semibold text-gray-800">${content.name || 'Your Name'}</h2>
+                                  <h2 class="text-3xl font-semibold text-gray-800">${content.name}</h2>
                                   <hr />
-                                  <p class="uppercase tracking-widest mt-1 pt-2 w-fit">${content.title || 'Accountant'}</p>
+                                  <p class="uppercase tracking-widest mt-1 pt-2 w-fit">${content.title}</p>
                               </div>
                               <div class="w-1/2 bg-gray-800 flex items-center justify-center p-10">
                                   <img src="${content.profileImage}" class="rounded-full w-40 h-40 border-4 border-white object-cover shadow-lg" alt="Profile" />
@@ -1618,16 +1623,16 @@
                                   <!-- About Me -->
                                   <div>
                                       <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">About Me:</div>
-                                      <p class="text-sm text-gray-800">${content.summary || 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, quam.'}</p>
+                                      <p class="text-sm text-gray-800">${content.summary}</p>
                                   </div>
 
                                   <!-- Contact -->
                                   <div>
                                       <div class="bg-black text-white px-4 py-1 rounded-full font-semibold inline-block mb-2">Contact:</div>
                                       <ul class="text-sm space-y-1">
-                                          <li>${content.phone || '+123-456-7890'}</li>
-                                          <li>${content.email || 'email@example.com'}</li>
-                                          <li>${content.address || '123 Anywhere St., Any City'}</li>
+                                          <li>${content.phone}</li>
+                                          <li>${content.email}</li>
+                                          <li>${content.address}</li>
                                       </ul>
                                   </div>
 
@@ -1673,15 +1678,15 @@
                                       <div class="mt-2 text-sm space-y-2">
                                           <div>
                                               <p class="font-semibold">Phone</p>
-                                              <p>${content.phone || '+123-456-7890'}</p>
+                                              <p>${content.phone}</p>
                                           </div>
                                           <div>
                                               <p class="font-semibold">Email</p>
-                                              <p>${content.email || 'email@example.com'}</p>
+                                              <p>${content.email}</p>
                                           </div>
                                           <div>
                                               <p class="font-semibold">Address</p>
-                                              <p>${content.address || '1234 Anywhere St., Any City'}</p>
+                                              <p>${content.address}</p>
                                           </div>
                                       </div>
                                   </div>
@@ -1703,15 +1708,15 @@
                               <div class="w-[65%] bg-white px-10 py-10 space-y-8">
                                   <!-- Header -->
                                   <div>
-                                      <h1 class="text-3xl font-extrabold leading-none">${content.name || 'Your Name'}</h1>
-                                      <p class="uppercase tracking-widest text-sm mt-1">${content.title || 'Accountant'}</p>
+                                      <h1 class="text-3xl font-extrabold leading-none">${content.name}</h1>
+                                      <p class="uppercase tracking-widest text-sm mt-1">${content.title}</p>
                                   </div>
 
                                   <!-- About -->
                                   <div>
                                       <h2 class="text-xl font-extrabold tracking-wide mb-2">ABOUT</h2>
                                       <hr class="border-black mb-2" />
-                                      <p class="text-sm leading-relaxed">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.'}</p>
+                                      <p class="text-sm leading-relaxed">${content.summary}</p>
                                   </div>
 
                                   <!-- Experience -->
@@ -1728,8 +1733,8 @@
                               <!-- Header -->
                               <div class="text-center border-b border-black pb-4">
                                   <img src="${content.profileImage}" class="w-32 h-32 rounded object-cover mx-auto mt-4 border" alt="Profile">
-                                  <h1 class="text-4xl font-bold mt-2">${content.name || 'Your Name'}</h1>
-                                  <p class="uppercase tracking-widest text-sm">${content.title || 'Accountant'}</p>
+                                  <h1 class="text-4xl font-bold mt-2">${content.name}</h1>
+                                  <p class="uppercase tracking-widest text-sm">${content.title}</p>
                               </div>
 
                               <!-- Main Section -->
@@ -1742,9 +1747,9 @@
                                               <h2 class="text-white font-bold text-lg tracking-wide">Contact</h2>
                                           </div>
                                           <ul class="mt-4 space-y-3 text-sm">
-                                              <li class="flex items-start gap-2"><span class="text-lg">☎️</span> <div><span class="font-semibold">Phone</span><br>${content.phone || '09123456789'}</div></li>
-                                              <li class="flex items-start gap-2"><span class="text-lg">🌐</span> <div><span class="font-semibold">Email</span><br>${content.email || 'email@example.com'}</div></li>
-                                              <li class="flex items-start gap-2"><span class="text-lg">📍</span> <div><span class="font-semibold">Address</span><br>${content.address || '123 Anywhere St., Any City'}</div></li>
+                                              <li class="flex items-start gap-2"><span class="text-lg">☎️</span> <div><span class="font-semibold">Phone</span><br>${content.phone}</div></li>
+                                              <li class="flex items-start gap-2"><span class="text-lg">🌐</span> <div><span class="font-semibold">Email</span><br>${content.email}</div></li>
+                                              <li class="flex items-start gap-2"><span class="text-lg">📍</span> <div><span class="font-semibold">Address</span><br>${content.address}</div></li>
                                           </ul>
                                       </div>
 
@@ -1768,7 +1773,7 @@
                                           <div class="bg-black border-t-4 border-white px-4 py-1">
                                               <h2 class="text-white font-bold text-lg tracking-wide">About</h2>
                                           </div>
-                                          <p class="mt-4 text-sm leading-relaxed">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum. In elementum elit at dui tristique.'}</p>
+                                          <p class="mt-4 text-sm leading-relaxed">${content.summary}</p>
                                       </div>
 
                                       <!-- Experience Section -->
@@ -1791,7 +1796,7 @@
                                       <img src="${content.profileImage}" alt="Profile" class="w-full rounded shadow-md" />
                                   </div>
                                   <div class="w-2/3 px-6 border-t-2 border-b-2 border-black py-4">
-                                      <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
+                                      <h1 class="text-4xl font-bold">${content.name}</h1>
                                       <p class="uppercase text-sm tracking-widest">Accountant</p>
                                   </div>
                               </div>
@@ -1803,7 +1808,7 @@
                                       <!-- About -->
                                       <div>
                                           <h2 class="text-xl font-bold border-b-2 border-black mb-4">ABOUT</h2>
-                                          <p class="text-sm leading-relaxed">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor.'}</p>
+                                          <p class="text-sm leading-relaxed">${content.summary}</p>
                                       </div>
 
                                       <!-- EDUCATION -->
@@ -1814,25 +1819,9 @@
 
                                       <!-- Skills -->
                                       <div>
-                                          <h2 class="text-xl font-bold border-b-2 border-black mb-4">SKILLS</h2>
-                                          <div class="mb-3">
-                                              <p class="text-sm">Accounting Financial</p>
-                                              <div class="w-full bg-gray-300 h-2 rounded">
-                                                  <div class="bg-blue-500 h-2 rounded" style="width:90%"></div>
-                                              </div>
-                                          </div>
-                                          <div class="mb-3">
-                                              <p class="text-sm">Teamwork</p>
-                                              <div class="w-full bg-gray-300 h-2 rounded">
-                                                  <div class="bg-blue-500 h-2 rounded" style="width:80%"></div>
-                                              </div>
-                                          </div>
-                                          <div>
-                                              <p class="text-sm">Communication</p>
-                                              <div class="w-full bg-gray-300 h-2 rounded">
-                                                  <div class="bg-blue-500 h-2 rounded" style="width:77%"></div>
-                                              </div>
-                                          </div>
+                                        <h2 class="text-xl font-bold border-b-2 border-black mb-4">SKILLS</h2>
+                                        
+                                        <ul class="list-disc list-inside mt-4 space-y-2 text-sm">${renderSkills(content.skills)}</ul>
                                       </div>
                                   </div>
 
@@ -1847,9 +1836,9 @@
                                       <!-- Contact -->
                                       <div>
                                           <h2 class="text-xl font-bold border-b-2 border-black mb-4">CONTACT</h2>
-                                          <p class="text-sm">${content.phone || '+123-456-7890'}</p>
-                                          <p class="text-sm">${content.email || 'email@example.com'}</p>
-                                          <p class="text-sm">${content.address || '123 Anywhere St., Any City'}</p>
+                                          <p class="text-sm">${content.phone}</p>
+                                          <p class="text-sm">${content.email}</p>
+                                          <p class="text-sm">${content.address}</p>
                                       </div>
                                   </div>
                               </div>
@@ -1864,7 +1853,7 @@
                                       <img src="${content.profileImage}" alt="Profile" class="w-full h-auto object-cover p-4" />
                                   </div>
                                   <div class="w-3/4 px-8">
-                                      <h1 class="text-5xl font-bold tracking-wide">${content.name || 'Your Name'}</h1>
+                                      <h1 class="text-5xl font-bold tracking-wide">${content.name}</h1>
                                       <p class="uppercase text-lg tracking-wider mt-2">Accountant</p>
                                   </div>
                               </div>
@@ -1876,7 +1865,7 @@
                                       <!-- About -->
                                       <div>
                                           <h2 class="text-lg font-bold mb-2">ABOUT ME</h2>
-                                          <p class="text-sm leading-relaxed">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, donec hendrerit libero eget est tempor.'}</p>
+                                          <p class="text-sm leading-relaxed">${content.summary}</p>
                                       </div>
 
                                       <!-- Skills -->
@@ -1888,9 +1877,9 @@
                                       <!-- Contact -->
                                       <div>
                                           <h2 class="text-lg font-bold mb-4">CONTACT</h2>
-                                          <p class="text-sm flex items-center gap-2 mb-2">📞 ${content.phone || '+123-456-7890'}</p>
-                                          <p class="text-sm flex items-center gap-2 mb-2">✉️ ${content.email || 'email@example.com'}</p>
-                                          <p class="text-sm flex items-center gap-2">📍 ${content.address || '123 Anywhere St, Any City, ST 12345'}</p>
+                                          <p class="text-sm flex items-center gap-2 mb-2">📞 ${content.phone}</p>
+                                          <p class="text-sm flex items-center gap-2 mb-2">✉️ ${content.email}</p>
+                                          <p class="text-sm flex items-center gap-2">📍 ${content.address}</p>
                                       </div>
                                   </div>
 
@@ -1934,13 +1923,13 @@
                                       <h2 class="w-full text-center bg-gray-700 text-white font-bold px-3 py-2">CONTACT</h2>
                                       <ul class="mt-2 text-sm space-y-2 text-black">
                                           <li class="flex items-center gap-2">
-                                              <span>📞</span> ${content.phone || '+123-456-7890'}
+                                              <span>📞</span> ${content.phone}
                                           </li>
                                           <li class="flex items-center gap-2">
-                                              <span>✉️</span> ${content.email || 'email@example.com'}
+                                              <span>✉️</span> ${content.email}
                                           </li>
                                           <li class="flex items-center gap-2">
-                                              <span>📍</span> ${content.address || '123 Anywhere St., Any City, ST 12345'}
+                                              <span>📍</span> ${content.address}
                                           </li>
                                       </ul>
                                   </div>
@@ -1963,8 +1952,8 @@
                                   <!-- Header -->
                                   <div class="text-center mb-6">
                                       <div class="bg-gray-700 text-white font-bold py-4 text-2xl leading-tight">
-                                          ${content.name || 'Your Name'}
-                                          <div class="text-sm font-normal">${content.title || 'Job Title'}</div>
+                                          ${content.name}
+                                          <div class="text-sm font-normal">${content.title}</div>
                                       </div>
                                   </div>
 
@@ -1996,8 +1985,8 @@
                                   <img src="${content.profileImage}" alt="Profile" class="w-28 h-28 object-cover rounded-full border-4 border-white shadow-md">
                                   <!-- Name and Title -->
                                   <div class="ml-6 text-white">
-                                      <h1 class="text-3xl font-extrabold">${content.name || 'Your Name'}</h1>
-                                      <p class="text-lg font-medium tracking-wide">${content.title || 'Job Title'}</p>
+                                      <h1 class="text-3xl font-extrabold">${content.name}</h1>
+                                      <p class="text-lg font-medium tracking-wide">${content.title}</p>
                                   </div>
                               </div>
 
@@ -2008,9 +1997,9 @@
                                       <div>
                                           <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT</h2>
                                           <hr class="border-t border-gray-400 mb-3">
-                                          <p class="text-sm flex items-center"><span class="mr-2">📞</span> ${content.phone || '+123-456-7890'}</p>
-                                          <p class="text-sm flex items-center"><span class="mr-2">✉️</span> ${content.email || 'email@example.com'}</p>
-                                          <p class="text-sm flex items-center"><span class="mr-2">📍</span> ${content.address || '123 Anywhere St., Any City'}</p>
+                                          <p class="text-sm flex items-center"><span class="mr-2">📞</span> ${content.phone}</p>
+                                          <p class="text-sm flex items-center"><span class="mr-2">✉️</span> ${content.email}</p>
+                                          <p class="text-sm flex items-center"><span class="mr-2">📍</span> ${content.address}</p>
                                       </div>
 
                                       <!-- Education -->
@@ -2034,7 +2023,7 @@
                                       <div>
                                           <h2 class="text-xl font-bold text-blue-900 mb-2">PROFILE</h2>
                                           <hr class="border-t border-blue-900 mb-3">
-                                          <p class="text-sm">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.'}</p>
+                                          <p class="text-sm">${content.summary}</p>
                                       </div>
 
                                       <!-- Work Experience -->
@@ -2077,17 +2066,17 @@
                                   <!-- Title -->
                                   <div class="text-center">
                                       <hr class="border-t border-gray-500 mb-3">
-                                      <h2 class="text-lg font-bold tracking-wide">${content.title || 'Job Title'}</h2>
+                                      <h2 class="text-lg font-bold tracking-wide">${content.title}</h2>
                                       <hr class="border-t border-gray-500 mt-3">
-                                      <p class="text-sm mt-2 text-gray-300">${content.summary || 'Dedicated and results-driven professional passionate about organizational growth and leadership.'}</p>
+                                      <p class="text-sm mt-2 text-gray-300">${content.summary}</p>
                                   </div>
 
                                   <!-- Contact -->
                                   <div>
                                       <h3 class="text-base font-bold border-b border-gray-600 pb-1 mb-3">CONTACT</h3>
-                                      <p class="flex items-center gap-2 text-sm"><span>📞</span> ${content.phone || '+123-456-7890'}</p>
-                                      <p class="flex items-center gap-2 text-sm"><span>📧</span> ${content.email || 'email@example.com'}</p>
-                                      <p class="flex items-center gap-2 text-sm"><span>📍</span> ${content.address || '123 Anywhere St, Any City'}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>📞</span> ${content.phone}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>📧</span> ${content.email}</p>
+                                      <p class="flex items-center gap-2 text-sm"><span>📍</span> ${content.address}</p>
                                   </div>
 
                                   <!-- Skills -->
@@ -2107,7 +2096,7 @@
                               <div class="w-2/3 bg-white p-10 space-y-8">
                                   <!-- Header -->
                                   <div class="text-center">
-                                      <h1 class="text-3xl font-bold text-gray-800 tracking-wide">${content.name || 'Your Name'}</h1>
+                                      <h1 class="text-3xl font-bold text-gray-800 tracking-wide">${content.name}</h1>
                                   </div>
                                   <!-- Education -->
                                   <div>
@@ -2137,7 +2126,7 @@
                                       <div class="text-center mb-8">
                                           <h2 class="text-lg font-bold tracking-wide">PROFILE</h2>
                                           <hr class="border-t border-white/60 my-2">
-                                          <p class="text-sm leading-relaxed">${content.summary || 'Business administration student. I consider myself a responsible and orderly person. I am looking forward to my first work experience.'}</p>
+                                          <p class="text-sm leading-relaxed">${content.summary}</p>
                                       </div>
 
                                       <!-- Contact -->
@@ -2145,13 +2134,13 @@
                                           <h2 class="text-lg font-bold tracking-wide mb-2">CONTACT ME</h2>
                                           <hr class="border-t border-white/60 mb-3">
                                           <p class="flex items-center text-sm mb-2">
-                                              <span class="mr-2">📞</span> ${content.phone || '+123-456-7890'}
+                                              <span class="mr-2">📞</span> ${content.phone}
                                           </p>
                                           <p class="flex items-center text-sm mb-2">
-                                              <span class="mr-2">✉️</span> ${content.email || 'email@example.com'}
+                                              <span class="mr-2">✉️</span> ${content.email}
                                           </p>
                                           <p class="flex items-center text-sm">
-                                              <span class="mr-2">📍</span> ${content.address || '123 Anywhere St., Any City'}
+                                              <span class="mr-2">📍</span> ${content.address}
                                           </p>
                                       </div>
                                   </div>
@@ -2160,8 +2149,8 @@
                                   <div class="col-span-2 bg-gray-50 p-8">
                                       <!-- Header -->
                                       <div class="text-center mb-8">
-                                          <h1 class="text-2xl font-bold text-gray-800 tracking-wide">${content.name || 'Your Name'}</h1>
-                                          <p class="text-lg italic text-gray-600">${content.title || 'Job Title'}</p>
+                                          <h1 class="text-2xl font-bold text-gray-800 tracking-wide">${content.name}</h1>
+                                          <p class="text-lg italic text-gray-600">${content.title}</p>
                                           <hr class="border-t-2 border-[#20B2AA] mt-4">
                                       </div>
 
@@ -2203,10 +2192,10 @@
                               <div class="bg-gray-200 p-6 flex items-center space-x-6">
                                   <img src="${content.profileImage}" alt="Profile Photo" class="w-32 h-32 object-cover border border-black" />
                                   <div class="text-sm text-gray-700">
-                                      <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
+                                      <h1 class="text-3xl font-bold">${content.name}</h1>
                                       <p class="text-lg text-gray-700">${content.title || 'Job Title'}</p>
                                       <p>${content.address || '123 Main Street, Cityville'}</p>
-                                      <p>${content.email || 'email@example.com'}</p>
+                                      <p>${content.email}</p>
                                       <p>${content.phone || '+63 912 345 6789'}</p>
                                   </div>
                               </div>
@@ -2217,7 +2206,7 @@
                                   <div class="space-y-6">
                                       <div>
                                           <h2 class="text-lg font-semibold">Profile</h2>
-                                          <p class="text-sm text-gray-700 mt-1">${content.summary || 'Results-driven Mechanical Engineer with over 5 years of experience in designing and optimizing mechanical systems across automotive and industrial applications.'}</p>
+                                          <p class="text-sm text-gray-700 mt-1">${content.summary}</p>
                                       </div>
 
                                       <hr class="border-gray-300" />
@@ -2264,13 +2253,13 @@
                                   <!-- Profile -->
                                   <div class="flex flex-col items-center text-center">
                                       <img src="${content.profileImage}" class="border-2 border-black w-32 h-32 object-cover" alt="Profile image">
-                                      <h1 class="text-2xl font-semibold mt-4">${content.name || 'Your Name'}</h1>
+                                      <h1 class="text-2xl font-semibold mt-4">${content.name}</h1>
                                       <p class="text-gray-500">Business Administration</p>
                                       <h2 class="inline-flex items-center gap-2 border border-gray-400 rounded-full px-4 py-1 text-sm font-semibold mt-4">
                                           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/></svg>
                                           MY PROFILE
                                       </h2>
-                                      <p class="mt-2 text-sm text-gray-700">${content.summary || 'My name is John Doe, I am a business owner age, I worked with several well-known fashion brands. Several famous artists have used my work.'}</p>
+                                      <p class="mt-2 text-sm text-gray-700">${content.summary}</p>
                                   </div>
 
                                   <!-- Education -->
@@ -2320,9 +2309,9 @@
                                               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 8l10 6 10-6"/></svg>
                                               CONTACT
                                           </h2>
-                                          <p class="text-sm">${content.phone || '+123-456-7890'}</p>
-                                          <p class="text-sm">${content.email || 'email@example.com'}</p>
-                                          <p class="text-sm">${content.address || '123 Anywhere Street., Any City'}</p>
+                                          <p class="text-sm">${content.phone}</p>
+                                          <p class="text-sm">${content.email}</p>
+                                          <p class="text-sm">${content.address}</p>
                                       </div>
                                   </div>
                               </div>
@@ -2335,8 +2324,8 @@
                               <div class="flex justify-center items-center gap-6 px-6 py-6 border-b border-gray-300">
                                   <img src="${content.profileImage}" class="w-40 h-40 object-cover" alt="Profile" />
                                   <div class="text-center">
-                                      <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                      <p class="text-sm text-gray-600">${content.title || 'Job Title'}</p>
+                                      <h1 class="text-3xl font-bold">${content.name}</h1>
+                                      <p class="text-sm text-gray-600">${content.title}</p>
                                   </div>
                               </div>
 
@@ -2350,7 +2339,7 @@
                                       <!-- About -->
                                       <div>
                                           <h2 class="text-sm font-bold uppercase mb-1">About Me</h2>
-                                          <p class="text-sm">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet.'}</p>
+                                          <p class="text-sm">${content.summary}</p>
                                       </div>
 
                                       <!-- Education -->
@@ -2387,9 +2376,9 @@
                                               Contact
                                           </h2>
                                           <div class="text-sm text-gray-700 space-y-1">
-                                              <p>📞 ${content.phone || '+123-456-7890'}</p>
-                                              <p>✉️ ${content.email || 'email@example.com'}</p>
-                                              <p>📍 ${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
+                                              <p>📞 ${content.phone}</p>
+                                              <p>✉️ ${content.email}</p>
+                                              <p>📍 ${content.address}</p>
                                           </div>
                                       </div>
                                   </div>
@@ -2403,8 +2392,8 @@
                               <div class="flex items-center bg-black text-white p-6">
                                   <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-full object-cover mr-6" />
                                   <div>
-                                      <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                      <p class="text-sm">${content.title || 'Job Title'}</p>
+                                      <h1 class="text-3xl font-bold">${content.name}</h1>
+                                      <p class="text-sm">${content.title}</p>
                                   </div>
                               </div>
                           
@@ -2412,7 +2401,7 @@
                               <div class="p-4">
                                   <div class="bg-gray-200 p-4">
                                       <h2 class="text-lg font-bold uppercase mb-2">About Me</h2>
-                                      <p class="text-sm leading-relaxed">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}</p>
+                                      <p class="text-sm leading-relaxed">${content.summary}</p>
                                   </div>
                               </div>
                           
@@ -2460,13 +2449,13 @@
                               <!-- Header Section -->
                               <div class="bg-[#0a2149] text-white text-center py-8 px-4">
                                   <img src="${content.profileImage}" alt="Profile" class="w-40 h-40 mx-auto rounded-full border-4 border-white mb-4">
-                                  <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                  <p class="text-lg">${content.title || 'Job Title'}</p>
+                                  <h1 class="text-3xl font-bold">${content.name}</h1>
+                                  <p class="text-lg">${content.title}</p>
                               </div>
 
                               <!-- Summary -->
                               <div class="text-[#0a2149] px-6 py-4">
-                                  <p class="text-sm text-center text-black">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}</p>
+                                  <p class="text-sm text-center text-black">${content.summary}</p>
                               </div>
 
                               <div class="grid grid-cols-2 gap-6 px-6 py-6">
@@ -2476,9 +2465,9 @@
                                       <div>
                                           <h2 class="text-white text-lg font-bold bg-[#0a2149] px-4 py-2 rounded">Contact</h2>
                                           <ul class="mt-2 space-y-1 text-black text-sm">
-                                              <li>${content.phone || '+123-456-7890'}</li>
-                                              <li>${content.email || 'email@example.com'}</li>
-                                              <li>${content.address || '123 Anywhere St., Any City, ST 12345'}</li>
+                                              <li>${content.phone}</li>
+                                              <li>${content.email}</li>
+                                              <li>${content.address}</li>
                                           </ul>
                                       </div>
 
@@ -2521,8 +2510,8 @@
                                       <img src="${content.profileImage}" alt="Profile Image" class="w-40 h-40 object-cover border-4 border-white" />
 
                                       <div>
-                                          <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                          <p class="text-sm mt-1 tracking-wide uppercase">${content.title || 'Job Title'}</p>
+                                          <h1 class="text-2xl font-bold">${content.name}</h1>
+                                          <p class="text-sm mt-1 tracking-wide uppercase">${content.title}</p>
                                       </div>
                                   </div>
                                   <br>
@@ -2530,15 +2519,15 @@
                                   <!-- Profile Info -->
                                   <div class="text-sm">
                                       <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Profile Info</h2>
-                                      <p class="text-white leading-relaxed">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}</p>
+                                      <p class="text-white leading-relaxed">${content.summary}</p>
                                   </div>
 
                                   <!-- Contact Info -->
                                   <div class="text-sm">
                                       <h2 class="text-lg font-semibold mb-2 text-[#f5e0c8]">Contact</h2>
-                                      <p class="mb-1">${content.phone || '+123-456-7890'}</p>
-                                      <p class="mb-1">${content.email || 'email@example.com'}</p>
-                                      <p>${content.address || '123 Anywhere St., Any City'}</p>
+                                      <p class="mb-1">${content.phone}</p>
+                                      <p class="mb-1">${content.email}</p>
+                                      <p>${content.address}</p>
                                   </div>
                               </div>
 
@@ -2577,8 +2566,8 @@
                             <!-- Header: Name, Title, and Photo -->
                             <div class="flex items-center justify-between px-10 pt-10 mb-8">
                                 <div>
-                                    <h1 class="text-3xl font-semibold text-blue-500">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg text-gray-800">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-semibold text-blue-500">${content.name}</h1>
+                                    <p class="text-lg text-gray-800">${content.title}</p>
                                 </div>
                                 <div>
                                     <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 object-cover border border-black bg-white" />
@@ -2590,9 +2579,9 @@
                                 <!-- Left Column -->
                                 <div class="w-1/2 pr-4">
                                     <div class="space-y-2 text-sm text-gray-700 mb-8">
-                                        <p>📧 ${content.email || 'email@example.com'}</p>
-                                        <p>📍 ${content.address || '123 Anywhere St., Any City'}</p>
-                                        <p>📞 ${content.phone || '+123-456-7890'}</p>
+                                        <p>📧 ${content.email}</p>
+                                        <p>📍 ${content.address}</p>
+                                        <p>📞 ${content.phone}</p>
                                     </div>
 
                                     <div class="mb-8">
@@ -2615,7 +2604,7 @@
                                     <div class="mb-8">
                                         <h2 class="font-bold text-lg mb-2">PROFILE</h2>
                                         <p class="text-sm text-gray-700">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
 
@@ -2646,9 +2635,9 @@
 
                                 <!-- Name & Title -->
                                 <div class="flex flex-col justify-center">
-                                    <h1 class="text-3xl font-bold text-[#2A7F8E]">${content.name || 'Your Name'}</h1>
+                                    <h1 class="text-3xl font-bold text-[#2A7F8E]">${content.name}</h1>
                                     <hr class="border-t-4 border-[#2A7F8E] w-140 my-2" />
-                                    <p class="text-lg font-semibold text-[#2A7F8E]">${content.title || 'Job Title'}</p>
+                                    <p class="text-lg font-semibold text-[#2A7F8E]">${content.title}</p>
                                 </div>
                             </div>
                             <br />
@@ -2662,9 +2651,9 @@
                                         <h2 class="text-xl font-semibold text-[#2A7F8E]">Contact</h2>
                                         <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
                                         <div class="text-sm space-y-1 pl-2">
-                                            <p>📧 ${content.email || 'email@example.com'}</p>
-                                            <p>📍 ${content.address || '123 Anywhere St., Any City'}</p>
-                                            <p>📞 ${content.phone || '+123-456-7890'}</p>
+                                            <p>📧 ${content.email}</p>
+                                            <p>📍 ${content.address}</p>
+                                            <p>📞 ${content.phone}</p>
                                         </div>
                                     </div>
 
@@ -2694,7 +2683,7 @@
                                         <h2 class="text-xl font-semibold text-[#2A7F8E] mb-2">Profile</h2>
                                         <hr class="border-t-2 border-[#2A7F8E] w-full my-2" />
                                         <p class="text-sm text-gray-800 pl-2">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rutrum maximus mauris sed sodales.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
 
@@ -2731,9 +2720,9 @@
                                 <div>
                                     <h2 class="text-xl font-bold uppercase mb-2">Contact</h2>
                                     <div class="text-sm space-y-2">
-                                        <p>${content.phone || '+123-456-7890'}</p>
-                                        <p>${content.email || 'email@example.com'}</p>
-                                        <p>${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
+                                        <p>${content.phone}</p>
+                                        <p>${content.email}</p>
+                                        <p>${content.address}</p>
                                     </div>
                                 </div>
 
@@ -2760,8 +2749,8 @@
                                 <br>
                                 <div class="text-center">
                                     <br>
-                                    <h1 class="text-3xl font-bold text-[#1C6F6A]">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg font-semibold text-[#1C6F6A] tracking-widest">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold text-[#1C6F6A]">${content.name}</h1>
+                                    <p class="text-lg font-semibold text-[#1C6F6A] tracking-widest">${content.title}</p>
                                     <br>
                                 </div>
 
@@ -2769,7 +2758,7 @@
                                 <div>
                                     <h2 class="text-xl font-bold uppercase text-[#1C6F6A] mb-2">About Me</h2>
                                     <p class="text-sm text-gray-700">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                 </div>
 
@@ -2812,9 +2801,9 @@
                                 
                                 <div class="text-sm space-y-2 text-black" >
                                     <ul class="text-sm list-disc list-inside space-y-1 text-left w-full px-4">
-                                        <li>${content.phone || '+123-456-7890'}</li>
-                                        <li>${content.email || 'email@example.com'}</li>
-                                        <li>${content.address || '123 Anywhere St., Any City'}</li>
+                                        <li>${content.phone}</li>
+                                        <li>${content.email}</li>
+                                        <li>${content.address}</li>
                                     </ul>
                                 </div>
 
@@ -2840,14 +2829,14 @@
                                 <br>
                                 <!-- Name & Title -->
                                 <div>
-                                    <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-xl font-semibold text-gray-700 tracking-wide">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold">${content.name}</h1>
+                                    <p class="text-xl font-semibold text-gray-700 tracking-wide">${content.title}</p>
                                 </div>
 
                                 <!-- About Me -->
                                 <div>
                                     <p class="text-sm text-gray-800 leading-relaxed">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                 </div>
 
@@ -2880,8 +2869,8 @@
                             <div class="bg-[#2b608a] px-8 py-6 flex items-center text-white">
                                 <div class="w-1/3"></div>
                                 <div class="w-1/2 flex flex-col items-center justify-center text-center">
-                                    <h1 class="text-4xl font-bold uppercase">${content.name || 'Your Name'}</h1>
-                                    <p class="text-sm">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-4xl font-bold uppercase">${content.name}</h1>
+                                    <p class="text-sm">${content.title}</p>
                                 </div>
                                 <div class="w-1/3 flex justify-center">
                                     <div class="w-32 h-32 rounded-full border-4 border-white overflow-visible">
@@ -2892,9 +2881,9 @@
 
                             <!-- CONTACT STRIP -->
                             <div class="bg-[#142a4e] text-white text-sm flex flex-wrap justify-center gap-6 px-4 py-3">
-                                <div class="flex items-center gap-2"><span>📞</span> ${content.phone || '+123-456-7890'}</div>
-                                <div class="flex items-center gap-2"><span>✉️</span> ${content.email || 'email@example.com'}</div>
-                                <div class="flex items-center gap-2"><span>📍</span> ${content.address || '123 Anywhere St., Any City, ST 12345'}</div>
+                                <div class="flex items-center gap-2"><span>📞</span> ${content.phone}</div>
+                                <div class="flex items-center gap-2"><span>✉️</span> ${content.email}</div>
+                                <div class="flex items-center gap-2"><span>📍</span> ${content.address}</div>
                             </div>
 
                             <!-- MAIN CONTENT -->
@@ -2905,7 +2894,7 @@
                                     <div>
                                         <div class="bg-white text-[#2b608a] font-bold px-6 py-2 rounded-full w-max mb-2">ABOUT ME</div>
                                         <p class="text-sm leading-relaxed">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
 
@@ -2962,8 +2951,8 @@
                                 </div>
                                 <!-- Name and Title -->
                                 <div class="ml-6">
-                                    <h1 class="text-4xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg tracking-wide">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-4xl font-bold">${content.name}</h1>
+                                    <p class="text-lg tracking-wide">${content.title}</p>
                                 </div>
                             </div>
 
@@ -2979,9 +2968,9 @@
 
                                     <!-- Contact -->
                                     <h2 class="text-lg font-bold border-b-2 border-black mb-4">CONTACT</h2>
-                                    <p class="flex items-center mb-2"><span class="mr-2">📞</span> ${content.phone || '+123-456-7890'}</p>
-                                    <p class="flex items-center mb-2"><span class="mr-2">✉️</span> ${content.email || 'email@example.com'}</p>
-                                    <p class="flex items-center"><span class="mr-2">📍</span> ${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
+                                    <p class="flex items-center mb-2"><span class="mr-2">📞</span> ${content.phone}</p>
+                                    <p class="flex items-center mb-2"><span class="mr-2">✉️</span> ${content.email}</p>
+                                    <p class="flex items-center"><span class="mr-2">📍</span> ${content.address}</p>
 
                                     <!-- Skills -->
                                     <h2 class="text-lg font-bold border-b-2 border-black mt-6 mb-4">SKILLS</h2>
@@ -2995,7 +2984,7 @@
                                     <!-- About -->
                                     <h2 class="text-lg font-bold border-b-2 border-black mb-4">ABOUT</h2>
                                     <p class="text-sm mb-6">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
 
                                     <!-- Experience -->
@@ -3022,8 +3011,8 @@
                                     <div class="border-b-4 border-black mt-6 mx-10"></div>
                                     <br>
                                     <img src="${content.profileImage}" alt="Profile" class="w-28 h-28 mx-auto rounded-full border border-black" />
-                                    <h1 class="text-3xl font-bold mt-4">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg font-light tracking-wide">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold mt-4">${content.name}</h1>
+                                    <p class="text-lg font-light tracking-wide">${content.title}</p>
                                     <div class="border-b-4 border-black mt-6 mx-10"></div>
                                 </div>
                             </div>
@@ -3036,7 +3025,7 @@
                                     <div>
                                         <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">About Me</h2>
                                         <p class="text-sm leading-relaxed">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
 
@@ -3044,9 +3033,9 @@
                                     <div>
                                         <h2 class="uppercase text-lg font-semibold border-b-4 border-black inline-block mb-2">Contact</h2>
                                         <ul class="text-sm space-y-1">
-                                            <li class="flex items-center gap-2">📧 ${content.email || 'email@example.com'}</li>
-                                            <li class="flex items-center gap-2">📞 ${content.phone || '+123-456-7890'}</li>
-                                            <li class="flex items-center gap-2">📍 ${content.address || '123 Anywhere St., Any City, ST 12345'}</li>
+                                            <li class="flex items-center gap-2">📧 ${content.email}</li>
+                                            <li class="flex items-center gap-2">📞 ${content.phone}</li>
+                                            <li class="flex items-center gap-2">📍 ${content.address}</li>
                                             <li class="flex items-center gap-2">🌐 ${content.website || 'www.reallygreatsite.com'}</li>
                                         </ul>
                                     </div>
@@ -3119,9 +3108,9 @@
                                 <div class="w-full mt-8">
                                     <h2 class="text-purple-500 text-lg font-semibold mb-2">Contact</h2>
                                     <p class="text-xs font-bold mt-2 uppercase">Address</p>
-                                    <p class="text-sm">${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
+                                    <p class="text-sm">${content.address}</p>
                                     <p class="text-xs font-bold mt-2 uppercase">Email</p>
-                                    <p class="text-sm">${content.email || 'email@example.com'}</p>
+                                    <p class="text-sm">${content.email}</p>
                                     <p class="text-xs font-bold mt-2 uppercase">Website</p>
                                     <p class="text-sm">${content.website || 'www.reallygreatsite.com'}</p>
                                 </div>
@@ -3132,8 +3121,8 @@
                                 <!-- Name & Title -->
                                 <div class="text-right">
                                     <br>
-                                    <h1 class="text-3xl font-bold text-purple-600">${content.name || 'Your Name'}</h1>
-                                    <p class="uppercase tracking-wider text-sm font-semibold text-gray-700">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold text-purple-600">${content.name}</h1>
+                                    <p class="uppercase tracking-wider text-sm font-semibold text-gray-700">${content.title}</p>
                                     <br>
                                 </div>
 
@@ -3143,7 +3132,7 @@
                                 <div class="mb-6">
                                     <h2 class="text-purple-500 text-lg font-semibold mb-2">Profile</h2>
                                     <p class="text-sm text-gray-800">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                 </div>
 
@@ -3178,8 +3167,8 @@
                             <!-- Header -->
                             <div class="flex bg-blue-900 text-white p-6">
                                 <div class="w-2/3">
-                                    <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold">${content.name}</h1>
+                                    <p class="text-lg">${content.title}</p>
                                 </div>
                                 <div class="w-1/3">
                                     <img src="${content.profileImage}" alt="Profile" class="w-28 h-28 object-cover  mx-auto" />
@@ -3190,15 +3179,15 @@
                             <div class="flex items-center justify-between bg-blue-200 text-blue-900 px-6 py-4 text-sm">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21 8V7l-3 2-2-1-1 2 3 2v-1l3-2z"></path></svg>
-                                    <span>${content.email || 'email@example.com'}</span>
+                                    <span>${content.email}</span>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27 11.72 11.72 0 003.69.59 1 1 0 011 1v3.61a1 1 0 01-.76.97A17.09 17.09 0 013 5a1 1 0 01.97-.76H7.58a1 1 0 011 1 11.72 11.72 0 00.59 3.69 1 1 0 01-.27 1.11l-2.28 2.28z"></path></svg>
-                                    <span>${content.phone || '+123-456-7890'}</span>
+                                    <span>${content.phone}</span>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z"></path></svg>
-                                    <span>${content.address || '123 Anywhere St., Any City, ST 12345'}</span>
+                                    <span>${content.address}</span>
                                 </div>
                             </div>
 
@@ -3209,7 +3198,7 @@
                                     <!-- About Me -->
                                     <div>
                                         <h2 class="text-blue-900 text-lg font-semibold mb-2">ABOUT ME</h2>
-                                        <p class="text-sm text-gray-800">${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}</p>
+                                        <p class="text-sm text-gray-800">${content.summary}</p>
                                     </div>
 
                                     <!-- Experience -->
@@ -3260,8 +3249,8 @@
                             <!-- Header with Image, Name, Title -->
                             <div class="flex flex-col items-center border border-black py-4 mb-6">
                                 <img src="${content.profileImage}" alt="Profile" class="w-32 h-32 rounded-full object-cover border-2 border-black mb-3">
-                                <h1 class="text-2xl font-bold text-blue-900">${content.name || 'Your Name'}</h1>
-                                <p class="text-sm text-gray-700">${content.title || 'Job Title'}</p>
+                                <h1 class="text-2xl font-bold text-blue-900">${content.name}</h1>
+                                <p class="text-sm text-gray-700">${content.title}</p>
                             </div>
 
                             <!-- Grid Layout: Sidebar and Main Content -->
@@ -3274,9 +3263,9 @@
                                     <!-- Contact -->
                                     <div>
                                         <h2 class="text-white bg-blue-800 px-2 py-1 text-xs font-bold tracking-widest mb-2">CONTACT</h2>
-                                        <p>📞 ${content.phone || '+123-456-7890'}</p>
+                                        <p>📞 ${content.phone}</p>
                                         <p>📍 ${content.address || '1123 Anywhere St., Any City'}</p>
-                                        <p>📧 ${content.email || 'email@example.com'}</p>
+                                        <p>📧 ${content.email}</p>
                                     </div>
                                     <br>
                                     <!-- Skills -->
@@ -3301,7 +3290,7 @@
                                     <!-- Profile Summary -->
                                     <div>
                                         <p class="text-sm text-gray-700 leading-relaxed">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
 
@@ -3336,8 +3325,8 @@
                             <div class="flex items-center gap-4">
                                 <img src="${content.profileImage}" alt="Profile" class="w-20 h-20 object-cover border border-black bg-white">
                                 <div>
-                                    <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-gray-600">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-2xl font-bold">${content.name}</h1>
+                                    <p class="text-gray-600">${content.title}</p>
                                 </div>
                             </div>
 
@@ -3351,7 +3340,7 @@
                                             <span>🧾</span> Profile
                                         </h2>
                                         <p class="text-sm leading-relaxed">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
                                     <!-- Employment History -->
@@ -3374,13 +3363,6 @@
                                             ${renderEducation(content.education)}
                                         </p>
                                     </div>
-
-                                    <!-- Courses -->
-                                    <div>
-                                        <h2 class="text-lg font-semibold flex items-center gap-2 mb-2">
-                                            <span>📚</span> Courses
-                                        </h2>
-                                    </div>
                                 </div>
 
                                 <!-- Right Column -->
@@ -3388,10 +3370,8 @@
                                     <!-- Details -->
                                     <div>
                                         <h3 class="text-lg font-semibold">Details</h3>
-                                        <p class="text-sm">${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
-                                        <p class="text-sm mt-2">${content.phone || '+123-456-7890'}<br><a href="#" class="text-blue-500">${content.email || 'email@example.com'}</a></p>
-                                        <p class="text-sm mt-2">Place of birth: ${content.placeOfBirth || 'San Antonio'}</p>
-                                        <p class="text-sm">Driving license: ${content.drivingLicense || 'Full'}</p>
+                                        <p class="text-sm">${content.address}</p>
+                                        <p class="text-sm mt-2">${content.phone}<br><a href="#" class="text-blue-500">${content.email}</a></p>
                                     </div>
 
                                     <!-- Skills -->
@@ -3406,7 +3386,7 @@
                                     <div>
                                         <h3 class="text-lg font-semibold">Hobbies</h3>
                                         <ul class="text-sm space-y-1">
-                                            ${generateLanguagesList(content.languages)}
+                                            ${generateHobbiesList(content.hobbies)}
                                         </ul>
                                     </div>
 
@@ -3432,11 +3412,11 @@
                                         <img src="${content.profileImage}" alt="Profile" class="w-full h-full object-cover" />
                                     </div>
                                     <div class="ml-6 flex flex-col justify-center">
-                                        <h1 class="text-4xl font-bold text-blue-600">${content.name || 'Your Name'}</h1>
-                                        <h1 class="text-1xl font-bold text-blue-600">${content.title || 'Job Title'}</h1>
+                                        <h1 class="text-4xl font-bold text-blue-600">${content.name}</h1>
+                                        <h1 class="text-1xl font-bold text-blue-600">${content.title}</h1>
                                         <div class="mt-1 text-sm text-gray-700">
-                                            <p>${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
-                                            <p>${content.email || 'email@example.com'} &middot; ${content.phone || '+123-456-7890'}</p>
+                                            <p>${content.address}</p>
+                                            <p>${content.email} &middot; ${content.phone}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -3445,7 +3425,7 @@
                                 <div>
                                     <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Profile</h2>
                                     <p class="text-sm leading-relaxed">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                 </div>
                         
@@ -3488,7 +3468,7 @@
                                 <div>
                                     <h2 class="uppercase font-semibold tracking-wider text-sm text-gray-600 mb-2">Hobbies</h2>
                                     <ul class="list-disc list-inside space-y-1">
-                                        ${generateLanguagesList(content.languages)}
+                                        ${generateHobbiesList(content.hobbies)}
                                     </ul>
                                 </div>
                         
@@ -3514,8 +3494,8 @@
                             
                                 <!-- Right: Name and Title -->
                                 <div class="flex flex-col justify-center w-2/3 px-6">
-                                    <h1 class="text-5xl font-bold text-black">${content.name || 'Your Name'}</h1>
-                                    <p class="text-xl text-black">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-5xl font-bold text-black">${content.name}</h1>
+                                    <p class="text-xl text-black">${content.title}</p>
                                 </div>
                             </div>
                         
@@ -3524,9 +3504,9 @@
                                 <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-3 uppercase">Details</div>
                                 <div class="grid grid-cols-2 gap-4 text-sm">
                                     <div>
-                                        <p>${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
-                                        <p class="text-blue-700">${content.email || 'email@example.com'}</p>
-                                        <p>${content.phone || '+123-456-7890'}</p>
+                                        <p>${content.address}</p>
+                                        <p class="text-blue-700">${content.email}</p>
+                                        <p>${content.phone}</p>
                                         <p class="mt-2"><span class="font-semibold">Place of birth</span><br>${content.placeOfBirth || 'San Antonio'}</p>
                                     </div>
                                 </div>
@@ -3536,7 +3516,7 @@
                             <div class="px-8 pt-4 pb-6">
                                 <div class="bg-black text-white text-xs font-semibold px-2 py-1 inline-block mb-2 uppercase">Profile</div>
                                 <p class="italic text-sm leading-relaxed">
-                                    ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                    ${content.summary}
                                 </p>
                             </div>
                         
@@ -3580,12 +3560,12 @@
                                     <!-- Top row: Name + Title and Email + Phone -->
                                     <div class="flex justify-between items-start">
                                         <div>
-                                            <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                            <p class="text-sm font-medium">${content.title || 'Job Title'}</p>
+                                            <h1 class="text-2xl font-bold">${content.name}</h1>
+                                            <p class="text-sm font-medium">${content.title}</p>
                                         </div>
                                         <div class="text-sm text-right space-y-1">
-                                            <p>${content.email || 'email@example.com'}</p>
-                                            <p>${content.phone || '+123-456-7890'}</p>
+                                            <p>${content.email}</p>
+                                            <p>${content.phone}</p>
                                         </div>
                                     </div>
 
@@ -3594,8 +3574,8 @@
 
                                     <!-- Address details -->
                                     <div class="text-sm space-y-1">
-                                        <p>Place of birth: ${content.placeOfBirth || 'San Antonio'}</p>
-                                        <p>${content.address || '1515 Pacific Ave, Los Angeles, CA 90291, United States'}</p>
+                                        <p>Place of birth: ${content.placeOfBirth}</p>
+                                        <p>${content.address}</p>
                                     </div>
                                 </div>
                             </div>
@@ -3603,7 +3583,7 @@
                             <!-- Summary -->
                             <div>
                                 <p class="italic text-[15px] leading-relaxed">
-                                    ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                    ${content.summary}
                                 </p>
                             </div>
 
@@ -3633,10 +3613,10 @@
                         
                                     <!-- Name and Contact -->
                                     <div>
-                                        <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                        <p class="text-md font-medium mb-2">${content.title || 'Job Title'}</p>
-                                        <p class="text-sm">${content.phone || '+123-456-7890'}</p>
-                                        <p class="text-sm">${content.email || 'email@example.com'}</p>
+                                        <h1 class="text-2xl font-bold">${content.name}</h1>
+                                        <p class="text-md font-medium mb-2">${content.title}</p>
+                                        <p class="text-sm">${content.phone}</p>
+                                        <p class="text-sm">${content.email}</p>
                                     </div>
                                 </div>
                             </div>
@@ -3647,7 +3627,7 @@
                                 <div class="flex">
                                     <!-- Right: Summary -->
                                     <p class="italic text-sm leading-relaxed">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                 </div>
                         
@@ -3684,8 +3664,8 @@
                             <!-- Header -->
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg font-semibold">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold">${content.name}</h1>
+                                    <p class="text-lg font-semibold">${content.title}</p>
                                 </div>
                                 <img src="${content.profileImage}" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
                             </div>
@@ -3697,7 +3677,7 @@
                                 <h2 class="font-semibold mb-1">Summary</h2>
                                 <div class="pl-4 text-sm space-y-1">
                                     <p>
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                     <p>
                                         Extensive knowledge of wine and food pairings with a specialization in French cuisine.
@@ -3747,18 +3727,18 @@
                                     <!-- Name on full-width line -->
                                     <div class="relative">
                                         <hr class="border-t-4 border-[#0BA29C]" />
-                                        <span class="absolute left-0 -top-3 bg-white pr-3 text-xl font-bold text-[#0BA29C]">${content.name || 'Your Name'}</span>
+                                        <span class="absolute left-0 -top-3 bg-white pr-3 text-xl font-bold text-[#0BA29C]">${content.name}</span>
                                     </div>
                                     <br>
-                                    <p class="font-semibold text-sm">${content.title || 'Job Title'}</p>
-                                    <p class="text-sm"><span class="font-bold">Phone:</span> ${content.phone || '+123-456-7890'}</p>
-                                    <p class="text-sm"><span class="font-bold">Address:</span> ${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
-                                    <p class="text-sm"><span class="font-bold">Email:</span> ${content.email || 'email@example.com'}</p>
+                                    <p class="font-semibold text-sm">${content.title}</p>
+                                    <p class="text-sm"><span class="font-bold">Phone:</span> ${content.phone}</p>
+                                    <p class="text-sm"><span class="font-bold">Address:</span> ${content.address}</p>
+                                    <p class="text-sm"><span class="font-bold">Email:</span> ${content.email}</p>
                                 </div>
                             </div>
 
                             <p class="text-sm">
-                                ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                ${content.summary}
                             </p>
 
                             <!-- Experience -->
@@ -3799,12 +3779,12 @@
                             <div class="flex justify-between items-start gap-6">
                                 <!-- Name and Contact Info -->
                                 <div class="space-y-1">
-                                    <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-sm font-medium">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-2xl font-bold">${content.name}</h1>
+                                    <p class="text-sm font-medium">${content.title}</p>
                                     <div class="text-sm space-y-1 mt-2">
-                                        <p><span class="font-bold">Phone:</span> ${content.phone || '+123-456-7890'}</p>
-                                        <p><span class="font-bold">Email:</span> ${content.email || 'email@example.com'}</p>
-                                        <p><span class="font-bold">Address:</span> ${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
+                                        <p><span class="font-bold">Phone:</span> ${content.phone}</p>
+                                        <p><span class="font-bold">Email:</span> ${content.email}</p>
+                                        <p><span class="font-bold">Address:</span> ${content.address}</p>
                                         <p><span class="font-bold">LinkedIn:</span> ${content.linkedin || 'linkedin.com/yourname'}</p>
                                     </div>
                                 </div>
@@ -3832,7 +3812,7 @@
                                     <div>
                                         <h2 class="text-[#008080] text-lg font-bold uppercase border-b-2 border-[#008080] mb-2">Profile</h2>
                                         <p class="text-sm">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
 
@@ -3861,9 +3841,9 @@
                             <!-- Header -->
                             <div class="text-center">
                                 <hr>
-                                <h1 class="text-xl font-bold">${content.name || 'Your Name'}</h1>
-                                <p>${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
-                                <p>• ${content.phone || '+123-456-7890'} • ${content.email || 'email@example.com'}</p>
+                                <h1 class="text-xl font-bold">${content.name}</h1>
+                                <p>${content.address}</p>
+                                <p>• ${content.phone} • ${content.email}</p>
                                 <hr>
                             </div>
 
@@ -3879,7 +3859,7 @@
                                 <div>
                                     <h2 class="font-semibold">OBJECTIVE</h2>
                                     <p class="text-sm">
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
 
                                     <h2 class="font-semibold mt-3">SKILLS</h2>
@@ -3901,24 +3881,6 @@
                                 </div>
                             </div>
 
-                            <!-- Certifications -->
-                            <div>
-                                <hr class="mb-2" />
-                                <h2 class="font-semibold uppercase mb-2">Certifications</h2>
-                                <hr class="mb-4" />
-
-                                <div class="mb-4 text-sm">
-                                    <p><span class="font-semibold">Human Sciences College</span></p>
-                                    <p><em>National Institute for Metalworking Skills Certification</em></p>
-                                    <p>October 2020</p>
-                                </div>
-
-                                <div class="text-sm">
-                                    <p><span class="font-semibold">Forklifter Association of America</span></p>
-                                    <p><em>Certified Forklift Driver</em></p>
-                                    <p>January 2014</p>
-                                </div>
-                            </div>
 
                             <!-- Languages -->
                             <div>
@@ -3937,8 +3899,8 @@
                             <!-- Header -->
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h1 class="text-3xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-lg font-semibold">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-3xl font-bold">${content.name}</h1>
+                                    <p class="text-lg font-semibold">${content.title}</p>
                                 </div>
                                 <img src="${content.profileImage}" alt="Profile Photo" class="w-20 h-20 object-cover rounded-full" />
                             </div>
@@ -3950,7 +3912,7 @@
                                 <h2 class="font-semibold mb-1">Summary</h2>
                                 <div class="pl-4 text-sm space-y-1">
                                     <p>
-                                        ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                        ${content.summary}
                                     </p>
                                 </div>
                             </div>
@@ -3991,8 +3953,8 @@
                             <div class="flex items-center gap-4">
                                 <img src="${content.profileImage}" alt="Profile" class="w-20 h-20 object-cover border border-black bg-white">
                                 <div>
-                                    <h1 class="text-2xl font-bold">${content.name || 'Your Name'}</h1>
-                                    <p class="text-gray-600">${content.title || 'Job Title'}</p>
+                                    <h1 class="text-2xl font-bold">${content.name}</h1>
+                                    <p class="text-gray-600">${content.title}</p>
                                 </div>
                             </div>
 
@@ -4006,7 +3968,7 @@
                                             <span>🧾</span> Profile
                                         </h2>
                                         <p class="text-sm leading-relaxed">
-                                            ${content.summary || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem at laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.'}
+                                            ${content.summary}
                                         </p>
                                     </div>
                                     <!-- Employment History -->
@@ -4043,8 +4005,8 @@
                                     <!-- Details -->
                                     <div>
                                         <h3 class="text-lg font-semibold">Details</h3>
-                                        <p class="text-sm">${content.address || '123 Anywhere St., Any City, ST 12345'}</p>
-                                        <p class="text-sm mt-2">${content.phone || '+123-456-7890'}<br><a href="#" class="text-blue-500">${content.email || 'email@example.com'}</a></p>
+                                        <p class="text-sm">${content.address}</p>
+                                        <p class="text-sm mt-2">${content.phone}<br><a href="#" class="text-blue-500">${content.email}</a></p>
                                         <p class="text-sm mt-2">Place of birth: ${content.placeOfBirth || 'San Antonio'}</p>
                                         <p class="text-sm">Driving license: ${content.drivingLicense || 'Full'}</p>
                                     </div>
@@ -4169,7 +4131,7 @@
                     // Configure PDF options
                     const opt = {
                         margin: [2, 2, 2, 2], 
-                        filename: `${resume.title || 'Resume'}.pdf`,
+                        filename: `${resume.template || 'Resume'}.pdf`,
                         image: { 
                             type: 'jpeg', 
                             quality: 0.95 

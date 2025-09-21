@@ -36,7 +36,14 @@ function validateConfig() {
             templateId: process.env.EMAILJS_TEMPLATE_ID || ''
         },
         removebg: {
-            apiKey: process.env.REMOVEBG_API_KEY || ''
+            apiKeys: [
+                process.env.REMOVEBG_API_KEY || '',
+                process.env.REMOVEBG_API_KEY2 || '',
+                process.env.REMOVEBG_API_KEY3 || '',
+                process.env.REMOVEBG_API_KEY4 || '',
+                process.env.REMOVEBG_API_KEY5 || '',
+                process.env.REMOVEBG_API_KEY6 || ''
+            ]
         },
         jwt: {
             secret: process.env.JWT_SECRET || ''
@@ -48,10 +55,10 @@ function validateConfig() {
             apiKey: process.env.TEXTGEARS_API_KEY || ''
         },
         database: {
-            host: process.env.DB_HOST || 'localhost',
-            user: process.env.DB_USER || 'root',
+            host: process.env.DB_HOST || '',
+            user: process.env.DB_USER || '',
             password: process.env.DB_PASSWORD || '',
-            name: process.env.DB_NAME || 'resume_generator'
+            name: process.env.DB_NAME || ''
         },
         server: {
             port: process.env.PORT || 3000,
