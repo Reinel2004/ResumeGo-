@@ -7708,22 +7708,18 @@
         // Modal functions - updated for new implementation
         function openModal() {
             document.getElementById('profileEditorModal').classList.remove('hidden');
-            // Reset the modal state when opening
+            document.getElementById('previewToggle').style.display = 'none'; // hide preview btn
             if (typeof resetModal === 'function') {
                 resetModal();
             }
         }
 
         function closeModal() {
-            console.log('closeModal function called');
             const modal = document.getElementById('profileEditorModal');
             if (modal) {
                 modal.classList.add('hidden');
-                console.log('Modal hidden');
-            } else {
-                console.error('Modal element not found');
             }
-            // Stop camera if it's running
+            document.getElementById('previewToggle').style.display = 'block'; // show preview btn again
             if (typeof stopCamera === 'function') {
                 stopCamera();
             }
