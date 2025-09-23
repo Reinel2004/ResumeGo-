@@ -577,14 +577,279 @@
                         if (!Array.isArray(education) || !education.length) {
                             return '<div class="mb-4"><p class="font-semibold">Bachelor of Information Technology</p><p class="text-sm">Capas Tarlac</p><p class="text-sm">2022–2025</p></div>';
                         }
-                        return education.map(item => `
-                            <div class="mb-4">
-                                <p class="font-semibold">${item.degree}</p>
-                                <p class="text-sm">${item.school }</p>
-                                <p class="text-sm">${item.year}${item.gpa ? ` | GPA: ${item.gpa}` : ''}</p>
-                                ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                        else if(template === 'it-3'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree}</strong><br>${item.school} • ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'it-4'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree}</strong><br>${item.school} • ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'it-8'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.school} - ${item.degree}</strong> <br> ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'it-9'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree}</strong><br>${item.school} <br> ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'accountant-1'){
+                            return education.map((item, index) => `
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-sm mb-1 font-bold">${item.school}</span>
+                                <span class="text-sm mb-1 font-light">${item.year}</span>
                             </div>
-                        `).join('');
+                            <p class="text-sm mb-1">${item.degree}</p>
+                            ${item.gpa ? `<p class="text-sm mb-1">GPA: ${item.gpa}</p>` : ''}
+                            ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `).join('');
+                        }
+                        else if(template === 'accountant-3'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                   <p class="text-sm"><strong>${item.degree}</strong><br>${item.school} <br> ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'accountant-5'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                   <i class="text-sm"><strong>${item.degree}</strong><br>${item.school} | ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''} : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-1'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                   <p class="text-sm"><strong>${item.degree}</strong> | ${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    <p class="text-sm font-light">${item.school}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-3'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.year}</strong> <br> ${item.school}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    <p class="text-sm font-light">${item.degree}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-4'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree}</strong> <br> ${item.description}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    <p class="text-sm font-light">${item.school} - ${item.year}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-5'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                   <p class="text-sm"><strong>${item.degree}</strong> <br> ${item.school} - ${item.year} ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-6'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.year}</strong> <br> ${item.degree} - ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-7'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.year}</strong> <br> ${item.school} <br> ${item.degree} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-8'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.year}</strong> <br> ${item.school} <br> ${item.degree} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'business-10'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <div class="flex justify-between text-sm font-semibold">
+                                        <span class="text-sm mb-1 font-bold">${item.school}</span>
+                                        <span class="text-sm mb-1 font-light">${item.year}</span>
+                                    </div>
+                                    <p class="text-sm mb-1">${item.degree}</p>
+                                    ${item.gpa ? `<p class="text-sm mb-1">GPA: ${item.gpa}</p>` : ''}
+                                    ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-1'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <div class="flex justify-between text-sm font-semibold">
+                                        <span class="text-sm mb-1 font-bold text-blue-600 font-medium">${item.degree}</span>
+                                        <span class="text-sm mb-1">${item.year}</span>
+                                    </div>
+                                    <p class="text-sm mb-1">${item.school}</p>
+                                    ${item.gpa ? `<p class="text-sm mb-1">GPA: ${item.gpa}</p>` : ''}
+                                    ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-2'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong class="text-[#2A7F8E]">${item.year}</strong> <br> ${item.school} <br> ${item.degree} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-3'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-4'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-5'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-6'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-7'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-8'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-9'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'civil-10'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree} | ${item.year}</strong> <br> ${item.school} <br> ${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'generic-1'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <i class="text-sm"><strong>${item.degree}</strong><br>${item.school}<br>${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'generic-2'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <i class="text-sm"><strong>${item.degree}</strong><br>${item.year}<br>${item.school}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'generic-3'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <i class="text-sm"><strong>${item.degree}</strong><br>${item.year} ${item.school}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'generic-6'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <i class="text-sm"><strong>${item.degree}</strong><br>${item.year} ${item.school}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if (template === 'generic-7') {
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <i class="text-sm"><strong>${item.degree}</strong> ${item.gpa ? `(GPA: ${item.gpa})` : ''}, ${item.school}, ${item.year}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        else if(template === 'generic-8'){
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <i class="text-sm"><strong>${item.degree}</strong>, ${item.school} <br> ${item.year} <br>${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</i>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        } else {
+                            return education.map((item, index) => `
+                                <div class="education-preview-item" style="margin-bottom: ${index < education.length - 1 ? '1rem' : '0'};">
+                                    <p class="text-sm"><strong>${item.degree}</strong><br>${item.school}<br>${item.year}${item.gpa ? `<br>GPA: ${item.gpa}` : ''}</p>
+                                    ${item.description ? `<p class="text-sm mt-1">${item.description}</p>` : ''}
+                                </div>
+                            `).join('');
+                        }
+                        
+                      
                     }
 
                     function renderExperience(experience) {

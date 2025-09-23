@@ -2891,6 +2891,15 @@
                         </div>
                     `;  
                     }
+                     else if(templateId === 'generic-7'){
+                        previewHTML += `
+                        <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
+                            <p class="text-sm font-bold font-medium">${position}<br></p>
+                             ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
+                            <p class="text-sm">${company} to ${dateRange}</p>
+                        </div>
+                    `;  
+                    }
                     else if(templateId === 'generic-8'){
                         previewHTML += `
                         <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
@@ -7556,6 +7565,47 @@
                     if (languagesSection) languagesSection.style.display = '';
                     if (hobbiesSection) hobbiesSection.style.display = '';
                     if (projectsSection) projectsSection.style.display = 'none';
+                    if(templateId === 'generic-3'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = 'none';
+                    }
+                    else if(templateId === 'generic-4'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = 'none';
+                    }
+                    else if(templateId === 'generic-5'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = '';
+                    }
+                    else if(templateId === 'generic-6'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = '';
+                        if (languagesSection) languagesSection.style.display = '';
+                    }
+                    else if(templateId === 'generic-7'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = 'none';
+                    }
+                    else if(templateId === 'generic-8'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = 'none';
+                    }
+                    else if(templateId === 'generic-9'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = '';
+                    }
+                    else if(templateId === 'generic-10'){
+                        if (projectsSection) projectsSection.style.display = 'none';
+                        if (hobbiesSection) hobbiesSection.style.display = 'none';
+                        if (languagesSection) languagesSection.style.display = 'none';
+                    }
+                    
                 }else if(templateId && templateId.startsWith('accountant-')){
                     if (languagesSection) languagesSection.style.display = '';
                     if (hobbiesSection) hobbiesSection.style.display = 'none';
