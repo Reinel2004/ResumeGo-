@@ -352,7 +352,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/config.js"></script>
     <script src="js/auth.js"></script>
-     <script>
+    <script>
         window.addEventListener("load", function () {
             const loader = document.getElementById("loader");
             if (loader) {
@@ -871,18 +871,542 @@
                         if (!Array.isArray(experience) || !experience.length) {
                             return '<div class="mb-6"><p class="font-bold text-sm">2019 - 2022</p><p class="font-semibold">Job position here</p><p class="text-sm mb-2">Company Name | Location</p><p class="text-sm">Lorem ipsum dolor sit amet consectetur adipiscing elit...</p></div>';
                         }
-                        return experience.map(item => {
+                        else if(template === 'it-1'){
+                            return experience.map((item, index) => {
                             const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
-                                             item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
                             return `
                                 <div class="mb-6">
                                     <p class="font-bold text-sm">${dateRange}</p>
-                                    <p class="font-semibold">${item.position || 'Job Title'}</p>
-                                    <p class="text-sm mb-2">${item.company || 'Company Name'}</p>
+                                    <p class="font-semibold">${item.position}</p>
+                                    <p class="text-sm mb-2">${item.company}</p>
                                     ${item.description ? `<p class="text-sm">${item.description}</p>` : ''}
                                 </div>
                             `;
                         }).join('');
+                        }
+                        else if(template === 'it-2'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="mb-6">
+                                    <p class="font-bold text-sm">${item.position}</p>
+                                    <p class="font-semibold">${item.company}</p>
+                                    <p class="text-sm mb-2">${dateRange}</p>
+                                    ${item.description ? `<p class="text-sm">${item.description}</p>` : ''}
+                                </div>
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'it-3'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="mb-6">
+                                    <p class="font-bold text-sm">${item.position}</p>
+                                    <p class="text-sm mb-1">${item.company} • ${dateRange}  </p>
+                                    ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                                </div>
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'it-4'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="mb-6">
+                                    <p class="font-bold text-sm">${item.position}</p>
+                                    <p class="text-sm mb-1">${item.company} • ${dateRange}  </p>
+                                    ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                                </div>
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'it-5'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.company}</span>
+                                    <span>(${dateRange})</span>
+                                </div>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'it-7'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.company}</span>
+                                    <span>(${dateRange})</span>
+                                </div>
+                                <p class="text-sm mb-1 font-bold">${item.position}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''} : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'it-8'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.company}</span>
+                                    <span>(${dateRange})</span>
+                                </div>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'it-10'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm mb-1 font-bold">${item.position}</p>
+                                <p class="text-sm mb-4">${item.company}</p>
+                                <p class="text-sm">${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-1'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.position}</span>
+                                    <span class="text-sm mb-1 font-light">${dateRange}</span>
+                                </div>
+                                <p class="text-sm mb-4">${item.company}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-3'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}</p>
+                                <p class="text-sm mb-1 font-light">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                         else if(template === 'accountant-4'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}</p>
+                                <p class="text-sm mb-1 font-light">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-5'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.company}</span>
+                                    <span class="text-sm mb-1 font-light">${dateRange}</span>
+                                </div>
+                                <p class="text-sm mb-4">${item.position}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-6'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}</p>
+                                <p class="text-sm mb-1 font-bold">${item.company}</p>
+                                <p class="text-sm mb-4">${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-7'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${dateRange}</p>
+                                <p class="text-sm mb-1 font-bold">${item.position}</p>
+                                <p class="text-sm mb-4">${item.company}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-8'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}</p>
+                                <p class="text-sm mb-1 font-bold">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'accountant-8'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.company}</p>
+                                <i class="text-sm mb-1">${item.position} | ${dateRange}</i>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-1'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}</p>
+                                <p class="text-sm mb-1 font-bold">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-2'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.position}</span>
+                                    <span class="text-sm mb-1 font-light">${dateRange}</span>
+                                </div>
+                                <p class="text-sm mb-4">${item.company}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-4'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}</p>
+                                <p class="text-sm mb-1 font-light">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-5'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                 <p class="text-sm font-bold">${item.position} - ${item.company}</p>
+                                <i class="text-sm mb-1 font-light">${dateRange}</i>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-7'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}<br>${item.company}</p>
+                                <i class="text-sm mb-1 font-light">${dateRange}</i>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-8'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}<br></p>
+                                <i class="text-sm mb-1 font-light">${item.company}</i><br>
+                                <i class="text-sm mb-1 font-light">${dateRange}</i>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-9'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}<br>${item.company}</p>
+                                <p class="text-sm mb-1 font-light">${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'business-10'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold">${item.position}<br>${item.company}</p>
+                                <p class="text-sm mb-1 font-light">${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-1'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold text-blue-600 font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company}</p>
+                                <p class="text-sm mb-1 font-light">${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-2'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-3'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-medium">${item.position}<br></p>
+                                <p class="text-sm font-bold">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-4'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-medium">${item.position}<br></p>
+                                <p class="text-sm font-bold">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-5'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-medium">${item.position}<br></p>
+                                <p class="text-sm font-bold">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-6'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position} <span>${dateRange}</span><br></p>
+                                <i class="text-sm">${item.company}</i>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-7'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${dateRange} · <span>${item.position} / ${company}</span><br></p>
+                                <i class="text-sm">${item.company}</i>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-8'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position} <span>${dateRange}</span><br></p>
+                                <p class="text-sm">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-9'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'civil-10'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                               <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} | ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-1'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} - ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-3'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} - ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-4'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                                    <!-- Left side -->
+                                    <div class="experience-left" style="flex: 1;">
+                                        <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                        <p class="text-sm">${item.company} - ${dateRange}</p>
+                                    </div>
+                                    
+                                    <!-- Right side -->
+                                    ${item.description ? `
+                                    <div class="experience-right" style="flex: 1; text-align: left; padding-left: 1rem;">
+                                        <p class="text-sm leading-relaxed">${item.description}</p>
+                                    </div>` : ''}
+                                </div>
+                                
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-5'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} - ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-6'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company} - ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-7'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                               <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                                <p class="text-sm">${item.company} to ${dateRange}</p>
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-8'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.position}</span>
+                                    <span class="text-sm mb-1 font-light">${dateRange}</span>
+                                </div>
+                            <p class="text-sm mb-4">${item.company}</p>
+                            ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-9'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <p class="text-sm font-bold font-medium">${item.position}<br></p>
+                                <p class="text-sm">${item.company}  ${dateRange}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else if(template === 'generic-10'){
+                            return experience.map((item, index) => {
+                            const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                            item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                            return `
+                                <div class="flex justify-between text-sm font-semibold">
+                                    <span class="text-sm mb-1 font-bold">${item.position}</span>
+                                    <span class="text-sm mb-1 font-light">${dateRange}</span>
+                                </div>
+                                <p class="text-sm mb-4 font-semibold">${item.company}</p>
+                                ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                            `;
+                        }).join('');
+                        }
+                        else{
+                            return experience.map((item, index) => {
+                                const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
+                                item.startDate ? `${item.startDate} - Present` : 'Date Range';
+                                return `
+                                    <div class="mb-6">
+                                        <p class="text-sm">${dateRange}</p>
+                                        <p class="text-sm mb-1 font-bold">${item.position}</p>
+                                        <p class="text-sm mb-4">${item.company}</p>
+                                        ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
+                                    </div>
+                                `;
+                            }).join('');
+                        }
+                        
                     }
 
                     function renderSkills(skills) {

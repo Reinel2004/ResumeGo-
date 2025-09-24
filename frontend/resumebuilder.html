@@ -2673,11 +2673,11 @@
                         </div>
                     `;
                     }
-                    else if(templateId === 'accountant-8'){
+                    else if(templateId === 'accountant-9'){
                         previewHTML += `
                         <div class="experience-preview-item" style="margin-bottom: ${index < experienceItems.length - 1 ? '2rem' : '0'};">
                             <p class="text-sm font-bold">${company}</p>
-                            <p class="text-sm mb-1 font-bold">${dateRange} | ${position}</p>
+                            <i class="text-sm mb-1">${position} | ${dateRange}</i>
                             ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
                         </div>
                     `;
@@ -2922,7 +2922,7 @@
                                 <span class="text-sm mb-1 font-bold">${position}</span>
                                 <span class="text-sm mb-1 font-light">${dateRange}</span>
                             </div>
-                        
+                            <p class="text-sm mb-4">${company}</p>
                             ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
                         </div>
                     `;
@@ -2943,7 +2943,7 @@
                                 <span class="text-sm mb-1 font-bold">${position}</span>
                                 <span class="text-sm mb-1 font-light">${dateRange}</span>
                             </div>
-                        
+                            <p class="text-sm mb-4 font-semibold">${company}</p>
                             ${description ? `<p class="text-sm leading-relaxed">${description}</p>` : ''}
                         </div>
                     `;
