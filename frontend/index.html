@@ -19,6 +19,9 @@
         html{
             scroll-behavior: smooth;
         }
+        #loader {
+            transition: opacity 0.5s ease;
+        }
 
         * {
             margin: 0;
@@ -469,6 +472,12 @@
     </style>
 </head>
 <body>
+
+    <!-- Loader -->
+    <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
+        <img src="/assets/img/logo.png" alt="ResumeGo Logo" class="h-20 w-auto animate-pulse" />
+    </div>
+
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <nav class="flex justify-between items-center py-4">
@@ -1399,9 +1408,18 @@
         // Set API base URL for mobile testing
         // Change this to your local IP when testing on mobile
         window.API_BASE_URL = 'http://192.168.100.5:3000/api';
+
+        
     </script>
     <script src="js/auth.js"></script>
     <script>
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("loader");
+            if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 500); // fade out
+            }
+        });
 
         // Initialize user menu
         Auth.updateUserMenu();

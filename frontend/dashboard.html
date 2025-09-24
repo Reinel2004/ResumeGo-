@@ -21,6 +21,9 @@
         }
     </script>
     <style>
+        #loader {
+            transition: opacity 0.5s ease;
+        }
         .user-dropdown {
             display: none;
         }
@@ -131,6 +134,9 @@
     </style>
 </head>
 <body class="bg-gray-50">
+    <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
+        <img src="/assets/img/logo.png" alt="ResumeGo Logo" class="h-20 w-auto animate-pulse" />
+    </div>
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="bg-white border-b border-gray-200">
             <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-4 py-3">
@@ -346,6 +352,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/config.js"></script>
     <script src="js/auth.js"></script>
+     <script>
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("loader");
+            if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 500); // fade out
+            }
+        });
+    </script>
     <script>
         // Check authentication and redirect if not authenticated
         if (!Auth.requireAuth()) {

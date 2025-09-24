@@ -29,7 +29,9 @@
             --border-color: #e2e8f0;
         }
 
-       
+        #loader {
+            transition: opacity 0.5s ease;
+        }
 
         .user-dropdown {
             position: absolute;
@@ -294,6 +296,9 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
+    <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
+        <img src="/assets/img/logo.png" alt="ResumeGo Logo" class="h-20 w-auto animate-pulse" />
+    </div>
     <nav class="bg-white border-b border-gray-200">
   <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-4 py-3">
     <a href="dashboard.html" class="flex items-center space-x-3">
@@ -1310,6 +1315,15 @@ if (menuBtn && navLinks) {
     </div>
     
     <script src="js/auth.js"></script>
+     <script>
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("loader");
+            if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 500); // fade out
+            }
+        });
+    </script>
     <script>
         // Check authentication and redirect if not authenticated
         if (!Auth.requireAuth()) {
