@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATS Checker - ResumeGo!</title>
+    <title>Mini ATS Engine - ResumeGo!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="../assets/img/logo.png" type="image/x-icon">
     <script>
@@ -89,7 +89,7 @@
                         <a href="resumebuilder.html?template=generic-1" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Create Resume</a>
                         </li>
                         <li>
-                        <a href="ats-checker.html" class="block py-2 px-3 text-primary hover:text-primary rounded md:p-0">ATS Checker</a>
+                        <a href="ats-checker.html" class="block py-2 px-3 text-primary hover:text-primary rounded md:p-0">Mini ATS Engine</a>
                         </li>
                     </ul>
                 </div>
@@ -125,15 +125,20 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <!-- Hero Section -->
         <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">ATS Resume Checker</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Mini ATS Engine</h1>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Optimize your resume for Applicant Tracking Systems (ATS) and increase your chances of getting noticed by recruiters.
+                Mini ATS Engine checks your resume against common ATS rules and suggests improvements so it’s more likely to get noticed by recruiters.
             </p>
         </div>
 
         <!-- Resume Selection Section -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Select Resume to Analyze</h2>
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Select Resume to Analyze</h2>
+                <button id="infoBtn" class="bg-primary text-white px-3 py-1 rounded-md hover:bg-secondary transition-colors text-sm">
+                  ℹ️ Info
+                </button>
+              </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="resumeSelect" class="block text-sm font-medium text-gray-700 mb-2">Choose Resume</label>
@@ -163,6 +168,30 @@
             </div>
         </div>
 
+        <!-- Info Modal -->
+        <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+            <!-- Close button -->
+            <button id="closeInfo" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">What is an ATS?</h2>
+            <p class="text-gray-700 mb-4">
+                ATS stands for <strong>Applicant Tracking System</strong>, software used by HR to filter and rank resumes.
+                It scans resumes for keywords, formatting, and structure before a recruiter sees them.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                <li>✅ Extracts text from resumes</li>
+                <li>✅ Matches job keywords</li>
+                <li>✅ Checks formatting and structure</li>
+                <li>✅ Scores and ranks candidates</li>
+            </ul>
+            <p class="text-gray-700">
+                Our <strong>Mini ATS Engine</strong> simulates this process, giving you a score and recommendations so you can improve your resume before sending it to companies.
+            </p>
+            </div>
+        </div>
+  
+
         <!-- Loading Section -->
         <div id="loadingSection" class="hidden bg-white rounded-lg shadow-sm p-8 text-center">
             <div class="loading-spinner mx-auto mb-4"></div>
@@ -173,9 +202,11 @@
         <div id="resultsSection" class="hidden">
             <!-- Overall Score -->
             <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-gray-900">ATS Compatibility Score</h2>
-                    <div id="scoreCircle" class="score-circle"></div>
+                <div class="flex flex-col items-center md:flex-row md:items-center md:justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4 md:mb-0 text-center md:text-left">
+                      ATS Compatibility Score
+                    </h2>
+                    <div id="scoreCircle" class="score-circle mx-auto md:mx-0"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="text-center">
@@ -220,7 +251,7 @@
 
             <!-- Industry Keywords -->
             <div class="bg-white rounded-lg shadow-sm p-6 mt-8">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Industry Keywords for <span id="industryName"></span></h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Industry Suggestions Keywords for <span id="industryName"></span></h3>
                 <div id="industryKeywords" class="flex flex-wrap gap-2"></div>
             </div>
         </div>
@@ -232,11 +263,10 @@
                 <div>
                     <h4 class="font-semibold text-gray-900 mb-2">✅ Do's</h4>
                     <ul class="text-sm text-gray-700 space-y-1">
-                        <li>• Use standard fonts (Arial, Calibri, Times New Roman)</li>
+                        <li>• Use standard fonts</li>
                         <li>• Include relevant keywords from job descriptions</li>
                         <li>• Use simple formatting and avoid tables</li>
                         <li>• Include all required sections (contact, experience, education)</li>
-                        <li>• Use bullet points for easy scanning</li>
                     </ul>
                 </div>
                 <div>
@@ -244,7 +274,6 @@
                     <ul class="text-sm text-gray-700 space-y-1">
                         <li>• Avoid images, graphics, or complex layouts</li>
                         <li>• Don't use headers or footers</li>
-                        <li>• Avoid excessive formatting or colors</li>
                         <li>• Don't use abbreviations without explanation</li>
                         <li>• Avoid creative fonts or unusual formatting</li>
                     </ul>
@@ -262,6 +291,26 @@
             setTimeout(() => loader.style.display = "none", 500); // fade out
             }
         });
+      
+        const infoBtn = document.getElementById('infoBtn');
+        const infoModal = document.getElementById('infoModal');
+        const closeInfo = document.getElementById('closeInfo');
+
+        infoBtn.addEventListener('click', () => {
+            infoModal.classList.remove('hidden');
+        });
+
+        closeInfo.addEventListener('click', () => {
+            infoModal.classList.add('hidden');
+        });
+
+        
+        infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) {
+            infoModal.classList.add('hidden');
+        }
+        });
+
     </script>
     <script>
         // Check authentication

@@ -795,6 +795,12 @@
         }
     }
 
+    @media (min-width: 769px) {
+  .preview-toggle {
+    display: none !important;
+  }
+}
+
     .ai-enhance-popup {
         display: none;
         position: absolute;
@@ -1216,7 +1222,7 @@
                         <a href="resumebuilder.html?template=generic-1" class="block py-2 px-3 text-primary hover:text-primary rounded md:p-0">Create Resume</a>
                         </li>
                         <li>
-                        <a href="ats-checker.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">ATS Checker</a>
+                        <a href="ats-checker.html" class="block py-2 px-3 text-gray-700 hover:text-primary rounded md:p-0">Mini ATS Engine</a>
                         </li>
                     </ul>
                 </div>
@@ -1324,29 +1330,55 @@
                             <div>
                                 <p class="text-sm font-medium mb-2 text-gray-700">Select Suit Overlay</p>
                                 <div class="space-y-3" id="suitOptions">
+                                    <p class="text-sm font-medium mb-2 text-gray-700">Male Suit</p>
                                     <!-- Top Row - 3 suits -->
                                     <div class="flex gap-3">
                                         <div class="border-2 border-blue-500 rounded-md p-1 suit-option cursor-pointer hover:border-blue-600 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-1.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                                             <img src="/assets/img/suit-overlay/suit-overlay-1.png" alt="Business" class="w-24 h-24 object-cover rounded" />
                                         </div>
-                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-2.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                                            <img src="/assets/img/suit-overlay/suit-overlay-2.png" alt="Executive" class="w-24 h-24 object-cover rounded" />
-                                        </div>
-                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-3.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                                            <img src="/assets/img/suit-overlay/suit-overlay-3.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
-                                        </div>
-                                    </div>
-                                    <!-- Bottom Row - 3 suits -->
-                                    <div class="flex gap-3" id="suitOptions">
                                         <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-4.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                                             <img src="/assets/img/suit-overlay/suit-overlay-4.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
-                                        </div>
-                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-5.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                                            <img src="/assets/img/suit-overlay/suit-overlay-5.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
                                         </div>
                                         <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-6.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                                             <img src="/assets/img/suit-overlay/suit-overlay-6.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
                                         </div>
+                                    </div>
+                                    <!-- Top Row - 3 suits -->
+                                    <div class="flex gap-3">
+                                        <div class="border-2 border-blue-500 rounded-md p-1 suit-option cursor-pointer hover:border-blue-600 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-10.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-10.png" alt="Business" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-11.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-11.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-12.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-12.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                    </div>
+                                    <p class="text-sm font-medium mb-2 text-gray-700">Female Suit</p>
+                                    <!-- Bottom Row - 3 suits -->
+                                    <div class="flex gap-3" id="suitOptions">
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-2.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-2.png" alt="Executive" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-5.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-5.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-3.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-3.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="flex gap-3" id="suitOptions">
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-7.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-7.png" alt="Executive" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-8.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-8.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                        </div>
+                                        <div class="border border-gray-300 rounded-md p-1 suit-option cursor-pointer hover:border-gray-400 transition-colors" data-suit="/assets/img/suit-overlay/suit-overlay-9.png" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                                            <img src="/assets/img/suit-overlay/suit-overlay-9.png" alt="Formal" class="w-24 h-24 object-cover rounded" />
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
@@ -1384,6 +1416,19 @@
                                     <input type="checkbox" id="suitCheckbox" class="form-checkbox" />
                                     Add suit overlay to my photo
                                 </label>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-4">
+                            <p class="text-sm font-medium text-gray-700">Background Color</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <button class="bg-white border w-8 h-8 rounded color-btn" data-color="#ffffff"></button>
+                                <button class="bg-gray-200 border w-8 h-8 rounded color-btn" data-color="#e5e7eb"></button>
+                                <button class="bg-blue-500 border w-8 h-8 rounded color-btn" data-color="#3b82f6"></button>
+                                <button class="bg-green-500 border w-8 h-8 rounded color-btn" data-color="#10b981"></button>
+                                <button class="bg-yellow-400 border w-8 h-8 rounded color-btn" data-color="#facc15"></button>
+                                <button class="bg-red-500 border w-8 h-8 rounded color-btn" data-color="#ef4444"></button>
+                                <!-- Optional: allow custom color -->
+                                <input type="color" id="customBgColor" class="w-10 h-8 border rounded" value="#ffffff">
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -7827,8 +7872,22 @@
 
         // ... existing code ...
 
-// --- New Profile Editor Logic with Canvas ---
-document.addEventListener('DOMContentLoaded', () => {
+    // --- New Profile Editor Logic with Canvas ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Background color buttons
+    document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            window.selectedBgColor = btn.dataset.color;
+            drawPreview();
+        });
+    });
+
+    // Custom color input
+    document.getElementById('customBgColor').addEventListener('input', (e) => {
+        window.selectedBgColor = e.target.value;
+        drawPreview();
+    });
+
     // Canvas setup
     const canvas = document.getElementById("previewCanvas");
     const ctx = canvas.getContext("2d");
@@ -7863,6 +7922,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // State
     let stream = null;
     let selectedSuit = null;
+
+    window.selectedBgColor = "#ffffff";
 
     // Canvas functions
     let overlayPos = { x: 0, y: 0 }; // Add overlay position tracking
@@ -7920,41 +7981,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function drawPreview() {
-        console.log('Drawing preview...');
-        console.log('Canvas context:', !!ctx);
-        console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    console.log('Drawing preview.');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (img) {
-            console.log('Drawing main image at position:', imgPos);
-            ctx.save();
-            ctx.translate(imgPos.x + img.width * imgPos.scale / 2, imgPos.y + img.height * imgPos.scale / 2);
-            ctx.scale(imgPos.scale, imgPos.scale);
-            ctx.drawImage(img, -img.width / 2, -img.height / 2);
-            ctx.restore();
-            console.log('Main image drawn');
-        } else {
-            console.log('No main image to draw');
-        }
-
-        if (overlayImg && suitCheckbox.checked) {
-            console.log('Drawing suit overlay at position:', overlayPos, 'scale:', overlayScale);
-            ctx.save();
-            ctx.translate(
-                overlayPos.x + (overlayImg.width * overlayScale) / 2,
-                overlayPos.y + (overlayImg.height * overlayScale) / 2
-            );
-            ctx.scale(overlayScale, overlayScale);
-            ctx.drawImage(overlayImg, -overlayImg.width / 2, -overlayImg.height / 2);
-            ctx.restore();
-            console.log('Suit overlay drawn');
-        } else {
-            console.log('No suit overlay to draw or checkbox not checked');
-        }
-        
-        console.log('Preview drawing complete');
+    // 1. Draw background color
+    if (window.selectedBgColor) {
+        ctx.fillStyle = window.selectedBgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        console.log('Background color drawn:', window.selectedBgColor);
     }
+
+    // 2. Draw uploaded photo
+    if (img) {
+        console.log('Drawing main image at position:', imgPos);
+        ctx.save();
+        ctx.translate(imgPos.x + img.width * imgPos.scale / 2, imgPos.y + img.height * imgPos.scale / 2);
+        ctx.scale(imgPos.scale, imgPos.scale);
+        ctx.drawImage(img, -img.width / 2, -img.height / 2);
+        ctx.restore();
+        console.log('Main image drawn');
+    } else {
+        console.log('No main image to draw');
+    }
+
+    // 3. Draw suit overlay
+    if (overlayImg && suitCheckbox.checked) {
+        console.log('Drawing suit overlay at position:', overlayPos, 'scale:', overlayScale);
+        ctx.save();
+        ctx.translate(
+            overlayPos.x + (overlayImg.width * overlayScale) / 2,
+            overlayPos.y + (overlayImg.height * overlayScale) / 2
+        );
+        ctx.scale(overlayScale, overlayScale);
+        ctx.drawImage(overlayImg, -overlayImg.width / 2, -overlayImg.height / 2);
+        ctx.restore();
+        console.log('Suit overlay drawn');
+    } else {
+        console.log('No suit overlay to draw or checkbox not checked');
+    }
+
+    console.log('Preview drawing complete');
+}
 
     // Helper: robustly set the label text for autoBgCheckbox
     function setAutoBgLabelText(text) {

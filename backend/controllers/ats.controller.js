@@ -34,13 +34,13 @@ const ATS_KEYWORDS = {
 };
 
 // ATS formatting rules
-const ATS_FORMATTING_RULES = {
-    'font': ['Arial', 'Calibri', 'Times New Roman', 'Georgia'],
-    'fontSize': { min: 10, max: 12 },
-    'sections': ['contact', 'summary', 'experience', 'education', 'skills'],
-    'avoidElements': ['tables', 'images', 'graphics', 'columns', 'headers', 'footers'],
-    'keywords': { minDensity: 2, maxDensity: 5 }
-};
+// const ATS_FORMATTING_RULES = {
+//     'font': ['Arial', 'Calibri', 'Times New Roman', 'Georgia'],
+//     'fontSize': { min: 10, max: 12 },
+//     'sections': ['contact', 'summary', 'experience', 'education', 'skills'],
+//     'avoidElements': ['tables', 'images', 'graphics', 'columns', 'headers', 'footers'],
+//     'keywords': { minDensity: 2, maxDensity: 5 }
+// };
 
 // Analyze resume for ATS compatibility
 exports.analyzeResume = async (req, res) => {
@@ -279,10 +279,15 @@ function analyzeStructure(content) {
             };
         }
         
-        // Check for required sections
-        const requiredSections = ['contact', 'experience', 'education'];
+        const requiredSections = ['experience', 'education'];
         const contentKeys = Object.keys(content);
-        
+
+        // Contact check (look for name, email, phone instead of 'contact')
+        if (!content.name && !content.email && !content.phone) {
+            issues.push("Missing contact section");
+            score -= 20;
+        }
+
         requiredSections.forEach(section => {
             if (!contentKeys.some(key => key.includes(section))) {
                 issues.push(`Missing ${section} section`);
