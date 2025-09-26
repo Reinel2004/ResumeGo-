@@ -23,16 +23,37 @@
 
 
 </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>IT Template No 9 - Benjamin Bautista</title>
+
+  <style>
+    div.w-\[210mm\] {
+      width: 210mm;
+      max-width: 100%;
+    }
+    @media (max-width: 1024px) {
+      div.w-\[210mm\] {
+        width: 100%;
+        transform: none;
+      }
+    }
+  </style>
+</head>
 <body class="bg-white justify-center">
   <div class="font-sans text-black shadow-md flex overflow-hidden flex-col min-w-[210mm] max-w-[210mm] w-[210mm] mx-auto">
 
     <!-- Header -->
     <div class="flex items-center px-10 pt-6">
-      <img src="../../assets/img/charles.png" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
+      <img src="../../assets/img/male.png" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10" alt="Profile">
       <div class="relative -ml-8 w-full">
         <div class="bg-slate-700 text-white pl-16 py-4 clip-path-diagonal">
-          <h1 class="text-4xl font-serif font-bold ">Charles Andrew Torres</h1>
-          <p class=" text-sm font-semibold tracking-wide">IT PROFESSIONAL</p>
+          <h1 class="text-4xl font-serif font-bold">Benjamin David Bautista</h1>
+          <p class="text-sm font-semibold tracking-wide">CLOUD ENGINEER</p>
         </div>
       </div>
     </div>
@@ -46,34 +67,44 @@
         <!-- About -->
         <div>
           <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">ABOUT</div>
-          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoreet. ipsum dolor sit amet, consectetur adipiscing elitullam aretra in lorem at laoree</p>
+          <p class="text-sm">
+            Cloud Engineer with expertise in AWS, DevOps, and automation. Skilled in building scalable infrastructures, managing Kubernetes clusters, and implementing disaster recovery strategies.
+          </p>
         </div>
 
         <!-- Education -->
         <div>
           <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">EDUCATION</div>
 
-          <!-- School 1 -->
           <div class="mb-4">
-            <p class="font-semibold text-sm">Bachelor of Information Technology</p>
-            <p>Dominican College of Tarlac</p>
-            <p class="italic text-sm">2022 - 2025</p>
-            
+            <p class="font-semibold text-sm">BS Computer Science</p>
+            <p>University of Melbourne</p>
+            <p class="italic text-sm">2014 – 2018</p>
           </div>
           <hr class="border-gray-400 mb-4">
 
-       
+          <div class="mb-4">
+            <p class="font-semibold text-sm">AWS Certified Solutions Architect</p>
+            <p>AWS</p>
+            <p class="italic text-sm">2020</p>
+          </div>
+          <hr class="border-gray-400 mb-4">
+
+          <div class="mb-4">
+            <p class="font-semibold text-sm">Certificate in DevOps</p>
+            <p>Linux Foundation</p>
+            <p class="italic text-sm">2021</p>
+          </div>
         </div>
 
         <!-- Language -->
         <div>
-          <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">LANGUAGE</div>
+          <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-2">LANGUAGES</div>
           <ul class="list-disc list-inside text-sm space-y-1">
-            <li>Filipino</li>
             <li>English</li>
+            <li>Filipino</li>
           </ul>
         </div>
-
       </div>
 
       <!-- Right Content -->
@@ -83,52 +114,40 @@
         <div>
           <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-4 w-fit">EXPERIENCE</div>
 
-          <!-- Job 1 -->
           <div class="mb-4">
-            <h3 class="font-bold text-sm">Company One <span class="float-right font-normal text-xs">(2022–2026)</span></h3>
-            <p class="text-sm mt-1 leading-relaxed">Worked as a software developer focusing on full-stack web development and agile methodologies.</p>
+            <h3 class="font-bold text-sm">Cloud Engineer — SkyTech, Sydney <span class="float-right font-normal text-xs">(2018–2023)</span></h3>
+            <p class="text-sm mt-1 leading-relaxed">Designed and maintained AWS cloud infrastructure, automated CI/CD pipelines, and optimized cloud costs by 20%.</p>
           </div>
           <hr class="border-gray-400 mb-4">
 
-          <!-- Job 2 -->
           <div class="mb-4">
-            <h3 class="font-bold text-sm">Company Two <span class="float-right font-normal text-xs">(2020–2022)</span></h3>
-            <p class="text-sm mt-1 leading-relaxed">Responsible for system maintenance, hardware troubleshooting, and network support.</p>
+            <h3 class="font-bold text-sm">Junior DevOps Engineer — CloudSys, Melbourne <span class="float-right font-normal text-xs">(2016–2017)</span></h3>
+            <p class="text-sm mt-1 leading-relaxed">Supported DevOps workflows, implemented automation scripts, and assisted in cloud deployments.</p>
           </div>
           <hr class="border-gray-400 mb-4">
 
-          <!-- Job 3 -->
           <div class="mb-4">
-            <h3 class="font-bold text-sm">Company Three <span class="float-right font-normal text-xs">(2018–2020)</span></h3>
-            <p class="text-sm mt-1 leading-relaxed">Handled IT documentation and assisted in database administration and version control.</p>
+            <h3 class="font-bold text-sm">Intern Developer — AppForge, Sydney <span class="float-right font-normal text-xs">(2015)</span></h3>
+            <p class="text-sm mt-1 leading-relaxed">Assisted in mobile app development, debugging, and testing across Android/iOS platforms.</p>
           </div>
           <hr class="border-gray-400">
         </div>
 
+        <!-- Projects -->
         <div>
           <div class="border border-black rounded-full px-4 py-1 font-semibold text-center mb-4 w-fit">PROJECTS</div>
 
-          <!-- Project 1 -->
           <div class="mb-4">
-            <h3 class="font-bold text-sm">Inventory Management System</h3>
-            <p class="text-xs text-gray-600">Python, MySQL, Flask</p>
-            <p class="text-sm mt-1 leading-relaxed">Developed a full-stack system for stock monitoring, purchase orders, and automated reports for SMEs.</p>
+            <h3 class="font-bold text-sm">Kubernetes Cluster Setup</h3>
+            <p class="text-xs text-gray-600">Kubernetes, Docker, AWS</p>
+            <p class="text-sm mt-1 leading-relaxed">Automated microservice deployment using Kubernetes clusters with Helm charts, reducing downtime by 30%.</p>
           </div>
           <hr class="border-gray-400 mb-4">
 
-          <!-- Project 2 -->
           <div class="mb-4">
-            <h3 class="font-bold text-sm">Portfolio Website</h3>
-            <p class="text-xs text-gray-600">React, Tailwind CSS, Node.js</p>
-            <p class="text-sm mt-1 leading-relaxed">Created and deployed a responsive personal portfolio with SEO optimization and interactive project showcases.</p>
-          </div>
-          <hr class="border-gray-400 mb-4">
-
-          <!-- Project 3 -->
-          <div class="mb-4">
-            <h3 class="font-bold text-sm">Mobile Task Manager App</h3>
-            <p class="text-xs text-gray-600">Flutter, Firebase</p>
-            <p class="text-sm mt-1 leading-relaxed">Built a cross-platform app to manage daily tasks with cloud sync and offline-first support.</p>
+            <h3 class="font-bold text-sm">Disaster Recovery Plan</h3>
+            <p class="text-xs text-gray-600">AWS, Terraform, S3</p>
+            <p class="text-sm mt-1 leading-relaxed">Implemented multi-region backups and disaster recovery strategies for enterprise systems ensuring 99.99% uptime.</p>
           </div>
           <hr class="border-gray-400">
         </div>
@@ -136,13 +155,14 @@
         <!-- Skills -->
         <div>
           <div class="font-bold mb-4 text-base">SKILLS</div>
-          <ul class="list-disc list-inside space-y-2 text-sm">
-            <li>Proficient in coding languages</li>
-            <li>Strong logical approach to problem-solving</li>
-            <li>High attention to detail</li>
+          <ul class="list-none space-y-2 text-sm pl-1">
+            <li>Cloud Engineering (AWS, Azure, GCP)</li>
+            <li>Kubernetes & Docker</li>
+            <li>Infrastructure as Code (Terraform, Ansible)</li>
+            <li>CI/CD Pipelines (Jenkins, GitHub Actions)</li>
+            <li>Monitoring & Logging (Prometheus, ELK)</li>
           </ul>
         </div>
-
       </div>
     </div>
 
