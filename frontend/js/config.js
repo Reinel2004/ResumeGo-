@@ -25,7 +25,7 @@ class APIConfig {
         }
         
         // Production URL (update this when you deploy)
-        return 'https://your-production-domain.com/api';
+        return 'https://resumego.cloud/api';
     }
 
     getFullURL(endpoint) {
