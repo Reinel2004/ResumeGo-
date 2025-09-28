@@ -1,5 +1,6 @@
 // Use the new configuration system
-const API_URL = window.apiConfig ? window.apiConfig.baseURL : 'http://localhost:3000/api';
+const API_URL = window.apiConfig?.baseURL || 'https://resumego.cloud/api';
+
 
 // Auth API calls
 export const authAPI = {
