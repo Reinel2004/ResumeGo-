@@ -1662,7 +1662,11 @@
     </main>
 
     <button class="preview-toggle" id="previewToggle"><i class="fa-regular fa-eye"></i></button>
-
+    <script>
+        window.apiConfig = {
+            baseURL: 'https://api.resumego.cloud/api'
+        };
+    </script>
     <script src="js/auth.js"></script>
     <script>
         window.addEventListener("load", function () {
@@ -8444,6 +8448,8 @@
     
 
     async function runBackgroundRemoval() {
+        const API_URL = window.apiConfig ? window.apiConfig.baseURL : 'http://localhost:3000/api';
+        const removeBgUrl = `${API_URL}/removebg/removebg`;
         try {
             autoBgCheckbox.disabled = true;
             setAutoBgLabelText('Removing background...');
@@ -8456,7 +8462,7 @@
             const formData = new FormData();
             formData.append('image_file', originalBlob, 'photo.png');
 
-            const apiResponse = await fetch('http://localhost:3000/api/removebg/removebg', {
+            const apiResponse = await fetch(removeBgUrl, {
                 method: 'POST',
                 body: formData,
             });
@@ -9458,8 +9464,9 @@ class GrammarChecker {
         }
         this.showLoading();
         try {
+            const API_URL = window.apiConfig.baseURL; 
             // Use full backend URL for grammar check to support dev servers on different ports
-            const response = await fetch('http://localhost:3000/api/grammar-check', {
+            const response = await fetch(`${API_URL}/grammar-check`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text })
