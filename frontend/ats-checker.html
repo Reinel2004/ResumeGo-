@@ -281,7 +281,9 @@
             </div>
         </div>
     </main>
-
+    <script>
+        window.apiConfig = { baseURL: 'https://api.resumego.cloud/api' };
+    </script>
     <script src="js/auth.js"></script>
     <script>
         window.addEventListener("load", function () {
@@ -347,12 +349,16 @@
         }
 
         // Load user's resumes
-        async function loadResumes() {
+       async function loadResumes() {
             const token = localStorage.getItem('token');
             if (!token) return;
 
             try {
-                const response = await fetch('http://localhost:3000/api/resume', {
+                const apiUrl = window.apiConfig 
+                    ? `${window.apiConfig.baseURL}/resume` 
+                    : 'http://localhost:3000/api/resume';
+
+                const response = await fetch(apiUrl, {
                     headers: {
                         'x-access-token': token
                     }
@@ -374,6 +380,7 @@
                 console.error('Error loading resumes:', error);
             }
         }
+
 
         // Analyze resume
         async function analyzeResume() {
@@ -397,7 +404,11 @@
             document.getElementById('resultsSection').classList.add('hidden');
 
             try {
-                const response = await fetch('http://localhost:3000/api/ats/analyze', {
+                const apiUrl = window.apiConfig
+                    ? `${window.apiConfig.baseURL}/ats/analyze`
+                    : 'http://localhost:3000/api/ats/analyze';
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -423,6 +434,7 @@
             } finally {
                 document.getElementById('loadingSection').classList.add('hidden');
             }
+
         }
 
         // Display analysis results
@@ -489,12 +501,18 @@
 
         // Load industry keywords
         async function loadIndustryKeywords(industry) {
-            try {
-                const response = await fetch(`http://localhost:3000/api/ats/keywords/${industry}`);
+           try {
+                const apiUrl = window.apiConfig
+                    ? `${window.apiConfig.baseURL}/ats/keywords/${industry}`
+                    : `http://localhost:3000/api/ats/keywords/${industry}`;
+
+                const response = await fetch(apiUrl);
+
                 if (response.ok) {
                     const data = await response.json();
-                    document.getElementById('industryName').textContent = data.industry.charAt(0).toUpperCase() + data.industry.slice(1);
-                    
+                    document.getElementById('industryName').textContent =
+                        data.industry.charAt(0).toUpperCase() + data.industry.slice(1);
+
                     const container = document.getElementById('industryKeywords');
                     container.innerHTML = '';
                     data.keywords.forEach(keyword => {
@@ -507,6 +525,7 @@
             } catch (error) {
                 console.error('Error loading industry keywords:', error);
             }
+
         }
 
         // Event listeners

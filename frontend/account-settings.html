@@ -514,6 +514,9 @@
         </div>
     </div>
 
+    <script>
+        window.apiConfig = { baseURL: 'https://api.resumego.cloud/api' };
+    </script>
     <!-- EmailJS CDN -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="js/auth.js"></script>
@@ -522,7 +525,11 @@
         let emailjsConfig = null;
         async function initializeEmailJS() {
             try {
-                const response = await fetch('http://localhost:3000/api/config/emailjs');
+                const apiUrl = window.apiConfig 
+                    ? `${window.apiConfig.baseURL}/config/emailjs` 
+                    : 'http://localhost:3000/api/config/emailjs';
+
+                const response = await fetch(apiUrl);
                 emailjsConfig = await response.json();
                 emailjs.init(emailjsConfig.publicKey);
                 console.log('EmailJS initialized successfully');
@@ -619,8 +626,11 @@
                 // Combine names
                 const fullName = [firstName, middleName, lastName].filter(name => name.trim()).join(' ');
                 
+                const apiUrl = window.apiConfig 
+                ? `${window.apiConfig.baseURL}/user/update` 
+                : 'http://localhost:3000/api/user/update';
                 // Update user data on the server
-                const updateResponse = await fetch('http://localhost:3000/api/user/update', {
+                const updateResponse = await fetch(apiUrl, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -631,7 +641,6 @@
                         email: email
                     })
                 });
-
                 if (!updateResponse.ok) {
                     const errorData = await updateResponse.json();
                     throw new Error(errorData.message || 'Failed to update account');
@@ -698,8 +707,11 @@
             showEmailValidating();
             
             try {
-                // Step 1: Check if email exists in database (excluding current user)
-                const dbResponse = await fetch('http://localhost:3000/api/auth/check-email', {
+                const apiUrl = window.apiConfig 
+                    ? `${window.apiConfig.baseURL}/auth/check-email` 
+                    : 'http://localhost:3000/api/auth/check-email';
+
+                const dbResponse = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
