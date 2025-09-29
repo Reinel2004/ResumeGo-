@@ -1,31 +1,26 @@
-// API Configuration for different environments
 class APIConfig {
     constructor() {
         this.isDevelopment = window.location.hostname === 'localhost' || 
-                           window.location.hostname === '127.0.0.1' ||
-                           window.location.hostname.includes('192.168') ||
-                           window.location.hostname.includes('10.0');
-        
-        this.baseURL = this.getBaseURL();
+                             window.location.hostname === '127.0.0.1' ||
+                             window.location.hostname.includes('192.168') ||
+                             window.location.hostname.includes('10.0');
+
+        // Set baseURL depending on environment
+        this.baseURL = this.isDevelopment 
+            ? this.getDevelopmentURL()
+            : (process.env.NEXT_PUBLIC_API_URL || 'https://api.resumego.cloud/api');
     }
 
-    getBaseURL() {
-        if (this.isDevelopment) {
-            // Check if we're on mobile/network access
-            const hostname = window.location.hostname;
-            
-            // If accessing from mobile device on same network
-            if (hostname.includes('192.168') || hostname.includes('10.0')) {
-                // Use the same IP as the frontend but with port 3000
-                return `http://${hostname}:3000/api`;
-            }
-            
-            // Default to localhost for desktop development
-            return 'http://localhost:3000/api';
+    getDevelopmentURL() {
+        const hostname = window.location.hostname;
+
+        // Accessing from mobile/device on same network
+        if (hostname.includes('192.168') || hostname.includes('10.0')) {
+            return `http://${hostname}:3000/api`;
         }
-        
-        // Production URL (update this when you deploy)
-        return 'https://resumego.cloud/api';
+
+        // Default localhost for desktop
+        return 'http://localhost:3000/api';
     }
 
     getFullURL(endpoint) {
@@ -33,7 +28,7 @@ class APIConfig {
     }
 }
 
-// Create global instance
+// Global instance
 window.apiConfig = new APIConfig();
 
 // Export for module usage
