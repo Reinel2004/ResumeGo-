@@ -1,5 +1,6 @@
 // Use the new configuration system
-const API_URL = window.apiConfig?.baseURL || 'https://resumego.cloud/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+
 
 
 // Auth API calls
