@@ -1,14 +1,15 @@
 class APIConfig {
     constructor() {
-        this.isDevelopment = window.location.hostname === 'localhost' || 
+        // Detect if running locally
+        this.isDevelopment = window.location.hostname === 'localhost' ||
                              window.location.hostname === '127.0.0.1' ||
                              window.location.hostname.includes('192.168') ||
                              window.location.hostname.includes('10.0');
 
         // Set baseURL depending on environment
-        this.baseURL = this.isDevelopment 
+        this.baseURL = this.isDevelopment
             ? this.getDevelopmentURL()
-            : (process.env.NEXT_PUBLIC_API_URL || 'https://api.resumego.cloud/api');
+            : (window.NEXT_PUBLIC_API_URL || 'https://api.resumego.cloud/api');
     }
 
     getDevelopmentURL() {
@@ -28,10 +29,10 @@ class APIConfig {
     }
 }
 
-// Global instance
+// Make global instance
 window.apiConfig = new APIConfig();
 
-// Export for module usage
+// Export for module usage (optional, for Node.js or bundlers)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = APIConfig;
 }
