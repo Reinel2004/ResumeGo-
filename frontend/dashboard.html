@@ -7,7 +7,7 @@
 
     <link href="../src/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="..assets/img/logo.png" type="image/x-icon">
+    <link rel="icon" href="assets/img/logo.png" type="image/x-icon">
     <script>
         tailwind.config = {
             theme: {
@@ -1237,7 +1237,7 @@
                             const dateRange = item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : 
                             item.startDate ? `${item.startDate} - Present` : 'Date Range';
                             return `
-                                <p class="text-sm font-bold font-medium">${dateRange} · <span>${item.position} / ${company}</span><br></p>
+                                <p class="text-sm font-bold font-medium">${dateRange} · <span>${item.position} / ${item.company}</span><br></p>
                                 <i class="text-sm">${item.company}</i>
                                 ${item.description ? `<p class="text-sm leading-relaxed">${item.description}</p>` : ''}
                             `;
@@ -3750,7 +3750,7 @@
                             <!-- Header -->
                             <div class="relative bg-black text-white p-8 flex items-center">
                                 <!-- Profile Image -->
-                                <div class="w-40 h-40 rounded-full overflow-visible border-4 border-gray-400">
+                                <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-400">
                                     <img src="${content.profileImage}" alt="Profile photo" class="w-full h-full object-cover" />
                                 </div>
                                 <!-- Name and Title -->
@@ -3960,8 +3960,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Bottom Border -->
-                                <div class="h-4 bg-black mt-10"></div>
                             </div>
                         </div>`;
                     }
