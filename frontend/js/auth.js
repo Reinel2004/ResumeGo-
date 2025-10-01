@@ -89,3 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     Auth.updateUserMenu();
 });
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'token' || event.key === 'user') {
+        Auth.updateUserMenu();
+    }
+});
