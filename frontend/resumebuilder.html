@@ -1664,11 +1664,7 @@
     <button class="preview-toggle" id="previewToggle"><i class="fa-regular fa-eye"></i></button>
     <script>
         window.apiConfig = {
-            baseURL: 'https://api.resumego.cloud/api',
-            getFullURL: function (endpoint) {
-                return this.baseURL + endpoint;
-            }
-
+            baseURL: 'https://api.resumego.cloud/api'
         };
     </script>
     <script src="js/auth.js"></script>
@@ -8831,16 +8827,16 @@
                 }
             } catch (e) { console.error(e); }
         });
-        
-        window.apiConfig = {
-            baseURL: 'https://api.resumego.cloud/api',
-            getFullURL: function (endpoint) {
-                return this.baseURL + endpoint;
-            }
-        };
+      
 
         async function askAI(promptText, textarea = null) {
           try {
+            window.apiConfig = {
+                baseURL: 'https://api.resumego.cloud/api',
+                getFullURL(endpoint) {
+                    return this.baseURL + endpoint;
+                }
+            };
             const category = getSelectedCategory();
             const section = textarea ? getCurrentSection(textarea) : 'general';
             const sectionContext = getSectionContext(section);
