@@ -8831,6 +8831,13 @@
                 }
             } catch (e) { console.error(e); }
         });
+        
+        window.apiConfig = {
+            baseURL: 'https://api.resumego.cloud/api',
+            getFullURL: function (endpoint) {
+                return this.baseURL + endpoint;
+            }
+        };
 
         async function askAI(promptText, textarea = null) {
           try {
