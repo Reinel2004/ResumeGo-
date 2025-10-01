@@ -1,3 +1,8 @@
+
+window.apiConfig = {
+    baseURL: "https://api.resumego.cloud/api"
+  };
+
 // Use the new configuration system
 const API_URL = window.apiConfig.baseURL;
 
