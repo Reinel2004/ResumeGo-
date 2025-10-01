@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - ResumeGo!</title>
-
-    <link href="../src/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="assets/img/logo.png" type="image/x-icon">
     <script>
@@ -348,6 +346,11 @@
       </div>
     </div>
 
+    <script>
+        window.apiConfig = {
+            baseURL: "https://api.resumego.cloud/api"
+        };
+    </script>
     <!-- Add html2pdf.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/config.js"></script>
@@ -369,10 +372,13 @@
 
         // Helper function to get API URL
         function getAPIUrl(endpoint = '') {
-            if (window.apiConfig) {
-                return window.apiConfig.getFullURL(endpoint);
-            }
-            return `http://localhost:3000/api${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
+            window.apiConfig = {
+                baseURL: "https://api.resumego.cloud/api",
+                getFullURL: function (endpoint) {
+                    return this.baseURL + (endpoint.startsWith('/') ? endpoint : '/' + endpoint);
+                }
+            };
+            return window.apiConfig.getFullURL(endpoint);
         }
 
         // User dropdown functionality
