@@ -76,3 +76,16 @@ const Auth = {
         }
     }
 }; 
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.pathname.includes("index.html") && Auth.isAuthenticated()) {
+        window.location.href = "dashboard.html";
+        return;
+    }
+
+    if (window.location.pathname.includes("dashboard.html")) {
+        Auth.requireAuth();
+    }
+
+    Auth.updateUserMenu();
+});
