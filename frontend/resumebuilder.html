@@ -1664,7 +1664,11 @@
     <button class="preview-toggle" id="previewToggle"><i class="fa-regular fa-eye"></i></button>
     <script>
         window.apiConfig = {
-            baseURL: 'https://api.resumego.cloud/api'
+            baseURL: 'https://api.resumego.cloud/api',
+            getFullURL: function (endpoint) {
+                return this.baseURL + endpoint;
+            }
+
         };
     </script>
     <script src="js/auth.js"></script>
