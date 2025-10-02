@@ -884,6 +884,100 @@
                 document.getElementById(id).classList.add('invalid');
             });
         });
+
+        // Name validation - allows letters (including ñ, á, etc.), spaces, hyphens, and apostrophes
+        function validateName(name, fieldName) {
+            // Allow letters from any language, spaces, hyphens, and apostrophes
+            const namePattern = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'-]+$/;
+            
+            if (!namePattern.test(name)) {
+                return `${fieldName} cannot contain numbers or special characters (except hyphens and apostrophes)`;
+            }
+            return null;
+        }
+
+        // Add real-time validation for name fields
+        const nameFields = [
+            { id: 'firstName', label: 'First Name' },
+            { id: 'middleName', label: 'Middle Name' },
+            { id: 'lastName', label: 'Last Name' }
+        ];
+
+        nameFields.forEach(field => {
+            const input = document.getElementById(field.id);
+            
+            input.addEventListener('input', function() {
+                const value = this.value.trim();
+                
+                // Skip validation for middle name if empty (it's optional)
+                if (field.id === 'middleName' && !value) {
+                    this.style.borderColor = '#e2e8f0';
+                    return;
+                }
+                
+                if (value && validateName(value, field.label)) {
+                    this.style.borderColor = '#dc2626';
+                } else {
+                    this.style.borderColor = '#059669';
+                }
+            });
+
+            input.addEventListener('blur', function() {
+                if (!this.value.trim() || (field.id === 'middleName')) {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+
+        // Add validation to form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const firstName = document.getElementById('firstName').value.trim();
+            const middleName = document.getElementById('middleName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            
+            let errorMessage = '';
+            
+            // Validate first name
+            const firstNameError = validateName(firstName, 'First Name');
+            if (firstNameError) {
+                errorMessage = firstNameError;
+            }
+            
+            // Validate middle name only if provided
+            if (middleName) {
+                const middleNameError = validateName(middleName, 'Middle Name');
+                if (middleNameError) {
+                    errorMessage = errorMessage ? errorMessage + '<br>' + middleNameError : middleNameError;
+                }
+            }
+            
+            // Validate last name
+            const lastNameError = validateName(lastName, 'Last Name');
+            if (lastNameError) {
+                errorMessage = errorMessage ? errorMessage + '<br>' + lastNameError : lastNameError;
+            }
+            
+            if (errorMessage) {
+                e.preventDefault();
+                showError(errorMessage);
+                return false;
+            }
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.innerHTML = message;
+            errorDiv.className = 'message error-message show';
+            
+            // Scroll to error message
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 5000);
+        }
+
     </script>
     
     <script src="js/config.js"></script>
