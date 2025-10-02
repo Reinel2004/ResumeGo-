@@ -735,10 +735,13 @@
         });
     </script>
     <script type="text/javascript">
+        window.apiConfig = {
+            baseURL: "https://api.resumego.cloud/api"
+        };
         // Initialize EmailJS with public key from backend
         async function initializeEmailJS() {
             try {
-                const response = await fetch('http://localhost:3000/api/config/emailjs');
+                const response = await fetch(`${window.apiConfig.baseURL}/config/emailjs`);
                 const config = await response.json();
                 emailjs.init(config.publicKey);
                 console.log('EmailJS initialized successfully');
