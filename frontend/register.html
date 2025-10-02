@@ -734,10 +734,15 @@
             }
         });
     </script>
-    <script type="text/javascript">
+    <script>
         window.apiConfig = {
-            baseURL: "https://api.resumego.cloud/api"
+        baseURL: "https://api.resumego.cloud/api",
+            getFullURL: function (path) {
+                return `${this.baseURL}${path}`;
+            }
         };
+    </script>
+    <script type="text/javascript">
         // Initialize EmailJS with public key from backend
         async function initializeEmailJS() {
             try {
