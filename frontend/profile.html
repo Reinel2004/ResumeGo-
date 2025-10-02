@@ -715,13 +715,13 @@
         import { authAPI, userAPI } from './js/api.js';
 
         // Check if user is logged in
-        // function checkAuth() {
-        //     if (!Auth.requireAuth()) {
-        //         // This will redirect to index.html if not authenticated
-        //         return false;
-        //     }
-        //     return true;
-        // }
+        function checkAuth() {
+            if (!Auth.requireAuth()) {
+                // This will redirect to index.html if not authenticated
+                return false;
+            }
+            return true;
+        }
 
         // Debug function to check authentication status
         function debugAuth() {
