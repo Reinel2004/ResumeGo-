@@ -135,13 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showEmailValidating();
-
-        window.apiConfig = {
-            baseURL: "api.resumego.cloud/api",
-            getFullURL: function(path) {
-                return this.baseURL + path;
-            }
-        };
         
         try {
             // Step 1: Check if email exists in your database
