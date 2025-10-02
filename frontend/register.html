@@ -888,7 +888,7 @@
         // Name validation - allows letters (including ñ, á, etc.), spaces, hyphens, and apostrophes
         function validateName(name, fieldName) {
             // Allow letters from any language, spaces, hyphens, and apostrophes
-            const namePattern = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'-]+$/;
+            const namePattern = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'.-]+$/;
             
             if (!namePattern.test(name)) {
                 return `${fieldName} cannot contain numbers or special characters (except hyphens and apostrophes)`;
