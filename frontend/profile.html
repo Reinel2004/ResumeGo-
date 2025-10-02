@@ -660,7 +660,17 @@
                                     <label for="newPassword">New Password</label>
                                     <input type="password" id="newPassword" class="form-control">
                                     <div class="error-message" id="newPasswordError"></div>
+
+                                    <!-- Password Guidelines -->
+                                    <ul id="passwordGuidelines" class="text-sm mt-2 space-y-1">
+                                        <li id="pw-length" class="text-gray-500">❌ At least 8 characters</li>
+                                        <li id="pw-upper" class="text-gray-500">❌ At least one uppercase letter</li>
+                                        <li id="pw-lower" class="text-gray-500">❌ At least one lowercase letter</li>
+                                        <li id="pw-number" class="text-gray-500">❌ At least one number</li>
+                                        <li id="pw-special" class="text-gray-500">❌ At least one special character</li>
+                                    </ul>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="confirmPassword">Confirm New Password</label>
                                     <input type="password" id="confirmPassword" class="form-control">
@@ -705,13 +715,13 @@
         import { authAPI, userAPI } from './js/api.js';
 
         // Check if user is logged in
-        function checkAuth() {
-            if (!Auth.requireAuth()) {
-                // This will redirect to index.html if not authenticated
-                return false;
-            }
-            return true;
-        }
+        // function checkAuth() {
+        //     if (!Auth.requireAuth()) {
+        //         // This will redirect to index.html if not authenticated
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
         // Debug function to check authentication status
         function debugAuth() {
@@ -1187,5 +1197,50 @@
             }
         }
     </script>
+    <script>
+    const newPasswordInput = document.getElementById('newPassword');
+    const updateBtn = document.querySelector('#changePasswordModal .btn.btn-primary'); // "Update Password" button
+
+    const guidelines = {
+        length: { el: document.getElementById('pw-length'), text: "At least 8 characters" },
+        upper: { el: document.getElementById('pw-upper'), text: "At least one uppercase letter" },
+        lower: { el: document.getElementById('pw-lower'), text: "At least one lowercase letter" },
+        number: { el: document.getElementById('pw-number'), text: "At least one number" },
+        special: { el: document.getElementById('pw-special'), text: "At least one special character" }
+    };
+
+    newPasswordInput.addEventListener('input', () => {
+        const val = newPasswordInput.value;
+
+        const checks = {
+            length: val.length >= 8,
+            upper: /[A-Z]/.test(val),
+            lower: /[a-z]/.test(val),
+            number: /[0-9]/.test(val),
+            special: /[^A-Za-z0-9]/.test(val)
+        };
+
+        let allValid = true; // assume valid until one fails
+
+        for (let key in checks) {
+            if (checks[key]) {
+                guidelines[key].el.textContent = "✅ " + guidelines[key].text;
+                guidelines[key].el.classList.remove('text-gray-500', 'text-red-600');
+                guidelines[key].el.classList.add('text-green-600');
+            } else {
+                guidelines[key].el.textContent = "❌ " + guidelines[key].text;
+                guidelines[key].el.classList.remove('text-green-600');
+                guidelines[key].el.classList.add('text-red-600');
+                allValid = false; // one rule failed
+            }
+        }
+
+        // Enable or disable button based on all checks
+        updateBtn.disabled = !allValid;
+    });
+
+    // Make sure it's disabled by default
+    updateBtn.disabled = true;
+</script>
 </body>
 </html>
