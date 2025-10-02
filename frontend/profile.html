@@ -760,35 +760,29 @@
             console.log('==================');
         }
 
-        // Profile photo upload & preview (frontend only, localStorage)
-const photoInput = document.getElementById("photoUpload");
-const profilePhoto = document.getElementById("profilePhoto");
+  const photoInput = document.getElementById("photoUpload");
+  const profilePhoto = document.getElementById("profilePhoto");
 
-if (photoInput) {
-  // When a new photo is selected
-  photoInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        // Update preview
-        profilePhoto.src = e.target.result;
-
-        // Save to localStorage
-        localStorage.setItem("profilePhoto", e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // Load saved photo when profile page opens
+  // Load saved photo from localStorage when page loads
   document.addEventListener("DOMContentLoaded", () => {
     const savedPhoto = localStorage.getItem("profilePhoto");
     if (savedPhoto) {
       profilePhoto.src = savedPhoto;
     }
   });
-}
+
+  // Save new photo to localStorage when user uploads
+  photoInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        profilePhoto.src = e.target.result; // preview
+        localStorage.setItem("profilePhoto", e.target.result); // persist
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
         
 
