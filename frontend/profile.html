@@ -832,9 +832,17 @@
                     emailInput.value = userData.email || '';
                 }
                 
-                if (profilePhoto) {
-                    profilePhoto.src = userData.profilePhoto || "https://via.placeholder.com/120x120?text=Profile+Photo";
+               if (profilePhoto) {
+                    const savedPhoto = localStorage.getItem("profilePhoto");
+                    if (savedPhoto) {
+                       
+                        profilePhoto.src = savedPhoto;
+                    } else {
+                        
+                        profilePhoto.src = userData.profilePhoto || "https://via.placeholder.com/120x120?text=Profile+Photo";
+                    }
                 }
+
                 
                 if (memberSinceText) {
                     const memberSince = new Date(userData.createdAt).toLocaleDateString('en-US', {
@@ -1236,7 +1244,7 @@
     </script>
     <script>
     const newPasswordInput = document.getElementById('newPassword');
-    const updateBtn = document.querySelector('#changePasswordModal .btn.btn-primary'); // "Update Password" button
+    const updateBtn = document.querySelector('#passwordModal .btn.btn-primary'); // "Update Password" button
 
     const guidelines = {
         length: { el: document.getElementById('pw-length'), text: "At least 8 characters" },
