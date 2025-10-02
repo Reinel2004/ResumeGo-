@@ -577,10 +577,21 @@
                 <!-- Profile Section -->
                 <div class="profile-section">
                     <div class="profile-photo-container">
-                    
-                        <input type="file" id="photoUpload" accept="image/*" style="display: none;">
-                      
+                    <!-- Profile photo preview -->
+                    <img id="profilePhoto" 
+                        src="https://via.placeholder.com/120x120?text=Profile+Photo" 
+                        alt="Profile Photo" 
+                        class="profile-photo">
+
+                    <!-- Hidden file input -->
+                    <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+
+                    <!-- Upload button -->
+                    <button class="change-photo-btn" onclick="document.getElementById('photoUpload').click()">
+                        <i class="fa fa-camera"></i> Change Photo
+                    </button>
                     </div>
+
                     <div class="profile-info">
                         <h2 class="profile-name">Zachary dela Cruz</h2>
                         <p>Premium Member since June 2023</p>
@@ -748,6 +759,38 @@
             
             console.log('==================');
         }
+
+        // Profile photo upload & preview (frontend only, localStorage)
+const photoInput = document.getElementById("photoUpload");
+const profilePhoto = document.getElementById("profilePhoto");
+
+if (photoInput) {
+  // When a new photo is selected
+  photoInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        // Update preview
+        profilePhoto.src = e.target.result;
+
+        // Save to localStorage
+        localStorage.setItem("profilePhoto", e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Load saved photo when profile page opens
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedPhoto = localStorage.getItem("profilePhoto");
+    if (savedPhoto) {
+      profilePhoto.src = savedPhoto;
+    }
+  });
+}
+
+        
 
         // Fetch user profile data when page loads
         async function fetchUserProfile() {
