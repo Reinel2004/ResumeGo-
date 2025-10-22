@@ -1257,6 +1257,14 @@
 
     <main class="main-container">
         <button id="saveResumeBtn" class="fixed bottom-5 right-8 bg-primary text-white px-5 py-2 rounded shadow-md text-sm font-semibold hover:bg-secondary transition-all z-50">Save</button>
+        <div class="flex gap-3 fixed bottom-5 left-8 z-50">
+  <button id="usePrevDataBtn" class="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition-all">
+    Use Previous Data
+  </button>
+  <button id="clearDataBtn" class="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition-all">
+    Clear Data
+  </button>
+</div>
     <div class="left-panel">
             <!-- Profile Picture Upload -->
             <div class="section-block bg-white rounded-lg shadow-sm p-6 mb-6" id="personal-section">
@@ -1468,7 +1476,7 @@
                 <div class="form-grid">
                     <div class="input-group">
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" placeholder="John Doe">
+                        <input type="text" id="name" class="no-grammar" placeholder="John Doe">
                     </div>
                     <div class="input-group">
                         <label for="title">Professional Title</label>
@@ -1484,7 +1492,7 @@
                     </div>
                     <div class="input-group">
                         <label for="address">Address</label>
-                        <input type="text" id="address" placeholder="123 Main St, City, State">
+                        <input type="text" id="address" class="no-grammar" placeholder="123 Main St, City, State">
                     </div>
                     <div class="input-group full-width">
                         <label for="summary">Professional Summary</label>
@@ -2020,11 +2028,19 @@
             alert('You must be logged in to save your resume.');
             return;
         }
+         const phone = document.getElementById("phone").value.trim();
+
+        
+        const phonePattern = /^(09|\+639)\d{9}$/;
+        if (!phonePattern.test(phone)) {
+            alert("⚠️ Please enter a valid Philippine mobile number (e.g., 09123456789 or +639123456789).");
+            return;
+        }
 
         updatePreview();
         const title = document.getElementById('title').value || 'Untitled Resume';
         const template = templateId;
-        // Gather all content (inputs, skills, experience, projects, etc.)
+      
         function getSkills() {
             const skills = [];
             document.querySelectorAll('.skills-list').forEach((list, i) => {
@@ -2139,28 +2155,28 @@
             profileImage: window.profileImage || null
         };
         const resumeId = urlParams.get('resumeId');
-        try {
-            if (resumeId) {
-                // Update existing resume
-                await resumeAPI.update(resumeId, { title, template, content }, token);
+       try {
+            if (resumeId && resumeId !== 'null' && resumeId !== 'undefined') {
+                // ✅ Only update if there’s a real ID
+                await resumeAPI.update(resumeId, {title, template, content }, token);
                 window.isResumeDirty = false;
                 showSuccessModal('Resume updated successfully!', 'dashboard.html');
-
             } else {
-                // Create new resume
+                // ✅ Otherwise, create a new one
                 await resumeAPI.create({ title, template, content }, token);
                 window.isResumeDirty = false;
                 showSuccessModal('Resume saved successfully!', 'dashboard.html');
             }
 
-            
             updateLanguagesInPreview(content.languages);
             updateHobbiesInPreview(content.hobbies);
+
         } catch (err) {
             console.error('Failed to save resume:', err);
             alert('Failed to save resume.');
             return;
         }
+
     });
     </script>
     <script>
@@ -9547,6 +9563,26 @@ function attachGrammarCheckerTo(el) {
         el._hasGrammarChecker = true;
     }
 }
+function shouldAttachGrammarChecker(el) {
+  // ✅ Exclude specific fields
+  if (el.id === "name" || el.classList.contains("no-grammar")) return false;
+  return true;
+}
+
+// ✅ Attach grammar checker to all eligible inputs/textareas
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("input[type='text'], textarea").forEach(el => {
+    if (shouldAttachGrammarChecker(el)) attachGrammarCheckerTo(el);
+  });
+
+  // ✅ Observe for newly added form fields
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll("input[type='text'], textarea").forEach(el => {
+      if (shouldAttachGrammarChecker(el)) attachGrammarCheckerTo(el);
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+});
 
 // Initial attach for existing textareas
 document.querySelectorAll('textarea').forEach(attachGrammarCheckerTo);
@@ -9571,4 +9607,255 @@ observer.observe(document.body, { childList: true, subtree: true });
 <script src="js/config.js"></script>
 
 </body>
+<script type="module">
+import { resumeAPI } from './js/api.js';
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const usePrevBtn = document.getElementById("usePrevDataBtn");
+  const token = localStorage.getItem("token");
+
+  usePrevBtn.addEventListener("click", async () => {
+    if (!token) {
+      alert("⚠️ Please log in first.");
+      return;
+    }
+
+    try {
+      // ✅ 1. Get all resumes for the current user
+      const resumes = await resumeAPI.getAll(token);
+      if (!resumes || resumes.length === 0) {
+        alert("No saved resumes found in your account.");
+        return;
+      }
+
+      
+      // ✅ 2. Get the most recent one
+      const latestResume = resumes[resumes.length - 1];
+      const content = latestResume.content;
+      console.log("Loaded resume content:", content);
+
+      if (!content) {
+        alert("⚠️ No data found in your latest resume.");
+        return;
+      }
+
+      // ✅ 3. Fill personal info
+      document.getElementById("name").value = content.name || "";
+      document.getElementById("title").value = content.title || "";
+      document.getElementById("email").value = content.email || "";
+      document.getElementById("phone").value = content.phone || "";
+      document.getElementById("address").value = content.address || "";
+      document.getElementById("summary").value = content.summary || "";
+
+      // ✅ 4. Fill Skills
+      if (Array.isArray(content.skills)) {
+        const skillCategories = document.querySelectorAll('.skill-category');
+        content.skills.forEach((cat, i) => {
+          if (skillCategories[i]) {
+            const skillsList = skillCategories[i].querySelector('.skills-list');
+            skillsList.innerHTML = '';
+            (cat.items || []).forEach(skill => {
+              const badge = document.createElement('span');
+              badge.className = 'skill-badge';
+              badge.textContent = skill;
+              const remove = document.createElement('button');
+              remove.className = 'remove-skill-btn';
+              remove.textContent = '×';
+              remove.addEventListener('click', () => badge.remove());
+              badge.appendChild(remove);
+              skillsList.appendChild(badge);
+            });
+          }
+        });
+      }
+
+      // ✅ 5. Fill Education (match design)
+if (Array.isArray(content.education)) {
+  const container = document.getElementById('education-container');
+  container.innerHTML = ''; // clear previous
+  content.education.forEach(edu => {
+    const item = document.createElement('div');
+    item.className = 'education-item';
+    item.innerHTML = `
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Degree/Strand</label>
+          <input type="text" placeholder="e.g. Bachelor of Information Technology" value="${edu.degree || ''}">
+        </div>
+        <div class="input-group">
+          <label>School/University</label>
+          <input type="text" placeholder="e.g. Tarlac State University" value="${edu.school || ''}">
+        </div>
+        <div class="input-group">
+          <label>Year</label>
+          <input type="text" placeholder="e.g. 2021 - 2025" value="${edu.year || ''}">
+        </div>
+        <div class="input-group">
+          <label>GPA (Optional)</label>
+          <input type="text" placeholder="e.g. 3.8 / 4.0" value="${edu.gpa || ''}">
+        </div>
+        <div class="input-group full-width">
+          <label>Description (Optional)</label>
+          <textarea placeholder="Relevant coursework, achievements, or activities">${edu.description || ''}</textarea>
+        </div>
+      </div>
+      <button class="remove-education-btn">Remove</button>
+    `;
+
+    // Match your original functionality
+    const removeBtn = item.querySelector('.remove-education-btn');
+    removeBtn.addEventListener('click', () => item.remove());
+
+    // Reattach preview updates
+    item.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('input', () => {
+        if (typeof debouncedUpdatePreview === 'function') debouncedUpdatePreview();
+      });
+    });
+
+    container.appendChild(item);
+  });
+}
+
+// ✅ 6. Fill Experience (match design)
+if (Array.isArray(content.experience)) {
+  const container = document.getElementById('work-experience-container');
+  container.innerHTML = ''; // clear previous
+  content.experience.forEach(exp => {
+    const item = document.createElement('div');
+    item.className = 'experience-item';
+    item.innerHTML = `
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Company</label>
+          <input type="text" placeholder="Company Name" value="${exp.company || ''}">
+        </div>
+        <div class="input-group">
+          <label>Position</label>
+          <input type="text" placeholder="Job Title" value="${exp.position || ''}">
+        </div>
+        <div class="input-group">
+          <label>Start Date</label>
+          <input type="month" value="${exp.startDate || ''}">
+        </div>
+        <div class="input-group">
+          <label>End Date</label>
+          <input type="month" value="${exp.endDate || ''}">
+        </div>
+        <div class="input-group full-width">
+          <label>Description</label>
+          <textarea placeholder="What did you work on?">${exp.description || ''}</textarea>
+        </div>
+      </div>
+      <button class="remove-experience-btn">Remove</button>
+    `;
+
+    // Remove button behavior
+    const removeBtn = item.querySelector('.remove-experience-btn');
+    removeBtn.addEventListener('click', () => item.remove());
+
+    // Live preview update listener
+    item.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('input', () => {
+        if (typeof debouncedUpdatePreview === 'function') debouncedUpdatePreview();
+      });
+    });
+
+    container.appendChild(item);
+  });
+}
+
+
+    // ✅ 7. Fill Projects (match design)
+if (Array.isArray(content.projects)) {
+  const container = document.getElementById('projects-container');
+  container.innerHTML = ''; // clear previous
+  content.projects.forEach(proj => {
+    const item = document.createElement('div');
+    item.className = 'project-item';
+    item.innerHTML = `
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Project Title</label>
+          <input type="text" placeholder="e.g. Portfolio Website" value="${proj.title || ''}">
+        </div>
+        <div class="input-group">
+          <label>Technologies Used</label>
+          <input type="text" placeholder="e.g. HTML, CSS, JavaScript" value="${proj.tech || ''}">
+        </div>
+        <div class="input-group full-width">
+          <label>Description</label>
+          <textarea placeholder="Briefly describe your project or role.">${proj.description || ''}</textarea>
+        </div>
+      </div>
+      <button class="remove-project-btn">Remove</button>
+    `;
+
+    // 🧠 Remove button functionality
+    const removeBtn = item.querySelector('.remove-project-btn');
+    removeBtn.addEventListener('click', () => item.remove());
+
+    // 🧠 Real-time preview update (if function exists)
+    item.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('input', () => {
+        if (typeof debouncedUpdatePreview === 'function') debouncedUpdatePreview();
+      });
+    });
+
+    // 🧠 (Optional) Add AI enhance button or tag if your UI does
+    if (typeof addAIEnhanceButtons === 'function') addAIEnhanceButtons();
+
+    container.appendChild(item);
+  });
+}
+      // ✅ 8. Fill Languages
+      if (Array.isArray(content.languages)) {
+        const container = document.getElementById('languages-container');
+        container.innerHTML = '';
+        content.languages.forEach(lang => {
+          const item = document.createElement('div');
+          item.className = 'language-item';
+          item.innerHTML = `
+            <input type="text" class="language-input" placeholder="Language" value="${lang.language || ''}">
+            <select class="proficiency-select">
+              <option value="Fluent" ${lang.proficiency === 'Fluent' ? 'selected' : ''}>Fluent</option>
+              <option value="Intermediate" ${lang.proficiency === 'Intermediate' ? 'selected' : ''}>Intermediate</option>
+              <option value="Basic" ${lang.proficiency === 'Basic' ? 'selected' : ''}>Basic</option>
+            </select>
+          `;
+          container.appendChild(item);
+        });
+      }
+
+      // ✅ 9. Fill Hobbies
+      if (Array.isArray(content.hobbies)) {
+        const container = document.getElementById('hobbies-container');
+        container.innerHTML = '';
+        content.hobbies.forEach(hob => {
+          const item = document.createElement('div');
+          item.className = 'hobby-item';
+          item.innerHTML = `
+            <input type="text" class="hobby-input" placeholder="Hobby" value="${hob.hobby || ''}">
+            <input type="text" class="hobby-description-input" placeholder="Description" value="${hob.description || ''}">
+          `;
+          container.appendChild(item);
+        });
+      }
+
+      // ✅ 10. (Optional) Refresh preview
+      if (typeof updatePreview === 'function') {
+        updatePreview();
+      }
+
+      alert("✅ Loaded your most recent saved resume from the database.");
+
+    } catch (error) {
+      console.error("Failed to load previous data:", error);
+      alert("❌ Unable to load your previous resume from the server.");
+    }
+  });
+});
+
+</script>
+
 </html>
