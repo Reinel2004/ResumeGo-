@@ -2180,10 +2180,10 @@
     });
     </script>
     <script>
-           if (!Auth.requireAuth()) {
-            // This will redirect to index.html if not authenticated
-            // No need for additional code here
-        }
+        //    if (!Auth.requireAuth()) {
+        //     // This will redirect to index.html if not authenticated
+        //     // No need for additional code here
+        // }
 
         // Get user data from localStorage
         const user = JSON.parse(localStorage.getItem('user'));
@@ -9854,6 +9854,59 @@ if (Array.isArray(content.projects)) {
       alert("❌ Unable to load your previous resume from the server.");
     }
   });
+});
+
+function clearData() {
+
+  document.querySelectorAll("input, textarea, select").forEach((el) => {
+    if (el.type === "button" || el.type === "submit" || el.type === "file") return;
+    el.value = "";
+  });
+
+  // 🧹 Clear all contenteditable fields
+  document.querySelectorAll("[contenteditable='true']").forEach((el) => {
+    el.innerHTML = "";
+  });
+
+  document.querySelectorAll(".skill-badge").forEach((badge) => badge.remove());
+
+  const dynamicContainers = [
+    "#education-container",
+    "#work-experience-container",
+    "#projects-container",
+    "#languages-container",
+    "#hobbies-container"
+  ];
+  dynamicContainers.forEach((selector) => {
+    const container = document.querySelector(selector);
+    if (container) container.innerHTML = "";
+  });
+
+  const profilePreview = document.querySelector(".profile-preview img, #profileImagePreview");
+  if (profilePreview) {
+    profilePreview.src = "assets/default-avatar.png"; 
+  }
+  window.profileImage = null; 
+
+  document.querySelectorAll("input, textarea").forEach((el) => {
+    if (el._hasGrammarChecker && el.grammarCheckerInstance) {
+      if (typeof el.grammarCheckerInstance.clearHighlights === "function") {
+        el.grammarCheckerInstance.clearHighlights();
+      }
+    }
+  });
+
+  alert("✅ All form fields, sections, and images have been cleared!");
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const clearBtn = document.getElementById("clearDataBtn");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to clear all form data?")) {
+        clearData();
+      }
+    });
+  }
 });
 
 </script>
