@@ -1186,6 +1186,30 @@
             min-height: 44px;
         }
     }
+/* Hide the two buttons initially on mobile */
+@media (max-width: 768px) {
+  #mobileButtons {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  #mobileButtons.show {
+    display: flex;
+  }
+
+  #burgerMenuBtn {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  #burgerMenuBtn {
+    display: none;
+  }
+}
+
 
     
     
@@ -1257,13 +1281,23 @@
 
     <main class="main-container">
         <button id="saveResumeBtn" class="fixed bottom-5 right-8 bg-primary text-white px-5 py-2 rounded shadow-md text-sm font-semibold hover:bg-secondary transition-all z-50">Save</button>
-        <div class="flex gap-3 fixed bottom-5 left-8 z-50">
-  <button id="usePrevDataBtn" class="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition-all">
-    Use Previous Data
+        <div class="fixed bottom-5 left-8 z-50">
+  <!-- Burger Toggle Button -->
+  <button id="burgerMenuBtn" class="bg-primary text-white px-4 py-2 rounded shadow hover:bg-secondary transition-all md:hidden">
+    ☰ Options
   </button>
-  <button id="clearDataBtn" class="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition-all">
-    Clear Data
-  </button>
+
+  <!-- Buttons Container -->
+  <div id="mobileButtons" class="flex gap-3 mt-2 md:flex">
+    <button id="usePrevDataBtn" class="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition-all">
+      Use Previous Data
+    </button>
+    <button id="clearDataBtn" class="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition-all">
+      Clear Data
+    </button>
+  </div>
+</div>
+
 </div>
     <div class="left-panel">
             <!-- Profile Picture Upload -->
@@ -1542,7 +1576,7 @@
                         <h4 class="text-lg font-light text-gray-800 mb-3">Input your skills here</h4>
                         <div class="flex gap-2 mb-3">
                             <input type="text" 
-                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors" 
+                                   class="skill-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors no-grammar" 
                                    placeholder="e.g., Communication, Java, Python, Excel...">
                             <button class="add-skill-btn px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                                 Add
@@ -2180,10 +2214,10 @@
     });
     </script>
     <script>
-        //    if (!Auth.requireAuth()) {
-        //     // This will redirect to index.html if not authenticated
-        //     // No need for additional code here
-        // }
+           if (!Auth.requireAuth()) {
+            // This will redirect to index.html if not authenticated
+            // No need for additional code here
+        }
 
         // Get user data from localStorage
         const user = JSON.parse(localStorage.getItem('user'));
@@ -9909,6 +9943,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+
 </script>
+
+<script>
+  const burgerBtn = document.getElementById('burgerMenuBtn');
+  const mobileButtons = document.getElementById('mobileButtons');
+
+  burgerBtn.addEventListener('click', () => {
+    mobileButtons.classList.toggle('show');
+  });
+</script>
+
 
 </html>
